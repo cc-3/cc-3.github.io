@@ -1,0 +1,87 @@
+# General Info
+site_name: Estructura de Máquinas
+site_description: Grandes Ideas en Arquitectura de Computadora
+site_author: CC-3
+site_url: https://cc-3.github.io/
+
+# Repository
+edit_uri: edit/master/page/es/docs
+repo_name: cc-3/cc-3.github.io
+repo_url: https://github.com/cc-3/cc-3.github.io
+
+# Copyright
+copyright: 'CC-3'
+
+# Theme Configuration
+theme:
+  name: material
+  language: es
+  custom_dir: ../assets
+
+
+# Customization
+extra:
+  social:
+    - type: github
+      link: https://github.com/cc-3/MachineStructures
+
+extra_css:
+  - stylesheets/emoji.css
+  - stylesheets/kbd.css
+  - convnet_demo/style.css
+  - stylesheets/button.css
+
+extra_javascript:
+  - https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML
+  - js/latex.js
+  - convnet_demo/jquery.min.js
+  - convnet_demo/convnet-min.js
+  - convnet_demo/convnet_demo.js
+  - js/python.js
+
+
+# Extensions
+markdown_extensions:
+  - admonition
+  - pymdownx.superfences:
+      preserve_tabs: true
+      custom_fences:
+        - name: flow
+          class: uml-flowchart
+          format: !!python/name:pymdownx.superfences.fence_code_format
+        - name: sequence
+          class: uml-sequence-diagram
+          format: !!python/name:pymdownx.superfences.fence_code_format
+        - name: math
+          class: arithmatex
+          format: !!python/name:pymdownx.arithmatex.fence_mathjax_format
+  - codehilite:
+      guess_lang: false
+  - toc:
+      permalink: true
+
+nav:
+  - Inicio: index.md
+  - Laboratorios:
+    - '0: Git': labs/lab00.md
+    - '1: Intro a C': labs/lab01.md
+    - '2: CGDB y punteros': labs/lab02.md
+    - '3: Estructuras y manejo de memoria' : labs/lab03.md
+    - '4: Intro a RISC-V': labs/lab04.md
+    - '5: RISC-V': labs/lab05.md
+    - '6: Logisim': labs/lab06.md
+    - '7: Logisim Avanzado': labs/lab07.md
+    - '8: SIMD': labs/lab08.md
+    - '9: OpenMP': labs/lab09.md
+  - Proyectos:
+    - '1: C y RISC-V': projs/proj01.md
+    - '2: Procesador': projs/proj02.md
+  - Tutoriales:
+    - 'Python': tutorials/python.md
+    - 'Instalacion de material': tutorials/install.md
+  - Notas:
+    - 'Números': notes/00_Numbers-Representation.md
+    - 'C': notes/01_C.md
+    - 'RISC-V': notes/02_Intro-RISCV.md
+    - 'Formato de instrucciones': notes/03_Instruction-Format.md
+    - 'CALL': notes/04_CALL.md
