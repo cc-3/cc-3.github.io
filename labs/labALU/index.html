@@ -1,0 +1,866 @@
+
+
+
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="Grandes Ideas en Arquitectura de Computadora">
+      
+      
+        <link rel="canonical" href="https://cc-3.github.io/labs/labALU/">
+      
+      
+        <meta name="author" content="CC-3">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copiar al portapapeles">
+      
+        <meta name="lang:clipboard.copied" content="Copiado al portapapeles">
+      
+        <meta name="lang:search.language" content="es">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No se encontraron documentos">
+      
+        <meta name="lang:search.result.one" content="1 documento encontrado">
+      
+        <meta name="lang:search.result.other" content="# documentos encontrados">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-3.2.0">
+    
+    
+      
+        <title>Lab 7 - ALU Proyecto 2 - Estructura de Máquinas</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.572ca0f0.css">
+      
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.8c900955.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/emoji.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/kbd.css">
+    
+      <link rel="stylesheet" href="../../convnet_demo/style.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/button.css">
+    
+    
+  </head>
+  
+    <body dir="ltr">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448"
+    viewBox="0 0 416 448" id="__github">
+  <path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19-18.125
+        8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19 18.125-8.5
+        18.125 8.5 10.75 19 3.125 20.5zM320 304q0 10-3.125 20.5t-10.75
+        19-18.125 8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19
+        18.125-8.5 18.125 8.5 10.75 19 3.125 20.5zM360
+        304q0-30-17.25-51t-46.75-21q-10.25 0-48.75 5.25-17.75 2.75-39.25
+        2.75t-39.25-2.75q-38-5.25-48.75-5.25-29.5 0-46.75 21t-17.25 51q0 22 8
+        38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0
+        37.25-1.75t35-7.375 30.5-15 20.25-25.75 8-38.375zM416 260q0 51.75-15.25
+        82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5-41.75
+        1.125q-19.5 0-35.5-0.75t-36.875-3.125-38.125-7.5-34.25-12.875-30.25-20.25-21.5-28.75q-15.5-30.75-15.5-82.75
+        0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25
+        30.875q36.75-8.75 77.25-8.75 37 0 70 8 26.25-20.5
+        46.75-30.25t47.25-9.75q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34
+        99.5z" />
+</svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#lab-7-alu-proyecto-2" tabindex="1" class="md-skip">
+        Saltar a contenido
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://cc-3.github.io/" title="Estructura de Máquinas" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                Estructura de Máquinas
+              </span>
+              <span class="md-header-nav__topic">
+                Lab 7 - ALU Proyecto 2
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Teclee para comenzar búsqueda
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+          
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+
+  <a href="https://github.com/cc-3/MachineStructures/" title="Ir al repositorio" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#__github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      cc-3/MachineStructures
+    </div>
+  </a>
+
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://cc-3.github.io/" title="Estructura de Máquinas" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    Estructura de Máquinas
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://github.com/cc-3/MachineStructures/" title="Ir al repositorio" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#__github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      cc-3/MachineStructures
+    </div>
+  </a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Inicio" class="md-nav__link">
+      Inicio
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      Laboratorios
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Laboratorios
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab00/" title="0: Git" class="md-nav__link">
+      0: Git
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab01/" title="1: Intro a C" class="md-nav__link">
+      1: Intro a C
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab02/" title="2: CGDB y punteros" class="md-nav__link">
+      2: CGDB y punteros
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab03/" title="3: Estructuras y manejo de memoria" class="md-nav__link">
+      3: Estructuras y manejo de memoria
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab04/" title="4: Intro a RISC-V" class="md-nav__link">
+      4: Intro a RISC-V
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab05/" title="5: RISC-V" class="md-nav__link">
+      5: RISC-V
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab06/" title="6: Logisim" class="md-nav__link">
+      6: Logisim
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab07/" title="7: Logisim Avanzado" class="md-nav__link">
+      7: Logisim Avanzado
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab08/" title="8: SIMD" class="md-nav__link">
+      8: SIMD
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab09/" title="9: OpenMP" class="md-nav__link">
+      9: OpenMP
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Proyectos
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Proyectos
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../projs/proj01/" title="1: C y RISC-V" class="md-nav__link">
+      1: C y RISC-V
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../projs/proj02/" title="2: Procesador" class="md-nav__link">
+      2: Procesador
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Tutoriales
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Tutoriales
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/python/" title="Python" class="md-nav__link">
+      Python
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/install/" title="Instalacion de material" class="md-nav__link">
+      Instalacion de material
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      Notas
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        Notas
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../notes/00_Numbers-Representation/" title="Números" class="md-nav__link">
+      Números
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../notes/01_C/" title="C" class="md-nav__link">
+      C
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../notes/02_Intro-RISCV/" title="RISC-V" class="md-nav__link">
+      RISC-V
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../notes/03_Instruction-Format/" title="Formato de instrucciones" class="md-nav__link">
+      Formato de instrucciones
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../notes/04_CALL/" title="CALL" class="md-nav__link">
+      CALL
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Tabla de contenidos</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#objetivo" title="Objetivo" class="md-nav__link">
+    Objetivo
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#preparacion" title="Preparación" class="md-nav__link">
+    Preparación
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejercicio-1-arithmetic-logic-unit-alu" title="Ejercicio 1: Arithmetic Logic Unit (ALU)" class="md-nav__link">
+    Ejercicio 1: Arithmetic Logic Unit (ALU)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#calificacion" title="Calificación" class="md-nav__link">
+    Calificación
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/cc-3/MachineStructures/edit/master/page/es/docs/labs/labALU.md" title="Editar esta página" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="lab-7-alu-proyecto-2">Lab 7 - ALU Proyecto 2<a class="headerlink" href="#lab-7-alu-proyecto-2" title="Permanent link">&para;</a></h1>
+<h2 id="objetivo">Objetivo<a class="headerlink" href="#objetivo" title="Permanent link">&para;</a></h2>
+<p>Este laboratorio es bastante corto y representa los primeros <strong>25 puntos</strong> de su proyecto 2 (procesador de RISC-V en Logisim). El motivo principal es que tengan más tiempo para invertir en otras partes del proyecto. Si logran sacar 100 en el laboratorio tendrán una de tres partes terminadas... éxitos.</p>
+<h2 id="preparacion">Preparación<a class="headerlink" href="#preparacion" title="Permanent link">&para;</a></h2>
+<p>Para este laboratorio, nuevamente, es necesario que tengan la aplicación de <a href="http://www.cburch.com/logisim/index.html">Logisim</a>. Adicionalmente pueden utilizar la <a href="http://www.cburch.com/logisim/docs.html">documentación</a> de Logisim para refrescar el conocimiento que adquirieron en los laboratorios anteriores.</p>
+<p>También tienen que tener todos los archivos base, estos se encuentran <a href="https://classroom.github.com/a/DX-8g8bp">aquí</a>. Cuando ya se haya creado el repositorio, pueden ejecutar los siguientes comandos abriendo una terminal (<kbd>CTRL</kbd><kbd>+</kbd><kbd>T</kbd>):</p>
+<div class="codehilite"><pre><span></span>git clone &lt;link del repositorio&gt;
+</pre></div>
+
+<h2 id="ejercicio-1-arithmetic-logic-unit-alu">Ejercicio 1: Arithmetic Logic Unit (ALU)<a class="headerlink" href="#ejercicio-1-arithmetic-logic-unit-alu" title="Permanent link">&para;</a></h2>
+<p><strong>Las instrucciones de este ejercicio son una copia literal de las instrucciones del proyecto 2, por favor lean cuidadosamente</strong>.</p>
+<p>Su tarea es crear un ALU que soporte todas las operaciones que necesitan las instrucciones de nuestro ISA. Van a estar trabajando en el archivo <strong>alu.circ</strong>. Este tiene tres entradas:</p>
+<table>
+<thead>
+<tr>
+<th align="center">Nombre de Entrada</th>
+<th align="center">Ancho en Bits</th>
+<th align="center">Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">A</td>
+<td align="center">32</td>
+<td align="center">Datos para usar por A en la operación del ALU</td>
+</tr>
+<tr>
+<td align="center">B</td>
+<td align="center">32</td>
+<td align="center">Datos para usar por B en la operación del ALU</td>
+</tr>
+<tr>
+<td align="center">ALU Op</td>
+<td align="center">4</td>
+<td align="center">Selecciona la operación que el ALU debería de efectuar</td>
+</tr>
+</tbody>
+</table>
+<p>y cuatro salidas:</p>
+<table>
+<thead>
+<tr>
+<th align="center">Nombre de Entrada</th>
+<th align="center">Ancho en Bits</th>
+<th align="center">Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">Out</td>
+<td align="center">32</td>
+<td align="center">Resultado de la operación efectuada por el ALU</td>
+</tr>
+<tr>
+<td align="center">Equal</td>
+<td align="center">1</td>
+<td align="center">1 si A y B son iguales, 0 de lo contrario</td>
+</tr>
+<tr>
+<td align="center">LT</td>
+<td align="center">1</td>
+<td align="center">1 si A es menor que B (signed), 0 de lo contrario</td>
+</tr>
+<tr>
+<td align="center">LTU</td>
+<td align="center">1</td>
+<td align="center">1 si A es menor que B (unsigned), 0 de lo contrario</td>
+</tr>
+</tbody>
+</table>
+<p>Esta es la lista de operaciones que necesitan implementar. Ustedes tienen que utilizar y les recomendamos utilizar los componentes de logisim que ya efectuan estas operaciones, por favor no las implementen desde 0, sería muy tardado y no es el objetivo del proyecto ni del laboratorio.</p>
+<table>
+<thead>
+<tr>
+<th align="center">Valor de ALU Op</th>
+<th>Instrucción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">0</td>
+<td>sll: Out = A &lt;&lt; B[4:0]</td>
+</tr>
+<tr>
+<td align="center">1</td>
+<td>srl: Out = (unsigned) A &gt;&gt; B[4:0]</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td>add: Out = A + B</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td>and: Out = A &amp; B</td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td>or: Out = A | B</td>
+</tr>
+<tr>
+<td align="center">5</td>
+<td>xor: Out = A ^ B</td>
+</tr>
+<tr>
+<td align="center">6</td>
+<td>slt: Out = (A &lt; B) ? 1 : 0 Signed</td>
+</tr>
+<tr>
+<td align="center">7</td>
+<td>mul: Out = (X * Y)[31:0]</td>
+</tr>
+<tr>
+<td align="center">8</td>
+<td>mulh: Out = (A * B)[63:32]</td>
+</tr>
+<tr>
+<td align="center">9</td>
+<td>div: Out =(unsigned) A / B</td>
+</tr>
+<tr>
+<td align="center">10</td>
+<td>rem: Out = A % B</td>
+</tr>
+<tr>
+<td align="center">11</td>
+<td>sub: Out = A - B</td>
+</tr>
+</tbody>
+</table>
+<p>Algunas cosas adicionales que tienen que tener en mente:</p>
+<p>La salidas <code>Equal</code>, <code>LT</code>, <code>LTU</code> siempre tienen que sacar el valor correcto de comparación sin importar el valor de <code>ALU Op</code>. Ustedes no pueden modificar (mover, reemplazar, cortar, pegar, eliminar, etc) los pines de entrada ni de salida que nosotros les damos de lo contrario el autograder no va a funcionar correctamente, tengan en cuenta esto para evitar problemas con el autograder a la hora de hacer submit.</p>
+<h2 id="calificacion">Calificación<a class="headerlink" href="#calificacion" title="Permanent link">&para;</a></h2>
+<p>Al finalizar su circuito puede usar <code>./check</code> para probarlo de forma local. Debido a lo importante que sera el ALU para su proyecto, este lab se calificara con 0 o 100 unicamente.</p>
+<p>Cuando haya superado el test local puede hacer <code>autograder --upload</code> para subir su laboratorio y luego <code>autograder --stats</code> para comprobar su 100 de nota.</p>
+<p>No olvide hacer add + commit + push a su repositorio y subir el link de este al GES.</p>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            CC-3
+          </div>
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+        
+  <div class="md-footer-social">
+    <link rel="stylesheet" href="../../assets/fonts/font-awesome.css">
+    
+      <a href="https://github.com/cc-3/MachineStructures" class="md-footer-social__link fa fa-github"></a>
+    
+  </div>
+
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.b41f3d20.js"></script>
+      
+        
+        
+          
+          <script src="../../assets/javascripts/lunr/lunr.stemmer.support.js"></script>
+          
+            
+              
+              
+                <script src="../../assets/javascripts/lunr/lunr.es.js"></script>
+              
+            
+          
+          
+        
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+        <script src="../../js/latex.js"></script>
+      
+        <script src="../../convnet_demo/jquery.min.js"></script>
+      
+        <script src="../../convnet_demo/convnet-min.js"></script>
+      
+        <script src="../../convnet_demo/convnet_demo.js"></script>
+      
+        <script src="../../js/python.js"></script>
+      
+    
+    
+      
+    
+  </body>
+</html>

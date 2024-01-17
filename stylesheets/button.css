@@ -1,0 +1,45 @@
+.bclear {
+  background-color:#ffec64;
+  -moz-border-radius:8px;
+  -webkit-border-radius:8px;
+  border-radius:8px;
+  border:2px solid #ffaa22;
+  font-weight:bold;
+  display:inline-block;
+  cursor:pointer;
+  color:#333333;
+  font-family:Arial;
+  font-size:12px;
+  padding:8px 12px;
+  text-decoration:none;
+}
+.bclear:hover {
+  background-color:#ffab23;
+}
+.bclear:active {
+  position:relative;
+  top:1px;
+}
+
+.brun {
+  background-color:#44c767;
+  -moz-border-radius:8px;
+  -webkit-border-radius:8px;
+  border-radius:8px;
+  border:2px solid #18ab29;
+  display:inline-block;
+  cursor:pointer;
+  color:#ffffff;
+  font-family:Arial;
+  font-size:12px;
+  font-weight:bold;
+  padding:8px 12px;
+  text-decoration:none;
+}
+.brun:hover {
+  background-color:#5cbf2a;
+}
+.brun:active {
+  position:relative;
+  top:1px;
+}

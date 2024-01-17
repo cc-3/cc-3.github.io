@@ -1,0 +1,1667 @@
+
+
+
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="Grandes Ideas en Arquitectura de Computadora">
+      
+      
+        <link rel="canonical" href="https://cc-3.github.io/projs/proj02/">
+      
+      
+        <meta name="author" content="CC-3">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copiar al portapapeles">
+      
+        <meta name="lang:clipboard.copied" content="Copiado al portapapeles">
+      
+        <meta name="lang:search.language" content="es">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No se encontraron documentos">
+      
+        <meta name="lang:search.result.one" content="1 documento encontrado">
+      
+        <meta name="lang:search.result.other" content="# documentos encontrados">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-3.2.0">
+    
+    
+      
+        <title>2: Procesador - Estructura de Máquinas</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.572ca0f0.css">
+      
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.8c900955.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/emoji.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/kbd.css">
+    
+      <link rel="stylesheet" href="../../convnet_demo/style.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/button.css">
+    
+    
+  </head>
+  
+    <body dir="ltr">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448"
+    viewBox="0 0 416 448" id="__github">
+  <path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19-18.125
+        8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19 18.125-8.5
+        18.125 8.5 10.75 19 3.125 20.5zM320 304q0 10-3.125 20.5t-10.75
+        19-18.125 8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19
+        18.125-8.5 18.125 8.5 10.75 19 3.125 20.5zM360
+        304q0-30-17.25-51t-46.75-21q-10.25 0-48.75 5.25-17.75 2.75-39.25
+        2.75t-39.25-2.75q-38-5.25-48.75-5.25-29.5 0-46.75 21t-17.25 51q0 22 8
+        38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0
+        37.25-1.75t35-7.375 30.5-15 20.25-25.75 8-38.375zM416 260q0 51.75-15.25
+        82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5-41.75
+        1.125q-19.5 0-35.5-0.75t-36.875-3.125-38.125-7.5-34.25-12.875-30.25-20.25-21.5-28.75q-15.5-30.75-15.5-82.75
+        0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25
+        30.875q36.75-8.75 77.25-8.75 37 0 70 8 26.25-20.5
+        46.75-30.25t47.25-9.75q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34
+        99.5z" />
+</svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#proyecto-2-cpu" tabindex="1" class="md-skip">
+        Saltar a contenido
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://cc-3.github.io/" title="Estructura de Máquinas" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                Estructura de Máquinas
+              </span>
+              <span class="md-header-nav__topic">
+                2: Procesador
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Teclee para comenzar búsqueda
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+          
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+
+  <a href="https://github.com/cc-3/MachineStructures/" title="Ir al repositorio" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#__github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      cc-3/MachineStructures
+    </div>
+  </a>
+
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://cc-3.github.io/" title="Estructura de Máquinas" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    Estructura de Máquinas
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://github.com/cc-3/MachineStructures/" title="Ir al repositorio" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#__github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      cc-3/MachineStructures
+    </div>
+  </a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Inicio" class="md-nav__link">
+      Inicio
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      Laboratorios
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Laboratorios
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../labs/lab00/" title="0: Git" class="md-nav__link">
+      0: Git
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../labs/lab01/" title="1: Intro a C" class="md-nav__link">
+      1: Intro a C
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../labs/lab02/" title="2: CGDB y punteros" class="md-nav__link">
+      2: CGDB y punteros
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../labs/lab03/" title="3: Estructuras y manejo de memoria" class="md-nav__link">
+      3: Estructuras y manejo de memoria
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../labs/lab04/" title="4: Intro a RISC-V" class="md-nav__link">
+      4: Intro a RISC-V
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../labs/lab05/" title="5: RISC-V" class="md-nav__link">
+      5: RISC-V
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../labs/lab06/" title="6: Logisim" class="md-nav__link">
+      6: Logisim
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../labs/lab07/" title="7: Logisim Avanzado" class="md-nav__link">
+      7: Logisim Avanzado
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../labs/lab08/" title="8: SIMD" class="md-nav__link">
+      8: SIMD
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../labs/lab09/" title="9: OpenMP" class="md-nav__link">
+      9: OpenMP
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
+    
+    <label class="md-nav__link" for="nav-3">
+      Proyectos
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Proyectos
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../proj01/" title="1: C y RISC-V" class="md-nav__link">
+      1: C y RISC-V
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        2: Procesador
+      </label>
+    
+    <a href="./" title="2: Procesador" class="md-nav__link md-nav__link--active">
+      2: Procesador
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Tabla de contenidos</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion" title="Introducción" class="md-nav__link">
+    Introducción
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#preparacion" title="Preparación" class="md-nav__link">
+    Preparación
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parte-1-register-file" title="Parte 1: Register File" class="md-nav__link">
+    Parte 1: Register File
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parte-2-alu" title="Parte 2: ALU" class="md-nav__link">
+    Parte 2: ALU
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parte-3-cpu" title="Parte 3: CPU" class="md-nav__link">
+    Parte 3: CPU
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#memoria" title="Memoria" class="md-nav__link">
+    Memoria
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#control" title="Control" class="md-nav__link">
+    Control
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#isa" title="ISA" class="md-nav__link">
+    ISA
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testing" title="Testing" class="md-nav__link">
+    Testing
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notas-sobre-logisim" title="Notas sobre Logisim" class="md-nav__link">
+    Notas sobre Logisim
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#calificacion" title="Calificación" class="md-nav__link">
+    Calificación
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Tutoriales
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Tutoriales
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/python/" title="Python" class="md-nav__link">
+      Python
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/install/" title="Instalacion de material" class="md-nav__link">
+      Instalacion de material
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      Notas
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        Notas
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../notes/00_Numbers-Representation/" title="Números" class="md-nav__link">
+      Números
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../notes/01_C/" title="C" class="md-nav__link">
+      C
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../notes/02_Intro-RISCV/" title="RISC-V" class="md-nav__link">
+      RISC-V
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../notes/03_Instruction-Format/" title="Formato de instrucciones" class="md-nav__link">
+      Formato de instrucciones
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../notes/04_CALL/" title="CALL" class="md-nav__link">
+      CALL
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Tabla de contenidos</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion" title="Introducción" class="md-nav__link">
+    Introducción
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#preparacion" title="Preparación" class="md-nav__link">
+    Preparación
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parte-1-register-file" title="Parte 1: Register File" class="md-nav__link">
+    Parte 1: Register File
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parte-2-alu" title="Parte 2: ALU" class="md-nav__link">
+    Parte 2: ALU
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parte-3-cpu" title="Parte 3: CPU" class="md-nav__link">
+    Parte 3: CPU
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#memoria" title="Memoria" class="md-nav__link">
+    Memoria
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#control" title="Control" class="md-nav__link">
+    Control
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#isa" title="ISA" class="md-nav__link">
+    ISA
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testing" title="Testing" class="md-nav__link">
+    Testing
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notas-sobre-logisim" title="Notas sobre Logisim" class="md-nav__link">
+    Notas sobre Logisim
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#calificacion" title="Calificación" class="md-nav__link">
+    Calificación
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/cc-3/MachineStructures/edit/master/page/es/docs/projs/proj02.md" title="Editar esta página" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="proyecto-2-cpu">Proyecto 2: CPU<a class="headerlink" href="#proyecto-2-cpu" title="Permanent link">&para;</a></h1>
+<h2 id="introduccion">Introducción<a class="headerlink" href="#introduccion" title="Permanent link">&para;</a></h2>
+<p>En este proyecto utilizaremos Logisim para implementar un procesador de 32-bits, cuyo ISA es un subset de las instrucciones de RISC-V. Algunos componentes del proyecto serán más sencillos que los componentes de hardware verdaderos para evitar realizar trabajo repetitivo. Nuestro ISA utiliza 32 registros de 32 bits cada uno y una memoria, cuyas direcciones son de 32 bits.</p>
+<p><img alt="RISC-V Datapath" src="/img/projs/proj02/datapath.png" /></p>
+<p>A continuación, algunos detalles importantes que debemos leer antes de iniciar.</p>
+<ul>
+<li>Pueden utilizar cualquier bloque ya existente en Logisim para el proyecto.</li>
+<li>Guarden constantemente. Realicen commits y hagan push al menos una vez por cada día que trabajen.</li>
+<li>Logisim es un excelente simulador pero ocasionalmente tiene errores, entonces hagamos caso a la indicación anterior. Guarden constantemente...</li>
+<li>Trabajemos de la misma forma que en un proyecto de software: Construyamos el proyecto pieza por pieza y realicemos pruebas antes de unir un bloque con otros. Podemos construir todos los subcircuitos adicionales que necesitemos, siempre y cuando sigamos las reglas específicas que cada parte impone (más de esto a continuación).</li>
+<li>Se incluyen algunos tests. Sólo se debe correr el script ./check (esto seguramente tendrán que hacerlo en Linux, se requiere Python 3.X instalado).</li>
+<li>¡Necesitaremos más tests! Cada equipo debería hacer sus propios tests adicionales. En la sección de <em>Testing</em> hay algunas indicaciones de cómo hacer pruebas adicionales.</li>
+</ul>
+<p>Finalmente, las dos indicaciones más importantes:</p>
+<ul>
+<li>Se les darán algunos armazones (harnesses) a los cuales sus circuitos se conectarán. ASEGURENSE QUE SÍ SE ADAPTAN DE FORMA CORRECTA, TODOS LOS TESTS FALLARÁN SI NO LO HACEN.</li>
+<li>En el camino nos hemos encontrado con algunos problemas de git merge si ambos miembros del equipo estaban trabajando en el mismo archivo; a veces git los resolvía automáticamente y a veces no. En Logisim es garantizado que git NO RESOLVERÁ ESTO DE FORMA CORRECTA, entonces si trabajamos en equipo NO DEBEMOS MODIFICAR EL MISMO ARCHIVO AL MISMO TIEMPO</li>
+</ul>
+<h2 id="preparacion">Preparación<a class="headerlink" href="#preparacion" title="Permanent link">&para;</a></h2>
+<p><strong>Antes de comenzar, asegúrense de que hayan <span style="color: red">leído y comprendido</span> todas las instrucciones del proyecto de principio a fin</strong>. Si tienen alguna pregunta, por favor diríjanse a <strong>Slack</strong> y pregunten en los canales correspondientes.</p>
+<p>Para comenzar con el proyecto, primero tienen que tener todos los archivos base, estos se encuentran <a href="https://classroom.github.com/a/KKOa0Ell">aquí</a>. Tienen permitido trabajar en parejas o de forma individual, por lo que al aceptar la asignación les preguntará si desean crear un grupo nuevo o unirse a uno ya existente. Si crean un grupo nuevo, ingresen un nombre que represente lo represente  y que no haya sido tomado por otro.</p>
+<p><img alt="Create group" src="/img/projs/proj01/classroom1.png" /></p>
+<p>Si desean unirse a un grupo ya creado, tienen que buscar el nombre del grupo y pulsar el botón que dice <strong>join</strong></p>
+<p><img alt="Join group" src="/img/projs/proj01/classroom2.png" /></p>
+<p><strong>Tienen que tener mucho cuidado al unirse a un grupo ya existente, ya que esto no se puede cambiar después, además, lo consideraremos como <span style="color: red">PLAGIO</span> si lo realizan de manera incorrecta, ya que, al hacer esto, pueden tener acceso al repositorio del otro miembro del grupo.</strong></p>
+<p>Ya sea que se unan o creen un nuevo grupo, al finalizar el proceso les creará automáticamente un repositorio con una extensión que termina con su nombre de grupo. Ya habiendo hecho todo eso, pueden ejecutar los siguientes comandos abriendo una terminal (<kbd >CTRL</kbd> <kbd>+</kbd> <kbd>T</kbd>):</p>
+<div class="codehilite"><pre><span></span>git clone &lt;link del repositorio&gt;
+</pre></div>
+
+<h2 id="parte-1-register-file">Parte 1: Register File<a class="headerlink" href="#parte-1-register-file" title="Permanent link">&para;</a></h2>
+<p>Como aprendimos en clase, RISC-V tiene 32 registros. En el proyecto sólo implementaremos 9 (abajo se indica cuales) para evitar realizar trabajo repetitivo. Todas nuestras señales (rs1, rs2, rd) siguen siendo de 5-bits, pero sólo se estarán usando los registros indicados.</p>
+<p>El register file debe poder leer y escribir a los registros que se especifiquen según la instrucción, sin afectar o modificar a cualquier otro registro. Existe una excepción: El registro cero está alambrado a tierra y su valor no puede ser cambiado por ningún motivo.</p>
+<p>Los registros que utilizaremos son los siguientes:</p>
+<table>
+<thead>
+<tr>
+<th>Registro por número</th>
+<th>Registro por nombre</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>x0</td>
+<td>zero</td>
+</tr>
+<tr>
+<td>x1</td>
+<td>ra</td>
+</tr>
+<tr>
+<td>x2</td>
+<td>sp</td>
+</tr>
+<tr>
+<td>x5</td>
+<td>t0</td>
+</tr>
+<tr>
+<td>x6</td>
+<td>t1</td>
+</tr>
+<tr>
+<td>x8</td>
+<td>s0</td>
+</tr>
+<tr>
+<td>x9</td>
+<td>s1</td>
+</tr>
+<tr>
+<td>x10</td>
+<td>a0</td>
+</tr>
+<tr>
+<td>x11</td>
+<td>a1</td>
+</tr>
+</tbody>
+</table>
+<p>En el archivo <strong>regfile.circ</strong> se encuentra el esqueleto de un register file.</p>
+<p><img alt="Register File" src="/img/projs/proj02/regfile.png" /></p>
+<p>Este tiene seis entradas:</p>
+<table>
+<thead>
+<tr>
+<th>Nombre</th>
+<th>Ancho en bits</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Clock</td>
+<td>1</td>
+<td>Señal de reloj. Aquí se recibirá una señal de reloj "non gated", es decir, se recibe la señal directa sin ser afectada por ANDs, NOTs o cualquier compuerta.</td>
+</tr>
+<tr>
+<td>Write Enable</td>
+<td>1</td>
+<td>Indica si se debería escribir a un registro en el siguiente flanco de subida del reloj.</td>
+</tr>
+<tr>
+<td>Read Register 1</td>
+<td>5</td>
+<td>Registro a leer y cuyo valor será enviado a Read Data 1.</td>
+</tr>
+<tr>
+<td>Read Register 2</td>
+<td>5</td>
+<td>Registro a leer y cuyo valor será enviado a Read Data 2.</td>
+</tr>
+<tr>
+<td>Write Register</td>
+<td>5</td>
+<td>Determina cuál registro será modificado en el siguiente flanco de subida (asumiendo que Write Enable = 1).</td>
+</tr>
+<tr>
+<td>Write Data</td>
+<td>32</td>
+<td>Los 32 bits de datos a guardarse en el registro, en el siguiente flanco de subida (asumiendo que Write Enable = 1).</td>
+</tr>
+</tbody>
+</table>
+<p>El register file tiene las siguientes salidas:</p>
+<table>
+<thead>
+<tr>
+<th>Nombre</th>
+<th>Ancho en bits</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Read Data 1</td>
+<td>32</td>
+<td>Datos que se están leyendo, según el registro que Read Register 1 pidió.</td>
+</tr>
+<tr>
+<td>Read Data 2</td>
+<td>32</td>
+<td>Datos que se están leyendo, según el registro que Read Register 2 pidió.</td>
+</tr>
+<tr>
+<td>s0 Value</td>
+<td>32</td>
+<td>Valor de s0 (salida para DEBUG/TEST).</td>
+</tr>
+<tr>
+<td>s1 Value</td>
+<td>32</td>
+<td>Valor de s1 (salida para DEBUG/TEST).</td>
+</tr>
+<tr>
+<td>t0 Value</td>
+<td>32</td>
+<td>Valor de t0 (salida para DEBUG/TEST).</td>
+</tr>
+<tr>
+<td>t1 Value</td>
+<td>32</td>
+<td>Valor de t1 (salida para DEBUG/TEST).</td>
+</tr>
+<tr>
+<td>a0 Value</td>
+<td>32</td>
+<td>Valor de a0 (salida para DEBUG/TEST).</td>
+</tr>
+<tr>
+<td>ra Value</td>
+<td>32</td>
+<td>Valor de ra (salida para DEBUG/TEST).</td>
+</tr>
+<tr>
+<td>sp Value</td>
+<td>32</td>
+<td>Valor de sp (salida para DEBUG/TEST).</td>
+</tr>
+</tbody>
+</table>
+<p>Las salidas para DEBUG/TEST están presentes porque son registros de uso frecuente (por ejemplo, tienen un trabajo importante en las llamadas a funciones). Se utilizarán sólo para pruebas del autograder. En un register file de verdad estas salidas no existirían. Para el proyecto deben estar presentes y funcionar bien para facilitar la calificación.</p>
+<p><strong>IMPORTANTE:</strong> En la primera tabla aparecen nueve registros y en la tabla anterior aparecen siete salidas, eso es intencional. Se estarán <strong>usando</strong> nueve, pero solo se estará <strong>revisando</strong> el valor de siete de ellos.</p>
+<p>Pueden modificar regfile.circ como deseen, pero las salidas deben cumplir con el comportamiento que se indica. Deben ser cuidadosos de no modificar (mover, reemplazar, cortar, pegar, eliminar, etc) los pines de entrada o salida. Si necesitan más espacio, pueden moverlos mientras sean cuidadosos de mantener el posicionamiento relativo que estos tienen. Para verificar que nuestros cambios no "rompan" nada, podemos abrir regfile-harness.circ y revisar que no existan errores allí y que todo funcione bien.</p>
+<p>HINTS: (1) Cuidado con los muxes. Si estos tienen un enable ese debería estar activo (o mejor aún, buscamos en la ayuda de Logisim cómo quitar esa funcionalidad). (2) Si en algún momento se encuentra con algo que diga three-state o tri-estado, no lo use, desactíve esta opción. En cursos futuros le mencionarán estados de alta impedancia, pero eso no importa en CC3 y en Logisim.</p>
+<h2 id="parte-2-alu">Parte 2: ALU<a class="headerlink" href="#parte-2-alu" title="Permanent link">&para;</a></h2>
+<p>Su segunda tarea es crear un ALU que soporte todas las operaciones que necesitan las instrucciones de nuestro ISA (se detallan más adelante). Van a estar trabajando en el archivo <strong>alu.circ</strong>.</p>
+<p><img alt="ALU" src="/img/projs/proj02/alu.png" /></p>
+<p>Este tiene tres entradas:</p>
+<table>
+<thead>
+<tr>
+<th align="center">Nombre de Entrada</th>
+<th align="center">Ancho en Bits</th>
+<th align="center">Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">A</td>
+<td align="center">32</td>
+<td align="center">Datos para usar por A en la operación del ALU</td>
+</tr>
+<tr>
+<td align="center">B</td>
+<td align="center">32</td>
+<td align="center">Datos para usar por B en la operación del ALU</td>
+</tr>
+<tr>
+<td align="center">ALU Op</td>
+<td align="center">4</td>
+<td align="center">Selecciona la operación que el ALU debe de efectuar</td>
+</tr>
+</tbody>
+</table>
+<p>...y cuatro salidas:</p>
+<table>
+<thead>
+<tr>
+<th align="center">Nombre de Entrada</th>
+<th align="center">Ancho en Bits</th>
+<th align="center">Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">Out</td>
+<td align="center">32</td>
+<td align="center">Resultado de la operación efectuada por el ALU</td>
+</tr>
+<tr>
+<td align="center">Equal</td>
+<td align="center">1</td>
+<td align="center">1 si A y B son iguales; 0 de lo contrario</td>
+</tr>
+<tr>
+<td align="center">LT</td>
+<td align="center">1</td>
+<td align="center">1 si A es menor que B (signed); 0 de lo contrario</td>
+</tr>
+<tr>
+<td align="center">LTU</td>
+<td align="center">1</td>
+<td align="center">1 si A es menor que B (unsigned); 0 de lo contrario</td>
+</tr>
+</tbody>
+</table>
+<p>Esta es la lista de operaciones que necesitan implementar. Ustedes tienen que utilizar los componentes de logisim que ya efectúan estas operaciones, por favor no las implementen desde cero, sería muy tardado y no es el objetivo del proyecto.</p>
+<table>
+<thead>
+<tr>
+<th align="center">Valor de ALU Op</th>
+<th>Instrucción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">0</td>
+<td>sll: Out = A &lt;&lt; B[4:0]</td>
+</tr>
+<tr>
+<td align="center">1</td>
+<td>srl: Out = (unsigned) A &gt;&gt; B[4:0]</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td>add: Out = A + B</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td>and: Out = A &amp; B</td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td>or: Out = A | B</td>
+</tr>
+<tr>
+<td align="center">5</td>
+<td>xor: Out = A ^ B</td>
+</tr>
+<tr>
+<td align="center">6</td>
+<td>slt: Out = (A &lt; B) ? 1 : 0 Signed</td>
+</tr>
+<tr>
+<td align="center">7</td>
+<td>mul: Out = (X * Y)[31:0]</td>
+</tr>
+<tr>
+<td align="center">8</td>
+<td>mulh: Out = (A * B)[63:32]</td>
+</tr>
+<tr>
+<td align="center">9</td>
+<td>div: Out =(unsigned) A / B</td>
+</tr>
+<tr>
+<td align="center">10</td>
+<td>rem: Out = A % B</td>
+</tr>
+<tr>
+<td align="center">11</td>
+<td>sub: Out = A - B</td>
+</tr>
+</tbody>
+</table>
+<p>Algunas cosas adicionales que tienen que tener en mente:</p>
+<p>La salidas <code>Equal</code>, <code>LT</code>, <code>LTU</code> siempre tienen que sacar el valor correcto de comparación sin importar el valor de <code>ALU Op</code>. Nuevamente, tienen que tener cuidado con los inputs y output pins, no los modifiquen por ningún motivo.</p>
+<p>Su ALU debería de encajar con el harness <strong>alu_harness.circ</strong>. Sigan las mismas instrucciones que en el register file. En particular, ustedes deberían de asegurar que su ALU es cargado correctamente por el harness antes de que hagan submit.</p>
+<h2 id="parte-3-cpu">Parte 3: CPU<a class="headerlink" href="#parte-3-cpu" title="Permanent link">&para;</a></h2>
+<p>Se les provee un esqueleto del procesador en <strong>cpu.circ</strong>. Su procesador tendrá una instancia de su ALU y Register File, así como una unidad de memoria que ya se les provee. Ustedes son los responsables de construir el datapath y control completos, desde cero. Su procesador debe implementar el ISA que se detalla más abajo.</p>
+<p><img alt="CPU" src="/img/projs/proj02/cpu.png" /></p>
+<p>Su procesador obtendrá su programa del armazón (harness) <strong>riscv.circ</strong>. Su procesador tendrá un output llamado FETCH_ADDRESS que indica cuál instrucción queremos, esta dirección será entregada al harness y este nos dará una instrucción. La instrucción será recibida por el procesador y será ejecutada. Revisen riscv.circ para ver exactamente qué sucede.</p>
+<p>El procesador tiene dos inputs que vienen del harness:</p>
+<table>
+<thead>
+<tr>
+<th>Input Name</th>
+<th>Bit Width</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>INSTRUCTION</td>
+<td>32</td>
+<td>Aquí se recibe la instrucción que se obtuvo en la dirección identificada por FETCH_ADDRESS.</td>
+</tr>
+<tr>
+<td>CLOCK</td>
+<td>1</td>
+<td>Input del reloj. Puede ser necesario estar enviando esta señal a varios subcircuitos. Esta señal no debe pasar por ninguna compuerta (NOT, AND, etc).</td>
+</tr>
+</tbody>
+</table>
+<p>El procesador debe tener los siguientes outputs, que entregará al harness:</p>
+<table>
+<thead>
+<tr>
+<th>Output Name</th>
+<th>Bit Width</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>s0</td>
+<td>32</td>
+<td>Contenido de s0, sólo para pruebas.</td>
+</tr>
+<tr>
+<td>s1</td>
+<td>32</td>
+<td>Contenido de s1, sólo para pruebas.</td>
+</tr>
+<tr>
+<td>t0</td>
+<td>32</td>
+<td>Contenido de t0, sólo para pruebas.</td>
+</tr>
+<tr>
+<td>t1</td>
+<td>32</td>
+<td>Contenido de t1, sólo para pruebas.</td>
+</tr>
+<tr>
+<td>a0</td>
+<td>32</td>
+<td>Contenido de a0, sólo para pruebas.</td>
+</tr>
+<tr>
+<td>ra</td>
+<td>32</td>
+<td>Contenido de ra, sólo para pruebas.</td>
+</tr>
+<tr>
+<td>sp</td>
+<td>32</td>
+<td>Contenido de sp, sólo para pruebas.</td>
+</tr>
+<tr>
+<td>FETCH_ADDRESS</td>
+<td>32</td>
+<td>Dirección que indica qué instrucción queremos obtener del harness. En respuesta a esto, el harness enviará alguna instrucción a través de INSTRUCTION.</td>
+</tr>
+</tbody>
+</table>
+<p>Como en la parte 1, tengan cuidado al mover componentes y asegúrense que los pines de input y output coincidan con el harness.</p>
+<h3 id="memoria">Memoria<a class="headerlink" href="#memoria" title="Permanent link">&para;</a></h3>
+<p>Se les provee una memoria ya implementada. :D</p>
+<p>Un resumen de sus inputs y outputs.</p>
+<table>
+<thead>
+<tr>
+<th>Nombre</th>
+<th>Tipo</th>
+<th>Bit Width</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ADDRESS</td>
+<td>input</td>
+<td>32</td>
+<td>Dirección a leer o escribir en la memoria.</td>
+</tr>
+<tr>
+<td>WRITE DATA</td>
+<td>input</td>
+<td>32</td>
+<td>Valor a escribirse en la memoria.</td>
+</tr>
+<tr>
+<td>WRITE ENABLE</td>
+<td>input</td>
+<td>1</td>
+<td>En = 1 en las instrucciones que escriben; En = 0 en las demás.</td>
+</tr>
+<tr>
+<td>Clk</td>
+<td>input</td>
+<td>1</td>
+<td>Señal de reloj que viene desde cpu.circ.</td>
+</tr>
+<tr>
+<td>READ DATA</td>
+<td>output</td>
+<td>32</td>
+<td>Datos leídos en la dirección especificada.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="control">Control<a class="headerlink" href="#control" title="Permanent link">&para;</a></h3>
+<p>Las señales de control tienen un papel muy importante en el proyecto. Se sugiere volver a leer el capítulo 4 del libro para darse cuenta dónde podemos necesitar un MUX y, por lo tanto, alguna señal de control.</p>
+<p>Existen varias formas de implementar las señales de control. Por ejemplo, pueden construir una palabra de control y guardarla en una memoria ROM (micro-código) o pueden construir un circuito que elija qué acción tomar basándose en algunos bits del opcode, func3 y func7.</p>
+<p><strong>Es obligatorio que sus componentes estén unidos y las señales de control necesarias estén implementadas.</strong> Si en la calificación del proyecto sólo tiene componentes sueltos (como el ALU y Reg File de la primera fase) y estos no se comunican entre sí, su nota será cero.</p>
+<p>Consejo final: ¡Modularicen! Creen los subcircuitos que sean necesarios y diséñenlos bien antes de empezar a construirlos.</p>
+<h3 id="isa">ISA<a class="headerlink" href="#isa" title="Permanent link">&para;</a></h3>
+<p><img alt="Formato de instrucciones" src="/img/projs/proj02/instruction_format.png" /></p>
+<p>Las instrucciones a implementar son las siguientes:</p>
+<table>
+<thead>
+<tr>
+<th>Instruction</th>
+<th>Type</th>
+<th>Opcode</th>
+<th>Funct3</th>
+<th>Funct7/IMM</th>
+<th>Operation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>add rd, rs1, rs2</td>
+<td>R</td>
+<td>0x33</td>
+<td>0x0</td>
+<td>0x00</td>
+<td>R[rd] ← R[rs1] + R[rs2]</td>
+</tr>
+<tr>
+<td>mul rd, rs1, rs2</td>
+<td>R</td>
+<td>0x33</td>
+<td>0x0</td>
+<td>0x01</td>
+<td>R[rd] ← (R[rs1] * R[rs2])[31:0]</td>
+</tr>
+<tr>
+<td>sub rd, rs1, rs2</td>
+<td>R</td>
+<td>0x33</td>
+<td>0x0</td>
+<td>0x20</td>
+<td>R[rd] ← R[rs1] - R[rs2]</td>
+</tr>
+<tr>
+<td>sll rd, rs1, rs2</td>
+<td>R</td>
+<td>0x33</td>
+<td>0x1</td>
+<td>0x00</td>
+<td>R[rd] ← R[rs1] &lt;&lt; R[rs2</td>
+</tr>
+<tr>
+<td>mulh rd, rs1, rs2</td>
+<td>R</td>
+<td>0x33</td>
+<td>0x1</td>
+<td>0x01</td>
+<td>R[rd] ← (R[rs1] * R[rs2])[63:32]</td>
+</tr>
+<tr>
+<td>slt rd, rs1, rs2</td>
+<td>R</td>
+<td>0x33</td>
+<td>0x2</td>
+<td>0x00</td>
+<td>R[rd] ← (R[rs1] &lt; R[rs2]) ? 1 : 0 (signed)</td>
+</tr>
+<tr>
+<td>xor rd, rs1, rs2</td>
+<td>R</td>
+<td>0x33</td>
+<td>0x4</td>
+<td>0x00</td>
+<td>R[rd] ← R[rs1] ^ R[rs2]</td>
+</tr>
+<tr>
+<td>div rd, rs1, rs2</td>
+<td>R</td>
+<td>0x33</td>
+<td>0x4</td>
+<td>0x01</td>
+<td>R[rd] ← R[rs1] / R[rs2]</td>
+</tr>
+<tr>
+<td>srl rd, rs1, rs2</td>
+<td>R</td>
+<td>0x33</td>
+<td>0x5</td>
+<td>0x00</td>
+<td>R[rd] ← R[rs1] &gt;&gt; R[rs2]</td>
+</tr>
+<tr>
+<td>or rd, rs1, rs2</td>
+<td>R</td>
+<td>0x33</td>
+<td>0x6</td>
+<td>0x00</td>
+<td>R[rd] ← R[rs1] | R[rs2]</td>
+</tr>
+<tr>
+<td>rem rd, rs1, rs2</td>
+<td>R</td>
+<td>0x33</td>
+<td>0x6</td>
+<td>0x01</td>
+<td>R[rd] ← (R[rs1] % R[rs2]</td>
+</tr>
+<tr>
+<td>and rd, rs1, rs2</td>
+<td>R</td>
+<td>0x33</td>
+<td>0x7</td>
+<td>0x00</td>
+<td>R[rd] ← R[rs1] &amp; R[rs2]</td>
+</tr>
+<tr>
+<td>lb rd, offset(rs1)</td>
+<td>I</td>
+<td>0x03</td>
+<td>0x0</td>
+<td></td>
+<td>R[rd] ← SignExt(Mem(R[rs1] + offset, byte))</td>
+</tr>
+<tr>
+<td>lh rd, offset(rs1)</td>
+<td>I</td>
+<td>0x03</td>
+<td>0x1</td>
+<td></td>
+<td>R[rd] ← SignExt(Mem(R[rs1] + offset, half))</td>
+</tr>
+<tr>
+<td>lw rd, offset(rs1)</td>
+<td>I</td>
+<td>0x03</td>
+<td>0x2</td>
+<td></td>
+<td>R[rd] ← Mem(R[rs1] + offset, word)</td>
+</tr>
+<tr>
+<td>addi rd, rs1, imm</td>
+<td>I</td>
+<td>0x13</td>
+<td>0x0</td>
+<td></td>
+<td>R[rd] ← R[rs1] + imm</td>
+</tr>
+<tr>
+<td>slli rd, rs1, imm</td>
+<td>I</td>
+<td>0x13</td>
+<td>0x1</td>
+<td>0x00</td>
+<td>R[rd] ← R[rs1] &lt;&lt; imm</td>
+</tr>
+<tr>
+<td>slti rd, rs1, imm</td>
+<td>I</td>
+<td>0x13</td>
+<td>0x2</td>
+<td></td>
+<td>R[rd] ← (R[rs1] &lt; imm) ? 1 : 0</td>
+</tr>
+<tr>
+<td>xori rd, rs1, imm</td>
+<td>I</td>
+<td>0x13</td>
+<td>0x4</td>
+<td></td>
+<td>R[rd] ← R[rs1] ^ imm</td>
+</tr>
+<tr>
+<td>srli rd, rs1, imm</td>
+<td>I</td>
+<td>0x13</td>
+<td>0x5</td>
+<td>0x00</td>
+<td>R[rd] ← R[rs1] &gt;&gt; imm</td>
+</tr>
+<tr>
+<td>ori rd, rs1, imm</td>
+<td>I</td>
+<td>0x13</td>
+<td>0x6</td>
+<td></td>
+<td>R[rd] ← R[rs1] | imm</td>
+</tr>
+<tr>
+<td>andi rd, rs1, imm</td>
+<td>I</td>
+<td>0x13</td>
+<td>0x7</td>
+<td></td>
+<td>R[rd] ← R[rs1] &amp; imm</td>
+</tr>
+<tr>
+<td>sw rs2, offset(rs1)</td>
+<td>S</td>
+<td>0x23</td>
+<td>0x2</td>
+<td></td>
+<td>Mem(R[rs1] + offset) ← R[rs2]</td>
+</tr>
+<tr>
+<td>beq rs1, rs2, offset</td>
+<td>SB</td>
+<td>0x63</td>
+<td>0x0</td>
+<td></td>
+<td>if(R[rs1] == R[rs2]) then {PC ← PC + {offset, 1b'0}}</td>
+</tr>
+<tr>
+<td>blt rs1, rs2, offset</td>
+<td>SB</td>
+<td>0x63</td>
+<td>0x4</td>
+<td></td>
+<td>if(R[rs1] less than  R[rs2] (signed)) then {PC ← PC + {offset, 1b'0}}</td>
+</tr>
+<tr>
+<td>bltu rs1, rs2, offset</td>
+<td>SB</td>
+<td>0x63</td>
+<td>0x6</td>
+<td></td>
+<td>if(R[rs1] less than  R[rs2] (unsigned)) then {PC ← PC + {offset, 1b'0}}</td>
+</tr>
+<tr>
+<td>lui rd, offset</td>
+<td>U</td>
+<td>0x37</td>
+<td></td>
+<td></td>
+<td>R[rd] ← {offset, 12b'0}</td>
+</tr>
+<tr>
+<td>jal rd, imm</td>
+<td>UJ</td>
+<td>0x6f</td>
+<td></td>
+<td></td>
+<td>R[rd] ← PC  +  4, PC ← PC + {imm, 1b'0}</td>
+</tr>
+<tr>
+<td>jalr rd,rs, imm</td>
+<td>I</td>
+<td>0x67</td>
+<td>0x0</td>
+<td></td>
+<td>R[rd] ← PC  +  4, PC ← R[rs] + {imm}</td>
+</tr>
+</tbody>
+</table>
+<h2 id="testing">Testing<a class="headerlink" href="#testing" title="Permanent link">&para;</a></h2>
+<p>Para la parte 1 y 2, con el check local es suficiente y si lo pasan significa que esas partes ya las tienen funcionando al 100%. Para la parte 2, el check local también es bastante completo, pero ustedes pueden hacer más pruebas si lo desean. Como no podemos probar cada componente que ustedes vayan implementando, la mejor opción es escribir programas de RISC-V pequeños e ir revisando su datapath de diferentes maneras.</p>
+<p>Una vez que hayan escrito su programa de RISC-V, lo van a tener que cargar en la ROM que está en <strong>riscv.circ</strong> y empezar la ejecución. Para eso, primero, abran riscv.circ y localicen la memoria ROM.</p>
+<p><img alt="ROM" src="/img/projs/proj02/rom.png" /></p>
+<p>Hagan click a la memoria y, después, en la barra de herramientas de la izquierda, hagan click en "(click here to edit)", esto va a abrir un diálogo en donde ustedes pueden cargar su archivo con el código de RISC-V y este ensamblará y generará código de máquina por ustedes que va a ser la salida de la memoria ROM.</p>
+<p><img alt="Testing" src="/img/projs/proj02/test.png" /></p>
+<h2 id="notas-sobre-logisim">Notas sobre Logisim<a class="headerlink" href="#notas-sobre-logisim" title="Permanent link">&para;</a></h2>
+<p>Si Logisim les da algún problema extraño, REINICIEN LOGISIM Y VUELVAN A CARGAR SU CIRCUITO. No pierdan tiempo buscando errores si no han hecho esto. Si reiniciar no ha resuelto el problema, allí sí ya les corresponde revisar su circuito.</p>
+<p>Logisim tiene un "Reference", en la pestaña "Help", y les dice las especificaciones de cada componente.</p>
+<p>Do NOT gate the clock! (esto no tiene una traducción directa). Los clocks tienen que llegar directo a los circuitos, ni en CC3 ni en un curso donde usen hardware deberían colocar compuertas antes que la señal de reloj entre al componente.</p>
+<p>Si están usando varias ventanas de Logisim tengan mucho cuidado cuando hagan copy-paste de una ventana a otra. Asegúrense que sí se copió el circuito completo que querían y que funcione bien después de pegarlo.</p>
+<p>Cuando importen otro archivo (Project -&gt; Load Library -&gt; Logisim Library...), este aparecerá como un folder en el panel de la izquierda. Los archivos esqueleto deberían de tener importado todo lo necesario.</p>
+<p>Cambiar los atributos antes de colocar un componente cambia el default. Si quieren colocar varios pines de 32 bits (por ejemplo), habría que cambiarlo antes de colocar el primero. Si sólo quieren cambiar algún valor para un componente, primero lo colocan y, luego, lo cambian.</p>
+<p>Cuando cambian los inputs y outputs de un subcircuito que ya colocaron en main, Logisim automáticamente añade o remueve puertos según los cambios que hagan. Esto, muchas veces, afecta el tamaño o posición del subcircuito. Si ya habían cables conectados, Logisim intentará moverlos, pero no siempre lo hace bien. Se recomienda que si van a cambiar los inputs y outputs de un circuito, primero desconecten todos los cables que este pueda tener en main o lo eliminen del main y lo vuelvan a colocar después de cambiarlo. <strong>Recuerden que sólo pueden hacer esto para los subcircuitos que USTEDES agregan</strong>.</p>
+<p>Los cables rojos significan que algo está mal conectado. Algunos casos pueden no ser tan obvios, revisen bien todas las conexiones cercanas.</p>
+<p><img alt="Red Wires" src="/img/projs/proj02/error_wire.png" /></p>
+<p>Logisim tiene algunas herramientas de análisis combinacional (nos puede construir mapas de Karnaugh o circuitos completos con sólo darle una tabla :D). Esta herramienta les puede ser útil en algún momento de sus vidas, pero la recomendación es no usarla en CC3. Recuerden que durante los exámenes tendrán que hacer mapas o circuitos a mano, sin acceso a su computadora.</p>
+<h2 id="calificacion">Calificación<a class="headerlink" href="#calificacion" title="Permanent link">&para;</a></h2>
+<p>Ustedes pueden verificar que cada parte funcione correctamente utilizando el autograder local, corriendo el siguiente comando en la terminal:</p>
+<div class="codehilite"><pre><span></span>./check
+</pre></div>
+
+<p>Si las tres partes del proyecto están correctas les saldrá algo como esto:</p>
+<div class="codehilite"><pre><span></span>   ___       __                        __       
+  / _ <span class="p">|</span>__ __/ /____  ___  _______ ____/ /__ ____
+ / __ / // / __/ _ <span class="se">\/</span> _ <span class="se">\/</span> __/ _ <span class="se">\/</span> _  / -_<span class="o">)</span> __/
+/_/ <span class="p">|</span>_<span class="se">\_</span>,_/<span class="se">\_</span>_/<span class="se">\_</span>__/<span class="se">\_</span>, /_/  <span class="se">\_</span>,_/<span class="se">\_</span>,_/<span class="se">\_</span>_/_/
+                   /___/
+
+             Machine Structures
+     Great Ideas in Computer Architecture
+               Project <span class="m">2</span>: CPU
+
+
+Exercise            Grade  Message
+----------------  -------  ---------
+<span class="m">1</span>. ALU                 <span class="m">10</span>  passed
+<span class="m">2</span>. Register File       <span class="m">10</span>  passed
+<span class="m">3</span>. CPU                 <span class="m">80</span>  <span class="nv">passed</span>
+
+<span class="o">=</span>&gt; Score: <span class="m">100</span>/100
+</pre></div>
+
+<p><strong>IMPORTANTE:</strong> Para tener derecho a nota debe presentar un procesador conectado y funcionando. Es posible obtener los puntos de ALU y de Register File con componentes sueltos y desconectados, sin emgargo si usted presenta esto se le pondrá CERO de nota. En otras palabras, todas las notas de 20 o menos se convierten en CERO.</p>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../proj01/" title="1: C y RISC-V" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Anterior
+                </span>
+                1: C y RISC-V
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../../tutorials/python/" title="Python" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Siguiente
+                </span>
+                Python
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            CC-3
+          </div>
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+        
+  <div class="md-footer-social">
+    <link rel="stylesheet" href="../../assets/fonts/font-awesome.css">
+    
+      <a href="https://github.com/cc-3/MachineStructures" class="md-footer-social__link fa fa-github"></a>
+    
+  </div>
+
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.b41f3d20.js"></script>
+      
+        
+        
+          
+          <script src="../../assets/javascripts/lunr/lunr.stemmer.support.js"></script>
+          
+            
+              
+              
+                <script src="../../assets/javascripts/lunr/lunr.es.js"></script>
+              
+            
+          
+          
+        
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+        <script src="../../js/latex.js"></script>
+      
+        <script src="../../convnet_demo/jquery.min.js"></script>
+      
+        <script src="../../convnet_demo/convnet-min.js"></script>
+      
+        <script src="../../convnet_demo/convnet_demo.js"></script>
+      
+        <script src="../../js/python.js"></script>
+      
+    
+    
+      
+    
+  </body>
+</html>

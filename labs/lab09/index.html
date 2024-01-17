@@ -1,0 +1,1003 @@
+
+
+
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="Grandes Ideas en Arquitectura de Computadora">
+      
+      
+        <link rel="canonical" href="https://cc-3.github.io/labs/lab09/">
+      
+      
+        <meta name="author" content="CC-3">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copiar al portapapeles">
+      
+        <meta name="lang:clipboard.copied" content="Copiado al portapapeles">
+      
+        <meta name="lang:search.language" content="es">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No se encontraron documentos">
+      
+        <meta name="lang:search.result.one" content="1 documento encontrado">
+      
+        <meta name="lang:search.result.other" content="# documentos encontrados">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-3.2.0">
+    
+    
+      
+        <title>9: OpenMP - Estructura de Máquinas</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.572ca0f0.css">
+      
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.8c900955.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/emoji.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/kbd.css">
+    
+      <link rel="stylesheet" href="../../convnet_demo/style.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/button.css">
+    
+    
+  </head>
+  
+    <body dir="ltr">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448"
+    viewBox="0 0 416 448" id="__github">
+  <path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19-18.125
+        8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19 18.125-8.5
+        18.125 8.5 10.75 19 3.125 20.5zM320 304q0 10-3.125 20.5t-10.75
+        19-18.125 8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19
+        18.125-8.5 18.125 8.5 10.75 19 3.125 20.5zM360
+        304q0-30-17.25-51t-46.75-21q-10.25 0-48.75 5.25-17.75 2.75-39.25
+        2.75t-39.25-2.75q-38-5.25-48.75-5.25-29.5 0-46.75 21t-17.25 51q0 22 8
+        38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0
+        37.25-1.75t35-7.375 30.5-15 20.25-25.75 8-38.375zM416 260q0 51.75-15.25
+        82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5-41.75
+        1.125q-19.5 0-35.5-0.75t-36.875-3.125-38.125-7.5-34.25-12.875-30.25-20.25-21.5-28.75q-15.5-30.75-15.5-82.75
+        0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25
+        30.875q36.75-8.75 77.25-8.75 37 0 70 8 26.25-20.5
+        46.75-30.25t47.25-9.75q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34
+        99.5z" />
+</svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#lab-9-thread-level-parallelism-con-openmp" tabindex="1" class="md-skip">
+        Saltar a contenido
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://cc-3.github.io/" title="Estructura de Máquinas" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                Estructura de Máquinas
+              </span>
+              <span class="md-header-nav__topic">
+                9: OpenMP
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Teclee para comenzar búsqueda
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+          
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+
+  <a href="https://github.com/cc-3/MachineStructures/" title="Ir al repositorio" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#__github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      cc-3/MachineStructures
+    </div>
+  </a>
+
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://cc-3.github.io/" title="Estructura de Máquinas" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    Estructura de Máquinas
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://github.com/cc-3/MachineStructures/" title="Ir al repositorio" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#__github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      cc-3/MachineStructures
+    </div>
+  </a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Inicio" class="md-nav__link">
+      Inicio
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+    
+    <label class="md-nav__link" for="nav-2">
+      Laboratorios
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Laboratorios
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab00/" title="0: Git" class="md-nav__link">
+      0: Git
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab01/" title="1: Intro a C" class="md-nav__link">
+      1: Intro a C
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab02/" title="2: CGDB y punteros" class="md-nav__link">
+      2: CGDB y punteros
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab03/" title="3: Estructuras y manejo de memoria" class="md-nav__link">
+      3: Estructuras y manejo de memoria
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab04/" title="4: Intro a RISC-V" class="md-nav__link">
+      4: Intro a RISC-V
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab05/" title="5: RISC-V" class="md-nav__link">
+      5: RISC-V
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab06/" title="6: Logisim" class="md-nav__link">
+      6: Logisim
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab07/" title="7: Logisim Avanzado" class="md-nav__link">
+      7: Logisim Avanzado
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab08/" title="8: SIMD" class="md-nav__link">
+      8: SIMD
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        9: OpenMP
+      </label>
+    
+    <a href="./" title="9: OpenMP" class="md-nav__link md-nav__link--active">
+      9: OpenMP
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Tabla de contenidos</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#objetivo" title="Objetivo" class="md-nav__link">
+    Objetivo
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias-adicional" title="Referencias Adicional" class="md-nav__link">
+    Referencias Adicional
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#preparacion" title="Preparación" class="md-nav__link">
+    Preparación
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion-a-openmp" title="Introducción a OpenMP" class="md-nav__link">
+    Introducción a OpenMP
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejemplo-hola-mundo" title="Ejemplo Hola Mundo" class="md-nav__link">
+    Ejemplo Hola Mundo
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejercicio-1-suma-de-vectores" title="Ejercicio 1: Suma de Vectores" class="md-nav__link">
+    Ejercicio 1: Suma de Vectores
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejercicio-2-producto-punto" title="Ejercicio 2: Producto Punto" class="md-nav__link">
+    Ejercicio 2: Producto Punto
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#calificacion" title="Calificación" class="md-nav__link">
+    Calificación
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Proyectos
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Proyectos
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../projs/proj01/" title="1: C y RISC-V" class="md-nav__link">
+      1: C y RISC-V
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../projs/proj02/" title="2: Procesador" class="md-nav__link">
+      2: Procesador
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Tutoriales
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Tutoriales
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/python/" title="Python" class="md-nav__link">
+      Python
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/install/" title="Instalacion de material" class="md-nav__link">
+      Instalacion de material
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      Notas
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        Notas
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../notes/00_Numbers-Representation/" title="Números" class="md-nav__link">
+      Números
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../notes/01_C/" title="C" class="md-nav__link">
+      C
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../notes/02_Intro-RISCV/" title="RISC-V" class="md-nav__link">
+      RISC-V
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../notes/03_Instruction-Format/" title="Formato de instrucciones" class="md-nav__link">
+      Formato de instrucciones
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../notes/04_CALL/" title="CALL" class="md-nav__link">
+      CALL
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Tabla de contenidos</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#objetivo" title="Objetivo" class="md-nav__link">
+    Objetivo
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias-adicional" title="Referencias Adicional" class="md-nav__link">
+    Referencias Adicional
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#preparacion" title="Preparación" class="md-nav__link">
+    Preparación
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion-a-openmp" title="Introducción a OpenMP" class="md-nav__link">
+    Introducción a OpenMP
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejemplo-hola-mundo" title="Ejemplo Hola Mundo" class="md-nav__link">
+    Ejemplo Hola Mundo
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejercicio-1-suma-de-vectores" title="Ejercicio 1: Suma de Vectores" class="md-nav__link">
+    Ejercicio 1: Suma de Vectores
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejercicio-2-producto-punto" title="Ejercicio 2: Producto Punto" class="md-nav__link">
+    Ejercicio 2: Producto Punto
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#calificacion" title="Calificación" class="md-nav__link">
+    Calificación
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/cc-3/MachineStructures/edit/master/page/es/docs/labs/lab09.md" title="Editar esta página" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="lab-9-thread-level-parallelism-con-openmp">Lab 9 - Thread Level parallelism con OpenMP<a class="headerlink" href="#lab-9-thread-level-parallelism-con-openmp" title="Permanent link">&para;</a></h1>
+<h2 id="objetivo">Objetivo<a class="headerlink" href="#objetivo" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Aprender acerca de OpenMP y thread level parallelism</li>
+</ul>
+<h2 id="referencias-adicional">Referencias Adicional<a class="headerlink" href="#referencias-adicional" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="http://openmp.org/mp-documents/omp-hands-on-SC08.pdf">OpenMP Hands On</a></li>
+<li><a href="https://www.openmp.org/resources/#Tutorials">OpenMP Tutorials</a></li>
+</ul>
+<h2 id="preparacion">Preparación<a class="headerlink" href="#preparacion" title="Permanent link">&para;</a></h2>
+<p>Tienen que tener todos los archivos base, estos se encuentran <a href="https://classroom.github.com/a/AMMyu594">aquí</a>. Recuerden que tienen que aprovechar el uso de Git y subir el link de su repositorio al GES, así como al autograder, de lo contrario su nota será de <strong>0</strong>.</p>
+<p><strong>Por favor revisen la sección de calificación para conocer el límite de submits que tienen</strong>.</p>
+<h2 id="introduccion-a-openmp">Introducción a OpenMP<a class="headerlink" href="#introduccion-a-openmp" title="Permanent link">&para;</a></h2>
+<p><strong>OpenMP</strong> es un framework de programación paralela para C/C++ y Fortran. Ha ganado bastante popularidad en los últimos años, principalmente por su simplicidad y buen performance. En este laboratorio vamos a darle un vistazo a una pequeña fracción de sus características, pero en la sección <strong><em>Referencia Adicional</em></strong> hay links con más información y tutoriales (<em>para los interesados</em>).</p>
+<p>Hay muchos tipos de paralelismo y patrones para aprovechar ese paralelismo. OpenMP utiliza un modelo de fork y join anidado. Por defecto, un programa de OpenMP es un programa sequencial normal, exceptuando las regiones que el programador explicitamente declara para que se ejecuten en paralelo. En la región paralela, el framework crea (hace un fork) un número de threads. Tipicamente estos threads ejecutan las mismas instrucciones, solo que en diferentes porciones de los datos. Al final de la región paralela, el framework espera por todos los threads a que terminen (hace join) antes de dejar la región y continuar secuencialmente.</p>
+<p align="center">
+  <img src="/img/labs/lab11/forkjoin.jpg" alt="Fork Join"/>
+</p>
+
+<p>OpenMP utiliza <em>memoria compartida</em>, esto significa que todos los threads pueden acceder al mismo espacio de direcciones. La alternativa a esto sería <em>memoria distribuida</em>, que es lo principal en clusters donde los datos deberían de ser movidos explicitamente entre espacios de direcciones. Muchos programadores encuentran la memoria compartida más fácil de programar, dado que no tienen que preocuparse de mover los datos, pero es usualmente más difícil de implementar en hardware de una manera escalable. Más adelante en este laboratorio vamos a declarar memoria que va a ser local al thread (<em>solo el thread que la declara puede acceder a esta memoria</em>) por motivos de performance, pero OpenMP provee la flexibilidad para que los threads puedan compartir memoria sin que el programador lo haga.</p>
+<h2 id="ejemplo-hola-mundo">Ejemplo Hola Mundo<a class="headerlink" href="#ejemplo-hola-mundo" title="Permanent link">&para;</a></h2>
+<p>Para este laboratorio, vamos a utilizar C. OpenMP es un framework con una interfaz de C, esto quiere decir que no es una parte del lenguaje como tal. La mayoría de características son realmente directivas al compilador. Consideren la siguiente implementación del Hola Mundo (<strong><em>hello.c</em></strong>)</p>
+<div class="codehilite"><pre><span></span><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+  <span class="cp">#pragma omp parallel</span>
+  <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">thread_ID</span> <span class="o">=</span> <span class="n">omp_get_thread_num</span><span class="p">();</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot; hello world %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">thread_ID</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>Este programa va a crear (fork) el número por defecto de threads y cada thread creado va a imprimir "<em>hello world</em>" así como también el número que le corresponde. El <code>#pragma</code> le dice al compilador que el resto de la linea es una directiva, y en este caso es <code>omp parallel</code>. <code>omp</code> declara que es para OpenMP y <code>parallel</code> le dice que el siguiente bloque de código (lo que está contenido en <code>{}</code>) puede ser ejecutado en paralelo. Pueden probarlo con lo siguiente:</p>
+<div class="codehilite"><pre><span></span>make hello
+./hello
+</pre></div>
+
+<p>Corran el comando <code>./hello</code> unas cuantas veces. Noten como los números de los threads no necesariamente se imprimen en orden numérico y tampoco en el mismo orden si corren <code>./hello</code> multiples veces, esto es porque en una región <code>omp parallel</code>, el programador se garantiza que las operaciones se pueden hacer en paralelo, y que no hay un orden entre los threads. También vale la pena notar que la variable <code>thread_ID</code> es local a cada thread. En general en OpenMP, las variables que se declaran a fuera de un bloque <code>omp parallel</code> tienen una sola copia y son compartidas a traves de todos los threads, mientras que las variables que se declaran adentro de ese bloque tienen una copia privada para cada thread.</p>
+<h2 id="ejercicio-1-suma-de-vectores">Ejercicio 1: Suma de Vectores<a class="headerlink" href="#ejercicio-1-suma-de-vectores" title="Permanent link">&para;</a></h2>
+<p>La suma de vectores es un cálculo inherentemente paralelo, así que es bueno para que sea el primer ejercicio. La función <code>v_add</code> adentro de <strong><em>v_add.c</em></strong> va a retornar un arreglo que es la suma de los vectores de entrada <code>x</code> y <code>y</code> componente por componente. Un primer intento de resolverlo se podría ver así:</p>
+<div class="codehilite"><pre><span></span><span class="kt">void</span> <span class="nf">v_add</span><span class="p">(</span><span class="kt">double</span><span class="o">*</span> <span class="n">x</span><span class="p">,</span> <span class="kt">double</span><span class="o">*</span> <span class="n">y</span><span class="p">,</span> <span class="kt">double</span><span class="o">*</span> <span class="n">z</span><span class="p">)</span> <span class="p">{</span>
+  <span class="cp">#pragma omp parallel</span>
+  <span class="p">{</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">ARRAY_SIZE</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+      <span class="n">z</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>Pueden correr esto haciendo lo siguiente:</p>
+<div class="codehilite"><pre><span></span>make v_add
+./v_add
+</pre></div>
+
+<p>Y las pruebas que se ejecutarán van a tomar el tiempo automáticamente y variar el número de threads. Ustedes van a ver que a medida de que se incrementa el número de threads cada vez se va haciendo más lento. Este problema se debe a que cada thread está ejecutando todo el código dentro del bloque <code>omp parallel</code>, esto significa que si tienen 8 threads, van a estar sumando los vectores 8 veces. <strong>¡¡NO HAGAN ESTE TIPO DE COSAS!!</strong>. Para obtener una aceleración al incrementar el número de threads, necesitamos que cada thread haga menos trabajo, no la misma cantidad como antes.</p>
+<p align="center">
+  <img src="/img/labs/lab11/decomp.jpg" alt="Suma Vectores Paralelo"/>
+</p>
+
+<p>Su tarea es modificar v_add de tal manera que se note la aceleración (la aceleración se puede estancar a medida de que el número de threads se incrementa). La mejor manera para hacer esto es decrementar la cantidad de trabajo que un thread hace. Para ayudarlos en el proceso, hay dos funciones útiles de OpenMP:</p>
+<ul>
+<li><code>int omp_get_num_threads()</code></li>
+<li><code>int omp_get_thread_num()</code></li>
+</ul>
+<p>La función <code>omp_get_num_threads()</code> va a retornar cuantos threads hay dentro de un bloque <code>omp parallel</code>, y <code>omp_get_thread_num()</code> va a retornar el ID o número de thread.</p>
+<p>Hay dos formas para dividir el trabajo en cada thread, la primera (que no deberían utilizar) es la técnica de <strong>slicing</strong>: cada thread maneja sumas adyacentes, es decir, el thread 0 va a sumar todos los elementos que están en los indices <code>i</code> tal que <code>i % omp_get_num_threads()</code> es 0, el thread 1 va a sumar todos los elementos tal que <code>i % omp_get_num_threads()</code> es 1 y así... noten que este método no va a ser eficiente porque va a sufrir de un problema llamado <a href="http://en.wikipedia.org/wiki/False_sharing"><strong>false sharing</strong></a>. La segunda manera de hacerlo (y como lo tienen que hacer ustedes) es la técnica de <strong>chunking</strong>: si hay N threads, hay que partir los vectores en N chunks continuos, y hacer que cada thread sume cada chunk (como la figura de arriba).</p>
+<blockquote>
+<p>PISTA: Puede ser que necesiten un caso especial para prevenir salirse del arreglo. No teman escribir un caso especial.</p>
+</blockquote>
+<p>Para este ejercicio, nosotros les estamos pidiendo que manualmente dividan el trabajo a traves de los threads. Dado que es un patrón comun, los diseñadores de OpenMP hicieron una directiva que hace esto por ustedes automáticamente. Aquí está la función utilizando la directiva: (<strong><em>Ustedes NO pueden utilizar esta directiva en su solución del ejercicio.</em></strong>)</p>
+<div class="codehilite"><pre><span></span><span class="kt">void</span> <span class="nf">v_add</span><span class="p">(</span><span class="kt">double</span><span class="o">*</span> <span class="n">x</span><span class="p">,</span> <span class="kt">double</span><span class="o">*</span> <span class="n">y</span><span class="p">,</span> <span class="kt">double</span><span class="o">*</span> <span class="n">z</span><span class="p">)</span> <span class="p">{</span>
+  <span class="cp">#pragma omp parallel</span>
+  <span class="p">{</span>
+    <span class="cp">#pragma omp for</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">ARRAY_SIZE</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+      <span class="n">z</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+<h2 id="ejercicio-2-producto-punto">Ejercicio 2: Producto Punto<a class="headerlink" href="#ejercicio-2-producto-punto" title="Permanent link">&para;</a></h2>
+<p>El siguiente calculo interesante que queremos ver es el producto punto entre dos vectores. A primera vista, implementar esto puede ser no muy diferente a <code>v_add</code>, pero el reto es como sumar todos los productos en una misma variable (reducción/reduction). Manejar de forma no inteligente la reducción va a resultar en las famosas condiciones de carrera: todos los threads están tratando de leer y escribir a la misma dirección simultáneamente. Una solución es utilizar una sección crítica. El código en la sección crítica puede ser únicamente ejecutado por un solo thread. Tener una sección crítica naturalmente previene que multiples threads lean y escriban a los mismos datos, un problema que podría llevar a condiciones de carrera. Una solución no muy buena protegería la suma con una sección crítica (dotp.c):</p>
+<div class="codehilite"><pre><span></span><span class="kt">double</span> <span class="nf">dotp</span><span class="p">(</span><span class="kt">double</span><span class="o">*</span> <span class="n">x</span><span class="p">,</span> <span class="kt">double</span><span class="o">*</span> <span class="n">y</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kt">double</span> <span class="n">global_sum</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">;</span>
+  <span class="cp">#pragma omp parallel</span>
+  <span class="p">{</span>
+    <span class="cp">#pragma omp for</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">ARRAY_SIZE</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+      <span class="cp">#pragma omp critical</span>
+        <span class="n">global_sum</span> <span class="o">+=</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="n">global_sum</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>Pruben el código haciendo:</p>
+<div class="codehilite"><pre><span></span>make dotp
+./dotp
+</pre></div>
+
+<p>Noten como el performance es peor a medida que el número de threads se incrementa. Dado que se está poniendo todo el trabajo de la reducción en la sección crítica, hemos desperdiciado el paralelismo y hecho que solo un thread pueda hacer el trabajo cada tiempo (que no es exactamente la idea detrás del paralelismo a nivel de threads). Esto es algo problemático, cada thread está constantemente luchando por la sección crítica y solo uno está haciendo progreso en cualquier momento. A medida que el número de threads incrementa, la cantidad de threads en espera también, y el performance paga el precio. ¿Pueden arreglar ustedes este cuello de botella?</p>
+<blockquote>
+<p>PISTA: Reduzcan el número de veces que cada thread necesita utilizar la sección crítica.</p>
+</blockquote>
+<p>Pueden hacer esto de dos maneras diferentes también</p>
+<ol>
+<li>Pueden arreglarlo sin utilizar la palabra clave de OpenMP <code>reduction</code>, y tratar de reducir la cantidad de veces que un thread debe de sumar a la variable compartida <code>global_sum</code>.</li>
+<li>Pueden arreglarlo utilizando la palabra clave de OpenMP <code>reduction</code> (abran Google para buscar información). Si utilizan esta opción, ya no deberían de tener una sección crítica. Además van a necesitar escribir un <code>+</code> en alguna parte utilizando esto.</li>
+</ol>
+<p>La sintáxis exacta para utilizar estas directivas puede ser un poco confusa. Aquí va un poco de información adicional:</p>
+<ul>
+<li>Una sección <code>#pragma omp parallel</code> puede ser especificada utilizando llaves <code>{}</code> que rodeen el código a paralelizar.</li>
+<li>Una sección <code>#pragma omp for</code> no debería de estar acompañada con llaves <code>{}</code>. Solo pongan la directiva arriba del for.</li>
+</ul>
+<h2 id="calificacion">Calificación<a class="headerlink" href="#calificacion" title="Permanent link">&para;</a></h2>
+<p>Al terminar, deben de subir su laboratorio al autograder con:</p>
+<div class="codehilite"><pre><span></span>./submit &lt;TOKEN&gt;
+</pre></div>
+
+<p>Para este laboratorio su solución será evaluada en un servidor de AWS EC2 por lo que únicamente tienen permitido hacer <strong><em>3 submits</em></strong>. Les aconsejamos probar bien su código antes de enviarlo al autograder. No olviden también subir el link de su repositorio en Github al GES.</p>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../lab08/" title="8: SIMD" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Anterior
+                </span>
+                8: SIMD
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../../projs/proj01/" title="1: C y RISC-V" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Siguiente
+                </span>
+                1: C y RISC-V
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            CC-3
+          </div>
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+        
+  <div class="md-footer-social">
+    <link rel="stylesheet" href="../../assets/fonts/font-awesome.css">
+    
+      <a href="https://github.com/cc-3/MachineStructures" class="md-footer-social__link fa fa-github"></a>
+    
+  </div>
+
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.b41f3d20.js"></script>
+      
+        
+        
+          
+          <script src="../../assets/javascripts/lunr/lunr.stemmer.support.js"></script>
+          
+            
+              
+              
+                <script src="../../assets/javascripts/lunr/lunr.es.js"></script>
+              
+            
+          
+          
+        
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+        <script src="../../js/latex.js"></script>
+      
+        <script src="../../convnet_demo/jquery.min.js"></script>
+      
+        <script src="../../convnet_demo/convnet-min.js"></script>
+      
+        <script src="../../convnet_demo/convnet_demo.js"></script>
+      
+        <script src="../../js/python.js"></script>
+      
+    
+    
+      
+    
+  </body>
+</html>

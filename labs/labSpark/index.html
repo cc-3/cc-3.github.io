@@ -1,0 +1,967 @@
+
+
+
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="Grandes Ideas en Arquitectura de Computadora">
+      
+      
+        <link rel="canonical" href="https://cc-3.github.io/labs/labSpark/">
+      
+      
+        <meta name="author" content="CC-3">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copiar al portapapeles">
+      
+        <meta name="lang:clipboard.copied" content="Copiado al portapapeles">
+      
+        <meta name="lang:search.language" content="es">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No se encontraron documentos">
+      
+        <meta name="lang:search.result.one" content="1 documento encontrado">
+      
+        <meta name="lang:search.result.other" content="# documentos encontrados">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-3.2.0">
+    
+    
+      
+        <title>Lab 12 - MapReduce y Spark - Estructura de Máquinas</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.572ca0f0.css">
+      
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.8c900955.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/emoji.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/kbd.css">
+    
+      <link rel="stylesheet" href="../../convnet_demo/style.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/button.css">
+    
+    
+  </head>
+  
+    <body dir="ltr">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448"
+    viewBox="0 0 416 448" id="__github">
+  <path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19-18.125
+        8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19 18.125-8.5
+        18.125 8.5 10.75 19 3.125 20.5zM320 304q0 10-3.125 20.5t-10.75
+        19-18.125 8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19
+        18.125-8.5 18.125 8.5 10.75 19 3.125 20.5zM360
+        304q0-30-17.25-51t-46.75-21q-10.25 0-48.75 5.25-17.75 2.75-39.25
+        2.75t-39.25-2.75q-38-5.25-48.75-5.25-29.5 0-46.75 21t-17.25 51q0 22 8
+        38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0
+        37.25-1.75t35-7.375 30.5-15 20.25-25.75 8-38.375zM416 260q0 51.75-15.25
+        82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5-41.75
+        1.125q-19.5 0-35.5-0.75t-36.875-3.125-38.125-7.5-34.25-12.875-30.25-20.25-21.5-28.75q-15.5-30.75-15.5-82.75
+        0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25
+        30.875q36.75-8.75 77.25-8.75 37 0 70 8 26.25-20.5
+        46.75-30.25t47.25-9.75q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34
+        99.5z" />
+</svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#lab-12-mapreduce-y-spark" tabindex="1" class="md-skip">
+        Saltar a contenido
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://cc-3.github.io/" title="Estructura de Máquinas" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                Estructura de Máquinas
+              </span>
+              <span class="md-header-nav__topic">
+                Lab 12 - MapReduce y Spark
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Teclee para comenzar búsqueda
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+          
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+
+  <a href="https://github.com/cc-3/MachineStructures/" title="Ir al repositorio" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#__github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      cc-3/MachineStructures
+    </div>
+  </a>
+
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://cc-3.github.io/" title="Estructura de Máquinas" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    Estructura de Máquinas
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://github.com/cc-3/MachineStructures/" title="Ir al repositorio" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#__github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      cc-3/MachineStructures
+    </div>
+  </a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Inicio" class="md-nav__link">
+      Inicio
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      Laboratorios
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Laboratorios
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab00/" title="0: Git" class="md-nav__link">
+      0: Git
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab01/" title="1: Intro a C" class="md-nav__link">
+      1: Intro a C
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab02/" title="2: CGDB y punteros" class="md-nav__link">
+      2: CGDB y punteros
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab03/" title="3: Estructuras y manejo de memoria" class="md-nav__link">
+      3: Estructuras y manejo de memoria
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab04/" title="4: Intro a RISC-V" class="md-nav__link">
+      4: Intro a RISC-V
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab05/" title="5: RISC-V" class="md-nav__link">
+      5: RISC-V
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab06/" title="6: Logisim" class="md-nav__link">
+      6: Logisim
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab07/" title="7: Logisim Avanzado" class="md-nav__link">
+      7: Logisim Avanzado
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab08/" title="8: SIMD" class="md-nav__link">
+      8: SIMD
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab09/" title="9: OpenMP" class="md-nav__link">
+      9: OpenMP
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Proyectos
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Proyectos
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../projs/proj01/" title="1: C y RISC-V" class="md-nav__link">
+      1: C y RISC-V
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../projs/proj02/" title="2: Procesador" class="md-nav__link">
+      2: Procesador
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Tutoriales
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Tutoriales
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/python/" title="Python" class="md-nav__link">
+      Python
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/install/" title="Instalacion de material" class="md-nav__link">
+      Instalacion de material
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      Notas
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        Notas
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../notes/00_Numbers-Representation/" title="Números" class="md-nav__link">
+      Números
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../notes/01_C/" title="C" class="md-nav__link">
+      C
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../notes/02_Intro-RISCV/" title="RISC-V" class="md-nav__link">
+      RISC-V
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../notes/03_Instruction-Format/" title="Formato de instrucciones" class="md-nav__link">
+      Formato de instrucciones
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../notes/04_CALL/" title="CALL" class="md-nav__link">
+      CALL
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Tabla de contenidos</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#objetivos" title="Objetivos" class="md-nav__link">
+    Objetivos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#preparacion" title="Preparación" class="md-nav__link">
+    Preparación
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion" title="Introducción" class="md-nav__link">
+    Introducción
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#variables-globales" title="Variables Globales" class="md-nav__link">
+    Variables Globales
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#como-correr-spark" title="Como correr Spark" class="md-nav__link">
+    Como correr Spark
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tips-rapidos-de-depuracion" title="Tips rápidos de Depuración" class="md-nav__link">
+    Tips rápidos de Depuración
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#documentacion-y-otros-recursos" title="Documentación y Otros Recursos" class="md-nav__link">
+    Documentación y Otros Recursos
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#python" title="Python" class="md-nav__link">
+    Python
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejercicio-1-grafos-dirigidos-warm-up" title="Ejercicio 1: Grafos Dirigidos (Warm-Up)" class="md-nav__link">
+    Ejercicio 1: Grafos Dirigidos (Warm-Up)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejemplo-ejecutando-un-contador-de-palabras" title="Ejemplo: Ejecutando un contador de palabras" class="md-nav__link">
+    Ejemplo: Ejecutando un contador de palabras
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejercicio-2-document-word-count" title="Ejercicio 2: Document Word Count" class="md-nav__link">
+    Ejercicio 2: Document Word Count
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejercicio-3-full-text-index-creation" title="Ejercicio 3: Full Text Index Creation" class="md-nav__link">
+    Ejercicio 3: Full Text Index Creation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#calificacion" title="Calificación" class="md-nav__link">
+    Calificación
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/cc-3/MachineStructures/edit/master/page/es/docs/labs/labSpark.md" title="Editar esta página" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="lab-12-mapreduce-y-spark">Lab 12 - MapReduce y Spark<a class="headerlink" href="#lab-12-mapreduce-y-spark" title="Permanent link">&para;</a></h1>
+<h2 id="objetivos">Objetivos<a class="headerlink" href="#objetivos" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Obtener experiencia ejecutando MapReduce y conseguir un conocimiento más profundo del paradigma MapReduce.</li>
+<li>Familiarizarse con Apache Spark y conseguir experiencia con Spark en una instalación local.</li>
+<li>Aprender  a aplicar el paradigma MapReduce a Spark implementando ciertos algoritmos en Spark.</li>
+</ul>
+<h2 id="preparacion">Preparación<a class="headerlink" href="#preparacion" title="Permanent link">&para;</a></h2>
+<p>Tienen que tener todos los archivos base, estos se encuentran <a href="https://classroom.github.com/a/MVBf0hH7">aquí</a>. Recuerden que tienen que aprovechar el uso de Git y subir el link de su repositorio al GES, así como al autograder, de lo contrario su nota será de <strong>0</strong>.</p>
+<p><strong>Por favor revisen la sección de calificación para conocer el límite de submits que tienen</strong>.</p>
+<p>Cuando ya se haya creado el repositorio, pueden ejecutar los siguientes comandos abriendo una terminal (<kbd>CTRL</kbd><kbd>+</kbd><kbd>T</kbd>):</p>
+<div class="codehilite"><pre><span></span>git clone &lt;link del repositorio&gt;
+</pre></div>
+
+<p>También, tienen que instalar el entorno de Python para este laboratorio. Para hacer esto, ejecuten lo siguiente:</p>
+<div class="codehilite"><pre><span></span>conda env create -f environment.yml
+</pre></div>
+
+<p>Respondan al mensaje de instalar paquetes con "y" (sin comillas). Después de la instalación, corran el siguiente comando para activar el entorno virtual:</p>
+<div class="codehilite"><pre><span></span>conda activate lab12
+</pre></div>
+
+<p>Cuando hayan terminado con el laboratorio pueden desactivar el entorno con:</p>
+<div class="codehilite"><pre><span></span>conda deactivate
+</pre></div>
+
+<h2 id="introduccion">Introducción<a class="headerlink" href="#introduccion" title="Permanent link">&para;</a></h2>
+<p>En clase los hemos expuesto a cluster computing (en particular, al framework MapReduce), como funciona y se ejecuta, pero ahora es tiempo de que ganen experiencia corriendo programas utilizando estos frameworks. En este laboratorio los vamos a introducir a <strong>Spark</strong> para que practiquen escribiendo rutinas de Map y Reduce. Este framework tiene su propia página en linea, así que son libres de probar instalarlo localmente en sus computadoras personales, de todas formas es más fácil utilizar la máquina virtual que les proporcionamos para completar este laboratorio. Asegúrense de entender bien el framework de Spark, ya que lo vamos a estar utilizando en el último proyecto del curso.</p>
+<h3 id="variables-globales">Variables Globales<a class="headerlink" href="#variables-globales" title="Permanent link">&para;</a></h3>
+<p>Cuando estén utilizando Spark o un framework de cluster computing, no utilicen variables globales. Esto mata el propósito de tener múltiples tareas corriendo en paralelo y crea cuellos de botella cuando múltiples tareas tratan de acceder a la misma variable global. Como resultado, muchos algoritmos son implementados sin el uso de variables globales. En Spark pueden hacer uso de variables <strong><em>broadcast</em></strong>, sin embargo, no las vamos a necesitar en este laboratorio.</p>
+<h3 id="como-correr-spark">Como correr Spark<a class="headerlink" href="#como-correr-spark" title="Permanent link">&para;</a></h3>
+<p>Para este laboratorio y en el proyecto les vamos a dar un archivo que les va a ayudar a correr los archivos de Spark, pero cuando ustedes utilicen Spark afuera de la clase (que deberían), van a necesitar saber como correr Spark en la línea de comandos. Para poder correr un archivo de Spark <code>foo.py</code> (similar a como ustedes corren un programa de Python <code>foo.py</code>) solo utilicen el siguiente comando:</p>
+<div class="codehilite"><pre><span></span>spark-submit foo.py <span class="c1"># corre el archivo de spark foo.py</span>
+</pre></div>
+
+<p>Si su archivo de Spark necesita argumentos (así como los archivos del laboratorio), el comando va a ser similar, pero ustedes van a pasar tantos argumentos como necesiten, así:</p>
+<div class="codehilite"><pre><span></span>spark-submit foo.py arg1 arg2 <span class="c1"># pasa los argumentos arg1 y arg2 a foo.py</span>
+</pre></div>
+
+<p>Spark también incluye un intérprete que corre con la versión de Python que tengan instalada, y los va a dejar probar cualquier comando de Spark en el intérprete. El intérprete también puede recibir archivos (pasen los archivos con la bandera --py-files). Si están buscando solo correr el intérprete, el comando es el siguiente:</p>
+<div class="codehilite"><pre><span></span>pyspark
+</pre></div>
+
+<p>Si quieren pre-cargar unos archivos (digamos a.py, b.py y c.py) pueden correr el siguiente comando:</p>
+<div class="codehilite"><pre><span></span>pyspark --py-files a.py, b.py, c.py
+</pre></div>
+
+<h3 id="tips-rapidos-de-depuracion">Tips rápidos de Depuración<a class="headerlink" href="#tips-rapidos-de-depuracion" title="Permanent link">&para;</a></h3>
+<p>Si alguna vez se encuentran preguntándose porqué su salida es extraña o algo está mal cuando corren sus archivos de Spark, recuerden los siguientes tips:</p>
+<ul>
+<li>Asegúrense de utilizar la función de acción <a href="http://spark.apache.org/docs/latest/api/python/pyspark.html#pyspark.RDD.take">take</a>. La función <strong>take</strong> puede ser utilizada sobre cualquier objeto <em>RDD</em> (así que prácticamente cualquier objeto que ustedes quieran paralelizar). Esta función toma un argumento <code>N</code>, que es un entero y va a retornar los primeros <code>N</code> elementos dentro de su objeto RDD.</li>
+<li>También pueden probar sus funciones (map, reduce, etc) adentro del intérprete de Spark (pyspark, mencionado arriba). Simplemente importen la función que quieren probar en pyspark (explicado arriba) y van a ser capaces de correr la función y verificar que la salida es la que ustedes esperan. Aquí hay un pequeño ejemplo de <code>wordcount.py</code>:</li>
+</ul>
+<div class="codehilite"><pre><span></span>pyspark --py-files wordcount.py <span class="c1"># corre el interprete de spark con el archivo wordcount.py</span>
+&gt;&gt;&gt; from wordcount import flat_map <span class="c1"># importa la funcion que quieren probar, flat_map, en este caso</span>
+&gt;&gt;&gt; <span class="nv">file</span> <span class="o">=</span> sc.sequenceFile<span class="o">(</span><span class="s2">&quot;data/billOfRights.txt.seq&quot;</span><span class="o">)</span> <span class="c1"># carga el archivo sequencial billOfRights.txt.seq</span>
+&gt;&gt;&gt; file.take<span class="o">(</span><span class="m">5</span><span class="o">)</span> <span class="c1"># retorna los primeros 5 elementos del RDD file</span>
+<span class="o">[(</span>&lt;doc_name_1&gt;, &lt;text <span class="m">1</span>&gt;<span class="o">)</span>, <span class="o">(</span>&lt;doc_name_2&gt;, &lt;text <span class="m">2</span>&gt;<span class="o">)</span>, ..., <span class="o">(</span>&lt;doc_name_5&gt;, &lt;text <span class="m">5</span>&gt;<span class="o">)]</span>
+&gt;&gt;&gt; <span class="nv">flat_map_output</span> <span class="o">=</span> file.flatMap<span class="o">(</span>flat_map<span class="o">)</span> <span class="c1"># corre la funcion importada flat_map sobre file</span>
+&gt;&gt;&gt; flat_map_output.take<span class="o">(</span><span class="m">5</span><span class="o">)</span> <span class="c1"># retorna las primeras 5 palabras en el documento.</span>
+<span class="o">[</span><span class="s1">&#39;Amendment&#39;</span>, <span class="s1">&#39;I&#39;</span>, <span class="s1">&#39;Congress&#39;</span>, <span class="s1">&#39;shall&#39;</span>, <span class="s1">&#39;make&#39;</span><span class="o">]</span>
+</pre></div>
+
+<h3 id="documentacion-y-otros-recursos">Documentación y Otros Recursos<a class="headerlink" href="#documentacion-y-otros-recursos" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Una guía rápida de programación en Spark (hagan click en la pestaña de Python para ver el código de Python) está disponile <a href="http://spark.apache.org/docs/latest/rdd-programming-guide.html">aquí</a>.</li>
+<li>Aquí hay un <a href="#">link</a> a la documentación de la API. Para este laboratorio, no necesitan navegar mucho en ella, pero tomen un tiempo para verla cuando estén haciendo el proyecto.</li>
+</ul>
+<h2 id="python">Python<a class="headerlink" href="#python" title="Permanent link">&para;</a></h2>
+<p>Talvez algunos ya estén familiarizados con Python ya que ha ganado popularidad en los últimos años (es el lenguaje más utilizado en universidades para cursos introductorios de programación), además siempre está en las primeras posiciones de los lenguajes de programación más usados donde reposan los grandes como C y no hay que olvidar que es el scripting language por excelencia que utilizan compañias como Google, Facebook, etc. Se preguntarán ¿por qué aprender Python? además de ser una nueva herramienta en su toolbox de conocimientos, es un lenguaje flexible, rápido a pesar de ser interpretado y con dynamic typing (obvio no se compara con uno compilado y con static typing).</p>
+<p>Antes de empezar este laboratorio, asumimos que ya leyeron el tutorial de Python que se les proporciona en el siguiente <a href="/tutorials/python/">link</a>, es imperativo que lean el tutorial, en otros años han tratado de saltarse este paso y el resultado no es muy bueno, <strong>LEAN EL TUTORIAL</strong>.</p>
+<h2 id="ejercicio-1-grafos-dirigidos-warm-up">Ejercicio 1: Grafos Dirigidos (Warm-Up)<a class="headerlink" href="#ejercicio-1-grafos-dirigidos-warm-up" title="Permanent link">&para;</a></h2>
+<p>Este ejercicio no tiene nada que ver con MapReduce, pero les servirá para practicar sus habilidades de Python. Tienen que implementar el método <code>path</code> de la clase <code>DirectedGraph</code>, el constructor de esta clase recibe de parámetro una matriz de booleans, la cual representará la matriz de adyacencias de un grafo dirigido. Los estados iran del 0, hasta length - 1 de la matriz. El método <code>path(self, start, end)</code> devuelve una lista de Python con el camino más corto desde el estado  <code>start</code> al estado <code>end</code>, el resultado (los elementos de la lista) debe contener los estados por los que se deben de pasar incluyendo el estado <code>start</code> (el inicio) y <code>end</code> (el final).</p>
+<p>Si nuestro grafo <code>G</code> fuera el siguiente:</p>
+<p align="center">
+  <img src="/img/labs/lab12/BFS.png" alt="BFS Ejemplo"/>
+</p>
+
+<p>y quisieramos el camino más corto del estado 2 a los demás estados, obtendriamos el siguiente resultado:</p>
+<div class="codehilite"><pre><span></span>from state: 2
+  to state: 0 = shortest path: 2 -&gt; 0, distance: 1
+  to state: 1 = shortest path: 2 -&gt; 0 -&gt; 1, distance: 2
+  to state: 3 = shortest path: 2 -&gt; 3, distance: 1
+  to state: 4 = shortest path: 2 -&gt; 3 -&gt; 4, distance: 2
+  to state: 5 = shortest path: 2 -&gt; 3 -&gt; 5, distance: 2
+  to state: 6 = shortest path: 2 -&gt; 3 -&gt; 4 -&gt; 6, distance: 3
+  to state: 7 = shortest path: 2 -&gt; 3 -&gt; 5 -&gt; 7, distance: 3
+</pre></div>
+
+<p>Para este ejercicio les recomendamos utilizar <strong><em>Breadth-first search</em></strong> (BFS), para los que no se recuerdan aquí hay una variante que solo toma en cuenta el arreglo de predecesores $\pi$ (¿Por qué solo predecesores?):</p>
+<div class="codehilite"><pre><span></span><span class="n">BFS</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">for</span> <span class="n">each</span> <span class="n">vertex</span> <span class="n">u</span> <span class="err">∈</span> <span class="n">V</span><span class="p">[</span><span class="n">G</span><span class="p">]</span> <span class="err">–</span> <span class="p">{</span><span class="n">s</span><span class="p">}</span> <span class="p">{</span>
+   <span class="n">visited</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">=</span> <span class="nb">false</span>
+   <span class="err">π</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">=</span> <span class="n">null</span>
+  <span class="p">}</span>
+  <span class="n">visited</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span>
+  <span class="err">π</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="o">=</span> <span class="n">null</span>
+  <span class="n">Q</span> <span class="o">=</span> <span class="p">[</span><span class="n">s</span><span class="p">]</span>
+  <span class="k">while</span> <span class="p">(</span><span class="n">Q</span> <span class="o">!=</span> <span class="err">∅</span> <span class="p">)</span> <span class="p">{</span>
+   <span class="n">u</span> <span class="o">=</span> <span class="n">Q</span><span class="p">.</span><span class="n">dequeue</span><span class="p">()</span>
+   <span class="k">for</span> <span class="n">each</span> <span class="n">v</span> <span class="err">∈</span> <span class="n">Adj</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="p">{</span>
+     <span class="k">if</span> <span class="n">not</span> <span class="n">visited</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="p">{</span>
+       <span class="n">visited</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span>
+       <span class="err">π</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="n">u</span>
+       <span class="n">Q</span><span class="p">.</span><span class="n">enqueue</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+     <span class="p">}</span>
+   <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="err">π</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>Pueden probar su implementación utilizando el siguiente comando:</p>
+<div class="codehilite"><pre><span></span>make graph
+</pre></div>
+
+<p>Esto probará su implementación con el grafo que se muestra en la figura de arriba, de esta manera pueden saber si el resultado que obtienen es el correcto.</p>
+<h2 id="ejemplo-ejecutando-un-contador-de-palabras">Ejemplo: Ejecutando un contador de palabras<a class="headerlink" href="#ejemplo-ejecutando-un-contador-de-palabras" title="Permanent link">&para;</a></h2>
+<p>En este ejemplo vamos a ejecutar el <strong><em>hola mundo</em></strong> de MapReduce que es un contador de palabras. Pueden probarlo con:</p>
+<p><div class="codehilite"><pre><span></span>make sparkwc-small
+</pre></div>
+Esto ejecutará <code>wordcount.py</code> con <code>billOfRights.txt.seq</code>. El resultado debería estar en <code>wc-out-wordcount-small/part-00000</code>. Una característica interesante de Spark es que es un motor de cómputo distribuido en memoria, asi que no tiene un almacenamiento de archivos predeterminado. Por ello, utilizamos el <strong><a href="http://hadoop.apache.org/">Hadoop</a> Distributed File System (HDFS)</strong> para poder guardar el resultado. Los exhortamos a leer acerca de Hadoop por su cuenta. en general, Hadoop requiere que el directorio de salida no exista al ejecutar un programa de MapReduce, pero el <code>makefile</code> se encarga de esto, removiendo el directorio de salida anterior. Traten con el archivo más grande, <code>complete-works-mark-twain.txt.seq</code>:</p>
+<p><div class="codehilite"><pre><span></span>make sparkwc-medium
+</pre></div>
+Su salida para este comando estar en el directorio <code>spark-wc-out-wordcount-medium</code>. Busquen en el archivo alguna palabra como "the" para entender mejor la salida. Tomen un tiempo para ver y analizar <code>wordcount.py</code>, traten de entender lo que está haciendo el código les va a servir para el siguiente ejercicio del laboratorio.</p>
+<h2 id="ejercicio-2-document-word-count">Ejercicio 2: Document Word Count<a class="headerlink" href="#ejercicio-2-document-word-count" title="Permanent link">&para;</a></h2>
+<p>Abran <code>docwordcount.py</code>. Noten que tiene casi el mismo código que <code>wordcount.py</code>, que acaban de probar. Modifíquenlo para contar la cantidad de documentos que contienen cada palabra en lugar de la cantidad de veces que aparece una palabra en la entrada.</p>
+<p>Para ayudarlos a entender el código, hemos agregado varios comentarios, pero siéntanse libres de revisar las <a href="http://spark.apache.org/docs/latest/programming-guide.html#transformations">transformaciones</a> y <a href="http://spark.apache.org/docs/latest/programming-guide.html#actions">acciones</a> en la página de Spark para una explicación más detallada de algunos métodos que pueden usarse en Spark.</p>
+<p>En esta parte, les será útil revisar los links de transformaciones y acciones de arriba, ya que hay métodos que pueden usar para ayudarlos a ordenar una salida o remover items duplicados. Para ayudarlos a distinguir cuándo aparece una palabra en un documento, tal vez quieran hacer uso del <code>document_id</code> también -- esto se menciona en los comentarios de <code>flat_map()</code>.</p>
+<p>Finalmente, asegúrense de ordenar en orden alfabético el resultado final. (pista: ¿Habrá alguna otra transformación que puedan usar?)</p>
+<p>Pueden probar <code>docwordcount.py</code> usando cualquiera de estos dos comandos (para los 2 datasets):</p>
+<p><div class="codehilite"><pre><span></span>make sparkdwc-small  <span class="c1"># Output in spark-wc-out-docwordcount-small/</span>
+</pre></div>
+O
+<div class="codehilite"><pre><span></span>make sparkdwc-medium <span class="c1"># Output in spark-wc-out-docwordcount-medium/</span>
+</pre></div></p>
+<h2 id="ejercicio-3-full-text-index-creation">Ejercicio 3: Full Text Index Creation<a class="headerlink" href="#ejercicio-3-full-text-index-creation" title="Permanent link">&para;</a></h2>
+<p>Abran <code>index.py</code>. Noten que el código es similar a <code>docwordcount.py</code>. Modifíquenlo para desplegar cada palabra y una lista de ocurrencias (identificador de documento, seguido del índice de <strong>CADA</strong> vez que la palabra esté en ese documento). Asegúrense de que los índices empiecen con cero. La salida tendría que tener lineas que se vean como lo siguiente:</p>
+<div class="codehilite"><pre><span></span>(word1	document1-id, word# word# ...)
+(word1	document2-id, word# word# ...)
+. . .
+(word2	document1-id, word# word# ...)
+(word2	document3-id, word# word# ...)
+. . .
+</pre></div>
+
+<p>Noten que hay una linea para CADA documento en el que la palabra aparezca y CADA par de palabra y documento debe tener solo UNA lista de índices. Recuerden que también necesitan desplegar el <code>document ID</code>.</p>
+<p>Para este ejercicio, tal vez no necesiten todas las funciones definidas. Si una función no se utiliza, siéntanse libres de remover el método que la llama. Asegúrense de que su resultado esté ordenado, al igual que los otros ejercicios.</p>
+<p>Pueden probar su <code>index.py</code> usando cualquiera de los dos comandos (para cada dataset):</p>
+<p><div class="codehilite"><pre><span></span>$ make index-small <span class="c1"># Output in spark-wc-out-index-small/</span>
+</pre></div>
+O</p>
+<div class="codehilite"><pre><span></span>$ make index-medium <span class="c1"># Output in spark-wc-out-index-medium/</span>
+</pre></div>
+
+<p>La salida de <code>make-index-medium</code> será un archivo muy grande. Para poder ver el contenido de manera más sencilla, pueden usar los comandos <code>cat</code>, <code>head</code>, <code>more</code>, y <code>grep</code>:</p>
+<p><div class="codehilite"><pre><span></span>$ head -25 OUTPUTFILE       <span class="c1"># view the first 25 lines of output</span>
+$ cat OUTPUTFILE <span class="p">|</span> more     <span class="c1"># scroll through output one screen at a time (use Space)</span>
+$ cat OUTPUTFILE <span class="p">|</span> grep the <span class="c1"># output only lines containing &#39;the&#39; (case-sensitive)</span>
+</pre></div>
+Verifiquen su salida. Abran <code>complete-works-mark-twain.txt</code> y eligan algunas palabras. Cuenten manualmente algunos índices de la palabra y asegúrense de que todos aparezcan en su archivo de salida.</p>
+<h2 id="calificacion">Calificación<a class="headerlink" href="#calificacion" title="Permanent link">&para;</a></h2>
+<p>Al terminar, deben de subir su laboratorio al autograder con:</p>
+<div class="codehilite"><pre><span></span>./submit &lt;TOKEN&gt;
+</pre></div>
+
+<p>Para este laboratorio su solución será evaluada en un servidor de AWS EC2 por lo que únicamente tienen permitido hacer <strong><em>3 submits</em></strong>. Les aconsejamos probar bien su código antes de enviarlo al autograder. No olviden también subir el link de su repositorio en Github al GES.</p>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            CC-3
+          </div>
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+        
+  <div class="md-footer-social">
+    <link rel="stylesheet" href="../../assets/fonts/font-awesome.css">
+    
+      <a href="https://github.com/cc-3/MachineStructures" class="md-footer-social__link fa fa-github"></a>
+    
+  </div>
+
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.b41f3d20.js"></script>
+      
+        
+        
+          
+          <script src="../../assets/javascripts/lunr/lunr.stemmer.support.js"></script>
+          
+            
+              
+              
+                <script src="../../assets/javascripts/lunr/lunr.es.js"></script>
+              
+            
+          
+          
+        
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+        <script src="../../js/latex.js"></script>
+      
+        <script src="../../convnet_demo/jquery.min.js"></script>
+      
+        <script src="../../convnet_demo/convnet-min.js"></script>
+      
+        <script src="../../convnet_demo/convnet_demo.js"></script>
+      
+        <script src="../../js/python.js"></script>
+      
+    
+    
+      
+    
+  </body>
+</html>

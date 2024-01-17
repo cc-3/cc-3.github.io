@@ -1,0 +1,42 @@
+#teaser {
+  height: 410px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 3px;
+  padding-right: 3px;
+  position: relative;
+  overflow: hidden;
+  font-size: 16px;
+  text-align: center;
+}
+
+#inputlayer {
+  width: 65px;
+}
+
+.layer {
+  width: 25px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 10px;
+  margin-bottom: 5px;
+}
+
+.actmap {
+  display: block;
+  border: 2px solid #fff;
+}
+
+#convnetvis {
+  text-align: center;
+}
+
+.pp {
+  color: black;
+  text-align: left;
+  padding: 5px;
+  height: 32px;
+  margin: 2px;
+  background-color: rgba(47, 105, 198, 0.5);
+  overflow: visible !important;
+}

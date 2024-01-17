@@ -1,0 +1,1135 @@
+
+
+
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="Grandes Ideas en Arquitectura de Computadora">
+      
+      
+        <link rel="canonical" href="https://cc-3.github.io/labs/labCache/">
+      
+      
+        <meta name="author" content="CC-3">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copiar al portapapeles">
+      
+        <meta name="lang:clipboard.copied" content="Copiado al portapapeles">
+      
+        <meta name="lang:search.language" content="es">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No se encontraron documentos">
+      
+        <meta name="lang:search.result.one" content="1 documento encontrado">
+      
+        <meta name="lang:search.result.other" content="# documentos encontrados">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-3.2.0">
+    
+    
+      
+        <title>Lab 9 - Localidad de Datos y Caches - Estructura de Máquinas</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.572ca0f0.css">
+      
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.8c900955.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/emoji.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/kbd.css">
+    
+      <link rel="stylesheet" href="../../convnet_demo/style.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/button.css">
+    
+    
+  </head>
+  
+    <body dir="ltr">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448"
+    viewBox="0 0 416 448" id="__github">
+  <path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19-18.125
+        8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19 18.125-8.5
+        18.125 8.5 10.75 19 3.125 20.5zM320 304q0 10-3.125 20.5t-10.75
+        19-18.125 8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19
+        18.125-8.5 18.125 8.5 10.75 19 3.125 20.5zM360
+        304q0-30-17.25-51t-46.75-21q-10.25 0-48.75 5.25-17.75 2.75-39.25
+        2.75t-39.25-2.75q-38-5.25-48.75-5.25-29.5 0-46.75 21t-17.25 51q0 22 8
+        38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0
+        37.25-1.75t35-7.375 30.5-15 20.25-25.75 8-38.375zM416 260q0 51.75-15.25
+        82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5-41.75
+        1.125q-19.5 0-35.5-0.75t-36.875-3.125-38.125-7.5-34.25-12.875-30.25-20.25-21.5-28.75q-15.5-30.75-15.5-82.75
+        0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25
+        30.875q36.75-8.75 77.25-8.75 37 0 70 8 26.25-20.5
+        46.75-30.25t47.25-9.75q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34
+        99.5z" />
+</svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#lab-9-localidad-de-datos-y-caches" tabindex="1" class="md-skip">
+        Saltar a contenido
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://cc-3.github.io/" title="Estructura de Máquinas" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                Estructura de Máquinas
+              </span>
+              <span class="md-header-nav__topic">
+                Lab 9 - Localidad de Datos y Caches
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Teclee para comenzar búsqueda
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+          
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+
+  <a href="https://github.com/cc-3/MachineStructures/" title="Ir al repositorio" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#__github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      cc-3/MachineStructures
+    </div>
+  </a>
+
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://cc-3.github.io/" title="Estructura de Máquinas" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    Estructura de Máquinas
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://github.com/cc-3/MachineStructures/" title="Ir al repositorio" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#__github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      cc-3/MachineStructures
+    </div>
+  </a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Inicio" class="md-nav__link">
+      Inicio
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      Laboratorios
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Laboratorios
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab00/" title="0: Git" class="md-nav__link">
+      0: Git
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab01/" title="1: Intro a C" class="md-nav__link">
+      1: Intro a C
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab02/" title="2: CGDB y punteros" class="md-nav__link">
+      2: CGDB y punteros
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab03/" title="3: Estructuras y manejo de memoria" class="md-nav__link">
+      3: Estructuras y manejo de memoria
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab04/" title="4: Intro a RISC-V" class="md-nav__link">
+      4: Intro a RISC-V
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab05/" title="5: RISC-V" class="md-nav__link">
+      5: RISC-V
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab06/" title="6: Logisim" class="md-nav__link">
+      6: Logisim
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab07/" title="7: Logisim Avanzado" class="md-nav__link">
+      7: Logisim Avanzado
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab08/" title="8: SIMD" class="md-nav__link">
+      8: SIMD
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab09/" title="9: OpenMP" class="md-nav__link">
+      9: OpenMP
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Proyectos
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Proyectos
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../projs/proj01/" title="1: C y RISC-V" class="md-nav__link">
+      1: C y RISC-V
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../projs/proj02/" title="2: Procesador" class="md-nav__link">
+      2: Procesador
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Tutoriales
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Tutoriales
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/python/" title="Python" class="md-nav__link">
+      Python
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/install/" title="Instalacion de material" class="md-nav__link">
+      Instalacion de material
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      Notas
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        Notas
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../notes/00_Numbers-Representation/" title="Números" class="md-nav__link">
+      Números
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../notes/01_C/" title="C" class="md-nav__link">
+      C
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../notes/02_Intro-RISCV/" title="RISC-V" class="md-nav__link">
+      RISC-V
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../notes/03_Instruction-Format/" title="Formato de instrucciones" class="md-nav__link">
+      Formato de instrucciones
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../notes/04_CALL/" title="CALL" class="md-nav__link">
+      CALL
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Tabla de contenidos</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#objetivos" title="Objetivos" class="md-nav__link">
+    Objetivos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#preparacion" title="Preparación" class="md-nav__link">
+    Preparación
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#notas" title="Notas" class="md-nav__link">
+    Notas
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejercicio-1-algunos-escenarios-de-acceso-a-memoria" title="Ejercicio 1: Algunos Escenarios de Acceso a Memoria" class="md-nav__link">
+    Ejercicio 1: Algunos Escenarios de Acceso a Memoria
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#escenario-1" title="Escenario #1" class="md-nav__link">
+    Escenario #1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#escenario-2" title="Escenario #2" class="md-nav__link">
+    Escenario #2
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejercicio-2-ordenamiento-de-ciclos-y-multiplicacion-de-matrices" title="Ejercicio 2: Ordenamiento de Ciclos y Multiplicación de Matrices" class="md-nav__link">
+    Ejercicio 2: Ordenamiento de Ciclos y Multiplicación de Matrices
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejercicio-3-cache-blocking-y-transposicion-de-matrices" title="Ejercicio 3: Cache Blocking y Transposición de Matrices" class="md-nav__link">
+    Ejercicio 3: Cache Blocking y Transposición de Matrices
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#transposicion-de-matrices" title="Transposición de Matrices" class="md-nav__link">
+    Transposición de Matrices
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cache-blocking" title="Cache Blocking" class="md-nav__link">
+    Cache Blocking
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#alternado-los-tamanos-de-los-arreglos" title="Alternado los Tamaños de los Arreglos" class="md-nav__link">
+    Alternado los Tamaños de los Arreglos
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cambiando-el-tamano-del-bloque" title="Cambiando el Tamaño del Bloque" class="md-nav__link">
+    Cambiando el Tamaño del Bloque
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#calificacion" title="Calificación" class="md-nav__link">
+    Calificación
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/cc-3/MachineStructures/edit/master/page/es/docs/labs/labCache.md" title="Editar esta página" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="lab-9-localidad-de-datos-y-caches">Lab 9 - Localidad de Datos y Caches<a class="headerlink" href="#lab-9-localidad-de-datos-y-caches" title="Permanent link">&para;</a></h1>
+<h2 id="objetivos">Objetivos<a class="headerlink" href="#objetivos" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Entender cómo los patrones de acceso a memoria determinan las tasas de <em>cache hits</em>.</li>
+<li>Pensar qué patrones de acceso a memoria producen BUENAS tasas de acierto.</li>
+<li>Aprender sobre una técnica para mejorar los accesos a memoria.</li>
+</ul>
+<h2 id="preparacion">Preparación<a class="headerlink" href="#preparacion" title="Permanent link">&para;</a></h2>
+<p><a href="https://classroom.github.com/a/OlFSJ1xg">Aquí</a> pueden descargar los archivos que utilizarán para esta práctica.</p>
+<h3 id="notas">Notas<a class="headerlink" href="#notas" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Para esta práctica de laboratorio se utilizará <a href="https://venus.cs61c.org/"><strong>Venus</strong></a>, un simulador de código de ensamblador en línea. Este programa permite visualizar los accesos al cache.</li>
+<li>Este laboratorio es complicado, largo y difícil. <strong>Asegúrense de saber lo requerido sobre el tema antes de subir los resultados al autograder y ¡PREGUNTEN si no entienden!</strong></li>
+<li>No se olviden que el tema de caches viene en el examen parcial, por lo que la visualización de acceso a caches es una manera práctica para aprender sobre los <em>cache hits</em> y <em>cache misses</em>.</li>
+</ul>
+<p>En este punto, lean <strong>cache.s</strong> para tener una idea de qué es lo que hace. Asegúrense de revisar qué contienen los registros de argumentos antes de proceder a analizar la configuración del cache. 
+<em> Lo más importante de entender de este archivo es que se pondrán en cero algunos elementos de un arreglo (opción 0) o se incrementarán (opción 1).
+</em> Los elementos a editar están determinados por el <em>step size</em> y la cantidad de veces que se realiza este procedimiento lo indica <em>repcount</em>. <strong>Estos dos parámetros son los que más afectarán la cantidad de cache hits y misses que ocurrirán.</strong> El valor de <em>option</em> también alterará algunas, así como los parámetros del cache mismo, por supuesto.</p>
+<h2 id="ejercicio-1-algunos-escenarios-de-acceso-a-memoria">Ejercicio 1: Algunos Escenarios de Acceso a Memoria<a class="headerlink" href="#ejercicio-1-algunos-escenarios-de-acceso-a-memoria" title="Permanent link">&para;</a></h2>
+<p>Para este ejercicio deben de contestar las preguntas adjuntas, con el formato indicado, en el archivo <code>ex1.txt</code>. Intenten razonar cuál va a ser la tasa de aciertos ANTES de correr la simulación. Luego de ejecutar el código, asegúrense de entender <strong>POR QUÉ</strong> ocurre lo que ocurre.</p>
+<p><em>No duden en preguntar si se sienten confundidos. Eso es totalmente normal y los auxiliares están ahí para ayudarlos.</em></p>
+<p>Estas son buenas preguntas para hacerse mientras realizan los ejercicios: 
+<em> ¿Qué tan grande es su <strong>cache block</strong>?
+</em> ¿Cuántos accesos <strong>consecutivos</strong> (tomando en cuenta el <em>step size</em>) caben en un único block?
+<em> ¿Cuánta data cabe en el cache COMPLETO?
+</em> ¿Qué tan lejos, en memoria, están los bloques que mapean al mismo set (y que pudieran causar conflictos)?
+<em> ¿Cuál es la asociatividad de su cache?
+</em> ¿En qué parte del cache mapea algún bloque particular?
+* Al considerar por qué un acceso específico es un hit o un miss: ¿ya se accedió a esta data antes? Si sí, ¿sigue en el cache o no?</p>
+<h3 id="escenario-1">Escenario #1<a class="headerlink" href="#escenario-1" title="Permanent link">&para;</a></h3>
+<p><strong>Cache Parameters:</strong> (editados en la pestaña de "Cache" en el simulador)
+<em> <strong>Política de colocación:</strong> Direct Mapping
+</em> <strong>Política de reemplazo de bloques:</strong> LRU
+<em> <strong>Tamaño del set (bloques) (setSize):</strong> 1
+</em> <strong>Cantidad de bloques:</strong> 4
+* <strong>Tamaño de los bloques del cache (en <em>words</em>) (blockSize):</strong> 2</p>
+<p><strong>Parámetros del Programa:</strong> (inicializando los valores de los argumentos en el código)
+<em> <strong>Tamaño del arreglo (arraySize):</strong> 128 bytes
+</em> <strong>Tamaño del salto (stepSize):</strong> 8
+<em> <strong>Número de repeticiones (repCount):</strong> 4
+</em> <strong>Opción:</strong> 0</p>
+<p><strong>Tip</strong>: Si les es difícil visualizar <em>qué está entrando en el cache</em> en cada acceso a memoria simplemente viendo el código, prueben utilizando lápiz y papel: escriban cuál sería el tag:index:offset de las direcciones y averigüen cuáles direcciones de memoria mapean a los distintos sets en cache con los bits del index.</p>
+<p>Preguntas:</p>
+<ol>
+<li>¿Qué combinación de parámetros produce el <em>hit rate</em> que se puede observar? (Pista: Su respuesta debe de ser de la forma: "Porque [parámetro 1], en bytes, es <em>exactamente igual</em> a [parámetro 2], en bytes.")</li>
+<li>¿En cuánto aumenta el hit rate al incrementar la cantidad de repeticiones de manera arbitraria (en %)?</li>
+<li>¿Cómo se puede modificar algún <em>parámetro del programa</em> para mejorar el hit rate? <strong>Nota</strong>: No importa que accedan a los mismos elementos en el arreglo, sólo provean una modificación de un parámetro del programa que aumente el hit rate. 
+<ol type="none">
+    <li>
+        <ol type="a">
+            <li>Aumentar el tamaño del arreglo.</li>
+            <li>Disminuir el tamaño del arreglo.</li>
+            <li>Aumentar el tamaño del salto.</li>
+            <li>Disminuir el tamaño del salto.</li>
+            <li>Aumentar el número de repeticiones.</li>
+            <li>Disminuir el número de repeticiones.</li>
+            <li>Cambiar a la opción 1.</li>
+        </ol>
+    </li>
+</ol>   </li>
+</ol>
+<h3 id="escenario-2">Escenario #2<a class="headerlink" href="#escenario-2" title="Permanent link">&para;</a></h3>
+<p><strong>Cache Parameters:</strong>
+<em> <strong>Política de colocación:</strong> N-Way Set Associative
+</em> <strong>Política de reemplazo de bloques:</strong> LRU
+<em> <strong>Tamaño del set (bloques) (setSize):</strong> 4
+</em> <strong>Cantidad de bloques:</strong> 16
+* <strong>Tamaño de los bloques del cache (en <em>words</em>) (blockSize):</strong> 4</p>
+<p><strong>Parámetros del Programa:</strong> (inicializando los valores de los argumentos en el código)
+<em> <strong>Tamaño del arreglo (arraySize):</strong> 256 bytes
+</em> <strong>Tamaño del salto (stepSize):</strong> 2
+<em> <strong>Número de repeticiones:</strong> 1
+</em> <strong>Opción (repCount):</strong> 1</p>
+<p>Preguntas:</p>
+<ol>
+<li>
+<p>¿Cuántos accesos a memoria hay por cada iteración en el ciclo interno? (Pista: No es uno.)   </p>
+</li>
+<li>
+<p>¿Cuál es el patrón que se repite de aciertos y fallos? 
+<ol type="none">
+    <li>
+        <ol type="a">
+            <li>miss/hit</li>
+            <li>miss/hit/hit</li>
+            <li>miss/hit/hit/hit</li>
+            <li>hit/miss/miss/miss</li>
+            <li>hit/miss</li>
+        </ol>
+    </li>
+</ol>   </p>
+</li>
+<li>
+<p>¿Cómo se relaciona el hit rate con el patrón de la pregunta anterior?
+<ol type="none">
+    <li>
+        <ol type="a">
+            <li>Aplicando una media geométrica a los valores del patrón se puede obtener el hit rate.</li>
+            <li>El hit rate es el resultado de una media aritmética del patrón.</li>
+            <li>Se debe de calcular la media ponderada con los resultados del patrón.</li>
+            <li>Al patrón se le debe aplicar la media armónica para calcular el hit rate.</li>
+            <li>Ninguna de las anteriores.</li>
+        </ol>
+    </li>
+</ol></p>
+</li>
+<li>
+<p>¿Qué ocurre si se altera la cantidad de iteraciones de manera arbitraria?
+<ol type="none">
+    <li>
+        <ol type="a">
+            <li>La cantidad de cache misses aumenta.</li>
+            <li>La cantidad de cache hits aumenta.</li>
+            <li>La cantidad de cache misses se queda igual.</li>
+            <li>La cantidad de cache hits se queda igual.</li>
+            <li>El hit rate aumenta.</li>
+            <li>El hit rate disminuye.</li>
+            <li>El hit rate se mantiene constante.</li>
+        </ol>
+    </li>
+</ol></p>
+</li>
+<li>
+<p>¿Por qué le ocurre, lo indicado en la pregunta anterior, al hit rate?
+<ol type="none">
+    <li>
+        <ol type="a">
+            <li>Porque se aprovecha la localidad espacial.</li>
+            <li>Porque se aprovecha la localidad temporal.</li>
+            <li>Porque no se aprovecha la localidad espacial.</li>
+            <li>Porque no se aprovecha la localidad temporal.</li>
+            <li>Porque la cantidad de repeticiones no tiene impacto en el hit rate.</li>
+        </ol>
+    </li>
+</ol></p>
+</li>
+</ol>
+<p><strong>Nota importante para el archivo <code>ex1.txt</code>:</strong> Solo se debe escribir las incógnitas en cada fila, estas deben estar separadas por una coma, sin espacios (si la pregunta posee más de una respuesta). Por ejemplo: 1.blockSize,stepSize,arraySize.</p>
+<h2 id="ejercicio-2-ordenamiento-de-ciclos-y-multiplicacion-de-matrices">Ejercicio 2: Ordenamiento de Ciclos y Multiplicación de Matrices<a class="headerlink" href="#ejercicio-2-ordenamiento-de-ciclos-y-multiplicacion-de-matrices" title="Permanent link">&para;</a></h2>
+<p>Si recuerdan, las matrices son estructuras de datos bidimensionales en donde cada elemento es accedido por medio de dos índices. Para poder multiplicar dos matrices, se puede utilizar tres ciclos anidados. Asumiendo que las matrices A, B y C son de nxn y guardadas en un arreglo de una dimensión, en donde sus elementos están ubicados de manera contigua en memoria: </p>
+<div class="codehilite"><pre><span></span>for (int i = 0; i &lt; n; i++)
+    for (int j = 0; j &lt; n; j++)
+        for (int k = 0; k &lt; n; k++)
+            C[i+j*n] += A[i+k*n] * B[k+j*n];
+</pre></div>
+
+<p><strong>Hecho:</strong> La multiplicación de matrices se encuentran detrás de numerosos algoritmos de álgebra lineal y la operación eficaz de ello es crítico para muchas aplicaciones dentro de las ciencias aplicadas.</p>
+<p>Nótese que en el código superior los ciclos están ordenados como i, j, k. Si se examina el bucle más íntimo, se puede ver que este...:
+<em> recorre B en pasos unitarios.
+</em> recorre A en progresos de tamaño n.
+* no recorre C.</p>
+<p><strong>RECORDAR:</strong> Para calcular la multiplicación de matrices de manera correcta, <strong>no importa el orden de los ciclos</strong>.</p>
+<p><strong>PERO</strong>, el orden elegido para acceder a los elementos de las matrices pueden tener <strong>un impacto muy grande en el rendimiento</strong>. Los caches se benefician más (más cache hits; menos misses) cuando el acceso a memoria se aprovecha de la temporalidad espacial y de la espacial, utilizando bloques ya dentro del cache. Optimizando los accesos de memoria de un programa es esencial para aprovecharse de la jerarquía de memoria.</p>
+<p>Guíen su atención a <strong>matrixMultiply.c</strong>, en este archivo se realizan varias implementaciones de la multiplicación de matrices con tres ciclos anidados. Compilar y ejecutar el código con el siguiente comando:</p>
+<p><code>make ex2</code></p>
+<p>Esto realizará las operaciones de matrices e indicará la <em>velocidad</em> con la que cada iteración complete las multiplicaciones. La unidad "Gflops/s" se lee como "Giga-floating-point-operations per second". </p>
+<p>Preguntas: 
+1. ¿Qué ordenamiento(s) rinde(n) mejor?
+<ol type="none">
+    <li>
+        <ol type="a">
+            <li>multMat1</li>
+            <li>multMat2</li>
+            <li>multMat3</li>
+            <li>multMat4</li>
+            <li>multMat5</li>
+            <li>multMat6</li>
+        </ol>
+    </li>
+</ol></p>
+<ol>
+<li>
+<p>¿Por qué?
+<ol type="none">
+    <li>
+        <ol type="a">
+            <li>Porque se aprovecha la localidad espacial.</li>
+            <li>Porque se aprovecha la localidad temporal.</li>
+            <li>Porque utiliza loop unrolling.</li>
+            <li>Porque se realiza cache blocking.</li>
+        </ol>
+    </li>
+</ol></p>
+</li>
+<li>
+<p>¿Qué versión (o versiones) muestra(n) ser la(s) más lenta(s)?
+<ol type="none">
+    <li>
+        <ol type="a">
+            <li>multMat1</li>
+            <li>multMat2</li>
+            <li>multMat3</li>
+            <li>multMat4</li>
+            <li>multMat5</li>
+            <li>multMat6</li>
+        </ol>
+    </li>
+</ol></p>
+</li>
+<li>
+<p>¿Por qué?
+<ol type="none">
+    <li>
+        <ol type="a">
+            <li>Porque no se aprovecha la localidad espacial.</li>
+            <li>Porque no se aprovecha la localidad temporal.</li>
+            <li>Porque no utiliza loop unrolling.</li>
+            <li>Porque no se realiza cache blocking.</li>
+        </ol>
+    </li>
+</ol></p>
+</li>
+<li>
+<p>¿Cómo afecta la manera de recorrer las matrices, respecto del índice que se encuentra en el ciclo más íntimo, al rendimiento?
+<ol type="none">
+    <li>
+        <ol type="a">
+            <li>Es el que mayor impacto tiene en el rendimiento.</li>
+            <li>Su impacto en el rendimiento es irrelevante.</li>
+            <li>De este depende si se aprovecha la localidad temporal o no.</li>
+            <li>Este influye directamente el aprovechamiento de la localidad espacial.</li>
+            <li>Es igual de importante que el resto de índices.</li>
+        </ol>
+    </li>
+</ol></p>
+</li>
+</ol>
+<p><strong>Nota importante para el archivo <code>ex2.txt</code>:</strong> Similar al archivo de texto del ejercicio anterior, si se requiere de más de una respuesta a una pregunta, estas deben de estar separadas por comas, sin espacios. Por ejemplo: 3.ii,iv.</p>
+<h2 id="ejercicio-3-cache-blocking-y-transposicion-de-matrices">Ejercicio 3: Cache Blocking y Transposición de Matrices<a class="headerlink" href="#ejercicio-3-cache-blocking-y-transposicion-de-matrices" title="Permanent link">&para;</a></h2>
+<h3 id="transposicion-de-matrices">Transposición de Matrices<a class="headerlink" href="#transposicion-de-matrices" title="Permanent link">&para;</a></h3>
+<p>En algunas ocasiones, se requiere intercambiar las filas con las columnas de una matriz, esta operación se llama una <em>transposición</em>. Una implementación eficiente pude ser de gran utilidad al implementar operaciones algebraicas más complejas. La matriz transpuesta de A suele denotarse como A<sup>T</sup>.</p>
+<p><img alt="Transposición de una Matriz de 5x5 Arbitraria" src="/img/labs/lab09/transposeIm1.png" /></p>
+<h3 id="cache-blocking">Cache Blocking<a class="headerlink" href="#cache-blocking" title="Permanent link">&para;</a></h3>
+<p>En el código ejemplo de multiplicación de matrices del ejercicio anterior se puede notar que se recorren las matrices A y B en su totalidad para calcular un único valor para C. Por lo mismo, ¡constantemente se debe de acceder a valores nuevos de memoria, reusando muy poca data en con el cache! Se puede mejorar el reuso de data en los caches implementando un técnica llamada cache blocking. Formalmente, <strong>cache blocking es una técnica que busca reducir la tasa de cache misses <em>aún más</em> al explotar la temporalidad espacial y/o temporal</strong>. En el caso de la transposición de matrices, se considera realizarla un bloque a la vez.</p>
+<p><img alt="Transposición de una matriz general de 3x3" src="/img/labs/lab09/transposeIm2.png" /></p>
+<p><strong>Notar:</strong> En la imagen superior, se transpone cada submatriz A<sub>ij</sub> de la matriz A en su posición final de la matriz de salida, una submatriz a la vez. Es importante entender que la transposición de por secciones es equivalente a hacerlo para toda la matriz.</p>
+<p>Como se opera y se termina de transponer cada submatriz una a la vez, se consodila el acceso a memoria a un espacio de memoria menor al transponer esa submatriz, aprovechando las localidades temporales (y espaciales), mejorando el rendimiento del cache, acortando el tiempo de ejecución del programa.</p>
+<p>Para este laboratorio, se implementará una estructura de cache blocking para la transposición de matrices y se analizará su rendimiento. Su <strong>tarea</strong> es implementar esta técnica en la función <em>transpose_blocking()</em> en <strong>transpose.c</strong>. <strong>NO pueden asumir que el ancho de la matriz (n) es un múltiplo del tamaño del bloque.</strong> 
+Luego de implementar la función, pueden probar el código corriendo los siguientes comandos:</p>
+<p><code>make ex3
+    ./transpose &lt;n&gt; &lt;blocksize&gt;</code></p>
+<p>Donde n y blocksize son parámetros que serán especificados por el usuario. Se puede verificar el funcionamiento del código eligiendo n=10000 y blocksize=33. La versión con blocking debería terminar significantemente más rápido.</p>
+<p>A continuación, se muestra una guía <strong>por si no saben cómo comenzar</strong>. De lo contrario, pueden saltarse esta parte y comenzar.</p>
+<p><em>Algunos consejos:</em></p>
+<p>Pueden empezar viendo la función <em>transpose_naive</em>. Notar que el índice <em>y</em> recorre TODA la matriz <em>src</em> de manera vertical en una iteración del ciclo <strong>externo</strong> antes de ser reiniciada a cero. Es decir, <em>x</em> se actualiza hasta que <em>y</em> termine su recorrido. <strong>Este es el comportamiento que se debe corregir.</strong> Lo que se quiere es moverse a la siguiente fila de <em>dst</em> después de recorrer el ancho (eje horizontal) de un solo bloque.
+<details> <summary> ¿Qué tan grande es cada bloque? </summary> El número de enteros especificados por <em>blocksize</em>. </details> </p>
+<p><strong>Además</strong>, solo se desea mover en el eje vertical (la altura) de un bloque antes de proseguir al siguiente. No se busca que <em>x</em> imite el comportamiento que se quiere evitar con el parámetro <em>y</em>.</p>
+<p><strong>Ayuda:</strong> Una solución estándar requiere de cuatro ciclos <em>for</em>.</p>
+<p>Finalmente, como no se puede asumir que <em>n</em> es un múltiplo de <em>blocksize</em>, la última columna del bloque de cada fila será más corta (no será un cuadrado de <em>block_size</em> por <em>block_size</em>). Además, la última fila del bloque estará truncada. Para arreglar este problema, se puede realizar la situación general que <em>n</em> sí es múltiplo de <em>block_size</em> y agregar, como caso especial, una alternativa para lidiar con la excepción de que se está recorriendo una parte del arreglo inexistente. </p>
+<p><strong>Cuando ya funcione el código</strong>, se deben completar los siguientes ejercicios:</p>
+<h3 id="alternado-los-tamanos-de-los-arreglos">Alternado los Tamaños de los Arreglos<a class="headerlink" href="#alternado-los-tamanos-de-los-arreglos" title="Permanent link">&para;</a></h3>
+<p>Fijar el tamaño del bloque a 20 y ejecutar el código con las siguientes variantes de <em>n</em>: 50, 100, 500, 1000, 5000.</p>
+<ol>
+<li>
+<p>¿A partir de qué punto se puede notar una mejora en rendimiento al comparar la versión con cache blocking y la versión común?
+<ol type="none">
+    <li>
+        <ol type="a">
+            <li>50</li>
+            <li>100</li>
+            <li>500</li>
+            <li>1000</li>
+            <li>5000</li>
+        </ol>
+    </li>
+</ol></p>
+</li>
+<li>
+<p>¿Por qué el método de cache blocking requiere que la matriz sea de cierto tamaño para que su mejora sea percibida?
+<ol type="none">
+    <li>
+        <ol type="a">
+            <li>Porque necesita aprovechar la localidad espacial.</li>
+            <li>Porque así puede explotar la localidad temporal.</li>
+            <li>Porque el tamaño de la matriz debe ser un múltiplo del tamaño del bloque.</li>
+            <li>Por la Ley de Amdahl.</li>
+            <li>Ninguna de las anteriores.</li>
+        </ol>
+    </li>
+</ol></p>
+</li>
+</ol>
+<h3 id="cambiando-el-tamano-del-bloque">Cambiando el Tamaño del Bloque<a class="headerlink" href="#cambiando-el-tamano-del-bloque" title="Permanent link">&para;</a></h3>
+<p>Fijar el ancho de las matrices a 10000 y correr el código con los siguientes valores para <em>blocksize</em>: 100, 1000, 2000, 5000, 10000.</p>
+<ol>
+<li>
+<p>¿Cómo se ve afectada la velocidad de ejecución de <em>transpose_blocking()</em> al cambiar el tamaño del bloque?
+<ol type="none">
+    <li>
+        <ol type="a">
+            <li>Aumenta de manera lineal.</li>
+            <li>Disminuye de manera lineal.</li>
+            <li>Aumenta de manera logarítmica.</li>
+            <li>Disminuye de manera logarítmica.</li>
+            <li>Se mantiene constante.</li>
+        </ol>
+    </li>
+</ol></p>
+</li>
+<li>
+<p>¿Por qué ocurre lo indicado en la respuesta anterior?
+<ol type="none">
+    <li>
+        <ol type="a">
+            <li>Porque se aprovecha más el uso de los bloques si son más grandes.</li>
+            <li>Porque se desaprovecha el uso de los bloques si su tamaño aumenta.</li>
+            <li>Porque se aprovecha de la localidad espacial.</li>
+            <li>Porque se aprovecha de la localidad temporal.</li>
+            <li>Porque es una característica intrínseca de la operación realizada.</li>
+        </ol>
+    </li>
+</ol></p>
+</li>
+</ol>
+<p>Escribir las respuestas en el archivo <code>ex3.txt</code>. Siguiendo las directrices indicadas para los ejercicios anteriores.</p>
+<p><strong>Es relevante notar que en los últimos dos ejercicios no fue necesario conocer los parámetros del cache de sus computadoras. Solo se exhibió un nivel más alto de localidad y se aceleró la ejecución del programa. Esto implica que todos los caches, sin importar sus parámetros específicos, se benefician al ejecutar código que se aprovecha de altos niveles de localidad.</strong></p>
+<h2 id="calificacion">Calificación<a class="headerlink" href="#calificacion" title="Permanent link">&para;</a></h2>
+<p>Recuerden que pueden evaluar, de manera local, sus respuestas ejecutando:
+<div class="codehilite"><pre><span></span>	./check
+</pre></div>
+Al terminar, deben de subir su laboratorio al calificador en línea con:
+<div class="codehilite"><pre><span></span>	./submit &lt;TOKEN&gt;
+</pre></div></p>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            CC-3
+          </div>
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+        
+  <div class="md-footer-social">
+    <link rel="stylesheet" href="../../assets/fonts/font-awesome.css">
+    
+      <a href="https://github.com/cc-3/MachineStructures" class="md-footer-social__link fa fa-github"></a>
+    
+  </div>
+
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.b41f3d20.js"></script>
+      
+        
+        
+          
+          <script src="../../assets/javascripts/lunr/lunr.stemmer.support.js"></script>
+          
+            
+              
+              
+                <script src="../../assets/javascripts/lunr/lunr.es.js"></script>
+              
+            
+          
+          
+        
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+        <script src="../../js/latex.js"></script>
+      
+        <script src="../../convnet_demo/jquery.min.js"></script>
+      
+        <script src="../../convnet_demo/convnet-min.js"></script>
+      
+        <script src="../../convnet_demo/convnet_demo.js"></script>
+      
+        <script src="../../js/python.js"></script>
+      
+    
+    
+      
+    
+  </body>
+</html>

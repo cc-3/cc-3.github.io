@@ -1,0 +1,1122 @@
+
+
+
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="Grandes Ideas en Arquitectura de Computadora">
+      
+      
+        <link rel="canonical" href="https://cc-3.github.io/labs/lab04/">
+      
+      
+        <meta name="author" content="CC-3">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copiar al portapapeles">
+      
+        <meta name="lang:clipboard.copied" content="Copiado al portapapeles">
+      
+        <meta name="lang:search.language" content="es">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No se encontraron documentos">
+      
+        <meta name="lang:search.result.one" content="1 documento encontrado">
+      
+        <meta name="lang:search.result.other" content="# documentos encontrados">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-3.2.0">
+    
+    
+      
+        <title>4: Intro a RISC-V - Estructura de Máquinas</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.572ca0f0.css">
+      
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.8c900955.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/emoji.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/kbd.css">
+    
+      <link rel="stylesheet" href="../../convnet_demo/style.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/button.css">
+    
+    
+  </head>
+  
+    <body dir="ltr">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448"
+    viewBox="0 0 416 448" id="__github">
+  <path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19-18.125
+        8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19 18.125-8.5
+        18.125 8.5 10.75 19 3.125 20.5zM320 304q0 10-3.125 20.5t-10.75
+        19-18.125 8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19
+        18.125-8.5 18.125 8.5 10.75 19 3.125 20.5zM360
+        304q0-30-17.25-51t-46.75-21q-10.25 0-48.75 5.25-17.75 2.75-39.25
+        2.75t-39.25-2.75q-38-5.25-48.75-5.25-29.5 0-46.75 21t-17.25 51q0 22 8
+        38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0
+        37.25-1.75t35-7.375 30.5-15 20.25-25.75 8-38.375zM416 260q0 51.75-15.25
+        82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5-41.75
+        1.125q-19.5 0-35.5-0.75t-36.875-3.125-38.125-7.5-34.25-12.875-30.25-20.25-21.5-28.75q-15.5-30.75-15.5-82.75
+        0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25
+        30.875q36.75-8.75 77.25-8.75 37 0 70 8 26.25-20.5
+        46.75-30.25t47.25-9.75q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34
+        99.5z" />
+</svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#lab-4-risc-v" tabindex="1" class="md-skip">
+        Saltar a contenido
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://cc-3.github.io/" title="Estructura de Máquinas" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                Estructura de Máquinas
+              </span>
+              <span class="md-header-nav__topic">
+                4: Intro a RISC-V
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Teclee para comenzar búsqueda
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+          
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+
+  <a href="https://github.com/cc-3/MachineStructures/" title="Ir al repositorio" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#__github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      cc-3/MachineStructures
+    </div>
+  </a>
+
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://cc-3.github.io/" title="Estructura de Máquinas" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    Estructura de Máquinas
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://github.com/cc-3/MachineStructures/" title="Ir al repositorio" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#__github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      cc-3/MachineStructures
+    </div>
+  </a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Inicio" class="md-nav__link">
+      Inicio
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+    
+    <label class="md-nav__link" for="nav-2">
+      Laboratorios
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Laboratorios
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab00/" title="0: Git" class="md-nav__link">
+      0: Git
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab01/" title="1: Intro a C" class="md-nav__link">
+      1: Intro a C
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab02/" title="2: CGDB y punteros" class="md-nav__link">
+      2: CGDB y punteros
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab03/" title="3: Estructuras y manejo de memoria" class="md-nav__link">
+      3: Estructuras y manejo de memoria
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        4: Intro a RISC-V
+      </label>
+    
+    <a href="./" title="4: Intro a RISC-V" class="md-nav__link md-nav__link--active">
+      4: Intro a RISC-V
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Tabla de contenidos</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#objetivos" title="Objetivos" class="md-nav__link">
+    Objetivos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lecturas" title="Lecturas" class="md-nav__link">
+    Lecturas
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#preparacion" title="Preparación" class="md-nav__link">
+    Preparación
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion-a-ensamblador-risc-v" title="Introducción a ensamblador RISC-V" class="md-nav__link">
+    Introducción a ensamblador RISC-V
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cosas-basicas-en-jupiter" title="Cosas básicas en Jupiter:" class="md-nav__link">
+    Cosas básicas en Jupiter:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejercicio-1-familiarizandote-con-jupiter" title="Ejercicio 1: Familiarizándote con Jupiter" class="md-nav__link">
+    Ejercicio 1: Familiarizándote con Jupiter
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#preguntas" title="Preguntas" class="md-nav__link">
+    Preguntas
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejercicio-2-traduciendo-de-c-a-risc-v" title="Ejercicio 2: Traduciendo de C a RISC-V" class="md-nav__link">
+    Ejercicio 2: Traduciendo de C a RISC-V
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#preguntas_1" title="Preguntas" class="md-nav__link">
+    Preguntas
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejercicio-3-factorial" title="Ejercicio 3: Factorial" class="md-nav__link">
+    Ejercicio 3: Factorial
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejercicio-4-list-map-extra" title="Ejercicio 4:  List Map (extra)" class="md-nav__link">
+    Ejercicio 4:  List Map (extra)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#calificacion" title="Calificación" class="md-nav__link">
+    Calificación
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab05/" title="5: RISC-V" class="md-nav__link">
+      5: RISC-V
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab06/" title="6: Logisim" class="md-nav__link">
+      6: Logisim
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab07/" title="7: Logisim Avanzado" class="md-nav__link">
+      7: Logisim Avanzado
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab08/" title="8: SIMD" class="md-nav__link">
+      8: SIMD
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab09/" title="9: OpenMP" class="md-nav__link">
+      9: OpenMP
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Proyectos
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Proyectos
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../projs/proj01/" title="1: C y RISC-V" class="md-nav__link">
+      1: C y RISC-V
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../projs/proj02/" title="2: Procesador" class="md-nav__link">
+      2: Procesador
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Tutoriales
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Tutoriales
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/python/" title="Python" class="md-nav__link">
+      Python
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/install/" title="Instalacion de material" class="md-nav__link">
+      Instalacion de material
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      Notas
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        Notas
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../notes/00_Numbers-Representation/" title="Números" class="md-nav__link">
+      Números
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../notes/01_C/" title="C" class="md-nav__link">
+      C
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../notes/02_Intro-RISCV/" title="RISC-V" class="md-nav__link">
+      RISC-V
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../notes/03_Instruction-Format/" title="Formato de instrucciones" class="md-nav__link">
+      Formato de instrucciones
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../notes/04_CALL/" title="CALL" class="md-nav__link">
+      CALL
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Tabla de contenidos</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#objetivos" title="Objetivos" class="md-nav__link">
+    Objetivos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lecturas" title="Lecturas" class="md-nav__link">
+    Lecturas
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#preparacion" title="Preparación" class="md-nav__link">
+    Preparación
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion-a-ensamblador-risc-v" title="Introducción a ensamblador RISC-V" class="md-nav__link">
+    Introducción a ensamblador RISC-V
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cosas-basicas-en-jupiter" title="Cosas básicas en Jupiter:" class="md-nav__link">
+    Cosas básicas en Jupiter:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejercicio-1-familiarizandote-con-jupiter" title="Ejercicio 1: Familiarizándote con Jupiter" class="md-nav__link">
+    Ejercicio 1: Familiarizándote con Jupiter
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#preguntas" title="Preguntas" class="md-nav__link">
+    Preguntas
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejercicio-2-traduciendo-de-c-a-risc-v" title="Ejercicio 2: Traduciendo de C a RISC-V" class="md-nav__link">
+    Ejercicio 2: Traduciendo de C a RISC-V
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#preguntas_1" title="Preguntas" class="md-nav__link">
+    Preguntas
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejercicio-3-factorial" title="Ejercicio 3: Factorial" class="md-nav__link">
+    Ejercicio 3: Factorial
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejercicio-4-list-map-extra" title="Ejercicio 4:  List Map (extra)" class="md-nav__link">
+    Ejercicio 4:  List Map (extra)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#calificacion" title="Calificación" class="md-nav__link">
+    Calificación
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/cc-3/MachineStructures/edit/master/page/es/docs/labs/lab04.md" title="Editar esta página" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="lab-4-risc-v">Lab 4 - RISC-V<a class="headerlink" href="#lab-4-risc-v" title="Permanent link">&para;</a></h1>
+<h2 id="objetivos">Objetivos<a class="headerlink" href="#objetivos" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Traducir código de C a RISC-V.</li>
+<li>Escribir funciones en RISC-V con el procedimiento correcto de llamadas a funciones.</li>
+<li>Aprender a depurar nuestros programas en Jupiter.</li>
+</ul>
+<h2 id="lecturas">Lecturas<a class="headerlink" href="#lecturas" title="Permanent link">&para;</a></h2>
+<p><img alt="PH" src="/img/PH.jpg" /></p>
+<ul>
+<li>P&amp;H: 2.12</li>
+</ul>
+<h2 id="preparacion">Preparación<a class="headerlink" href="#preparacion" title="Permanent link">&para;</a></h2>
+<p>Para comenzar con el laboratorio primero tienen que tener todos los archivos base, estos se encuentran <a href="https://classroom.github.com/a/rKhFYoFr">aquí</a>. Recuerden que deben aceptar la asignación de <strong>Github Classroom</strong> y se les creará automáticamente un repositorio con una extensión que termina con su usuario de GitHub. Cuando ya se haya creado el repositorio, pueden ejecutar los siguientes comandos abriendo una terminal (<kbd>CTRL</kbd> <kbd>+</kbd> <kbd>T</kbd> ):</p>
+<div class="codehilite"><pre><span></span>git clone https://github.com/cc-3/lab04-2023-SU-USUARIO-DE-GITHUB
+</pre></div>
+
+<h2 id="introduccion-a-ensamblador-risc-v">Introducción a ensamblador RISC-V<a class="headerlink" href="#introduccion-a-ensamblador-risc-v" title="Permanent link">&para;</a></h2>
+<p>Los siguientes ejercicios utilizan un ensamblador y simulador de RISC-V, desarrollado por el catedrático de la sección nocturna <strong>Andrés Castellanos</strong>. El simulador se llama <strong>Jupiter</strong> (la versión anterior se llamaba V-Sim, por si mira ese nombre en algún lado) y es un proyecto open source inspirado, inicialmente, en el lengendario <a href="http://spimsimulator.sourceforge.net/"><em>SPIM</em></a> y, posteriormente, en <a href="http://courses.missouristate.edu/KenVollmar/mars/"><em>MARS</em></a> y <a href="http://www.kvakil.me/venus/"><em>VENUS</em></a> para la versión gráfica.</p>
+<p align="center">
+  <img src="/img/labs/lab03/jupiter.png"  alt="Jupiter"/>
+</p>
+
+<p>Para instalarlo en su computadora, siga estas instrucciones:</p>
+<p><strong>Máquina virtual del curso</strong></p>
+<p>Felicidades! No necesita instalar nada, puede ejecutar Jupiter usando el siguiente comando</p>
+<div class="codehilite"><pre><span></span>jupiter
+</pre></div>
+
+<p><strong>Ubuntu 20</strong></p>
+<p>Descargue <a href="https://github.com/andrescv/Jupiter/releases/download/v3.1/Jupiter-3.1-linux.zip">este archivo</a>, luego en su terminal vaya a la carpeta donde lo descargó y ejecute estos comandos</p>
+<div class="codehilite"><pre><span></span>unzip Jupiter-3.1-linux.zip
+sudo mv image /opt/jupiter
+echo &#39;export PATH=/opt/jupiter/bin:$PATH&#39; &gt;&gt; ~/.bashrc 
+source ~/.bashrc
+</pre></div>
+
+<p>Después de esto, ya debería poder usar <code>jupiter</code>. Si aun no funciona, la vieja y confiable, reinicie su máquina.</p>
+<h3 id="cosas-basicas-en-jupiter">Cosas básicas en Jupiter:<a class="headerlink" href="#cosas-basicas-en-jupiter" title="Permanent link">&para;</a></h3>
+<p>A continuación, les vamos a dar una pequeña guía de Jupiter, para más información visiten <a href="https://jupitersim.gitbook.io/jupiter/">la documentación completa</a>.</p>
+<ul>
+<li>Pueden crear archivos, editarlos y borrarlos desde la pestaña "Editor".</li>
+<li>Los programas empiezan en la etiqueta global <code>__start</code>, es decir que tienen que definir una etiqueta llamada <code>__start</code> y declararla como global.</li>
+</ul>
+<div class="codehilite"><pre><span></span><span class="na">.globl</span> <span class="no">__start</span>
+<span class="nl">__start:</span>
+  <span class="nf">li</span> <span class="no">a0</span> <span class="mi">10</span>
+  <span class="nf">ecall</span>       <span class="c"># exit</span>
+</pre></div>
+
+<p>Sí, allí dice <code>.globl</code>, no <code>.global</code>.</p>
+<ul>
+<li>Las etiquetas terminan con dos puntos como ven en el ejemplo anterior.</li>
+<li>Los comentarios comienzan con el simbolo "#" o ";".</li>
+<li>Solo pueden poner una instrucción por línea.</li>
+<li>Cuando hayan terminado de escribir su código, guarden y presionen <kbd>F3</kbd> para ensamblar y poder ejecutar.</li>
+<li>Los programas siempre tienen que terminar con un <code>ecall</code> de exit y esto se logra poniendo un 10 en <code>a0</code> (exactamente como el ejemplo anterior). Esto le indica al programa que tiene que terminar. Las instrucciones <code>ecall</code> son análogas a los "System Calls" (llamadas al sistema) y nos permiten hacer cosas como imprimir a consola o reservar memoria dinámica.</li>
+</ul>
+<h2 id="ejercicio-1-familiarizandote-con-jupiter">Ejercicio 1: Familiarizándote con Jupiter<a class="headerlink" href="#ejercicio-1-familiarizandote-con-jupiter" title="Permanent link">&para;</a></h2>
+<p>Para este ejercicio ustedes van a familiarizarse con <strong>Jupiter</strong> corriendo un programa sencillo de RISC-V y, luego, contestarán unas preguntas.</p>
+<ol>
+<li>Abran la interfaz gráfica de Jupiter, escribiendo <code>jupiter</code> en su terminal. </li>
+<li>Desde el editor abran el archivo llamado <strong>ex1.s</strong> que esta en la carpeta <strong>ex1</strong>.</li>
+<li>En la barra de herramientas de Jupiter, vayan a settings y asegúrense de que <strong>Assemble Only Selected File</strong> esté seleccionado con un cheque verde.</li>
+<li>Guarden su programa, luego presionen <kbd>F3</kbd>. Esto va a preparar el código para que pueda ser ejecutado y simulado. Si hacen click a la pestaña "Editor", su simulación se va a reiniciar.</li>
+<li>En el simulador, para ejecutar la siguiente instrucción, presionen el botón que dice "step".</li>
+<li>Para regresar un paso atrás, presionen el botón que dice "backstep".</li>
+<li>Para correr todo el programa hasta que termine, presionen el botón que dice "go".</li>
+<li>Para volver a empezar el programa nuevamente, presionen el botón que dice "reset".</li>
+<li>Para ver el contenido de los 32 registros en la parte derecha del simulador, hay una pestaña que dice <code>Registers</code>.</li>
+<li>La consola está en la parte de abajo del simulador.</li>
+<li>Para ver el contenido de la memoria, en el mismo lugar que los registros hay una pestaña que dice <code>Memory</code>, pueden navegar a diferentes secciones de la memoria haciendo click derecho encima de la tabla que muestra el estado de la memoria.</li>
+</ol>
+<h3 id="preguntas">Preguntas<a class="headerlink" href="#preguntas" title="Permanent link">&para;</a></h3>
+<p>Ahora que ya han ejecutado su primer programa de RISC-V y que ganaron experiencia con Jupiter pueden contestar las siguientes preguntas en el archivo <strong>ex1.txt</strong> que se encuentra en la carpeta <strong>ex1</strong>.</p>
+<ol>
+<li>¿Qué significan las directivas <code>.data</code>, <code>.word</code>, <code>.text</code>? Escriban sólo una de las siguientes letras para responder. Pista: Piensen acerca de las cuatro secciones de memoria.<ul>
+<li>A) Son como etiquetas sirven para hacer referencia a cosas que están en memoria, con <code>.data</code> apuntamos hacia los datos con <code>.word</code> hacia palabras de 32 bits y con <code>.text</code> hacia texto.</li>
+<li>B) <code>.data</code> le indica al ensamblador que guarde los siguientes elementos en la sección estática de la memoria, <code>.word</code> que guarde una palabra de 32 bits en memoria en la sección estática de datos y <code>.text</code> que estamos en la sección de texto y entonces deberíamos escribir instrucciones de ensamblador.</li>
+<li>C) <code>.data</code> es para guardar datos en la sección de datos de la memoria, <code>.word</code> es para guardar palabras de 32 bits en la sección de palabras de la memoria, <code>.text</code> es para guardar texto ascii en la sección de texto de la memoria.</li>
+<li>D) <code>.data</code> y <code>.word</code> no son directivas de ensamblador, y <code>.text</code> siempre está por defecto y ni se tendría que poner.</li>
+</ul>
+</li>
+<li>Corran por completo el programa. ¿Qué número da como output?</li>
+<li>¿Qué representa el número que da como output el programa? Escriban sólo una de las siguientes letras para responder:<ul>
+<li>A) Número áureo</li>
+<li>B) Factorial de 9</li>
+<li>C) Fibonnaci de 9</li>
+<li>D) Factorial de 10</li>
+</ul>
+</li>
+<li>¿En qué dirección de memoria (en hexadecimal) está almacenado <code>n</code>? Pista: Miren el contenido de los registros.</li>
+<li>Sin utilizar la pestaña "Editor", hagan que el programa calcule el 13º número (tomando en cuenta que el índice empieza en 0) de la sucesión de Fibonacci, modificando manualmente el valor de un registro. Encontrarán útil de primero correr línea por línea el código. Si prefieren ver los valores en decimal, cambien esto haciendo click derecho sobre la tabla de registros y presionando "Decimal Display Mode". ¿Qué registro modificaron?</li>
+</ol>
+<h2 id="ejercicio-2-traduciendo-de-c-a-risc-v">Ejercicio 2: Traduciendo de C a RISC-V<a class="headerlink" href="#ejercicio-2-traduciendo-de-c-a-risc-v" title="Permanent link">&para;</a></h2>
+<p>Desde Jupiter abran el archivo <strong>ex2.s</strong> que está en la carpeta <strong>ex2</strong>, desde algún editor de texto de su preferencia abran <strong>ex2.c</strong> que está en la misma carpeta. El código ensamblador que se provee (archivo ex2.s) es una traducción del programa escrito en C (archivo ex2.c) pero en RISC-V. Su tarea es encontrar/explicar los siguientes componentes de este archivo escrito en lenguaje ensamblador en el archivo de texto llamado <strong>ex2.txt</strong>.</p>
+<h3 id="preguntas_1">Preguntas<a class="headerlink" href="#preguntas_1" title="Permanent link">&para;</a></h3>
+<ol>
+<li>¿Cuál es el registro que representa la variable <code>k</code>?</li>
+<li>¿Cuáles son los registros que actúan como punteros a los arreglos <code>source</code> y <code>dest</code> (separados por coma)?</li>
+<li>¿De qué número de línea a que número línea se encuentra el loop (separado por coma)?</li>
+<li>¿En qué número de línea se copia el contenido de <code>source</code> a <code>dest</code>?, es decir ¿dónde se puede observar <code>dest[k] = source[k]</code>?.</li>
+<li>¿Cómo son manipulados los punteros en el código? Escriban sólo una de las siguientes letras para responder:<ul>
+<li>A) En cada iteración se le suma <code>k</code> a cada puntero, que es el equivalente en C a <code>arreglo[k]</code>.</li>
+<li>B) En cada iteración se le suma <code>k * 4</code> a cada puntero, que es equivalente en C a <code>arreglo[k]</code>.</li>
+<li>C) En cada iteración se le hace corrimiento lógico a la derecha a cada puntero, que es equivalente en C a <code>arreglo[k]</code>.</li>
+<li>D) En cada iteración se le suma <code>+1</code> a cada puntero, que es equivalente en C a <code>arreglo[k]</code>.</li>
+</ul>
+</li>
+</ol>
+<h2 id="ejercicio-3-factorial">Ejercicio 3: Factorial<a class="headerlink" href="#ejercicio-3-factorial" title="Permanent link">&para;</a></h2>
+<p>En este ejercicio, tienen que implementar la función de factorial en RISC-V que toma un sólo parámetro entero $n$ y retorna $n!$. Pueden encontrar un esqueleto de esta función en el archivo <strong>factorial.s</strong>, que se encuentra en la carpeta <strong>ex3</strong> del repositorio que clonaron. Ustedes sólo necesitan agregar las instrucciones bajo la etiqueta <code>factorial</code>, y el argumento que se pasa a la función va en el registro <code>a0</code>. Pueden resolver este problema ya sea de forma recursiva o iterativa. Asegúrense de que su función retorne de forma apropidada lo siguiente $3! = 6$, $7! = 5040$ y $8! = 40320$.</p>
+<h2 id="ejercicio-4-list-map-extra">Ejercicio 4:  List Map (extra)<a class="headerlink" href="#ejercicio-4-list-map-extra" title="Permanent link">&para;</a></h2>
+<p>Para este ejercicio van a utilizar el archivo <strong>list_map.s</strong> que se encuentra en la carpeta <strong>ex4</strong>. En este ejercicio, van a completar una función de <strong>map</strong> con listas encadenadas en RISC-V. La función se simplificará en mutar la lista en cuestión, es decir que tomará una lista encadenada como entrada y va a retornar la lista con los valores modificados. Nuestro procedimiento de "map" toma dos parámetros, el primero será la dirección del nodo "head" de una lista encadenada, cuyos valores son enteros de 32 bits. Entonces, en C, la estructura se define como:</p>
+<div class="codehilite"><pre><span></span><span class="k">struct</span> <span class="n">node</span> <span class="p">{</span>
+  <span class="kt">int</span> <span class="n">value</span><span class="p">;</span>
+  <span class="k">struct</span> <span class="n">node</span> <span class="o">*</span><span class="n">next</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+
+<p>El segundo parámetro será la dirección de una función que toma un entero como argumento y devuelve un entero. Usaremos la instrucción <strong>jalr</strong> de RISC-V para llamar a esta función con los valores de cada nodo de la lista.</p>
+<p>Nuestra función <strong>map</strong> irá recorriendo la lista recursivamente, aplicando la función a cada valor de la lista y almacenando el valor devuelto al nodo correspondiente. En C, la función se vería algo como esta:</p>
+<div class="codehilite"><pre><span></span><span class="kt">void</span> <span class="nf">map</span><span class="p">(</span><span class="k">struct</span> <span class="n">node</span> <span class="o">*</span><span class="n">head</span><span class="p">,</span> <span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">f</span><span class="p">)(</span><span class="kt">int</span><span class="p">))</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">head</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span><span class="p">;</span> <span class="p">}</span>
+  <span class="n">head</span><span class="o">-&gt;</span><span class="n">value</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">head</span><span class="o">-&gt;</span><span class="n">value</span><span class="p">);</span>
+  <span class="n">map</span><span class="p">(</span><span class="n">head</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">,</span> <span class="n">f</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>Si no habían algo como <code>int (*f)(int)</code> antes, no se preocupen demasiado. Significa básicamente que <code>f</code> es un puntero a una función de C, y esta función recibe un int como argumento. <code>f</code> entonces puede ser utilizado exactamente como cualquier otra función. Les será útil acudir al green card de RISC-V que pueden encontrar <a href="http://inst.eecs.berkeley.edu/~cs61c/fa17/img/riscvcard.pdf">aquí</a> para completar este ejercicio.</p>
+<p>Hay exactamente 9 espacios (8 en <code>map</code> y 1 en <code>main</code>) en el código que se provee, donde dice <code>YOUR_INSTRUCTION_HERE</code>. Reemplacen esos espacios con las instrucciones de su implementación de map, y escriban una simple llamada a <code>map</code> con <code>square</code> como argumento de la función. Hay comentarios en el código que explican qué debería hacer, o cumplir, cada instrucción. Cuando hayan rellenado los espacios con las instrucciones correctas, pueden correr el código pulsando en <kbd>F3</kbd> y luego el botón <strong>go</strong>, al hacer esto, debería de darles como output lo siguiente:</p>
+<div class="codehilite"><pre><span></span><span class="m">9</span> <span class="m">8</span> <span class="m">7</span> <span class="m">6</span> <span class="m">5</span> <span class="m">4</span> <span class="m">3</span> <span class="m">2</span> <span class="m">1</span> <span class="m">0</span>
+<span class="m">81</span> <span class="m">64</span> <span class="m">49</span> <span class="m">36</span> <span class="m">25</span> <span class="m">16</span> <span class="m">9</span> <span class="m">4</span> <span class="m">1</span> <span class="m">0</span>
+</pre></div>
+
+<p>La primera línea es la lista original, y la segunda es la lista modificada después de que se aplicó la función <strong>map</strong>.</p>
+<h2 id="calificacion">Calificación<a class="headerlink" href="#calificacion" title="Permanent link">&para;</a></h2>
+<p>Si está usando nuestra máquina virtual (es decir, ya tenía Jupiter pre-instalado), para conocer su nota use el comando:</p>
+<div class="codehilite"><pre><span></span>./check
+</pre></div>
+
+<p>Si está usando su propio Linux y le tocó instalar Jupiter a usted mismo, use el comando:</p>
+<div class="codehilite"><pre><span></span>./check -x
+</pre></div>
+
+<p>Las series valen 20, 20, 60 y 60 puntos respectivamente.</p>
+<p>Cuando esté satisfecho con su nota haga add, commit y push. Luego suba el link de su repositorio al GES.</p>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../lab03/" title="3: Estructuras y manejo de memoria" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Anterior
+                </span>
+                3: Estructuras y manejo de memoria
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../lab05/" title="5: RISC-V" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Siguiente
+                </span>
+                5: RISC-V
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            CC-3
+          </div>
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+        
+  <div class="md-footer-social">
+    <link rel="stylesheet" href="../../assets/fonts/font-awesome.css">
+    
+      <a href="https://github.com/cc-3/MachineStructures" class="md-footer-social__link fa fa-github"></a>
+    
+  </div>
+
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.b41f3d20.js"></script>
+      
+        
+        
+          
+          <script src="../../assets/javascripts/lunr/lunr.stemmer.support.js"></script>
+          
+            
+              
+              
+                <script src="../../assets/javascripts/lunr/lunr.es.js"></script>
+              
+            
+          
+          
+        
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+        <script src="../../js/latex.js"></script>
+      
+        <script src="../../convnet_demo/jquery.min.js"></script>
+      
+        <script src="../../convnet_demo/convnet-min.js"></script>
+      
+        <script src="../../convnet_demo/convnet_demo.js"></script>
+      
+        <script src="../../js/python.js"></script>
+      
+    
+    
+      
+    
+  </body>
+</html>

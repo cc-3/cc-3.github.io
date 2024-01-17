@@ -1,0 +1,1107 @@
+
+
+
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="Grandes Ideas en Arquitectura de Computadora">
+      
+      
+        <link rel="canonical" href="https://cc-3.github.io/labs/lab02/">
+      
+      
+        <meta name="author" content="CC-3">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copiar al portapapeles">
+      
+        <meta name="lang:clipboard.copied" content="Copiado al portapapeles">
+      
+        <meta name="lang:search.language" content="es">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No se encontraron documentos">
+      
+        <meta name="lang:search.result.one" content="1 documento encontrado">
+      
+        <meta name="lang:search.result.other" content="# documentos encontrados">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-3.2.0">
+    
+    
+      
+        <title>2: CGDB y punteros - Estructura de Máquinas</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.572ca0f0.css">
+      
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.8c900955.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/emoji.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/kbd.css">
+    
+      <link rel="stylesheet" href="../../convnet_demo/style.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/button.css">
+    
+    
+  </head>
+  
+    <body dir="ltr">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448"
+    viewBox="0 0 416 448" id="__github">
+  <path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19-18.125
+        8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19 18.125-8.5
+        18.125 8.5 10.75 19 3.125 20.5zM320 304q0 10-3.125 20.5t-10.75
+        19-18.125 8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19
+        18.125-8.5 18.125 8.5 10.75 19 3.125 20.5zM360
+        304q0-30-17.25-51t-46.75-21q-10.25 0-48.75 5.25-17.75 2.75-39.25
+        2.75t-39.25-2.75q-38-5.25-48.75-5.25-29.5 0-46.75 21t-17.25 51q0 22 8
+        38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0
+        37.25-1.75t35-7.375 30.5-15 20.25-25.75 8-38.375zM416 260q0 51.75-15.25
+        82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5-41.75
+        1.125q-19.5 0-35.5-0.75t-36.875-3.125-38.125-7.5-34.25-12.875-30.25-20.25-21.5-28.75q-15.5-30.75-15.5-82.75
+        0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25
+        30.875q36.75-8.75 77.25-8.75 37 0 70 8 26.25-20.5
+        46.75-30.25t47.25-9.75q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34
+        99.5z" />
+</svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#lab-2-cgdb-y-punteros" tabindex="1" class="md-skip">
+        Saltar a contenido
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://cc-3.github.io/" title="Estructura de Máquinas" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                Estructura de Máquinas
+              </span>
+              <span class="md-header-nav__topic">
+                2: CGDB y punteros
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Teclee para comenzar búsqueda
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+          
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+
+  <a href="https://github.com/cc-3/MachineStructures/" title="Ir al repositorio" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#__github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      cc-3/MachineStructures
+    </div>
+  </a>
+
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://cc-3.github.io/" title="Estructura de Máquinas" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    Estructura de Máquinas
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://github.com/cc-3/MachineStructures/" title="Ir al repositorio" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#__github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      cc-3/MachineStructures
+    </div>
+  </a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Inicio" class="md-nav__link">
+      Inicio
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+    
+    <label class="md-nav__link" for="nav-2">
+      Laboratorios
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Laboratorios
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab00/" title="0: Git" class="md-nav__link">
+      0: Git
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab01/" title="1: Intro a C" class="md-nav__link">
+      1: Intro a C
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        2: CGDB y punteros
+      </label>
+    
+    <a href="./" title="2: CGDB y punteros" class="md-nav__link md-nav__link--active">
+      2: CGDB y punteros
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Tabla de contenidos</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#objetivos" title="Objetivos" class="md-nav__link">
+    Objetivos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#preparacion" title="Preparación" class="md-nav__link">
+    Preparación
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejercicio-1-debugger-depurador" title="Ejercicio 1: Debugger (depurador)" class="md-nav__link">
+    Ejercicio 1: Debugger (depurador)
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#que-es-un-debugger" title="¿Qué es un debugger?" class="md-nav__link">
+    ¿Qué es un debugger?
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejercicio-2-depurando-un-problema-con-fallas-usando-cgdb" title="Ejercicio 2: Depurando un problema con fallas usando cgdb" class="md-nav__link">
+    Ejercicio 2: Depurando un problema con fallas usando cgdb
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#aprendiendo-algo-extra-debuggeando-un-programa-en-c-que-requiere-interaccion-del-usuario" title="Aprendiendo algo extra: Debuggeando un programa en C que requiere interacción del usuario" class="md-nav__link">
+    Aprendiendo algo extra: Debuggeando un programa en C que requiere interacción del usuario
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejercicio-3-punteros-y-estructuras-en-c" title="Ejercicio 3: Punteros y estructuras en C" class="md-nav__link">
+    Ejercicio 3: Punteros y estructuras en C
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#entrega-de-laboratorio" title="Entrega de laboratorio" class="md-nav__link">
+    Entrega de laboratorio
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab03/" title="3: Estructuras y manejo de memoria" class="md-nav__link">
+      3: Estructuras y manejo de memoria
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab04/" title="4: Intro a RISC-V" class="md-nav__link">
+      4: Intro a RISC-V
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab05/" title="5: RISC-V" class="md-nav__link">
+      5: RISC-V
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab06/" title="6: Logisim" class="md-nav__link">
+      6: Logisim
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab07/" title="7: Logisim Avanzado" class="md-nav__link">
+      7: Logisim Avanzado
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab08/" title="8: SIMD" class="md-nav__link">
+      8: SIMD
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab09/" title="9: OpenMP" class="md-nav__link">
+      9: OpenMP
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Proyectos
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Proyectos
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../projs/proj01/" title="1: C y RISC-V" class="md-nav__link">
+      1: C y RISC-V
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../projs/proj02/" title="2: Procesador" class="md-nav__link">
+      2: Procesador
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Tutoriales
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Tutoriales
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/python/" title="Python" class="md-nav__link">
+      Python
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/install/" title="Instalacion de material" class="md-nav__link">
+      Instalacion de material
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      Notas
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        Notas
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../notes/00_Numbers-Representation/" title="Números" class="md-nav__link">
+      Números
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../notes/01_C/" title="C" class="md-nav__link">
+      C
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../notes/02_Intro-RISCV/" title="RISC-V" class="md-nav__link">
+      RISC-V
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../notes/03_Instruction-Format/" title="Formato de instrucciones" class="md-nav__link">
+      Formato de instrucciones
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../notes/04_CALL/" title="CALL" class="md-nav__link">
+      CALL
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Tabla de contenidos</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#objetivos" title="Objetivos" class="md-nav__link">
+    Objetivos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#preparacion" title="Preparación" class="md-nav__link">
+    Preparación
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejercicio-1-debugger-depurador" title="Ejercicio 1: Debugger (depurador)" class="md-nav__link">
+    Ejercicio 1: Debugger (depurador)
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#que-es-un-debugger" title="¿Qué es un debugger?" class="md-nav__link">
+    ¿Qué es un debugger?
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejercicio-2-depurando-un-problema-con-fallas-usando-cgdb" title="Ejercicio 2: Depurando un problema con fallas usando cgdb" class="md-nav__link">
+    Ejercicio 2: Depurando un problema con fallas usando cgdb
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#aprendiendo-algo-extra-debuggeando-un-programa-en-c-que-requiere-interaccion-del-usuario" title="Aprendiendo algo extra: Debuggeando un programa en C que requiere interacción del usuario" class="md-nav__link">
+    Aprendiendo algo extra: Debuggeando un programa en C que requiere interacción del usuario
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejercicio-3-punteros-y-estructuras-en-c" title="Ejercicio 3: Punteros y estructuras en C" class="md-nav__link">
+    Ejercicio 3: Punteros y estructuras en C
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#entrega-de-laboratorio" title="Entrega de laboratorio" class="md-nav__link">
+    Entrega de laboratorio
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/cc-3/MachineStructures/edit/master/page/es/docs/labs/lab02.md" title="Editar esta página" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="lab-2-cgdb-y-punteros">Lab 2 - CGDB y punteros<a class="headerlink" href="#lab-2-cgdb-y-punteros" title="Permanent link">&para;</a></h1>
+<h2 id="objetivos">Objetivos<a class="headerlink" href="#objetivos" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Aprender a usar el debugger (depurador) de C</li>
+<li>Encontrar errores en programas usando cgdb</li>
+<li>Practicar el uso de punteros</li>
+</ul>
+<h2 id="preparacion">Preparación<a class="headerlink" href="#preparacion" title="Permanent link">&para;</a></h2>
+<p>Para obtener sus archivos base visite el siguiente link, luego clone su repositorio.</p>
+<div class="codehilite"><pre><span></span>https://classroom.github.com/a/GaL-ZrRp
+</pre></div>
+
+<div class="codehilite"><pre><span></span>git clone https://github.com/cc3-ug/lab02-2024-MI_USUARIO.git
+</pre></div>
+
+<p>Un par de recordatorios, si necesita ayuda con esto revise los labs anteriores para más detalle:</p>
+<ul>
+<li>
+<p>Si está trabajando en las computadoras del lab o en alguna máquina nueva, debe volver a hacer las configuraciones de Github.</p>
+</li>
+<li>
+<p>En Github usamos token en lugar de contraseña.</p>
+</li>
+</ul>
+<h2 id="ejercicio-1-debugger-depurador">Ejercicio 1: Debugger (depurador)<a class="headerlink" href="#ejercicio-1-debugger-depurador" title="Permanent link">&para;</a></h2>
+<h3 id="que-es-un-debugger">¿Qué es un debugger?<a class="headerlink" href="#que-es-un-debugger" title="Permanent link">&para;</a></h3>
+<p>Un <strong>debugger</strong>, como sugiere el nombre, es un programa específicamente diseñado para ayudarlos a encontrar <strong>bugs</strong>, es decir errores en el código (nota: si quieren saber por qué se les llama bugs a los errores, vean <a href="https://www.quora.com/Why-are-errors-in-software-codes-called-bugs">aquí</a>). Distintos debuggers tienen distintas características, pero es normal que todos los debuggers sean capaces de hacer las siguientes cosas:</p>
+<ol>
+<li>
+<p>Poner un <strong>breakpoint</strong> en el programa. Un breakpoint es una línea específica en su código en donde quisieran que se detenga la ejecución del programa, para que puedan ver lo que está pasando alrededor.</p>
+</li>
+<li>
+<p>Ejecución por <strong>steps</strong> (línea a línea) por el programa. El código siempre se ejecuta línea a línea, pero pasa muy rápido como para que sepamos qué línea produce algún error. Ser capaces de ejecutar línea a línea el programa les permite observar exactamente qué esta causando un bug en el programa.</p>
+</li>
+</ol>
+<p>Para este ejercicio, necesitarán la <a href="http://inst.eecs.berkeley.edu/~cs61c/resources/gdb5-refcard.pdf">GDB reference card</a>. Para poder usarlo compilaremos con la bandera <code>-g</code>. </p>
+<div class="codehilite"><pre><span></span>gcc -g -o hello hello.c
+</pre></div>
+
+<p>Esto hará que gcc guarde información en el archivo ejecutable para que cgdb lo interprete. Ahora ejecuten el debugger:</p>
+<div class="codehilite"><pre><span></span>cgdb hello
+</pre></div>
+
+<p>Vean lo que hace este comando. Están ejecutando el programa <code>cgdb</code> en el <strong>ejecutable</strong> <code>hello</code> generado por <code>gcc</code>. No intenten ejecutar cgdb en el archivo fuente en <code>hello.c</code>! Eso no va a funcionar.</p>
+<p><strong>Su tarea: Ejecute el programa en cgdb varias veces, pruebe distintos comandos en cada ejecución</strong>
+  1. Ponga un breakpoint en el main.
+  2. Use el comando <code>run</code> de cgdb.
+  3. Use el comando para single-step de cgdb.</p>
+<p>Escriban <code>help</code> adentro de cgdb para averiguar cómo hacer estas cosas, o usen la reference card.</p>
+<p><strong>Si encuentran un mensaje de error que dice <code>printf.c: No such file or directory</code>:</strong> Probablemente entraron a una función <code>printf</code>. Si siguen ejecutando paso a paso, pareciera que nunca avanzaran en el código. cgdb está dando el error porque no tienen el archivo en el que se define la función <code>printf</code>. Esto es algo molesto, entonces para librarse de esto usen el comando <code>finish</code> para ejecutar el programa hasta que termine la función printf. La próxima vez que prueba, utilice el comando <code>next</code> para saltar sobre la linea que usa <code>printf</code>.</p>
+<p>En cgdb, pueden presionar <code>ESC</code> para ir a la ventana del código (arriba), y usar <code>i</code> para regresar a la ventana de comandos (abajo). La ventana de comandos es donde se introducen los comandos de cgdb.</p>
+<p>Para este ejercicio, encontrarán un archivo de texto llamado <strong>ex1.txt</strong>, con el siguiente formato:</p>
+<p><div class="codehilite"><pre><span></span><span class="m">1</span>:
+<span class="m">2</span>:
+<span class="m">3</span>:
+<span class="m">4</span>:
+<span class="m">5</span>:
+<span class="m">6</span>:
+<span class="m">7</span>:
+<span class="m">8</span>:
+<span class="m">9</span>:
+</pre></div>
+Aquí tendrán que responder las siguientes preguntas de opción múltiple con el siguiente formato. Los siguiente son solo ejemplos, usted debe colocar la letra de la respuesta que considere correcta.</p>
+<div class="codehilite"><pre><span></span><span class="m">1</span>:e
+<span class="m">2</span>:f
+<span class="m">3</span>:g
+<span class="m">4</span>:h
+<span class="m">5</span>:i
+<span class="m">6</span>:j
+<span class="m">7</span>:k
+<span class="m">8</span>:l
+<span class="m">9</span>:m
+</pre></div>
+
+<p>No responda al azar. Lea la documentación y/o pruebe los comandos para saber que hace cada uno.</p>
+<p><strong>Preguntas</strong></p>
+<p><strong>1.</strong> ¿Cómo se le dan <strong>argumentos desde la línea de comandos</strong> a un programa al utilizar gdb?</p>
+<p>a. args arglist <br />
+  b. run arglist  <br />
+  c. gdb args <br />
+  d. Ninguna de las anteriores</p>
+<p><strong>2.</strong> ¿Cómo se añade un breakpoint que sólo ocurre cuando se cumplen <strong>ciertas condiciones</strong> (por ejemplo, ciertas variables alcanzan cierto valor)?</p>
+<p>a. expr cond  <br />
+  b. cond break expr  <br />
+  c. break ... if expr  <br />
+  d. Ninguna de las anteriores</p>
+<p><strong>3.</strong> ¿Con qué comando se ejecuta la <strong>siguiente línea del código en C</strong> después de parar en un breakpoint? (si la línea a ejecutar es una llamada a función, debe ejecutarse toda la función)</p>
+<p>a. run  <br />
+  b. s  <br />
+  c. c  <br />
+  d. n    </p>
+<p><strong>4.</strong> ¿Cómo se le indica a cgdb, que quieren debuggear el código <strong>adentro de la función</strong>? (esta respuesta es distinta a la pregunta 3, ahora ya no pasamos por encima sino que entramos a debuggear la función)</p>
+<p>a. run  <br />
+  b. s  <br />
+  c. c  <br />
+  d. n    </p>
+<p><strong>5.</strong> ¿Cómo se reanuda la ejecución del programa después de parar en un breakpoint?</p>
+<p>a. run  <br />
+  b. s  <br />
+  c. c  <br />
+  d. n    </p>
+<p><strong>6.</strong> ¿Cómo podemos ver el valor de una variable (o expresión) en cgdb?</p>
+<p>a. display expr <br />
+  b. signal expr  <br />
+  c. print expr <br />
+  d. next expr    </p>
+<p><strong>7.</strong> ¿Qué comando de cgdb se usa para desplegar el valor de una variable <strong>después de cada paso</strong>?</p>
+<p>a. display expr <br />
+  b. signal expr  <br />
+  c. print expr <br />
+  d. next expr    </p>
+<p><strong>8.</strong> ¿Cómo se imprime una lista de <strong>todas las variables y su valor</strong> en la función actual?</p>
+<p>a. info locals
+  b. display locals
+  c. info all
+  d. display all </p>
+<p><strong>9.</strong> ¿Cómo salimos de cgdb?</p>
+<p>a. end  <br />
+  b. quit <br />
+  c. exit <br />
+  d. finish   </p>
+<p>Después de responder estas preguntas, no olviden hacer el add, commit y push de este archivo hacia Github:
+<div class="codehilite"><pre><span></span>git add ex1.txt
+git commit -m <span class="s2">&quot;Ejercicio 1 terminado&quot;</span>
+git push  origin master
+</pre></div></p>
+<h2 id="ejercicio-2-depurando-un-problema-con-fallas-usando-cgdb">Ejercicio 2: Depurando un problema con fallas usando cgdb<a class="headerlink" href="#ejercicio-2-depurando-un-problema-con-fallas-usando-cgdb" title="Permanent link">&para;</a></h2>
+<p>Ahora usarán lo aprendido en el ejercicio 1 para buscar errores en un programa, usando cgdb. Vean el programa <code>ll_equal.c</code>. Lean el programa y analicen un poco lo que hace, luego compilen y ejecuten. Así como está, producirá un resultado como el siguiente:</p>
+<p><div class="codehilite"><pre><span></span>gcc -g -o ll_equal ll_equal.c
+./ll_equal
+
+equal <span class="nb">test</span> <span class="m">1</span> <span class="nv">result</span> <span class="o">=</span> <span class="m">1</span>
+Segmentation fault
+</pre></div>
+<strong>Su tarea: Averigüen qué produce el segmentation fault (falla de segmentación)</strong>.</p>
+<p>Ejecuten cgdb en el programa, siguiendo las instrucciones aprendidas en los ejercicios anteriores. Les recomendamos añadir un breakpoint en la función <code>ll_equal()</code>. Cuando el debugger pare en el breakpoint, ejecuten paso a paso el programa para que puedan descifrar qué es lo que provoca el error.</p>
+<ul>
+<li>
+<p>Pista 1: Analicen el valor de los punteros <code>a</code> y <code>b</code> en la función (¡despliéguenlos!). ¿Están siempre apuntando a la dirección correcta?</p>
+</li>
+<li>
+<p>Pista 2: Vean el código fuente en <code>main</code> para ver la estructura de los nodos y ver exactamente qué se está enviando como argumento a <code>ll_equal</code>.</p>
+</li>
+</ul>
+<p>Cuando haya encontrado el problema, arréglelo, compile nuevamente y ejecute el código. ¿Nota la diferencia?</p>
+<p>Al finalizar, no olvide subir el archivo modificado a su repositorio.</p>
+<div class="codehilite"><pre><span></span>git add ll_equal.c
+git commit -m <span class="s2">&quot;Ejercicio 2 terminado&quot;</span>
+git push origin master
+</pre></div>
+
+<h2 id="aprendiendo-algo-extra-debuggeando-un-programa-en-c-que-requiere-interaccion-del-usuario">Aprendiendo algo extra: Debuggeando un programa en C que requiere interacción del usuario<a class="headerlink" href="#aprendiendo-algo-extra-debuggeando-un-programa-en-c-que-requiere-interaccion-del-usuario" title="Permanent link">&para;</a></h2>
+<p><strong>Esta parte es opcional y no vale puntos, ni siquiera extras.</strong></p>
+<p>Veamos qué pasa cuando, a un programa que requiere interacción del usuario, lo ejecutamos con cgdb. Primero, ejecuten el programa en <code>interactive_hello.c</code> para hablar con un programa muy amigable.
+<div class="codehilite"><pre><span></span>gcc -g -o int_hello interactive_hello.c
+./int_hello
+</pre></div>
+Ahora, traten de depurarlo paso a paso en cgdb.
+<div class="codehilite"><pre><span></span>cgdb int_hello
+</pre></div>
+¿Qué pasa cuando intentar ejecutar el programa hasta el final? ¿Logró terminar o se quedó trabado?</p>
+<p>Vamos a aprender un poco acerca de las redirecciones. Para comenzar, puede ir a leer un poco en los siguientes links:</p>
+<ul>
+<li><a href="http://linuxcommand.org/lc3_lts0070.php">Standard Input</a></li>
+<li><a href="https://stackoverflow.com/questions/19467865/how-to-use-redirection-in-c-for-file-input">Discusion en Stack Overflow</a></li>
+</ul>
+<p>Ahora uniremos algunas piezas de conocimiento... ¿Qué se le ocurre hacer con el <code>run</code> que vió en el ejercicio 2 y el <code>&lt;</code> que acaba de conocer? (Hint: Si está pensando en crear un archivo de texto, va en buen camino)</p>
+<p>¿Ya lo pensó un poco por su cuenta? Muy bien, hora de ver la solución sobre cómo enviar datos que nuestro programa de C espera leer.</p>
+<ul>
+<li>Cree un archivo <code>nombre.txt</code> y escriba adentro su nombre, en una sola línea. Guarde el archivo en la carpeta de su lab.</li>
+<li>Compile su programa con banderas de debugging <code>gcc -g -o int_hello interactive_hello.c</code></li>
+<li>Inicie el debugger <code>cgdb int_hello</code></li>
+<li>En lugar de solo hacer <code>run</code> como antes, haga <code>run &lt; nombre.txt</code></li>
+</ul>
+<p>¿Apareció su nombre automágicamente allí escrito? Ese es el poder de las redirecciones, el <code>&lt;</code> nos permite enviar el contenido del archivo de texto, hacia el programa que se está debuggeando.</p>
+<p>El debugger no es una herramienta muy atractiva visualmente, pero es increiblemente poderosa al momento de buscar errores. Úsela siempre que tenga problemas, aunque las instrucciones no se lo indiquen.</p>
+<h2 id="ejercicio-3-punteros-y-estructuras-en-c">Ejercicio 3: Punteros y estructuras en C<a class="headerlink" href="#ejercicio-3-punteros-y-estructuras-en-c" title="Permanent link">&para;</a></h2>
+<p>En <strong>ll_cycle.c</strong> completen la función <code>ll_has_cycle()</code> de modo que implemente el siguiente algoritmo para comprobar si una linked list simple tiene un ciclo:
+  1. Comiencen con dos punteros apuntando al principio de la lista. Llamaremos al primero <code>tortoise</code> (tortuga) y al segundo <code>hare</code> (liebre).
+  2. Avancen el puntero <code>hare</code> dos nodos hacia adelante. Si no se puede debido a punteros nulos, hemos llegado al final de la lista. Por lo tanto, la lista no tiene un ciclo.
+  3. Ahora, avancen <code>tortoise</code> un nodo. (Revisar si llega a ser un puntero nulo es innecesario. ¿Por qué?)
+  4. Si la tortuga y la liebre apuntan al mismo nodo, la lista es cíclica. Si no, regresen al paso 2.</p>
+<p>Después de implementar correctamente la función <code>ll_has_cycle()</code>, el programa que se obtiene después de compilar <strong>ll_cycle.c</strong> mostrará si el resultado de su función está correcto, conforme a lo que esperaba como salida.</p>
+<p>Pista: Para este ejercicio debe haber entendido que es un puntero nulo. Recuerda cuándo avanzaba en una linked list en Java? Recuerda las precauciones que debía tomar para no seguir avanzando de más?</p>
+<p>Si necesita más explicación del algoritmo aquí hay un <a href="https://en.wikipedia.org/wiki/Cycle_detection#Floyd.27s_Tortoise_and_Hare">artículo</a> sobre su funcionamiento.</p>
+<p>A propósito, los punteros se llaman <code>tortoise</code> y <code>hare</code> porque el puntero tortoise (tortuga) se incrementa lentamente (como una tortuga, que se mueve muy lento) y el puntero hare (liebre) se incrementa rápidamente (más rápido que una tortuga, como una liebre, o conejo, que se mueve muy rápido).</p>
+<p>Al finalizar, compilen y ejecuten el archivo, y verifiquen que el resultado de su código, el cual debería ser más o menos igual a este:</p>
+<div class="codehilite"><pre><span></span>gcc -g -o ll_cycle ll_cycle.c
+./ll_cycle
+
+Checking first list <span class="k">for</span> cycles. There should be none, ll_has_cycle says it has no cycle
+Checking second list <span class="k">for</span> cycles. There should be a cycle, ll_has_cycle says it has a cycle
+Checking third list <span class="k">for</span> cycles. There should be a cycle, ll_has_cycle says it has a cycle
+Checking fourth list <span class="k">for</span> cycles. There should be a cycle, ll_has_cycle says it has a cycle
+Checking fifth list <span class="k">for</span> cycles. There should be none, ll_has_cycle says it has no cycle
+Checking length-zero list <span class="k">for</span> cycles. There should be none, ll_has_cycle says it has no cycle
+</pre></div>
+
+<p>Si su código tiene errores, use lo aprendido sobre cgdb para encontrarlos y corregirlos. Al terminar, agregue su código a su repositorio.</p>
+<div class="codehilite"><pre><span></span>git add ll_cycle.c
+git commit -m <span class="s2">&quot;Lab 2 terminado&quot;</span>
+git push origin master
+</pre></div>
+
+<p>Para finalizar, la fábula de <a href="http://read.gov/aesop/025.html">la tortuga y la liebre</a> es relevante siempre, especialmente en este curso. Escribir sus programas en C a paso lento pero seguro (ayudándose de programas como cgdb) es lo que les hará ganar la carrera.</p>
+<h2 id="entrega-de-laboratorio">Entrega de laboratorio<a class="headerlink" href="#entrega-de-laboratorio" title="Permanent link">&para;</a></h2>
+<p>Recuerde probar su laboratorio usando el autograder.</p>
+<div class="codehilite"><pre><span></span>./check
+</pre></div>
+
+<p>Las series valen 30, 30 y 40 puntos respectivamente.</p>
+<p>Luego <strong>envíe el link de su repositorio de Github en el GES</strong>. El GES tiene una opción para enviar links, ÚSELA. Si envía algún txt, pdf, zip, etc. su laboratorio no se calificará, es decir tendrá cero.</p>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../lab01/" title="1: Intro a C" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Anterior
+                </span>
+                1: Intro a C
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../lab03/" title="3: Estructuras y manejo de memoria" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Siguiente
+                </span>
+                3: Estructuras y manejo de memoria
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            CC-3
+          </div>
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+        
+  <div class="md-footer-social">
+    <link rel="stylesheet" href="../../assets/fonts/font-awesome.css">
+    
+      <a href="https://github.com/cc-3/MachineStructures" class="md-footer-social__link fa fa-github"></a>
+    
+  </div>
+
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.b41f3d20.js"></script>
+      
+        
+        
+          
+          <script src="../../assets/javascripts/lunr/lunr.stemmer.support.js"></script>
+          
+            
+              
+              
+                <script src="../../assets/javascripts/lunr/lunr.es.js"></script>
+              
+            
+          
+          
+        
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+        <script src="../../js/latex.js"></script>
+      
+        <script src="../../convnet_demo/jquery.min.js"></script>
+      
+        <script src="../../convnet_demo/convnet-min.js"></script>
+      
+        <script src="../../convnet_demo/convnet_demo.js"></script>
+      
+        <script src="../../js/python.js"></script>
+      
+    
+    
+      
+    
+  </body>
+</html>

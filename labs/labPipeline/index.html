@@ -1,0 +1,889 @@
+
+
+
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="Grandes Ideas en Arquitectura de Computadora">
+      
+      
+        <link rel="canonical" href="https://cc-3.github.io/labs/labPipeline/">
+      
+      
+        <meta name="author" content="CC-3">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copiar al portapapeles">
+      
+        <meta name="lang:clipboard.copied" content="Copiado al portapapeles">
+      
+        <meta name="lang:search.language" content="es">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No se encontraron documentos">
+      
+        <meta name="lang:search.result.one" content="1 documento encontrado">
+      
+        <meta name="lang:search.result.other" content="# documentos encontrados">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-3.2.0">
+    
+    
+      
+        <title>Lab 8 - Pipelining y preparación para el CPU - Estructura de Máquinas</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.572ca0f0.css">
+      
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.8c900955.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/emoji.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/kbd.css">
+    
+      <link rel="stylesheet" href="../../convnet_demo/style.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/button.css">
+    
+    
+  </head>
+  
+    <body dir="ltr">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448"
+    viewBox="0 0 416 448" id="__github">
+  <path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19-18.125
+        8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19 18.125-8.5
+        18.125 8.5 10.75 19 3.125 20.5zM320 304q0 10-3.125 20.5t-10.75
+        19-18.125 8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19
+        18.125-8.5 18.125 8.5 10.75 19 3.125 20.5zM360
+        304q0-30-17.25-51t-46.75-21q-10.25 0-48.75 5.25-17.75 2.75-39.25
+        2.75t-39.25-2.75q-38-5.25-48.75-5.25-29.5 0-46.75 21t-17.25 51q0 22 8
+        38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0
+        37.25-1.75t35-7.375 30.5-15 20.25-25.75 8-38.375zM416 260q0 51.75-15.25
+        82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5-41.75
+        1.125q-19.5 0-35.5-0.75t-36.875-3.125-38.125-7.5-34.25-12.875-30.25-20.25-21.5-28.75q-15.5-30.75-15.5-82.75
+        0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25
+        30.875q36.75-8.75 77.25-8.75 37 0 70 8 26.25-20.5
+        46.75-30.25t47.25-9.75q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34
+        99.5z" />
+</svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#lab-8-pipelining-y-preparacion-para-el-cpu" tabindex="1" class="md-skip">
+        Saltar a contenido
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://cc-3.github.io/" title="Estructura de Máquinas" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                Estructura de Máquinas
+              </span>
+              <span class="md-header-nav__topic">
+                Lab 8 - Pipelining y preparación para el CPU
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Teclee para comenzar búsqueda
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+          
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+
+  <a href="https://github.com/cc-3/MachineStructures/" title="Ir al repositorio" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#__github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      cc-3/MachineStructures
+    </div>
+  </a>
+
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://cc-3.github.io/" title="Estructura de Máquinas" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    Estructura de Máquinas
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://github.com/cc-3/MachineStructures/" title="Ir al repositorio" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#__github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      cc-3/MachineStructures
+    </div>
+  </a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Inicio" class="md-nav__link">
+      Inicio
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      Laboratorios
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Laboratorios
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab00/" title="0: Git" class="md-nav__link">
+      0: Git
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab01/" title="1: Intro a C" class="md-nav__link">
+      1: Intro a C
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab02/" title="2: CGDB y punteros" class="md-nav__link">
+      2: CGDB y punteros
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab03/" title="3: Estructuras y manejo de memoria" class="md-nav__link">
+      3: Estructuras y manejo de memoria
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab04/" title="4: Intro a RISC-V" class="md-nav__link">
+      4: Intro a RISC-V
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab05/" title="5: RISC-V" class="md-nav__link">
+      5: RISC-V
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab06/" title="6: Logisim" class="md-nav__link">
+      6: Logisim
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab07/" title="7: Logisim Avanzado" class="md-nav__link">
+      7: Logisim Avanzado
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab08/" title="8: SIMD" class="md-nav__link">
+      8: SIMD
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab09/" title="9: OpenMP" class="md-nav__link">
+      9: OpenMP
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Proyectos
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Proyectos
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../projs/proj01/" title="1: C y RISC-V" class="md-nav__link">
+      1: C y RISC-V
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../projs/proj02/" title="2: Procesador" class="md-nav__link">
+      2: Procesador
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Tutoriales
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Tutoriales
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/python/" title="Python" class="md-nav__link">
+      Python
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/install/" title="Instalacion de material" class="md-nav__link">
+      Instalacion de material
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      Notas
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        Notas
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../notes/00_Numbers-Representation/" title="Números" class="md-nav__link">
+      Números
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../notes/01_C/" title="C" class="md-nav__link">
+      C
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../notes/02_Intro-RISCV/" title="RISC-V" class="md-nav__link">
+      RISC-V
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../notes/03_Instruction-Format/" title="Formato de instrucciones" class="md-nav__link">
+      Formato de instrucciones
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../notes/04_CALL/" title="CALL" class="md-nav__link">
+      CALL
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Tabla de contenidos</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#objetivo" title="Objetivo" class="md-nav__link">
+    Objetivo
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#preparacion" title="Preparación" class="md-nav__link">
+    Preparación
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejercicio-1-pipeline" title="Ejercicio 1: Pipeline" class="md-nav__link">
+    Ejercicio 1: Pipeline
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#calificacion" title="Calificación" class="md-nav__link">
+    Calificación
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejercicio-2-guia-del-proyecto-de-cpu" title="Ejercicio 2: Guía del proyecto de CPU" class="md-nav__link">
+    Ejercicio 2: Guía del proyecto de CPU
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#etapa-1-instruction-fetch" title="Etapa 1: Instruction fetch" class="md-nav__link">
+    Etapa 1: Instruction fetch
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etapa-2-instruction-decode" title="Etapa 2: Instruction decode" class="md-nav__link">
+    Etapa 2: Instruction decode
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etapa-3-execute" title="Etapa 3: Execute" class="md-nav__link">
+    Etapa 3: Execute
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etapa-4-memory" title="Etapa 4: Memory" class="md-nav__link">
+    Etapa 4: Memory
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etapa-5-write-back" title="Etapa 5: Write back" class="md-nav__link">
+    Etapa 5: Write back
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/cc-3/MachineStructures/edit/master/page/es/docs/labs/labPipeline.md" title="Editar esta página" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="lab-8-pipelining-y-preparacion-para-el-cpu">Lab 8 - Pipelining y preparación para el CPU<a class="headerlink" href="#lab-8-pipelining-y-preparacion-para-el-cpu" title="Permanent link">&para;</a></h1>
+<h2 id="objetivo">Objetivo<a class="headerlink" href="#objetivo" title="Permanent link">&para;</a></h2>
+<p>Este laboratorio es bastante corto. Consiste únicamente en un ejercicio de <em>pipelining</em>, con el objetivo de darles suficiente tiempo para el proyecto 2, empiecen pronto...</p>
+<h2 id="preparacion">Preparación<a class="headerlink" href="#preparacion" title="Permanent link">&para;</a></h2>
+<p>Para este laboratorio, nuevamente, es necesario que tengan la aplicación de <a href="http://www.cburch.com/logisim/index.html">Logisim</a>. Adicionalmente, pueden utilizar la <a href="http://www.cburch.com/logisim/docs.html">documentación</a> de Logisim para refrescar el conocimiento que adquirieron en los laboratorios anteriores.</p>
+<p>También, tienen que tener todos los archivos base, estos se encuentran <a href="https://classroom.github.com/a/pxWdbD4u">aquí</a>. Recuerden que deben aceptar la asignación de <strong>GitHub Classroom</strong> y se les creará automáticamente un repositorio con una extensión que termina con su usuario de GitHub. Cuando ya se haya creado el repositorio, pueden ejecutar los siguientes comandos abriendo una terminal (<kbd>CTRL</kbd><kbd>+</kbd><kbd>T</kbd>):</p>
+<div class="codehilite"><pre><span></span>git clone &lt;link del repositorio&gt;
+</pre></div>
+
+<h2 id="ejercicio-1-pipeline">Ejercicio 1: Pipeline<a class="headerlink" href="#ejercicio-1-pipeline" title="Permanent link">&para;</a></h2>
+<p>Asuman que, al encender, todos los registros tienen 0.</p>
+<p>Consideren el siguiente FSM de 2 entradas, su salida es calculada por medio de una multiplicación de sus entradas y sumada a su estado actual.</p>
+<p><img alt="Imagen" src="/img/labs/lab08/fsm.png" /></p>
+<p>Asuman que el tiempo de propagación de un bloque de suma es de 50ns, el tiempo de propagación de un bloque de multiplicación es de 55ns, y el clk-to-q delay de un registro es de 5ns. Calculen la máxima frecuencia del reloj en la que puede operar este circuito. Asuman que el tiempo de configuración de un registro es despreciable y que las 2 entradas vienen de registros sincronizados que reciben información de fuentes externas.</p>
+<p>Ahora, deben mejorar el desempeño de este circuito, de manera que pueda operar a una frecuencia de reloj más alta. Para ello, deben separar la multiplicación y la suma en dos etapas de <em>pipeline</em>. En la primera etapa, se realiza la multiplicación de las 2 entradas y, en la segunda etapa, se le suma el producto al estado actual.</p>
+<p>La forma en que se evaluará es muy simple: La secuencia de salidas de este circuito está bien, ssi corresponde a la secuencia de salidas del circuito sin <em>pipeline</em>, potencialmente, con algunos ceros en el principio. Por ejemplo, si el circuito da como salidas [3,5,1,2,4,...], su circuito correcto podría devolver [0,3,5,1,2,4,...] para la misma secuencia de entradas.</p>
+<p>Para facilitar el proceso de calificación, se les dará un punto de inicio estándar en los archivos del laboratorio. En <code>pipeline.circ</code>, el sub-circuito <code>Non- pipelined</code> está estructurado exactamente como la imagen de arriba. El <code>main</code> está programado para que la salida del subcircuito sin <em>pipeline</em> sea [3,5,1,2,4,-1,0,0,...]. Esto, también, los ayudará como ejemplo de cómo usar una memoria con datos desde un archivo. El bloque ROM debería tener los datos correctos, pero, si no, denle click derecho al bloque y elijan la opción "Load image..." y escogan <code>ROMdata</code>.</p>
+<p>Noten que necesitarán un registro para guardar un valor intermedio entre etapas del <em>pipeline</em>, esto es bastante común en pipelines.</p>
+<ol>
+<li>Completen el subcircuito <code>pipelined</code>. Tendrán que agregar un registro entre los bloques de producto y suma para separar las dos etapas.</li>
+<li>Ahora, calculen la nueva frecuencia máxima para la versión con <em>pipeline</em> del circuito.</li>
+<li>Cuando aprendieron de esto en clase, se les mencionó que si un resultado depende de la salida de una instrucción previa, se suele agregar una "burbuja" en el pipeline para asegurar que el resultado de la primera instrucción esté listo para ser usado en la segunda. Piensen por qué agregar burbujas en este ejemplo es innecesario.</li>
+</ol>
+<h2 id="calificacion">Calificación<a class="headerlink" href="#calificacion" title="Permanent link">&para;</a></h2>
+<p>Cuando crean que tengan ejercicios completos, pueden utilizar el autograder, localmente, escribiendo en la terminal:</p>
+<div class="codehilite"><pre><span></span>./check
+</pre></div>
+
+<p>Si todo esta correcto les saldrá algo como esto:</p>
+<div class="codehilite"><pre><span></span>   ___       __                        __       
+  / _ <span class="p">|</span>__ __/ /____  ___  _______ ____/ /__ ____
+ / __ / // / __/ _ <span class="se">\/</span> _ <span class="se">\/</span> __/ _ <span class="se">\/</span> _  / -_<span class="o">)</span> __/
+/_/ <span class="p">|</span>_<span class="se">\_</span>,_/<span class="se">\_</span>_/<span class="se">\_</span>__/<span class="se">\_</span>, /_/  <span class="se">\_</span>,_/<span class="se">\_</span>,_/<span class="se">\_</span>_/_/
+                   /___/
+
+             Machine Structures
+     Great Ideas in Computer Architecture
+              Lab <span class="m">8</span>: Pipeline
+
+
+Exercise           Grade   Message
+----------------  -------  ---------
+<span class="m">1</span>. Pipeline           <span class="m">100</span>  <span class="nv">Passed</span>
+
+<span class="o">=</span>&gt; Score: <span class="m">100</span>/100
+</pre></div>
+
+<p>Pueden subir su laboratorio para calificación utilizando:</p>
+<div class="codehilite"><pre><span></span>./submit &lt;TOKEN&gt;
+</pre></div>
+
+<h2 id="ejercicio-2-guia-del-proyecto-de-cpu">Ejercicio 2: Guía del proyecto de CPU<a class="headerlink" href="#ejercicio-2-guia-del-proyecto-de-cpu" title="Permanent link">&para;</a></h2>
+<p>Queremos incluir esta guía para guiarlos en la tercera parte del proyecto. Aprovechen esta guía para comenzar la parte 3 (CPU).</p>
+<p>Empezar esta parte desde cero puede ser intimidante, así que queremos guiarlos en la forma de pensar en este proyecto con un ejemplo de instrucciones tipo R: una suma (la instrucción <code>add</code>).</p>
+<p>Recuerden las 5 etapas de pipeline del CPU:</p>
+<ol>
+<li>Instruction fetch</li>
+<li>Instruction decode</li>
+<li>Execute</li>
+<li>Memory</li>
+<li>Writeback</li>
+</ol>
+<p>Esta guía los ayudará a completar cada uno de estos pasos, de la instrucción <code>add</code>. Cada sección tendrá preguntas para que analicen, detalles importantes y referencias al contenido del curso, pero no les dirá cómo implementarla exactamente. Tal vez necesiten leer y entender cada pregunta antes de pasar a la siguiente y podrán ver las respuestas haciendo click a cada pregunta. Mientras implementen el proyecto, siéntanse libres de poner cosas en subcircuitos conforme lo vean necesario.</p>
+<h3 id="etapa-1-instruction-fetch">Etapa 1: Instruction fetch<a class="headerlink" href="#etapa-1-instruction-fetch" title="Permanent link">&para;</a></h3>
+<p>La parte principal de esta estapa es, ¿cómo se obtiene la instrucción actual? De las clases, se sabe que las instrucciones son almacenadas en una memoria de instrucciones (texto) y cada instrucción se puede obtener con una dirección.</p>
+<ol>
+<li><details> <summary> ¿Qué archivo tiene la memoria de datos? ¿Cómo se conecta a su archivo <code>cpu.circ</code>? </summary> Está en el archivo riscv.circ; le da una entrada al cpu llamada <code>Instruction</code> y recibe una salida llamada <code>fetch_addr</code>. </details></li>
+<li><details> <summary> En el CPU, ¿cómo afecta la dirección que tenemos en la salida <code>fetch_addr</code> a la entrada <code>Instruction</code>?  </summary> La instrucción que riscv.circ envía al CPU debe ser la instrucción en la posición <code>fetch_addr</code> de la memoria de texto. </details></li>
+<li><details> <summary> ¿Cómo sabemos qué valor debería tener <code>fetch_addr</code>? (pista: también se le llama PC)</summary> <code>fetch_address</code> es la dirección de la instrucción que actualmente está siendo ejecutada, así que se guarda en el registro PC. Para este proyecto, está bien que PC empiece en 0, el valor por defecto de los registros.</details></li>
+<li><details> <summary> En este proyecto, ¿qué cantidad de bits tiene el PC? </summary>32 bits.</details></li>
+<li><details> <summary> Para programas sencillos sin ningún jump o branch, ¿cómo debería cambiar el PC de línea a línea?  </summary>El PC se debe incrementar en 1 instrucción para poder recibir la siguiente instrucción, ya que la dirección almacenada en el PC representa la instrucción a ejecutar.</details></li>
+<li>En los archivos del proyecto, ya está el PC. implementen el comportamiento del PC para programas simples (sin jumps o branches). Tendrán que agregar esto más adelante, pero por ahora sólo piensen en ejecutar un programa con <code>add</code> . Piensen a dónde debe estar conectada la salida del PC. ¡No se olviden de conectar el clock!</li>
+</ol>
+<h3 id="etapa-2-instruction-decode">Etapa 2: Instruction decode<a class="headerlink" href="#etapa-2-instruction-decode" title="Permanent link">&para;</a></h3>
+<p>Ya que tienen la instucción en el tunnel <code>Instruction</code>, deben separarla en el paso de decodificación de acuerdo a lo que han aprendido en clase acerca de formatos de instrucciones de Risc-V.</p>
+<ol>
+<li><details> <summary> ¿Qué tipo de instrucción es <code>add</code>? ¿Cuáles son sus diferentes campos y qué bits se necesitan para cada uno?  </summary>(Vean las instrucciones del proyecto :D)</details></li>
+<li><details> <summary> En Logisim, ¿qué se utiliza para separar (split out) diferentes grupos de bits?  </summary> ¡Un splitter!       </details></li>
+<li>Implementen la etapa de decodificación de los campos de la instrucción usando la entrada <code>instruction</code>. Deberían usar <em>tunnels</em> para etiquetar y agrupar los bits.</li>
+<li><details> <summary> Ahora deben obtener datos de los registros correspondientes usando el <i>register file</i>. ¿Qué campos de bits deben estar conectados al <i>register file</i>? ¿A qué entradas del register file deberían conectarse? </summary> Los campos <code>rs1 y rs2</code> deben ir a <code> Read register </code> 1 y 2.</details></li>
+<li>Implementen la forma de leer del <code>register file</code>. Van a tener que usar su regfile.circ de la parte 1 (seguro ya la tienen hecha :), si no, ya van un poco tarde). ¡No se olviden de conectar el clock!</li>
+</ol>
+<h3 id="etapa-3-execute">Etapa 3: Execute<a class="headerlink" href="#etapa-3-execute" title="Permanent link">&para;</a></h3>
+<p>Esta etapa, también conocida como <em>ALU stage</em>, es la etapa en la cual se computan la mayoría de instrucciones. Aquí se introducirá la idea de implementar un <code>módulo de control</code>.</p>
+<ol>
+<li><details> <summary> Para la instrucción <code>add</code>, ¿cuáles deberían ser las entradas del ALU?  </summary> Read Data 1 y 2 deben ir a los puertos A y B del ALU</details></li>
+<li><details> <summary> En el ALU, ¿cuál es el propósito del switch llamado <code>ALU_ctr</code>?  </summary>Elige la operación que el ALU debe realizar.</details></li>
+<li><details> <summary> Aunque para un add es posible poner un valor constante en el control del ALU, ¿por qué sería malo hacer esto conforme siguen implementando más instrucciones del proyecto?  </summary>En otras instrucciones, las entradas del ALU pueden cambiar, por lo que es necesario algún tipo de (sub)circuito que cambie los valores de entrada y/o salida, dependiendo de la instrucción siendo ejecutada.</details></li>
+<li>Ahora implementen un subcircuito para el módulo de control. Este módulo debe recibir como entradas el opcode y funct y, como salidas, los valores adecuados para el manejo correcto del ALU para cada instrucción. Hay varias formar de lograr esto (pueden ver el instructivo del proyecto para más ayuda). Al implementar más instrucciones, este módulo puede hacerce más complejo.</li>
+<li>Utilicen el ALU de la parte anterior y conéctenlo correctamente. ¿Es necesario conectar el clock? ¿Por qué, o por qué no?</li>
+</ol>
+<h3 id="etapa-4-memory">Etapa 4: Memory<a class="headerlink" href="#etapa-4-memory" title="Permanent link">&para;</a></h3>
+<p>En esta etapa se pueden almacenar datos a una memoria con instrucciones "store", y recuperar datos con instrucciones de "load". Como <code>add</code> no utiliza la memoria, la guía no se enfocará mucho en esta etapa.
+Vean el módulo de memoria en el proyecto. En este punto no se explicará lo que debe tener en cada una de sus entradas, pero siéntanse libres de implementarlo por su cuenta cuando aprendan qué hacer. Pueden conectarle el clock mientras tanto.</p>
+<h3 id="etapa-5-write-back">Etapa 5: Write back<a class="headerlink" href="#etapa-5-write-back" title="Permanent link">&para;</a></h3>
+<p>La estapa de escritura es donde el resultado de la operación se guarda de regreso a los registros. Aunque no todas las instrucciones escriben de regreso a los registros (piensen en cuales), <code>add</code> si lo hace.</p>
+<ol>
+<li><details> <summary> Viendo el ISA, ¿qué instrucciones sí usan esta etapa?  </summary> add recibe un dato del ALU y lo guarda en un registro. lw recibe un dato de la memoria y lo escribe en un registro. Hay muchas instrucciones más que hacen esto. </details></li>
+<li>Implementen la etapa de escritura de modo que sea capaz de obtener datos, tanto del ALU como de la memoria, y escribirlos al Register File. Luego, cuando implementen saltos/branches, tal vez tengan que agregar más cosas a este MUX. Sin embargo, por el momento, deben poder escoger entre el ALU y la memoria, ya que sólo una salida puede llegar al módulo de registros. Conecten un cable de las salidas del ALU y MEM hacia un multiplexor.</li>
+<li><details> <summary> ¿Qué debería tener el selector del mux? ¿De qué depende esta entrada?  </summary> El selector escoge qué salida (ALU o MEM) llega al Reg. File y la salida correcta depende de qué instrucción está ejecutándose. Esto sugiere que la entrada del selector debería venir del módulo de control, porque el control se encarga de descifrar qué instrucción se ejecuta (con el opcode y las funct). </details></li>
+<li>Ahora viene el segundo (y posiblemente más importante) rol de los módulos de control: determinar qué valores salen del módulo al CPU, para poder controlar el flujo de ejecución. A esto se le llaman Señales de Control.</li>
+</ol>
+<p>Un ejemplo de estas es la señal que controla el MUX mencionado anteriormente, comúnmente llamado WBsel. WBsel determina el valor que se escribe de regreso a los registros.</p>
+<p>Hay más señales de control que pueden encontrar en el material de la clase y van a tener que definir algunas más. Si notan que van a necesitar un mux en alguna parte del proyecto, muy posiblemente van a tener que definir una señal de control para el mux.</p>
+<ol>
+<li>Hay varias formas de implementar el control para que traduzca los opcodes/functs a la instrucción correspondiente y luego configurar las señales de control correctamente. Una forma (vista en clase) es con una ROM. Los otros métodos usan lógica de <code>and</code>s y <code>or</code>s para alcanzar el objetivo. Prueben implementar las señales de control pertinentes a la instrucción <code>add</code>.</li>
+<li><details> <summary> Ya que tienen las entradas del mux, necesitan conectar la salida. ¿A dónde va la salida?  </summary> Como el output son los datos que quieren escribir al register file, debería conectarse a la entrada <code>Write Data</code> del Register File </details></li>
+<li>Hay dos entradas más al Register File que son importantes para escribir datos: RegWEn y Write Register. Uno de estos viene de la etapa de decodificación y, para el otro, deberán hacer una nueva señal de control. Terminen la etapa de Write Back conectando del módulo de control, y de la etapa de decodificación, las entradas correspondientes al register file.</li>
+</ol>
+<p>Si han hecho todos estos pasos correctamente, deberían tener un procesador que funciona para sumar. Para el resto del proyecto, van a estar implementando más instrucciones de la misma forma; conectando salidas a entradas, agregando muxes y otros componentes de Logisim y definiendo señales de control nuevas. Debería ser más fácil ahora que tienen un esqueleto básico para trabajar. Recuerden el contenido del curso ya tienen bastante información y los ayudará a seguir construyendo los circuitos que tienen ahora. ¡Éxitos!</p>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            CC-3
+          </div>
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+        
+  <div class="md-footer-social">
+    <link rel="stylesheet" href="../../assets/fonts/font-awesome.css">
+    
+      <a href="https://github.com/cc-3/MachineStructures" class="md-footer-social__link fa fa-github"></a>
+    
+  </div>
+
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.b41f3d20.js"></script>
+      
+        
+        
+          
+          <script src="../../assets/javascripts/lunr/lunr.stemmer.support.js"></script>
+          
+            
+              
+              
+                <script src="../../assets/javascripts/lunr/lunr.es.js"></script>
+              
+            
+          
+          
+        
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+        <script src="../../js/latex.js"></script>
+      
+        <script src="../../convnet_demo/jquery.min.js"></script>
+      
+        <script src="../../convnet_demo/convnet-min.js"></script>
+      
+        <script src="../../convnet_demo/convnet_demo.js"></script>
+      
+        <script src="../../js/python.js"></script>
+      
+    
+    
+      
+    
+  </body>
+</html>

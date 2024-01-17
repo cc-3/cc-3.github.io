@@ -1,0 +1,1547 @@
+
+
+
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="Grandes Ideas en Arquitectura de Computadora">
+      
+      
+        <link rel="canonical" href="https://cc-3.github.io/tutorials/python/">
+      
+      
+        <meta name="author" content="CC-3">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copiar al portapapeles">
+      
+        <meta name="lang:clipboard.copied" content="Copiado al portapapeles">
+      
+        <meta name="lang:search.language" content="es">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No se encontraron documentos">
+      
+        <meta name="lang:search.result.one" content="1 documento encontrado">
+      
+        <meta name="lang:search.result.other" content="# documentos encontrados">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-3.2.0">
+    
+    
+      
+        <title>Python - Estructura de Máquinas</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.572ca0f0.css">
+      
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.8c900955.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/emoji.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/kbd.css">
+    
+      <link rel="stylesheet" href="../../convnet_demo/style.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/button.css">
+    
+    
+  </head>
+  
+    <body dir="ltr">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448"
+    viewBox="0 0 416 448" id="__github">
+  <path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19-18.125
+        8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19 18.125-8.5
+        18.125 8.5 10.75 19 3.125 20.5zM320 304q0 10-3.125 20.5t-10.75
+        19-18.125 8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19
+        18.125-8.5 18.125 8.5 10.75 19 3.125 20.5zM360
+        304q0-30-17.25-51t-46.75-21q-10.25 0-48.75 5.25-17.75 2.75-39.25
+        2.75t-39.25-2.75q-38-5.25-48.75-5.25-29.5 0-46.75 21t-17.25 51q0 22 8
+        38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0
+        37.25-1.75t35-7.375 30.5-15 20.25-25.75 8-38.375zM416 260q0 51.75-15.25
+        82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5-41.75
+        1.125q-19.5 0-35.5-0.75t-36.875-3.125-38.125-7.5-34.25-12.875-30.25-20.25-21.5-28.75q-15.5-30.75-15.5-82.75
+        0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25
+        30.875q36.75-8.75 77.25-8.75 37 0 70 8 26.25-20.5
+        46.75-30.25t47.25-9.75q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34
+        99.5z" />
+</svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#tutorial-de-python-3" tabindex="1" class="md-skip">
+        Saltar a contenido
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://cc-3.github.io/" title="Estructura de Máquinas" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                Estructura de Máquinas
+              </span>
+              <span class="md-header-nav__topic">
+                Python
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Teclee para comenzar búsqueda
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+          
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+
+  <a href="https://github.com/cc-3/MachineStructures/" title="Ir al repositorio" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#__github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      cc-3/MachineStructures
+    </div>
+  </a>
+
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://cc-3.github.io/" title="Estructura de Máquinas" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    Estructura de Máquinas
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://github.com/cc-3/MachineStructures/" title="Ir al repositorio" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#__github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      cc-3/MachineStructures
+    </div>
+  </a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Inicio" class="md-nav__link">
+      Inicio
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      Laboratorios
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Laboratorios
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../labs/lab00/" title="0: Git" class="md-nav__link">
+      0: Git
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../labs/lab01/" title="1: Intro a C" class="md-nav__link">
+      1: Intro a C
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../labs/lab02/" title="2: CGDB y punteros" class="md-nav__link">
+      2: CGDB y punteros
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../labs/lab03/" title="3: Estructuras y manejo de memoria" class="md-nav__link">
+      3: Estructuras y manejo de memoria
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../labs/lab04/" title="4: Intro a RISC-V" class="md-nav__link">
+      4: Intro a RISC-V
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../labs/lab05/" title="5: RISC-V" class="md-nav__link">
+      5: RISC-V
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../labs/lab06/" title="6: Logisim" class="md-nav__link">
+      6: Logisim
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../labs/lab07/" title="7: Logisim Avanzado" class="md-nav__link">
+      7: Logisim Avanzado
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../labs/lab08/" title="8: SIMD" class="md-nav__link">
+      8: SIMD
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../labs/lab09/" title="9: OpenMP" class="md-nav__link">
+      9: OpenMP
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Proyectos
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Proyectos
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../projs/proj01/" title="1: C y RISC-V" class="md-nav__link">
+      1: C y RISC-V
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../projs/proj02/" title="2: Procesador" class="md-nav__link">
+      2: Procesador
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
+    
+    <label class="md-nav__link" for="nav-4">
+      Tutoriales
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Tutoriales
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Python
+      </label>
+    
+    <a href="./" title="Python" class="md-nav__link md-nav__link--active">
+      Python
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Tabla de contenidos</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#instalacion" title="Instalación" class="md-nav__link">
+    Instalación
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion" title="Introducción" class="md-nav__link">
+    Introducción
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tipos-de-datos-basicos" title="Tipos de datos básicos" class="md-nav__link">
+    Tipos de datos básicos
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#numeros" title="Números" class="md-nav__link">
+    Números
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#booleans" title="Booleans" class="md-nav__link">
+    Booleans
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#strings" title="Strings" class="md-nav__link">
+    Strings
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#contenedores" title="Contenedores" class="md-nav__link">
+    Contenedores
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#listas" title="Listas" class="md-nav__link">
+    Listas
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#slicing" title="Slicing" class="md-nav__link">
+    Slicing
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ciclos" title="Ciclos" class="md-nav__link">
+    Ciclos
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#list-comprehensions" title="List comprehensions" class="md-nav__link">
+    List comprehensions
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#diccionarios" title="Diccionarios" class="md-nav__link">
+    Diccionarios
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ciclos_1" title="Ciclos" class="md-nav__link">
+    Ciclos
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dictionary-comprehensions" title="Dictionary comprehensions" class="md-nav__link">
+    Dictionary comprehensions
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sets" title="Sets" class="md-nav__link">
+    Sets
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#loops" title="Loops" class="md-nav__link">
+    Loops
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-comprehensions" title="Set comprehensions" class="md-nav__link">
+    Set comprehensions
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tuplas" title="Tuplas" class="md-nav__link">
+    Tuplas
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#funciones" title="Funciones" class="md-nav__link">
+    Funciones
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#funciones-lambda" title="Funciones Lambda" class="md-nav__link">
+    Funciones Lambda
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#clases" title="Clases" class="md-nav__link">
+    Clases
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../install/" title="Instalacion de material" class="md-nav__link">
+      Instalacion de material
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      Notas
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        Notas
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../notes/00_Numbers-Representation/" title="Números" class="md-nav__link">
+      Números
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../notes/01_C/" title="C" class="md-nav__link">
+      C
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../notes/02_Intro-RISCV/" title="RISC-V" class="md-nav__link">
+      RISC-V
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../notes/03_Instruction-Format/" title="Formato de instrucciones" class="md-nav__link">
+      Formato de instrucciones
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../notes/04_CALL/" title="CALL" class="md-nav__link">
+      CALL
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Tabla de contenidos</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#instalacion" title="Instalación" class="md-nav__link">
+    Instalación
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion" title="Introducción" class="md-nav__link">
+    Introducción
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tipos-de-datos-basicos" title="Tipos de datos básicos" class="md-nav__link">
+    Tipos de datos básicos
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#numeros" title="Números" class="md-nav__link">
+    Números
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#booleans" title="Booleans" class="md-nav__link">
+    Booleans
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#strings" title="Strings" class="md-nav__link">
+    Strings
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#contenedores" title="Contenedores" class="md-nav__link">
+    Contenedores
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#listas" title="Listas" class="md-nav__link">
+    Listas
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#slicing" title="Slicing" class="md-nav__link">
+    Slicing
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ciclos" title="Ciclos" class="md-nav__link">
+    Ciclos
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#list-comprehensions" title="List comprehensions" class="md-nav__link">
+    List comprehensions
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#diccionarios" title="Diccionarios" class="md-nav__link">
+    Diccionarios
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ciclos_1" title="Ciclos" class="md-nav__link">
+    Ciclos
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dictionary-comprehensions" title="Dictionary comprehensions" class="md-nav__link">
+    Dictionary comprehensions
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sets" title="Sets" class="md-nav__link">
+    Sets
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#loops" title="Loops" class="md-nav__link">
+    Loops
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-comprehensions" title="Set comprehensions" class="md-nav__link">
+    Set comprehensions
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tuplas" title="Tuplas" class="md-nav__link">
+    Tuplas
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#funciones" title="Funciones" class="md-nav__link">
+    Funciones
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#funciones-lambda" title="Funciones Lambda" class="md-nav__link">
+    Funciones Lambda
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#clases" title="Clases" class="md-nav__link">
+    Clases
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/cc-3/MachineStructures/edit/master/page/es/docs/tutorials/python.md" title="Editar esta página" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="tutorial-de-python-3">Tutorial de Python 3<a class="headerlink" href="#tutorial-de-python-3" title="Permanent link">&para;</a></h1>
+<p align="center">
+<img src="/img/python.svg" alt="Python"/>
+</p>
+
+<p>El objetivo de este tutorial es que ustedes puedan aprender sobre lo básico de <strong>Python 3</strong>, no esperamos que se vuelvan expertos con esta introducción. En este curso no es fundamental que dominen al 100% este lenguaje de programación y realmente solo necesitan conocer lo básico para poder completar satisfactoriamente los laboratorios y proyectos que utilicen este lenguaje.</p>
+<h2 id="instalacion">Instalación<a class="headerlink" href="#instalacion" title="Permanent link">&para;</a></h2>
+<p>Actualmente hay 2 diferentes versiones soportadas de Python: <strong>2.7</strong> y <strong>3.X</strong>. Para este curso vamos a estar utilizando Python 3 y más especificamente utilizar Anaconda Python. Para instalar Anaconda en sus computadoras tienen que hacer lo siguiente:</p>
+<div class="codehilite"><pre><span></span>wget https://repo.anaconda.com/archive/Anaconda3-2019.03-Linux-x86_64.sh
+bash Anaconda3-2019.03-Linux-x86_64.sh
+<span class="nb">source</span> ~/.bashrc
+</pre></div>
+
+<p>Esto va a instalar Anaconda Python <strong>3.7</strong>, para verificar la version pueden correr el siguiente comando:</p>
+<div class="codehilite"><pre><span></span>python --version
+</pre></div>
+
+<p>Para abrir el intérprete de Python solo necesitan escribir:</p>
+<div class="codehilite"><pre><span></span>python
+</pre></div>
+
+<p>Si su instalación es correcta resultará en algo como esto:</p>
+<div class="codehilite"><pre><span></span>Python <span class="m">3</span>.7.3 <span class="o">(</span>default, Mar <span class="m">27</span> <span class="m">2019</span>, <span class="m">22</span>:11:17<span class="o">)</span>
+<span class="o">[</span>GCC <span class="m">7</span>.3.0<span class="o">]</span> :: Anaconda, Inc. on linux
+Type <span class="s2">&quot;help&quot;</span>, <span class="s2">&quot;copyright&quot;</span>, <span class="s2">&quot;credits&quot;</span> or <span class="s2">&quot;license&quot;</span> <span class="k">for</span> more information.
+&gt;&gt;&gt;
+</pre></div>
+
+<h2 id="introduccion">Introducción<a class="headerlink" href="#introduccion" title="Permanent link">&para;</a></h2>
+<p>Python es un lenguaje de programación <strong><em>multiparadigma</em></strong> y con <strong><em>tipos dinámicos</em></strong>. El código escrito en Python se dice que es similar al pseudocódigo, ya que permite expresar ideas bastante poderosas en muy pocas líneas de código y al mismo tiempo ser bastante leíble. Como ejemplo, aquí hay una implementación del clásico algoritmo <strong>quicksort</strong> escrito en Python:</p>
+<p><div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">quicksort</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">arr</span>
+    <span class="n">pivot</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span><span class="p">]</span>
+    <span class="n">left</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">arr</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">pivot</span><span class="p">]</span>
+    <span class="n">middle</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">arr</span> <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="n">pivot</span><span class="p">]</span>
+    <span class="n">right</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">arr</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="n">pivot</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">quicksort</span><span class="p">(</span><span class="n">left</span><span class="p">)</span> <span class="o">+</span> <span class="n">middle</span> <span class="o">+</span> <span class="n">quicksort</span><span class="p">(</span><span class="n">right</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">quicksort</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">]))</span>
+</pre></div>
+<pre id="quicksort-out"></pre></p>
+<p><button class="brun" onclick="quicksort()">Run</button> <button id="bquicksort" class="bclear" onclick="rm('bquicksort', 'quicksort-out')" style="visibility: hidden;">Clear</button></p>
+<h2 id="tipos-de-datos-basicos">Tipos de datos básicos<a class="headerlink" href="#tipos-de-datos-basicos" title="Permanent link">&para;</a></h2>
+<p>Como en muchos lenguajes, Python tiene un número de tipos de datos básicos incluyendo enteros, floats, booleans y strings. Estos tipos de datos se comportan como lo han visto en otros lenguajes de programación (C por ejemplo).</p>
+<h3 id="numeros">Números<a class="headerlink" href="#numeros" title="Permanent link">&para;</a></h3>
+<p>Los enteros y los floats funcionan como ustedes han visto que funcionan en otros lenguajes:</p>
+<div class="codehilite"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="c1"># type: sirve para obtener el tipo de un objeto</span>
+<span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">x</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>   <span class="c1"># division exacta</span>
+<span class="k">print</span><span class="p">(</span><span class="n">x</span> <span class="o">//</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># division entera</span>
+<span class="k">print</span><span class="p">(</span><span class="n">x</span> <span class="o">**</span> <span class="mi">3</span><span class="p">)</span>  <span class="c1"># exponentes</span>
+<span class="n">x</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">*=</span> <span class="mi">2</span>
+<span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="mf">2.5</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">y</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">y</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">y</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">y</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+
+<pre id="nums-out"></pre>
+
+<p><button class="brun" onclick="nums()">Run</button> <button id="bnums" class="bclear" onclick="rm('bnums', 'nums-out')" style="visibility: hidden;">Clear</button></p>
+<p>Noten que Python no tiene los operadores de incremento unario (<code>x++</code>) o decremento (<code>x--</code>). Python también tiene tipos para manejo de números completos, todo esto lo pueden ver en la <a href="https://docs.python.org/3/library/stdtypes.html#numeric-types-int-float-complex">documentación</a></p>
+<h3 id="booleans">Booleans<a class="headerlink" href="#booleans" title="Permanent link">&para;</a></h3>
+<p>Python implementa todos los operadores usuales para hacer lógica booleana, pero usa palabras en Inglés en vez de símbolos (<code>&amp;&amp;</code>, <code>||</code>, etc.):</p>
+<div class="codehilite"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="n">f</span> <span class="o">=</span> <span class="bp">False</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">t</span> <span class="ow">and</span> <span class="n">f</span><span class="p">)</span> <span class="c1"># AND lógico</span>
+<span class="k">print</span><span class="p">(</span><span class="n">t</span> <span class="ow">or</span> <span class="n">f</span><span class="p">)</span>  <span class="c1"># OR lógico</span>
+<span class="k">print</span><span class="p">(</span><span class="ow">not</span> <span class="n">t</span><span class="p">)</span>   <span class="c1"># NOT lógico</span>
+<span class="k">print</span><span class="p">(</span><span class="n">t</span> <span class="o">!=</span> <span class="n">f</span><span class="p">)</span>  <span class="c1"># XOR lógico</span>
+</pre></div>
+
+<pre id="bools-out"></pre>
+
+<p><button class="brun" onclick="bools()">Run</button> <button id="bbools" class="bclear" onclick="rm('bbools', 'bools-out')" style="visibility: hidden;">Clear</button></p>
+<h3 id="strings">Strings<a class="headerlink" href="#strings" title="Permanent link">&para;</a></h3>
+<p>Python tiene buen soporte de strings:</p>
+<div class="codehilite"><pre><span></span><span class="n">hello</span> <span class="o">=</span> <span class="s1">&#39;hello&#39;</span>           <span class="c1"># las literales string pueden ser declaradas con apóstofre</span>
+<span class="n">world</span> <span class="o">=</span> <span class="s2">&quot;world&quot;</span>           <span class="c1"># o comillas, no importa la verdad...</span>
+<span class="k">print</span><span class="p">(</span><span class="n">hello</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">hello</span><span class="p">))</span>         <span class="c1"># con len obtenemos el length del string</span>
+<span class="n">hw</span> <span class="o">=</span> <span class="n">hello</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">world</span>  <span class="c1"># concatenación, así como en Java</span>
+<span class="k">print</span><span class="p">(</span><span class="n">hw</span><span class="p">)</span>
+<span class="n">hw12</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> </span><span class="si">%s</span><span class="s1"> </span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">hello</span><span class="p">,</span> <span class="n">world</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span> <span class="c1"># formato de texto al estilo sprintf</span>
+<span class="k">print</span><span class="p">(</span><span class="n">hw12</span><span class="p">)</span>
+</pre></div>
+
+<pre id="strings1-out"></pre>
+
+<p><button class="brun" onclick="strings1()">Run</button> <button id="bstrings1" class="bclear" onclick="rm('bstrings1', 'strings1-out')" style="visibility: hidden;">Clear</button></p>
+<p>Los objetos de tipo string tienen un montón de métodos útiles; Por ejemplo:</p>
+<div class="codehilite"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;hello&#39;</span>
+<span class="c1"># Pone la letra del principio en mayuscula</span>
+<span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">capitalize</span><span class="p">())</span>  
+<span class="c1"># Pasa el string a mayusculas</span>
+<span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">upper</span><span class="p">())</span>       
+<span class="c1"># Justifica un string, rellenando con espacios</span>
+<span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">rjust</span><span class="p">(</span><span class="mi">7</span><span class="p">))</span>      
+<span class="c1"># Centra un string, rellanando con espacios</span>
+<span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">center</span><span class="p">(</span><span class="mi">7</span><span class="p">))</span>
+<span class="c1"># Reemplaza todas las apariciones de un substring por otro</span>
+<span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;l&#39;</span><span class="p">,</span> <span class="s1">&#39;(ell)&#39;</span><span class="p">))</span>  
+<span class="c1"># Quita todos los caracteres de whitespace del principio y final</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;  world &#39;</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+</pre></div>
+
+<pre id="strings2-out"></pre>
+
+<p><button class="brun" onclick="strings2()">Run</button> <button id="bstrings2" class="bclear" onclick="rm('bstrings2', 'strings2-out')" style="visibility: hidden;">Clear</button></p>
+<p>Pueden encontrar una lista de todos los métodos en la <a href="https://docs.python.org/3/library/stdtypes.html#string-methods">documentación</a>.</p>
+<h2 id="contenedores">Contenedores<a class="headerlink" href="#contenedores" title="Permanent link">&para;</a></h2>
+<p>Python incluye bastantes tipos de contenedores: listas, diccionarios, sets y tuplas.</p>
+<h3 id="listas">Listas<a class="headerlink" href="#listas" title="Permanent link">&para;</a></h3>
+<p>Una lista en Python es equivalente a un arreglo en C o Java, pero es dinámico (puede cambiar su tamaño, es decir no es fijo) y puede tener elementos de diferentes tipos:\</p>
+<div class="codehilite"><pre><span></span><span class="c1"># Crea una lista</span>
+<span class="n">xs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>  
+<span class="k">print</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
+<span class="c1"># Para acceder a un elemento de la lista, los indices van de 0 a length - 1</span>
+<span class="k">print</span><span class="p">(</span><span class="n">xs</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="c1"># Los indices negativos empiezan desde el final de la lista</span>
+<span class="k">print</span><span class="p">(</span><span class="n">xs</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>     
+<span class="c1"># Las listas pueden contener elementos de diferentes tipos</span>
+<span class="n">xs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;foo&#39;</span>    
+<span class="k">print</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>         
+<span class="c1"># Añade un elemento al final de la lista</span>
+<span class="n">xs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;bar&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>         
+<span class="c1"># Quita y devuelve el último elemento de la lista</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">xs</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>  
+<span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">xs</span><span class="p">)</span>      
+<span class="c1"># para obtener el length de la lista</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">xs</span><span class="p">))</span>
+</pre></div>
+
+<pre id="lists-out"></pre>
+
+<p><button class="brun" onclick="lists()">Run</button> <button id="blists" class="bclear" onclick="rm('blists', 'lists-out')" style="visibility: hidden;">Clear</button></p>
+<p>Puden encontrar más detalles en la <a href="https://docs.python.org/3/tutorial/datastructures.html#more-on-lists">documentación</a> de listas.</p>
+<h4 id="slicing">Slicing<a class="headerlink" href="#slicing" title="Permanent link">&para;</a></h4>
+<p>Además de acceder a los elementos de una lista uno a la vez, Python provee una sintaxis para acceder a sublistas, a esto se le conoce como <strong><em>slicing</em></strong>:</p>
+<div class="codehilite"><pre><span></span><span class="c1"># Creamos una nueva lista</span>
+<span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>   
+<span class="c1"># Agarra una sublista desde el indice 2 hasta el indice 3 es decir [2,4)      </span>
+<span class="k">print</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">])</span>   
+<span class="c1"># Agarra una sublista desde el indice 2 hasta el final de la lista, es decir [2,4]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="mi">2</span><span class="p">:])</span>     
+<span class="c1"># Agarra una sublista desde el principio de la misma hasta el indice 2 sin incluir, es decir [0,2)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">nums</span><span class="p">[:</span><span class="mi">2</span><span class="p">])</span>    
+<span class="c1"># Agarra toda la lista &quot;[0, 1, 2, 3, 4]&quot;</span>
+<span class="k">print</span><span class="p">(</span><span class="n">nums</span><span class="p">[:])</span>     
+<span class="c1"># El slice puede ser negativo, en este caso agarra desde el principio hasta el penultimo elemento, es decir [0,3]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">nums</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>    
+<span class="c1"># Asigna una sublista al slice</span>
+<span class="n">nums</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>  
+</pre></div>
+
+<pre id="lists1-out"></pre>
+
+<p><button class="brun" onclick="lists1()">Run</button> <button id="blists1" class="bclear" onclick="rm('blists1', 'lists1-out')" style="visibility: hidden;">Clear</button></p>
+<h4 id="ciclos">Ciclos<a class="headerlink" href="#ciclos" title="Permanent link">&para;</a></h4>
+<p>Pueden iterar sobre elementos de una lista de la siguiente manera:</p>
+<div class="codehilite"><pre><span></span><span class="n">animals</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;cat&#39;</span><span class="p">,</span> <span class="s1">&#39;dog&#39;</span><span class="p">,</span> <span class="s1">&#39;monkey&#39;</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">animal</span> <span class="ow">in</span> <span class="n">animals</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">animal</span><span class="p">)</span>
+</pre></div>
+
+<pre id="lists2-out"></pre>
+
+<p><button class="brun" onclick="lists2()">Run</button> <button id="blists2" class="bclear" onclick="rm('blists2', 'lists2-out')" style="visibility: hidden;">Clear</button></p>
+<p>Si quieren acceder al indice de cada elemento dentro del ciclo, pueden utilizar la funcion “enumerate”:</p>
+<div class="codehilite"><pre><span></span><span class="n">animals</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;cat&#39;</span><span class="p">,</span> <span class="s1">&#39;dog&#39;</span><span class="p">,</span> <span class="s1">&#39;monkey&#39;</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">animal</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">animals</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;#</span><span class="si">%d</span><span class="s1">: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">animal</span><span class="p">))</span>
+</pre></div>
+
+<pre id="lists3-out"></pre>
+
+<p><button class="brun" onclick="lists3()">Run</button> <button id="blists3" class="bclear" onclick="rm('blists3', 'lists3-out')" style="visibility: hidden;">Clear</button></p>
+<h4 id="list-comprehensions">List comprehensions<a class="headerlink" href="#list-comprehensions" title="Permanent link">&para;</a></h4>
+<p>Cuando estamos programando, frecuentemente vamos a querer transformar un tipo de dato hacia otro. Como un ejemplo simple, consideren el siguiente código que calcula numeros al cuadrado:</p>
+<div class="codehilite"><pre><span></span><span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+<span class="n">squares</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">:</span>
+    <span class="n">squares</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">squares</span><span class="p">)</span>
+</pre></div>
+
+<pre id="lists4-out"></pre>
+
+<p><button class="brun" onclick="lists4()">Run</button> <button id="blists4" class="bclear" onclick="rm('blists4', 'lists4-out')" style="visibility: hidden;">Clear</button></p>
+<p>Pueden hacer este código más simple utilizando una list comprehension:</p>
+<div class="codehilite"><pre><span></span><span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+<span class="n">squares</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="o">**</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">]</span> <span class="c1"># list comprehension</span>
+<span class="k">print</span><span class="p">(</span><span class="n">squares</span><span class="p">)</span>
+</pre></div>
+
+<pre id="lists5-out"></pre>
+
+<p><button class="brun" onclick="lists5()">Run</button> <button id="blists5" class="bclear" onclick="rm('blists5', 'lists5-out')" style="visibility: hidden;">Clear</button></p>
+<p>Las list comprehension pueden contener condiciones:</p>
+<div class="codehilite"><pre><span></span><span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+<span class="n">even_squares</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="o">**</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">nums</span> <span class="k">if</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">even_squares</span><span class="p">)</span>
+</pre></div>
+
+<pre id="lists6-out"></pre>
+
+<p><button class="brun" onclick="lists6()">Run</button> <button id="blists6" class="bclear" onclick="rm('blists6', 'lists6-out')" style="visibility: hidden;">Clear</button></p>
+<h3 id="diccionarios">Diccionarios<a class="headerlink" href="#diccionarios" title="Permanent link">&para;</a></h3>
+<p>Un diccionario guarda un par (key, value), similar a un Map en java. Pueden utilizarlo así:</p>
+<div class="codehilite"><pre><span></span><span class="c1"># crea un nuevo diccionario con algunos datos</span>
+<span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;cat&#39;</span><span class="p">:</span> <span class="s1">&#39;cute&#39;</span><span class="p">,</span> <span class="s1">&#39;dog&#39;</span><span class="p">:</span> <span class="s1">&#39;furry&#39;</span><span class="p">}</span>
+<span class="c1"># toma el valor del key &#39;cat&#39;</span>
+<span class="k">print</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;cat&#39;</span><span class="p">])</span>
+<span class="c1"># verifica que el key &#39;cat&#39; este en el diccionario d</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;cat&#39;</span> <span class="ow">in</span> <span class="n">d</span><span class="p">)</span>
+<span class="c1"># añade un par key, value al diccionario d</span>
+<span class="n">d</span><span class="p">[</span><span class="s1">&#39;fish&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;wet&#39;</span>
+<span class="k">print</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;fish&#39;</span><span class="p">])</span>
+<span class="c1"># el key &#39;monkey&#39; no existe, pero podemos poner un valor por defecto, en este caso N/A</span>
+<span class="k">print</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;monkey&#39;</span><span class="p">,</span> <span class="s1">&#39;N/A&#39;</span><span class="p">))</span>
+<span class="c1"># como fish existe no imprime el valor por defecto</span>
+<span class="k">print</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;fish&#39;</span><span class="p">,</span> <span class="s1">&#39;N/A&#39;</span><span class="p">))</span>
+<span class="c1"># podemos eliminar elementos del diccionario</span>
+<span class="k">del</span> <span class="n">d</span><span class="p">[</span><span class="s1">&#39;fish&#39;</span><span class="p">]</span>
+<span class="c1"># come fish lo quitamos y ya no existe, tiene que devolver el valor por defecto</span>
+<span class="k">print</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;fish&#39;</span><span class="p">,</span> <span class="s1">&#39;N/A&#39;</span><span class="p">))</span>
+</pre></div>
+
+<pre id="dicts-out"></pre>
+
+<p><button class="brun" onclick="dicts()">Run</button> <button id="bdicts" class="bclear" onclick="rm('bdicts', 'dicts-out')" style="visibility: hidden;">Clear</button></p>
+<p>Pueden encontrar todo lo que necesitan saber de diccionarios en la <a href="https://docs.python.org/3/library/stdtypes.html#dict">documentación</a>.</p>
+<h4 id="ciclos_1">Ciclos<a class="headerlink" href="#ciclos_1" title="Permanent link">&para;</a></h4>
+<p>Es fácil iterar sobre las keys de un diccionario:</p>
+<div class="codehilite"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;person&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;cat&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;spider&#39;</span><span class="p">:</span> <span class="mi">8</span><span class="p">}</span>
+<span class="k">for</span> <span class="n">animal</span> <span class="ow">in</span> <span class="n">d</span><span class="p">:</span>
+    <span class="n">legs</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="n">animal</span><span class="p">]</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;A </span><span class="si">%s</span><span class="s1"> has </span><span class="si">%d</span><span class="s1"> legs&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">animal</span><span class="p">,</span> <span class="n">legs</span><span class="p">))</span>
+</pre></div>
+
+<pre id="dicts1-out"></pre>
+
+<p><button class="brun" onclick="dicts1()">Run</button> <button id="bdicts1" class="bclear" onclick="rm('bdicts1', 'dicts1-out')" style="visibility: hidden;">Clear</button></p>
+<p>Si quieren acceder a las keys y sus valores correspondientes pueden utilizar el método “items”:</p>
+<div class="codehilite"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;person&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;cat&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;spider&#39;</span><span class="p">:</span> <span class="mi">8</span><span class="p">}</span>
+<span class="k">for</span> <span class="n">animal</span><span class="p">,</span> <span class="n">legs</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;A </span><span class="si">%s</span><span class="s1"> has </span><span class="si">%d</span><span class="s1"> legs&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">animal</span><span class="p">,</span> <span class="n">legs</span><span class="p">))</span>
+</pre></div>
+
+<pre id="dicts2-out"></pre>
+
+<p><button class="brun" onclick="dicts2()">Run</button> <button id="bdicts2" class="bclear" onclick="rm('bdicts2', 'dicts2-out')" style="visibility: hidden;">Clear</button></p>
+<h4 id="dictionary-comprehensions">Dictionary comprehensions<a class="headerlink" href="#dictionary-comprehensions" title="Permanent link">&para;</a></h4>
+<p>Estos son similares a las list comprehensions, pero ayuda a construir diccionarios fácilmente, por ejemplo:</p>
+<div class="codehilite"><pre><span></span><span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+<span class="n">even_num_to_square</span> <span class="o">=</span> <span class="p">{</span><span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">**</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">nums</span> <span class="k">if</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">}</span>
+<span class="k">print</span><span class="p">(</span><span class="n">even_num_to_square</span><span class="p">)</span>
+</pre></div>
+
+<pre id="dicts3-out"></pre>
+
+<p><button class="brun" onclick="dicts3()">Run</button> <button id="bdicts3" class="bclear" onclick="rm('bdicts3', 'dicts3-out')" style="visibility: hidden;">Clear</button></p>
+<h3 id="sets">Sets<a class="headerlink" href="#sets" title="Permanent link">&para;</a></h3>
+<p>Un set es un la colección no ordenada de elementos distintos. Como ejemplo simple, consideren lo siguiente:</p>
+<div class="codehilite"><pre><span></span><span class="n">animals</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;cat&#39;</span><span class="p">,</span> <span class="s1">&#39;dog&#39;</span><span class="p">}</span>
+<span class="c1"># Verifica que un elemento este en el set</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;cat&#39;</span> <span class="ow">in</span> <span class="n">animals</span><span class="p">)</span>   
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;fish&#39;</span> <span class="ow">in</span> <span class="n">animals</span><span class="p">)</span>
+<span class="c1"># Añade un elemento al set</span>
+<span class="n">animals</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;fish&#39;</span><span class="p">)</span>      
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;fish&#39;</span> <span class="ow">in</span> <span class="n">animals</span><span class="p">)</span>
+<span class="c1"># Numero de elementos en un set</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">animals</span><span class="p">))</span>       
+<span class="c1"># Añadir un elemento que ya esta en el set, lo permite pero no pasa nada</span>
+<span class="n">animals</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;cat&#39;</span><span class="p">)</span>     
+<span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">animals</span><span class="p">))</span>   
+<span class="c1"># Remueve un elemento del set</span>
+<span class="n">animals</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;cat&#39;</span><span class="p">)</span>  
+<span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">animals</span><span class="p">))</span>
+</pre></div>
+
+<pre id="sets-out"></pre>
+
+<p><button class="brun" onclick="sets()">Run</button> <button id="bsets" class="bclear" onclick="rm('bsets', 'sets-out')" style="visibility: hidden;">Clear</button></p>
+<p>Otra vez, todo lo que quieran saber acerca de los sets lo pueden encontrar en la <a href="https://docs.python.org/3/library/stdtypes.html#set-types-set-frozenset">documentación</a>.</p>
+<h4 id="loops">Loops<a class="headerlink" href="#loops" title="Permanent link">&para;</a></h4>
+<p>Iterear sobre un set tienen la misma sintaxis que iterar sobre una lista, sin embargo como los sets no tienen orden, no pueden asumir sobre en que orden se van a visitar los elementos del set:</p>
+<div class="codehilite"><pre><span></span><span class="n">animals</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;cat&#39;</span><span class="p">,</span> <span class="s1">&#39;dog&#39;</span><span class="p">,</span> <span class="s1">&#39;fish&#39;</span><span class="p">}</span>
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">animal</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">animals</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;#</span><span class="si">%d</span><span class="s1">: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">animal</span><span class="p">))</span>
+</pre></div>
+
+<pre id="sets1-out"></pre>
+
+<p><button class="brun" onclick="sets1()">Run</button> <button id="bsets1" class="bclear" onclick="rm('bsets1', 'sets1-out')" style="visibility: hidden;">Clear</button></p>
+<h4 id="set-comprehensions">Set comprehensions<a class="headerlink" href="#set-comprehensions" title="Permanent link">&para;</a></h4>
+<p>como las listas y los diccionarios, podemos construir sets fácilmente utilizando set comprehensions:</p>
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">sqrt</span>
+<span class="n">nums</span> <span class="o">=</span> <span class="p">{</span><span class="nb">int</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">30</span><span class="p">)}</span>
+<span class="k">print</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+</pre></div>
+
+<pre id="sets2-out"></pre>
+
+<p><button class="brun" onclick="sets2()">Run</button> <button id="bsets2" class="bclear" onclick="rm('bsets2', 'sets2-out')" style="visibility: hidden;">Clear</button></p>
+<h3 id="tuplas">Tuplas<a class="headerlink" href="#tuplas" title="Permanent link">&para;</a></h3>
+<p>Una tupla es una lista ordenada de elementos “fija”. Una tupla es bastante similar a una lista, una de las más importantes diferencias es que las tuplas se pueden utilizar como keys en un diccionario y como elementos de los sets, mientras que las listas no. Aquí hay un ejemplo:</p>
+<div class="codehilite"><pre><span></span><span class="c1"># Crea un diccionario con keys de tuplas</span>
+<span class="n">d</span> <span class="o">=</span> <span class="p">{(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)}</span>  
+<span class="c1"># Crea una tupla</span>
+<span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>      
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">t</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">d</span><span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)])</span>
+</pre></div>
+
+<pre id="tuples-out"></pre>
+
+<p><button class="brun" onclick="tuples()">Run</button> <button id="btuples" class="bclear" onclick="rm('btuples', 'tuples-out')" style="visibility: hidden;">Clear</button></p>
+<p>La <a href="https://docs.python.org/3/tutorial/datastructures.html#tuples-and-sequences">documentación</a> tiene mas información acerca de las tuplas.</p>
+<h2 id="funciones">Funciones<a class="headerlink" href="#funciones" title="Permanent link">&para;</a></h2>
+<p>Las funciones de Python se definen utilizando el keyword def. Por ejemplo:</p>
+<div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">sign</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39;positive&#39;</span>
+    <span class="k">elif</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39;negative&#39;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39;zero&#39;</span>
+
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">sign</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+</pre></div>
+
+<pre id="funct-out"></pre>
+
+<p><button class="brun" onclick="funct()">Run</button> <button id="bfunct" class="bclear" onclick="rm('bfunct', 'funct-out')" style="visibility: hidden;">Clear</button></p>
+<p>Vamos a definir funciones que toman argumentos, y opcionalmente argumentos keyword, como esto:</p>
+<div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">hello</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">loud</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">loud</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;HELLO, </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">name</span><span class="o">.</span><span class="n">upper</span><span class="p">())</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Hello, </span><span class="si">%s</span><span class="s1">!&#39;</span> <span class="o">%</span> <span class="n">name</span><span class="p">)</span>
+
+<span class="n">hello</span><span class="p">(</span><span class="s1">&#39;Bob&#39;</span><span class="p">)</span>
+<span class="n">hello</span><span class="p">(</span><span class="s1">&#39;Fred&#39;</span><span class="p">,</span> <span class="n">loud</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre></div>
+
+<pre id="funct1-out"></pre>
+
+<p><button class="brun" onclick="funct1()">Run</button> <button id="bfunct1" class="bclear" onclick="rm('bfunct1', 'funct1-out')" style="visibility: hidden;">Clear</button></p>
+<p>Hay mucha información acerca de como definir funciones en Python en la <a href="https://docs.python.org/3/tutorial/controlflow.html#defining-functions">documentación</a>.</p>
+<h2 id="funciones-lambda">Funciones Lambda<a class="headerlink" href="#funciones-lambda" title="Permanent link">&para;</a></h2>
+<p>Python tiene una sintaxis definida para funciones anónimas, <strong><em>lambda functions</em></strong>, están son bastante utiles para pasarlas como argumento a otras funciones:</p>
+<div class="codehilite"><pre><span></span><span class="c1"># importamos la funcion reduce</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="nb">reduce</span>
+<span class="c1"># definimos una funcion anonima y se la asignamos a una variable x</span>
+<span class="n">x</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">l</span><span class="p">:</span> <span class="n">l</span> <span class="o">**</span> <span class="mi">2</span>
+<span class="c1"># podemos usar la funcion anonima como cualquier otra funcion</span>
+<span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+<span class="c1"># pero lo mas importante es que la podemos pasar como argumento</span>
+<span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">f</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">foo</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+<span class="c1"># aunque esto no implica que con las funciones normales puedan hacer esto...</span>
+<span class="k">def</span> <span class="nf">bar</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">**</span> <span class="mi">2</span>
+<span class="k">print</span><span class="p">(</span><span class="n">foo</span><span class="p">(</span><span class="n">bar</span><span class="p">))</span>
+<span class="c1"># por lo general se utilizan con las funciones map, reduce y filter de python que trabajan con listas</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">**</span> <span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])))</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])))</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]))</span>
+<span class="c1"># pero tambien se ven muy seguido cuando se trabaja con el paradigma MapReduce y Spark</span>
+<span class="c1"># que es parte de su proyecto y este laboratorio !!!</span>
+</pre></div>
+
+<pre id="funct2-out"></pre>
+
+<p><button class="brun" onclick="funct2()">Run</button> <button id="bfunct2" class="bclear" onclick="rm('bfunct2', 'funct2-out')" style="visibility: hidden;">Clear</button></p>
+<h2 id="clases">Clases<a class="headerlink" href="#clases" title="Permanent link">&para;</a></h2>
+<p>La sintaxis para definir clases en Python es bastante simple:</p>
+<div class="codehilite"><pre><span></span><span class="k">class</span> <span class="nc">Greeter</span><span class="p">:</span>
+
+    <span class="c1"># Constructor</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>  <span class="c1"># Crea un atributo para la clase</span>
+
+    <span class="c1"># Un metodo de la clase</span>
+    <span class="k">def</span> <span class="nf">greet</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">loud</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">loud</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s1">&#39;HELLO, </span><span class="si">%s</span><span class="s1">!&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">upper</span><span class="p">())</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Hello, </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+
+<span class="c1"># Crea una instancia de la clase</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">Greeter</span><span class="p">(</span><span class="s1">&#39;Fred&#39;</span><span class="p">)</span>  
+<span class="c1"># Llama al metodo de la clase; imprime &quot;Hello, Fred&quot;</span>
+<span class="n">g</span><span class="o">.</span><span class="n">greet</span><span class="p">()</span>   
+<span class="c1"># Llama al metodo de la clase; imprime &quot;HELLO, FRED!&quot;</span>
+<span class="n">g</span><span class="o">.</span><span class="n">greet</span><span class="p">(</span><span class="n">loud</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>   
+</pre></div>
+
+<pre id="cls-out"></pre>
+
+<p><button class="brun" onclick="cls()">Run</button> <button id="bcls" class="bclear" onclick="rm('bcls', 'cls-out')" style="visibility: hidden;">Clear</button></p>
+<p>Con esto concluimos el tutorial de Python 3, pueden obtener más información en la <a href="https://docs.python.org/3/">documentación</a> de Python 3 oficial o incluso seguir el <a href="https://docs.python.org/3/tutorial/">tutorial</a> completo que ellos tienen.</p>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../../projs/proj02/" title="2: Procesador" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Anterior
+                </span>
+                2: Procesador
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../install/" title="Instalacion de material" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Siguiente
+                </span>
+                Instalacion de material
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            CC-3
+          </div>
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+        
+  <div class="md-footer-social">
+    <link rel="stylesheet" href="../../assets/fonts/font-awesome.css">
+    
+      <a href="https://github.com/cc-3/MachineStructures" class="md-footer-social__link fa fa-github"></a>
+    
+  </div>
+
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.b41f3d20.js"></script>
+      
+        
+        
+          
+          <script src="../../assets/javascripts/lunr/lunr.stemmer.support.js"></script>
+          
+            
+              
+              
+                <script src="../../assets/javascripts/lunr/lunr.es.js"></script>
+              
+            
+          
+          
+        
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+        <script src="../../js/latex.js"></script>
+      
+        <script src="../../convnet_demo/jquery.min.js"></script>
+      
+        <script src="../../convnet_demo/convnet-min.js"></script>
+      
+        <script src="../../convnet_demo/convnet_demo.js"></script>
+      
+        <script src="../../js/python.js"></script>
+      
+    
+    
+      
+    
+  </body>
+</html>

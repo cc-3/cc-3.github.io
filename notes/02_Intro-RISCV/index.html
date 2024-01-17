@@ -1,0 +1,1001 @@
+
+
+
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="Grandes Ideas en Arquitectura de Computadora">
+      
+      
+        <link rel="canonical" href="https://cc-3.github.io/notes/02_Intro-RISCV/">
+      
+      
+        <meta name="author" content="CC-3">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copiar al portapapeles">
+      
+        <meta name="lang:clipboard.copied" content="Copiado al portapapeles">
+      
+        <meta name="lang:search.language" content="es">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No se encontraron documentos">
+      
+        <meta name="lang:search.result.one" content="1 documento encontrado">
+      
+        <meta name="lang:search.result.other" content="# documentos encontrados">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-3.2.0">
+    
+    
+      
+        <title>RISC-V - Estructura de Máquinas</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.572ca0f0.css">
+      
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.8c900955.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/emoji.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/kbd.css">
+    
+      <link rel="stylesheet" href="../../convnet_demo/style.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/button.css">
+    
+    
+  </head>
+  
+    <body dir="ltr">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448"
+    viewBox="0 0 416 448" id="__github">
+  <path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19-18.125
+        8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19 18.125-8.5
+        18.125 8.5 10.75 19 3.125 20.5zM320 304q0 10-3.125 20.5t-10.75
+        19-18.125 8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19
+        18.125-8.5 18.125 8.5 10.75 19 3.125 20.5zM360
+        304q0-30-17.25-51t-46.75-21q-10.25 0-48.75 5.25-17.75 2.75-39.25
+        2.75t-39.25-2.75q-38-5.25-48.75-5.25-29.5 0-46.75 21t-17.25 51q0 22 8
+        38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0
+        37.25-1.75t35-7.375 30.5-15 20.25-25.75 8-38.375zM416 260q0 51.75-15.25
+        82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5-41.75
+        1.125q-19.5 0-35.5-0.75t-36.875-3.125-38.125-7.5-34.25-12.875-30.25-20.25-21.5-28.75q-15.5-30.75-15.5-82.75
+        0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25
+        30.875q36.75-8.75 77.25-8.75 37 0 70 8 26.25-20.5
+        46.75-30.25t47.25-9.75q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34
+        99.5z" />
+</svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#introduccion-a-risc-v" tabindex="1" class="md-skip">
+        Saltar a contenido
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://cc-3.github.io/" title="Estructura de Máquinas" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                Estructura de Máquinas
+              </span>
+              <span class="md-header-nav__topic">
+                RISC-V
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Teclee para comenzar búsqueda
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+          
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+
+  <a href="https://github.com/cc-3/MachineStructures/" title="Ir al repositorio" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#__github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      cc-3/MachineStructures
+    </div>
+  </a>
+
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://cc-3.github.io/" title="Estructura de Máquinas" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    Estructura de Máquinas
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://github.com/cc-3/MachineStructures/" title="Ir al repositorio" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#__github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      cc-3/MachineStructures
+    </div>
+  </a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Inicio" class="md-nav__link">
+      Inicio
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      Laboratorios
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Laboratorios
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../labs/lab00/" title="0: Git" class="md-nav__link">
+      0: Git
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../labs/lab01/" title="1: Intro a C" class="md-nav__link">
+      1: Intro a C
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../labs/lab02/" title="2: CGDB y punteros" class="md-nav__link">
+      2: CGDB y punteros
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../labs/lab03/" title="3: Estructuras y manejo de memoria" class="md-nav__link">
+      3: Estructuras y manejo de memoria
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../labs/lab04/" title="4: Intro a RISC-V" class="md-nav__link">
+      4: Intro a RISC-V
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../labs/lab05/" title="5: RISC-V" class="md-nav__link">
+      5: RISC-V
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../labs/lab06/" title="6: Logisim" class="md-nav__link">
+      6: Logisim
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../labs/lab07/" title="7: Logisim Avanzado" class="md-nav__link">
+      7: Logisim Avanzado
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../labs/lab08/" title="8: SIMD" class="md-nav__link">
+      8: SIMD
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../labs/lab09/" title="9: OpenMP" class="md-nav__link">
+      9: OpenMP
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Proyectos
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Proyectos
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../projs/proj01/" title="1: C y RISC-V" class="md-nav__link">
+      1: C y RISC-V
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../projs/proj02/" title="2: Procesador" class="md-nav__link">
+      2: Procesador
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Tutoriales
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Tutoriales
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/python/" title="Python" class="md-nav__link">
+      Python
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/install/" title="Instalacion de material" class="md-nav__link">
+      Instalacion de material
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5" checked>
+    
+    <label class="md-nav__link" for="nav-5">
+      Notas
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        Notas
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../00_Numbers-Representation/" title="Números" class="md-nav__link">
+      Números
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../01_C/" title="C" class="md-nav__link">
+      C
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        RISC-V
+      </label>
+    
+    <a href="./" title="RISC-V" class="md-nav__link md-nav__link--active">
+      RISC-V
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Tabla de contenidos</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#que-es-risc-v" title="¿Qué es RISC-V?" class="md-nav__link">
+    ¿Qué es RISC-V?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#algunos-ejemplos-en-risc-v" title="Algunos Ejemplos en RISC-V" class="md-nav__link">
+    Algunos Ejemplos en RISC-V
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#convertir-un-ciclo-a-ensamblador-en-risc-v" title="Convertir un ciclo a Ensamblador en RISC-V" class="md-nav__link">
+    Convertir un ciclo a Ensamblador en RISC-V
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#partes-de-un-ciclo" title="Partes de un Ciclo" class="md-nav__link">
+    Partes de un Ciclo
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../03_Instruction-Format/" title="Formato de instrucciones" class="md-nav__link">
+      Formato de instrucciones
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../04_CALL/" title="CALL" class="md-nav__link">
+      CALL
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Tabla de contenidos</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#que-es-risc-v" title="¿Qué es RISC-V?" class="md-nav__link">
+    ¿Qué es RISC-V?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#algunos-ejemplos-en-risc-v" title="Algunos Ejemplos en RISC-V" class="md-nav__link">
+    Algunos Ejemplos en RISC-V
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#convertir-un-ciclo-a-ensamblador-en-risc-v" title="Convertir un ciclo a Ensamblador en RISC-V" class="md-nav__link">
+    Convertir un ciclo a Ensamblador en RISC-V
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#partes-de-un-ciclo" title="Partes de un Ciclo" class="md-nav__link">
+    Partes de un Ciclo
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/cc-3/MachineStructures/edit/master/page/es/docs/notes/02_Intro-RISCV.md" title="Editar esta página" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="introduccion-a-risc-v">Introducción a RISC V<a class="headerlink" href="#introduccion-a-risc-v" title="Permanent link">&para;</a></h1>
+<p>Estos son algunos de los términos más importantes de este tema:
+- ISA (probablemente uno de los términos mas importantes del curso): Es el <em>pegamento que une el hardware con el software</em>. <em>Una especie de "contrato" que nos dice lo que sí podemos hacer porque tiene un soporte por el hardware</em>. El <strong>ISA</strong> o <strong>Instruction Set Architecture</strong> es el set de instrucciones reales soportadas por el procesador sobre el que estamos trabajando.
+- RISC: Reduced Instruction Set Computer
+    - Un ejemplo de procesadores RISC son los procesadores MIPS, ARM y RISC-V.
+    - Este tipo de procesadores utiliza muchos regitros (32 registros de 32 bits cada uno, por ejemplo)
+    - Se caracteriza por tener pocas instrucciones, siendo todas de un tamaño fijo (32 bits, por ejemplo)
+    - Existen pocas instrucciones para acceder a memoria, (2 basicamente: <strong>lw</strong> y <strong>sw</strong>)
+    - La base de los procesadores RISC es soportar pocas instrucciones, pero hacerlas muy eficientemente
+- CISC: Complex Instruction Set Computer
+    - x86 x86_64 (Intel)
+    - Este tipo de procesadores utiliza pocos regitros
+    - Soporta una cantidad de instrucciones mucho mayor a los procesadores RISC, y muchas de estas instrucciones no son de un tamaño fijo
+    -  La base de los procesadores CISC es soportar la mayor cantidad de instrucciones posibles para darle multiples opciones a los desarrolladores </p>
+<h2 id="que-es-risc-v">¿Qué es RISC-V?<a class="headerlink" href="#que-es-risc-v" title="Permanent link">&para;</a></h2>
+<ul>
+<li>RISC-V es la quinta versión de procesadores RISC diseñador por Berkeley</li>
+<li>De licencia libre</li>
+<li>Los registros son ¡muy! rápidos (y caros) y se encuentran dentro del procesador</li>
+<li>Tiene un formato rigido: <em>operacion registro_destino registro_fuente1 registro_fuente2</em></li>
+<li>Esta es la distribución de registros utilizada en procesadores RISC-V (nombrados del x0 al x31):</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Registros</th>
+<th>Nombre</th>
+<th>Función</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>x0</td>
+<td>ZERO</td>
+<td>Alambrado a tierra. x0 siempre contiene el valor 0x00000000</td>
+</tr>
+<tr>
+<td>x1</td>
+<td>RA</td>
+<td>Return Address: Contiene la dirección de retorno de la función actual</td>
+</tr>
+<tr>
+<td>x2</td>
+<td>SP</td>
+<td>Stack Pointer: Es un puntero a la cabeza del Stack</td>
+</tr>
+<tr>
+<td>x3</td>
+<td>GP</td>
+<td>Global Pointer: Es un puntero a la sección global de Data</td>
+</tr>
+<tr>
+<td>x4</td>
+<td>TP</td>
+<td>Thread Pointer: No lo utiilizaremos en este curso, pero cabe mencionar su existencia</td>
+</tr>
+<tr>
+<td>x5-x7</td>
+<td>t0-t2</td>
+<td>Temporaries: Registros de proposito general que no se conservan en llamadas a funciones</td>
+</tr>
+<tr>
+<td>x8</td>
+<td>s0/fp</td>
+<td>Saved Register (Frame Pointer): Registro <em>seguro</em>, se debe conservar su valor entre llamadas. El frame pointer contiene la dirección justo antes de la llamada a una función. Sirve para regresar el stack a su posición original al regresar de una función</td>
+</tr>
+<tr>
+<td>x9</td>
+<td>s1</td>
+<td>Saved Register: Registro <em>seguro</em> de propósito general, se debe conservar su valor entre llamadas</td>
+</tr>
+<tr>
+<td>x10-x11</td>
+<td>a0-a1</td>
+<td>Function Arguments &amp; Return Values: Registros utilizados para enviar argumentos en las llamadas a funciones. Tambien son usados como valor de retorno de las funciones</td>
+</tr>
+<tr>
+<td>x12-x17</td>
+<td>a2-a7</td>
+<td>Function Arguments: Registros utilizados para enviar argumentos en las llamadas a funciones</td>
+</tr>
+<tr>
+<td>x18-x27</td>
+<td>s2-s11</td>
+<td>Saved Registers: Registros <em>seguros</em> de propósito general, se debe conservar su valor entre llamadas</td>
+</tr>
+<tr>
+<td>x28-x31</td>
+<td>t3-t6</td>
+<td>Temporaries: Registros de proposito general que no se conservan en llamadas a funciones</td>
+</tr>
+</tbody>
+</table>
+<h2 id="algunos-ejemplos-en-risc-v">Algunos Ejemplos en RISC-V<a class="headerlink" href="#algunos-ejemplos-en-risc-v" title="Permanent link">&para;</a></h2>
+<h4 id="convertir-un-ciclo-a-ensamblador-en-risc-v">Convertir un ciclo a Ensamblador en RISC-V<a class="headerlink" href="#convertir-un-ciclo-a-ensamblador-en-risc-v" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="kt">int</span> <span class="n">a</span><span class="p">[</span><span class="mi">20</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span><span class="mi">20</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+    <span class="n">sum</span><span class="o">+=</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<span class="p">}</span>
+</pre></div>
+
+<div class="codehilite"><pre><span></span># Asumimos A = x8
+    addi x5, x0, 0      # sum = 0
+    addi x6, x0, 0      # i = 0
+    addi x28, x0, 20    # x28 = 20
+Condition:
+    blt x6, x28, For    # Evaluamos la condición antes de empezar el ciclo
+    j EndFor            # Si es falsa terminamos el ciclo
+For:
+    lw x7, 0(x8)
+    add x5, x5, x7      # sum+=A[i]
+    addi x8, x8, 4      # A++ ¿Por qué +4?
+    addi x6, x6, 1      # i++
+    j Condition
+EndFor:
+</pre></div>
+
+<h2 id="partes-de-un-ciclo">Partes de un Ciclo<a class="headerlink" href="#partes-de-un-ciclo" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Inicialización: fuera del ciclo</li>
+<li>Condición: para go to step, while y for queremos queremos un true para seguir. False para detenernos</li>
+<li>Instrucciones: ¿qué me pide el problema?</li>
+<li>Step: un pequeño cambio entre una iteración y otra, se relaciona con la condición.</li>
+</ol>
+<h1 id="funciones">Funciones<a class="headerlink" href="#funciones" title="Permanent link">&para;</a></h1>
+<p>Entre llamadas a funciones, pueden haber muchos valores que se sobreescriben. Una solución simple a este problema es guardar estos valores en el Stack. Antes de hacer una llamada a una función, el <strong>caller</strong> debe almacenar valores como los argumentos recibidos (si es que recibio alguno), su <strong>return address</strong>, y los valores que desee preservar en registros seguros (guardando el contenido actual de estos registros antes de sobreescribirlo).</p>
+<p>Es importante mencionar que, cualquier espacio reservado en el stack al inicio de una función, debe ser <em>liberado</em> antes de retornar de ella. Esto garantiza que cuando se regrese a la función anterior, el stack quedará en la misma posición de antes de ejecutar la función.</p>
+<h2 id="ejemplo-funcion">Ejemplo Función<a class="headerlink" href="#ejemplo-funcion" title="Permanent link">&para;</a></h2>
+<p>La siguiente función en C
+<div class="codehilite"><pre><span></span><span class="kt">int</span> <span class="nf">sum</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">){</span>
+    <span class="k">return</span> <span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div></p>
+<p>Se traduce a</p>
+<div class="codehilite"><pre><span></span>function_sum:
+    add a0, a0, a1  #los argumentos vienen en a0 y a1, y el valor de retorno se devuelve en a0
+    jr ra           #sabemos que ra tiene la dirección de retorno
+</pre></div>
+
+<p>Ahora veamos como se codifica la llamada a esta función
+<div class="codehilite"><pre><span></span>    <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">sum</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
+</pre></div></p>
+<div class="codehilite"><pre><span></span>    addi a0, zero, 1    #int x = 1
+    addi a1, zero, 1    #int y = 1
+    addi sp, sp, -12    #reservamos espacio en el stack para las variables y el return address
+    sw ra, 0(sp)        #
+    sw s0, 4(sp)        #guardamos los registros en el stack
+    sw s1, 8(sp)        #
+    add s0, a0, zero
+    add s1, a1, zero    #guardamos los valores de las variables el registros seguros para no perderlos
+    jal function_sum    #saltamos a la funcion
+    add t0, zero, a0    #nuestro valor de retorno esta en a0, lo pasamos a cualquier otro registro
+    add a0, zero, s0    #restauramos nuestra variable x en a0
+    add a1, zero, s1    #restauramos nuestra variable y en a1
+    lw ra, 0(sp)        #
+    lw s0, 4(sp)        #restauramos los registros seguros y el return address
+    lw s1, 8(sp)        #
+    addi sp, sp, 12     #regresamos el stack a la posición original
+</pre></div>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../01_C/" title="C" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Anterior
+                </span>
+                C
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../03_Instruction-Format/" title="Formato de instrucciones" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Siguiente
+                </span>
+                Formato de instrucciones
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            CC-3
+          </div>
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+        
+  <div class="md-footer-social">
+    <link rel="stylesheet" href="../../assets/fonts/font-awesome.css">
+    
+      <a href="https://github.com/cc-3/MachineStructures" class="md-footer-social__link fa fa-github"></a>
+    
+  </div>
+
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.b41f3d20.js"></script>
+      
+        
+        
+          
+          <script src="../../assets/javascripts/lunr/lunr.stemmer.support.js"></script>
+          
+            
+              
+              
+                <script src="../../assets/javascripts/lunr/lunr.es.js"></script>
+              
+            
+          
+          
+        
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+        <script src="../../js/latex.js"></script>
+      
+        <script src="../../convnet_demo/jquery.min.js"></script>
+      
+        <script src="../../convnet_demo/convnet-min.js"></script>
+      
+        <script src="../../convnet_demo/convnet_demo.js"></script>
+      
+        <script src="../../js/python.js"></script>
+      
+    
+    
+      
+    
+  </body>
+</html>

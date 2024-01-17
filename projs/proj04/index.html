@@ -1,0 +1,1255 @@
+
+
+
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="Grandes Ideas en Arquitectura de Computadora">
+      
+      
+        <link rel="canonical" href="https://cc-3.github.io/projs/proj04/">
+      
+      
+        <meta name="author" content="CC-3">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copiar al portapapeles">
+      
+        <meta name="lang:clipboard.copied" content="Copiado al portapapeles">
+      
+        <meta name="lang:search.language" content="es">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No se encontraron documentos">
+      
+        <meta name="lang:search.result.one" content="1 documento encontrado">
+      
+        <meta name="lang:search.result.other" content="# documentos encontrados">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-3.2.0">
+    
+    
+      
+        <title>Proyecto 4: MapReduce - Estructura de Máquinas</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.572ca0f0.css">
+      
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.8c900955.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/emoji.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/kbd.css">
+    
+      <link rel="stylesheet" href="../../convnet_demo/style.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/button.css">
+    
+    
+  </head>
+  
+    <body dir="ltr">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448"
+    viewBox="0 0 416 448" id="__github">
+  <path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19-18.125
+        8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19 18.125-8.5
+        18.125 8.5 10.75 19 3.125 20.5zM320 304q0 10-3.125 20.5t-10.75
+        19-18.125 8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19
+        18.125-8.5 18.125 8.5 10.75 19 3.125 20.5zM360
+        304q0-30-17.25-51t-46.75-21q-10.25 0-48.75 5.25-17.75 2.75-39.25
+        2.75t-39.25-2.75q-38-5.25-48.75-5.25-29.5 0-46.75 21t-17.25 51q0 22 8
+        38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0
+        37.25-1.75t35-7.375 30.5-15 20.25-25.75 8-38.375zM416 260q0 51.75-15.25
+        82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5-41.75
+        1.125q-19.5 0-35.5-0.75t-36.875-3.125-38.125-7.5-34.25-12.875-30.25-20.25-21.5-28.75q-15.5-30.75-15.5-82.75
+        0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25
+        30.875q36.75-8.75 77.25-8.75 37 0 70 8 26.25-20.5
+        46.75-30.25t47.25-9.75q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34
+        99.5z" />
+</svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#proyecto-4-mapreduce" tabindex="1" class="md-skip">
+        Saltar a contenido
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://cc-3.github.io/" title="Estructura de Máquinas" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                Estructura de Máquinas
+              </span>
+              <span class="md-header-nav__topic">
+                Proyecto 4: MapReduce
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Teclee para comenzar búsqueda
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+          
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+
+  <a href="https://github.com/cc-3/MachineStructures/" title="Ir al repositorio" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#__github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      cc-3/MachineStructures
+    </div>
+  </a>
+
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://cc-3.github.io/" title="Estructura de Máquinas" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    Estructura de Máquinas
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://github.com/cc-3/MachineStructures/" title="Ir al repositorio" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#__github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      cc-3/MachineStructures
+    </div>
+  </a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Inicio" class="md-nav__link">
+      Inicio
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      Laboratorios
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Laboratorios
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../labs/lab00/" title="0: Git" class="md-nav__link">
+      0: Git
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../labs/lab01/" title="1: Intro a C" class="md-nav__link">
+      1: Intro a C
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../labs/lab02/" title="2: CGDB y punteros" class="md-nav__link">
+      2: CGDB y punteros
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../labs/lab03/" title="3: Estructuras y manejo de memoria" class="md-nav__link">
+      3: Estructuras y manejo de memoria
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../labs/lab04/" title="4: Intro a RISC-V" class="md-nav__link">
+      4: Intro a RISC-V
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../labs/lab05/" title="5: RISC-V" class="md-nav__link">
+      5: RISC-V
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../labs/lab06/" title="6: Logisim" class="md-nav__link">
+      6: Logisim
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../labs/lab07/" title="7: Logisim Avanzado" class="md-nav__link">
+      7: Logisim Avanzado
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../labs/lab08/" title="8: SIMD" class="md-nav__link">
+      8: SIMD
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../labs/lab09/" title="9: OpenMP" class="md-nav__link">
+      9: OpenMP
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Proyectos
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Proyectos
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../proj01/" title="1: C y RISC-V" class="md-nav__link">
+      1: C y RISC-V
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../proj02/" title="2: Procesador" class="md-nav__link">
+      2: Procesador
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Tutoriales
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Tutoriales
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/python/" title="Python" class="md-nav__link">
+      Python
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/install/" title="Instalacion de material" class="md-nav__link">
+      Instalacion de material
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      Notas
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        Notas
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../notes/00_Numbers-Representation/" title="Números" class="md-nav__link">
+      Números
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../notes/01_C/" title="C" class="md-nav__link">
+      C
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../notes/02_Intro-RISCV/" title="RISC-V" class="md-nav__link">
+      RISC-V
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../notes/03_Instruction-Format/" title="Formato de instrucciones" class="md-nav__link">
+      Formato de instrucciones
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../notes/04_CALL/" title="CALL" class="md-nav__link">
+      CALL
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Tabla de contenidos</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#objetivos" title="Objetivos" class="md-nav__link">
+    Objetivos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#preparacion" title="Preparación" class="md-nav__link">
+    Preparación
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion" title="Introducción" class="md-nav__link">
+    Introducción
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#entrenamiento" title="Entrenamiento" class="md-nav__link">
+    Entrenamiento
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#clasificacion" title="Clasificación" class="md-nav__link">
+    Clasificación
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bag-of-words-bow" title="Bag of Words (BoW)" class="md-nav__link">
+    Bag of Words (BoW)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#naive-bayes" title="Naive Bayes" class="md-nav__link">
+    Naive Bayes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejemplo" title="Ejemplo" class="md-nav__link">
+    Ejemplo
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#su-tarea" title="Su Tarea" class="md-nav__link">
+    Su Tarea
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pruebas" title="Pruebas" class="md-nav__link">
+    Pruebas
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dataset" title="Dataset" class="md-nav__link">
+    Dataset
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tokenizar-texto-en-palabras" title="Tokenizar texto en palabras" class="md-nav__link">
+    Tokenizar texto en palabras
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#depuracion" title="Depuración" class="md-nav__link">
+    Depuración
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#benchmark" title="Benchmark" class="md-nav__link">
+    Benchmark
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#calificacion" title="Calificación" class="md-nav__link">
+    Calificación
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/cc-3/MachineStructures/edit/master/page/es/docs/projs/proj04.md" title="Editar esta página" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="proyecto-4-mapreduce">Proyecto 4: MapReduce<a class="headerlink" href="#proyecto-4-mapreduce" title="Permanent link">&para;</a></h1>
+<p><img alt="Python + Apache Spark" src="/img/projs/proj04/python_spark.png" /></p>
+<h2 id="objetivos">Objetivos<a class="headerlink" href="#objetivos" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Familiarizarse con el modelo de programación MapReduce utilizando Apache Spark.</li>
+<li>Aplicar técnicas de paralelismo a nivel de datos para resolver un problema grande.</li>
+<li>Paralelizar un clasificador simple en Spark para predecir ratings de reviews.</li>
+</ul>
+<h2 id="preparacion">Preparación<a class="headerlink" href="#preparacion" title="Permanent link">&para;</a></h2>
+<p><strong>Antes de comenzar, asegúrense de que hayan <span style="color: red">leído y comprendido</span> todas las instrucciones del proyecto de principio a fin</strong>. Si tienen alguna pregunta, por favor diríjanse a <strong>Slack</strong> y pregunten en los canales correspondientes.</p>
+<p>También les recomendamos seguir el <a href="#">Tutorial</a> de Python para que tengan las bases del lenguaje y asegurarse de que tengan instalado Anaconda Python.</p>
+<p>Para comenzar con el proyecto, primero tienen que tener todos los archivos base, estos se encuentran <a href="https://classroom.github.com/g/cICWfZi0">aquí</a>. Tienen permitido trabajar en parejas o de forma individual, por lo que al aceptar la asignación les preguntará si desean crear un grupo nuevo o unirse a uno ya existente. Si crean un grupo nuevo, ingresen un nombre que los represente (seguramente un nombre raro como siempre <i class="em em-rolling_on_the_floor_laughing"></i>...) y que no haya sido tomado por otro.</p>
+<p><img alt="Create group" src="/img/projs/proj01/classroom1.png" /></p>
+<p>Si desean unirse a un grupo ya creado, tienen que buscar el nombre del grupo y pulsar el botón que dice <strong>join</strong>:</p>
+<p><img alt="Join group" src="/img/projs/proj01/classroom2.png" /></p>
+<p><strong>Tienen que tener mucho cuidado al unirse a un grupo ya existente, ya que esto no se puede cambiar después, además, lo consideraremos como <span style="color: red">PLAGIO</span> si lo realizan de manera incorrecta, ya que, al hacer esto, pueden tener acceso al repositorio del otro miembro del grupo y leer su código.</strong></p>
+<p>Ya sea que se unan o creen un nuevo grupo, al finalizar el proceso, se creará automáticamente un repositorio con una extensión que termina con su nombre de grupo. Habiendo hecho todo esto, pueden ejecutar los siguientes comandos abriendo una terminal (<kbd >CTRL</kbd> <kbd>+</kbd> <kbd>T</kbd>):</p>
+<div class="codehilite"><pre><span></span>git clone &lt;link del repositorio&gt;
+</pre></div>
+
+<p>También, tienen que instalar el entorno de Python para este proyecto. Para hacer esto, ejecuten lo siguiente:</p>
+<div class="codehilite"><pre><span></span>conda env create -f environment.yml
+</pre></div>
+
+<p>Respondan al mensaje de instalar paquetes con "y" (sin comillas). Después de la instalación, corran el siguiente comando para activar el entorno virtual:</p>
+<div class="codehilite"><pre><span></span>conda activate proj4
+</pre></div>
+
+<p>Cuando hayan terminado con el proyecto pueden desactivar el entorno con:</p>
+<div class="codehilite"><pre><span></span>conda deactivate
+</pre></div>
+
+<h2 id="introduccion">Introducción<a class="headerlink" href="#introduccion" title="Permanent link">&para;</a></h2>
+<p>En este proyecto, vamos a estar clasificando y prediciendo las <strong><em>estrellas</em></strong> (<strong><em>ratings</em></strong>) de dos datasets bastante grandes. Los datasets contienen mucha información de <strong><em>reviews</em></strong> (<strong><em>reseñas</em></strong>), pero ustedes van a estar enfocados en clasificar el texto del review en cierta cantidad de estrellas. El dataset original contiene reviews con ratings de 0-5, pero para este proyecto ustedes solo van a clasificar los reviews en 3 categorías diferentes o cantidad de estrellas diferentes: <strong>1</strong>, <strong>3</strong>, <strong>5</strong>. Para simplificar el proceso de clasificación y para que mejore la precisión, nosotros hemos tomado el dataset original y agrupado los reviews en estas 3 categorías. Para hacer esto, nosotros tomamos el rating original que se le dio a un review, y lo agrupamos conforme a las siguientes reglas:</p>
+<ul>
+<li>[4, 5) estrellas -&gt; 5 estrellas</li>
+<li>[2, 4) estrellas -&gt; 3 estrellas</li>
+<li>[0, 2) estrellas -&gt; 1 estrella</li>
+</ul>
+<p>Esta, definitivamente, no es la mejor manera de agrupar los datos, pero elegimos esto por simplicidad. También, hay muchos modelos y técnicas de <em>Machine Learning</em> para clasificar texto, sin embargo, el más simple (y  bastante efectivo) es el  clasificador <strong><em>Naive Bayes</em></strong> con un modelo de <strong><em>Bag of Words (BoW)</em></strong> para el texto.</p>
+<h2 id="entrenamiento">Entrenamiento<a class="headerlink" href="#entrenamiento" title="Permanent link">&para;</a></h2>
+<p>Primero, vamos a calcular la probabilidad (<em>likelihoods</em>) de que una palabra ocurra en reviews con cada posible número de estrellas:</p>
+<p>$$P(w | s) = \dfrac{1 + num(w, s) }{1 + total(s)}$$</p>
+<p>Siendo $num(w, s)$ la cantidad de veces que una palabra $w$ aparece en reviews que tienen $s$ estrellas y $total(s)$ el número de palabras total en reviews que tienen $s$ estrellas. Van a hacer esto para cada palabra que aparezca en el grupo de reviews con $s$ estrellas, para cada posible número de estrellas. Después, van a calcular la probabilidad <em>a priori</em> (<em>priors</em>) de un review con $s$ número de estrellas, para todos los posibles números de estrellas:</p>
+<p>$$P(s) = \dfrac{N}{size}$$</p>
+<p>siendo $N$ el número de reviews con $s$ estrellas y $size$ el número total de reviews.</p>
+<h2 id="clasificacion">Clasificación<a class="headerlink" href="#clasificacion" title="Permanent link">&para;</a></h2>
+<p>Dado un review separado en palabras $(w_1, w_2, w_3, w_4, ...)$, para todos los posibles números de estrellas, van a calcular la probabilidad conjunta:
+$$P(s|w_1, w_2, w_3, w_4, ...) = P(s)P(w_1|s)P(w_2|s)P(w_3|s)P(w_4|s)...$$</p>
+<p>Su predicción final será el número de estrellas $s$ para el review, de tal manera que $s$ tenga la mayor probabilidad conjunta.</p>
+<h2 id="bag-of-words-bow">Bag of Words (BoW)<a class="headerlink" href="#bag-of-words-bow" title="Permanent link">&para;</a></h2>
+<p>Cuando se piensa en la relación de las palabras en una oración con su sentimiento o significado, la secuencia de las palabras parece ser un factor importante. Sin embargo, el modelo de texto <strong>Bag of Words</strong> ignora el orden de las palabras y en su lugar considera cada palabra de forma independiente. Una palabra en un documento (o en un review en nuestro caso) está representada solo por el número de veces que aparece en el documento y nada más (no se considera el orden o las partes de la oración).</p>
+<p>Por ejemplo, si tuvieramos un review "<em>This restaurant is amazing! The best. The food is never bad.</em>", entonces utilizando <em>BoW</em> se representaría de la siguiente manera:</p>
+<table>
+<thead>
+<tr>
+<th align="center"><strong>Palabra</strong></th>
+<th align="center"><strong>Conteo</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">this</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">restaurant</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">is</td>
+<td align="center">2</td>
+</tr>
+<tr>
+<td align="center">amazing</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">the</td>
+<td align="center">2</td>
+</tr>
+<tr>
+<td align="center">best</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">food</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">never</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">bad</td>
+<td align="center">1</td>
+</tr>
+</tbody>
+</table>
+<h2 id="naive-bayes">Naive Bayes<a class="headerlink" href="#naive-bayes" title="Permanent link">&para;</a></h2>
+<p>Ahora vamos a explicar el clasificador que van a utilizar para esta tarea. Dado algún conjunto de datos $X$, <strong><em>Naive Bayes</em></strong> va a tratar de predecir la probabilidad $P(Y|X)$ de que esos datos tienen una etiqueta, o categoría, $Y$, es decir la probabilidad <em>a posteriori</em>. (En nuestro caso, dado el texto de un review, ustedes van a tratar de predecir el número de estrellas que el review podría tener). Para poder calcular la probabilidad a posteriori, la regla de Bayes se tiene que aplicar:</p>
+<p>$$P(Y|X) = \dfrac{P(X|Y)P(Y)}{P(X)}$$</p>
+<p>Sin embargo, en la práctica, a pesar de que la probabilidad a posteriori es la deseada, esta es realmente proporcional a la probabilidad conjunta $P(Y|X)$, que es más fácil de calcular, de esta manera <strong>Naive Bayes</strong>, finalmente, trata de estimar:</p>
+<p>$$P(Y|X) = P(X|Y)P(Y)$$</p>
+<p>Con el objetivo de estimar $P(Y|X)$, el clasificador trata de estimar $P(X|Y)$ y $P(Y)$ dado un set de datos de entrenamiento y sus etiquetas. En nuestro caso, nuestro clasificador Naive Bayes, va a recibir un set de datos de entrenamiento, que son las palabras en un review (datos), y el número de estrellas para ese review (etiqueta) y, después, estimar $P(X| Y)$ y $P(Y)$. Por ejemplo $P(\text{awesome} | 5)$ y $P(5)$.</p>
+<p>Para entrenar el clasificador, van a estimar $P(X|Y)$ de la siguiente manera:</p>
+<p>$$P(w | s) = \dfrac{1 + num(w, s) }{1 + total(s)}$$</p>
+<p>y para estimar $P(Y)$:</p>
+<p>$$P(s) = \dfrac{N}{size}$$</p>
+<p>Como se explica más arriba en las instrucciones.</p>
+<h2 id="ejemplo">Ejemplo<a class="headerlink" href="#ejemplo" title="Permanent link">&para;</a></h2>
+<p>Si tuvieramos solo 4 reviews para entrenar:</p>
+<table>
+<thead>
+<tr>
+<th align="center"><strong>Review</strong></th>
+<th align="center"><strong>Numero de estrellas</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">I hate the food.</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">The food is good.</td>
+<td align="center">3</td>
+</tr>
+<tr>
+<td align="center">Service is good.</td>
+<td align="center">3</td>
+</tr>
+<tr>
+<td align="center">I love the good food.</td>
+<td align="center">5</td>
+</tr>
+</tbody>
+</table>
+<p>Dado que hay dos reviews con 3 estrellas y cuatro reviews en total, la probabilidad a priori de que un review sea de 3 estrellas es:</p>
+<p>$$P(3) = \dfrac{2}{4}$$</p>
+<p>Los mismos cálculos deberían de hacerse para 1 estrella y 5 estrellas, de tal manera que tengamos una tabla que traduzca de número de estrellas a su probabilidad a priori:</p>
+<table>
+<thead>
+<tr>
+<th align="center"><strong>Número de estrellas</strong></th>
+<th align="center"><strong>Probabilidad a Priori</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">1</td>
+<td align="center">$\dfrac{1}{4}$</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">$\dfrac{2}{4}$</td>
+</tr>
+<tr>
+<td align="center">5</td>
+<td align="center">$\dfrac{1}{4}$</td>
+</tr>
+</tbody>
+</table>
+<p>Para estimar las probabilidades $P(X|Y)$ (likelihoods), vamos a tomar como ejemplo la estimación de la probabilidad de "good":</p>
+<p>$$P(\text{good}|3) = \dfrac{1 + num(\text{good}, 3) }{1 + total(3)} = \dfrac{1 + 2}{1 + 7} = \dfrac{3}{8}$$</p>
+<p>Ya que "good" aparece en 2 reviews con 3 estrellas (The food is good, Service is good) y hay 7 palabras en total en reviews con 3 estrellas (The, food, is, good, Service, is, good). Este cálculo se tiene que repetir para cada palabra que aparece, al menos, una vez en un review con 3 estrellas y, de igual forma, para las palabras con reviews de 1 y 5 estrellas. Al final, van a tener una tabla con las probabilidades (likelihoods) para cada posible número de estrellas, donde cada fila traduce una palabra a su probabilidad dado el número de estrellas:</p>
+<table>
+<thead>
+<tr>
+<th align="center">$W$</th>
+<th align="center">$P(W|1)$</th>
+<th align="center">$P(W|3)$</th>
+<th align="center">$P(W|5)$</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">I</td>
+<td align="center">$\dfrac{2}{5}$</td>
+<td align="center">$\dfrac{1}{8}$</td>
+<td align="center">$\dfrac{2}{6}$</td>
+</tr>
+<tr>
+<td align="center">hate</td>
+<td align="center">$\dfrac{2}{5}$</td>
+<td align="center">$\dfrac{1}{8}$</td>
+<td align="center">$\dfrac{1}{6}$</td>
+</tr>
+<tr>
+<td align="center">the</td>
+<td align="center">$\dfrac{2}{5}$</td>
+<td align="center">$\dfrac{2}{8}$</td>
+<td align="center">$\dfrac{2}{6}$</td>
+</tr>
+<tr>
+<td align="center">food</td>
+<td align="center">$\dfrac{2}{5}$</td>
+<td align="center">$\dfrac{2}{8}$</td>
+<td align="center">$\dfrac{2}{6}$</td>
+</tr>
+<tr>
+<td align="center">is</td>
+<td align="center">$\dfrac{1}{5}$</td>
+<td align="center">$\dfrac{3}{8}$</td>
+<td align="center">$\dfrac{1}{6}$</td>
+</tr>
+<tr>
+<td align="center">good</td>
+<td align="center">$\dfrac{1}{5}$</td>
+<td align="center">$\dfrac{3}{8}$</td>
+<td align="center">$\dfrac{2}{6}$</td>
+</tr>
+<tr>
+<td align="center">service</td>
+<td align="center">$\dfrac{1}{5}$</td>
+<td align="center">$\dfrac{2}{8}$</td>
+<td align="center">$\dfrac{1}{6}$</td>
+</tr>
+<tr>
+<td align="center">love</td>
+<td align="center">$\dfrac{1}{5}$</td>
+<td align="center">$\dfrac{1}{8}$</td>
+<td align="center">$\dfrac{2}{6}$</td>
+</tr>
+</tbody>
+</table>
+<p>Ya entrenado el modelo, se procede al proceso de clasificación. Si se utiliza el clasificador Naive Bayes con un dato sin etiqueta, $X$, entonces para todas las posibles etiquetas o categorías, $Y = y_1, y_2, y_3...$, las probabilidades conjuntas $P(Y=y_1, X)$, $P(Y=y_2, X)$, $P(Y=y_3, X)$... son calculadas y, después, el dato es clasificado con la etiqueta que tiene la mayor probabilidad conjunta. En este caso, la probabilidad conjunta es calculada como:</p>
+<p>$$P(Y=y, X) = P(Y=y)P(x_1 | Y=y)P(x_2 | Y=y) P(x_3 | Y=y)...$$</p>
+<p>Donde Naive Bayes hace la suposición de que las probabilidades de cada $x_i$ son independientes dada la etiqueta $y$. En nuestro caso, las etiquetas son 1, 3, y 5 estrellas y cada dato es un review $x_i$.</p>
+<p>Más concretamente, supongan que tenemos los mismos cuatro reviews anteriores para entrenar y ustedes quieren, ahora, predecir el número de estrellas correspondientes al review "Good food!". Para cada posible número de estrellas, ustedes calcularían la probabilidad para ese número de estrellas, dado este review, como:</p>
+<p>$$P(s| \text{good}, {food}) = P(s)P({good} | s)P(\text{food} | s)$$</p>
+<p>Para cada diferente número de estrellas:</p>
+<ul>
+<li>$P(1| \text{good}, \text{food}) = (\dfrac{1}{4})(\dfrac{1}{5})(\dfrac{2}{5}) = \dfrac{2}{100}$</li>
+<li>$P(3| \text{good}, \text{food}) = (\dfrac{2}{4})(\dfrac{3}{8})(\dfrac{2}{8}) = \dfrac{12}{256}$</li>
+<li>$P(5| \text{good}, \text{food}) = (\dfrac{1}{4})(\dfrac{2}{6})(\dfrac{2}{6}) = \dfrac{4}{144}$</li>
+</ul>
+<p>Dada la probabilidad conjunta del review "Good food", siendo 3 estrellas es la más alta, Naive Bayes va a clasificar este review como 3 estrellas.</p>
+<p>Por último, multiplicar muchos números de punto flotante puede resultar en problemas de precisión (¿se recuerdan por qué?). Para resolver este problema, su implementación para la clasificación va a calcular el logaritmo natural de las probabilidades (likelihoods) y las probabilidades a priori y, luego, sumarlas (en vez de multiplicar los likelihoods por las probabilidades a priori):</p>
+<ul>
+<li>$P(1| \text{good}, \text{food}) = log(\dfrac{1}{4}) + log(\dfrac{1}{5}) + log(\dfrac{2}{5})$</li>
+<li>$P(3| \text{good}, \text{food}) = log(\dfrac{2}{4}) + log(\dfrac{3}{8}) + log(\dfrac{2}{8})$</li>
+<li>$P(5| \text{good}, \text{food}) = log(\dfrac{1}{4}) + log(\dfrac{2}{6}) + log(\dfrac{2}{6})$</li>
+</ul>
+<h2 id="su-tarea">Su Tarea<a class="headerlink" href="#su-tarea" title="Permanent link">&para;</a></h2>
+<p>Su tarea va a ser terminar el clasificador Naive Bayes. Todo el código para el clasificador Naive Bayes va estar en <code>classifier.py</code>. Las partes que ustedes tienen que completar están claramente indicadas. Tomen un poco tiempo para entender los comentarios en el archivo.</p>
+<p>Ustedes son libres de implementar las funciones correspondientes de cualquier forma (utilizando MapReduce y Spark, obviamente). Sin embargo, solo vamos a aceptar código que esté en <code>classifier.py</code>. Si su código tiene otras dependencias y/o no funciona junto con <code>run.py</code>, no va a funcionar y tendrán una nota de <strong>0</strong> puntos. El archivo que corre el clasificador es <code>run.py</code>. Siéntanse libres de modificar este archivo para depurar, pero recuerden que ninguno de sus cambios a este archivo se van a utilizar para la calificación final.</p>
+<p>En general, las funciones que se tienen que implementar son:</p>
+<div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">calculate_priors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rdd</span><span class="p">,</span> <span class="n">size</span><span class="p">):</span>
+
+<span class="k">def</span> <span class="nf">calculate_words_per_num_stars</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rdd</span><span class="p">):</span>
+
+<span class="k">def</span> <span class="nf">calculate_likelihoods</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rdd</span><span class="p">):</span>
+
+<span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rdd</span><span class="p">):</span>
+</pre></div>
+
+<h2 id="pruebas">Pruebas<a class="headerlink" href="#pruebas" title="Permanent link">&para;</a></h2>
+<h3 id="dataset">Dataset<a class="headerlink" href="#dataset" title="Permanent link">&para;</a></h3>
+<p>Primero tienen que descargar el dataset con el que vamos a estar trabajando haciendo lo siguiente:</p>
+<div class="codehilite"><pre><span></span><span class="nb">cd</span> data
+python preprocess.py
+<span class="nb">cd</span> ..
+</pre></div>
+
+<p>Esto va a descargar el dataset, procesarlo y generar los siguientes archivos:</p>
+<div class="codehilite"><pre><span></span>reviews-train-sample.txt
+reviews-test-sample.txt
+reviews-labels-sample.txt
+reviews-train-small.txt
+reviews-test-small.txt
+reviews-labels-small.txt
+reviews-train-medium.txt
+reviews-test-medium.txt
+reviews-labels-medium.txt
+reviews-train-large.txt
+reviews-test-large.txt
+reviews-labels-large.txt
+</pre></div>
+
+<p>Estos archivos son cargados por <code>run.py</code> en un RDD de Spark, donde cada línea de los archivos de entrenamiento (train) representa un diccionario de Python con la siguiente estructura:</p>
+<div class="codehilite"><pre><span></span><span class="p">{</span>
+  <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="n">review_id</span><span class="p">,</span>
+  <span class="s1">&#39;text&#39;</span><span class="p">:</span> <span class="n">review_text</span><span class="p">,</span>
+  <span class="s1">&#39;stars&#39;</span><span class="p">:</span> <span class="n">review_stars</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>Cada línea de los archivos de prueba (test) representa un diccionario de Python con la siguiente estructura:</p>
+<div class="codehilite"><pre><span></span><span class="p">{</span>
+  <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="n">review_id</span><span class="p">,</span>
+  <span class="s1">&#39;text&#39;</span><span class="p">:</span> <span class="n">review_text</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>Noten que el número de estrellas no está presente en estos archivos, ya que es tarea del clasificador predecir ese número. De todas maneras las etiquetas correctas están en los archivos de etiquetas (labels) que se utilizan para verificar el porcentaje de acierto, estos tienen la siguiente estructura:</p>
+<div class="codehilite"><pre><span></span><span class="p">{</span>
+  <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="n">review_id</span><span class="p">,</span>
+  <span class="s1">&#39;stars&#39;</span><span class="p">:</span> <span class="n">review_stars</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>Recuerden que review_stars solo puede considerar <strong>1</strong>, <strong>3</strong> o <strong>5</strong>, y que el texto es "texto crudo" (<em>raw text</em>), que no está separado por palabras.</p>
+<h3 id="tokenizar-texto-en-palabras">Tokenizar texto en palabras<a class="headerlink" href="#tokenizar-texto-en-palabras" title="Permanent link">&para;</a></h3>
+<p>Ya que hay diferentes maneras en Python de tokenizar un texto en palabras, ustedes tienen que utilizar lo siguiente
+para realizar esta tarea:</p>
+<div class="codehilite"><pre><span></span><span class="c1"># texto a tokenizar</span>
+<span class="n">text</span> <span class="o">=</span> <span class="s1">&#39;Hello World!!&#39;</span>
+<span class="c1"># remueve la puntuacion</span>
+<span class="n">text2</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="nb">str</span><span class="o">.</span><span class="n">maketrans</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">string</span><span class="o">.</span><span class="n">punctuation</span><span class="p">))</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+<span class="c1"># genera un arreglo de palabras en minuscula</span>
+<span class="n">words</span> <span class="o">=</span> <span class="p">[</span><span class="n">w</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">text2</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
+</pre></div>
+
+<pre id="tokenizer-out"></pre>
+
+<p><button class="brun" onclick="tokenizer()">Run</button> <button id="btokenizer" class="bclear" onclick="rm('btokenizer', 'tokenizer-out')" style="visibility: hidden;">Clear</button></p>
+<p>De esta forma su resultado será igual al esperado por el autograder si por alguna razón no llegan al tiempo esperado.</p>
+<h3 id="depuracion">Depuración<a class="headerlink" href="#depuracion" title="Permanent link">&para;</a></h3>
+<p>Para este proyecto no hay autograder local. Pero vamos a dejar el output del staff para un dataset de ejemplo. Este dataset de ejemplo contiene 10 reviews para entrenamiento y 5 reviews para clasificación. Siéntanse libres de utilizarlo para depurar su salida de cada parte de su implementación. Cuando ustedes corran el dataset de ejemplo, <code>run.py</code> va a generar automáticamente un archivo llamado <code>debug_diffs.txt</code> en el directorio <code>out/</code>, que va a contener las diferencias de su implementación con respecto a las del staff (si es que hay alguna) o indicar que todo está correcto. Noten que como es un dataset demasiado pequeño, no se tienen que preocupar del porcentaje de acierto si es bajo o 0. Pueden correr el dataset de ejemplo utilizando:</p>
+<div class="codehilite"><pre><span></span>./check sample
+</pre></div>
+
+<p>Si todo esta correcto les tiene que salir algo similar a esto:</p>
+<div class="codehilite"><pre><span></span>[PRIORS]
+OK [✓]
+
+[WORDS PER # STARS]
+OK [✓]
+
+[LIKELIHOODS]
+OK [✓]
+
+[PREDICTION]
+OK [✓]
+</pre></div>
+
+<p>De lo contrario contendrá las diferencias de cada una de las partes, por ejemplo:</p>
+<div class="codehilite"><pre><span></span>[PRIORS]
+prior for 1 stars, P(1), should be 0.100000 instead of -1.000000
+prior for 3 stars, P(3), should be 0.100000 instead of -1.000000
+prior for 5 stars, P(5), should be 0.800000 instead of -1.000000
+
+[WORDS PER # STARS]
+words per 1 stars should be 22 instead of -1
+words per 3 stars should be 722 instead of -1
+words per 5 stars should be 905 instead of -1
+
+...
+</pre></div>
+
+<h3 id="benchmark">Benchmark<a class="headerlink" href="#benchmark" title="Permanent link">&para;</a></h3>
+<p>Una vez hayan implementado todas las partes faltantes, hay tres datasets para que ustedes prueben y así ver el porcentaje de acierto y el tiempo que se toma en ejecutar su programa. Pueden probar su código de Spark en cada uno de estos datasets utilizando el comando:</p>
+<div class="codehilite"><pre><span></span>./check <span class="o">(</span>small<span class="p">|</span>medium<span class="p">|</span>large<span class="o">)</span>
+</pre></div>
+
+<p>El cual generará un archivo <code>.txt</code> con el nombre del dataset utilizado que contendrá la información mencionada, por ejemplo si utilizan <code>./check large</code>, esto generaría un archivo llamado <code>out/large.txt</code> con la siguiente información:</p>
+<div class="codehilite"><pre><span></span>time: 32.44 seconds
+accuracy: 75.23
+</pre></div>
+
+<p>Cada dataset está estructurado de la siguiente forma:</p>
+<table>
+<thead>
+<tr>
+<th align="center">Dataset</th>
+<th align="center"># reviews para entrenamiento</th>
+<th align="center"># reviews para test</th>
+<th align="center">% acierto Staff</th>
+<th align="center">Tiempo Staff</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">small</td>
+<td align="center">3750</td>
+<td align="center">1250</td>
+<td align="center">38.24</td>
+<td align="center">~5 segundos</td>
+</tr>
+<tr>
+<td align="center">medium</td>
+<td align="center">37500</td>
+<td align="center">12500</td>
+<td align="center">65.36</td>
+<td align="center">~10 segundos</td>
+</tr>
+<tr>
+<td align="center">large</td>
+<td align="center">375000</td>
+<td align="center">125000</td>
+<td align="center">75.23</td>
+<td align="center">~30 segundos</td>
+</tr>
+</tbody>
+</table>
+<p>El dataset pequeño debería de correr bastante rápido, así que deberían de utilizar este para probar su implementación y asegurarse de que corresponden con los benchmarks del staff. Si su implementación es mejor, y logra más porcentaje de acierto que el nuestro, ¡genial!, sin embargo, por favor noten que vamos a poner límites de tiempo. Es decir, si su porcentaje de acierto es igual o mejor que el del staff, pero es significativamente más lento que nuestra implementación, no van a obtener una buena nota en el autograder.</p>
+<p>Ya que es el último proyecto, la calificación va a ser bastante simple. Vamos a correr su implementación en un dataset más grande (2 millones de reviews). Si es igual o mejor que el porcentaje de acierto que el staff, y no toma mucho tiempo para correr, ustedes van a obtener la nota completa. Si ustedes lograron el benchmark para los tres datasets que les damos, pueden estar 100% seguros que van a lograrlo en el autograder. De todas maneras, se van a dar créditos parciales de la siguiente manera:</p>
+<ul>
+<li>20% si su implementación corre sin errores</li>
+<li>20% si obtienen un porcentaje de acierto diferente de 0</li>
+<li>10% si calculan correctamente <code>calculate_priors</code></li>
+<li>10% si calculan correctamente <code>calculate_words_per_num_stars</code></li>
+<li>20% si calculan correctamente <code>calculate_likelihoods</code></li>
+<li>20% si calculan correctamente <code>predict</code></li>
+</ul>
+<p>Para los 4 últimos puntos, vamos a probar estas funciones aisladas para darles los créditos parciales.</p>
+<h2 id="calificacion">Calificación<a class="headerlink" href="#calificacion" title="Permanent link">&para;</a></h2>
+<p>Por favor empiecen lo antes posible, porque vamos a utilizar instancias de Amazon para el autograder y este solo puede procesar 4 submits al mismo tiempo (esto por lo general toma bastante tiempo en completarse). Para este proyecto vamos a limitar la cantidad de veces que ustedes pueden hacer submit, a <strong>5 por persona</strong>. Sí, si ustedes van en pareja, en teoría tendrían 10 submits. De esta manera, tal vez, motivamos la colaboración. Les recomendamos que prueben en las computadoras de los laboratorios antes de desperdiciar créditos, si es que en su computadora no pueden lograr los tiempos del staff. Las medidas no van a ser exactas, pero les darán una idea.</p>
+<p>Pueden subir su implementación al autograder, haciendo lo siguiente:</p>
+<div class="codehilite"><pre><span></span>./submit &lt;TOKEN&gt;
+</pre></div>
+
+<p>lo que va a resultar en algo parecido a esto:</p>
+<div class="codehilite"><pre><span></span>   ___       __                        __       
+  / _ <span class="p">|</span>__ __/ /____  ___  _______ ____/ /__ ____
+ / __ / // / __/ _ <span class="se">\/</span> _ <span class="se">\/</span> __/ _ <span class="se">\/</span> _  / -_<span class="o">)</span> __/
+/_/ <span class="p">|</span>_<span class="se">\_</span>,_/<span class="se">\_</span>_/<span class="se">\_</span>__/<span class="se">\_</span>, /_/  <span class="se">\_</span>,_/<span class="se">\_</span>,_/<span class="se">\_</span>_/_/
+                   /___/
+
+             Machine Structures
+     Great Ideas in Computer Architecture
+
+Repo: proj4_spark
+
+Best Score: <span class="m">100</span>/100
+
+Last Output:
+
+Exercise                                   Grade  Message
+----------------------------------------   -----  -------
+<span class="m">1</span>. Compiling implementation                   <span class="m">20</span>  passed
+<span class="m">2</span>. Non-zero accuracy                          <span class="m">20</span>  passed
+<span class="m">3</span>. Correct calculate_priors                   <span class="m">10</span>  passed
+<span class="m">4</span>. Correct calculate_words_per_num_stars      <span class="m">10</span>  passed
+<span class="m">5</span>. Correct calculate_likelihoods              <span class="m">20</span>  passed
+<span class="m">6</span>. Correct predict                            <span class="m">20</span>  passed
+</pre></div>
+
+<p>Esperamos que hayan disfrutado el curso, muchos éxitos <i class="em em---1"></i> en lo que viene.</p>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            CC-3
+          </div>
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+        
+  <div class="md-footer-social">
+    <link rel="stylesheet" href="../../assets/fonts/font-awesome.css">
+    
+      <a href="https://github.com/cc-3/MachineStructures" class="md-footer-social__link fa fa-github"></a>
+    
+  </div>
+
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.b41f3d20.js"></script>
+      
+        
+        
+          
+          <script src="../../assets/javascripts/lunr/lunr.stemmer.support.js"></script>
+          
+            
+              
+              
+                <script src="../../assets/javascripts/lunr/lunr.es.js"></script>
+              
+            
+          
+          
+        
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+        <script src="../../js/latex.js"></script>
+      
+        <script src="../../convnet_demo/jquery.min.js"></script>
+      
+        <script src="../../convnet_demo/convnet-min.js"></script>
+      
+        <script src="../../convnet_demo/convnet_demo.js"></script>
+      
+        <script src="../../js/python.js"></script>
+      
+    
+    
+      
+    
+  </body>
+</html>

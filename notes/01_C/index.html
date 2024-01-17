@@ -1,0 +1,1201 @@
+
+
+
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="Grandes Ideas en Arquitectura de Computadora">
+      
+      
+        <link rel="canonical" href="https://cc-3.github.io/notes/01_C/">
+      
+      
+        <meta name="author" content="CC-3">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copiar al portapapeles">
+      
+        <meta name="lang:clipboard.copied" content="Copiado al portapapeles">
+      
+        <meta name="lang:search.language" content="es">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No se encontraron documentos">
+      
+        <meta name="lang:search.result.one" content="1 documento encontrado">
+      
+        <meta name="lang:search.result.other" content="# documentos encontrados">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-3.2.0">
+    
+    
+      
+        <title>C - Estructura de Máquinas</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.572ca0f0.css">
+      
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.8c900955.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/emoji.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/kbd.css">
+    
+      <link rel="stylesheet" href="../../convnet_demo/style.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/button.css">
+    
+    
+  </head>
+  
+    <body dir="ltr">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448"
+    viewBox="0 0 416 448" id="__github">
+  <path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19-18.125
+        8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19 18.125-8.5
+        18.125 8.5 10.75 19 3.125 20.5zM320 304q0 10-3.125 20.5t-10.75
+        19-18.125 8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19
+        18.125-8.5 18.125 8.5 10.75 19 3.125 20.5zM360
+        304q0-30-17.25-51t-46.75-21q-10.25 0-48.75 5.25-17.75 2.75-39.25
+        2.75t-39.25-2.75q-38-5.25-48.75-5.25-29.5 0-46.75 21t-17.25 51q0 22 8
+        38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0
+        37.25-1.75t35-7.375 30.5-15 20.25-25.75 8-38.375zM416 260q0 51.75-15.25
+        82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5-41.75
+        1.125q-19.5 0-35.5-0.75t-36.875-3.125-38.125-7.5-34.25-12.875-30.25-20.25-21.5-28.75q-15.5-30.75-15.5-82.75
+        0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25
+        30.875q36.75-8.75 77.25-8.75 37 0 70 8 26.25-20.5
+        46.75-30.25t47.25-9.75q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34
+        99.5z" />
+</svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#introduccion-a-c" tabindex="1" class="md-skip">
+        Saltar a contenido
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://cc-3.github.io/" title="Estructura de Máquinas" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                Estructura de Máquinas
+              </span>
+              <span class="md-header-nav__topic">
+                C
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Teclee para comenzar búsqueda
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+          
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+
+  <a href="https://github.com/cc-3/MachineStructures/" title="Ir al repositorio" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#__github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      cc-3/MachineStructures
+    </div>
+  </a>
+
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://cc-3.github.io/" title="Estructura de Máquinas" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    Estructura de Máquinas
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://github.com/cc-3/MachineStructures/" title="Ir al repositorio" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#__github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      cc-3/MachineStructures
+    </div>
+  </a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Inicio" class="md-nav__link">
+      Inicio
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      Laboratorios
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Laboratorios
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../labs/lab00/" title="0: Git" class="md-nav__link">
+      0: Git
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../labs/lab01/" title="1: Intro a C" class="md-nav__link">
+      1: Intro a C
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../labs/lab02/" title="2: CGDB y punteros" class="md-nav__link">
+      2: CGDB y punteros
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../labs/lab03/" title="3: Estructuras y manejo de memoria" class="md-nav__link">
+      3: Estructuras y manejo de memoria
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../labs/lab04/" title="4: Intro a RISC-V" class="md-nav__link">
+      4: Intro a RISC-V
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../labs/lab05/" title="5: RISC-V" class="md-nav__link">
+      5: RISC-V
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../labs/lab06/" title="6: Logisim" class="md-nav__link">
+      6: Logisim
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../labs/lab07/" title="7: Logisim Avanzado" class="md-nav__link">
+      7: Logisim Avanzado
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../labs/lab08/" title="8: SIMD" class="md-nav__link">
+      8: SIMD
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../labs/lab09/" title="9: OpenMP" class="md-nav__link">
+      9: OpenMP
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Proyectos
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Proyectos
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../projs/proj01/" title="1: C y RISC-V" class="md-nav__link">
+      1: C y RISC-V
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../projs/proj02/" title="2: Procesador" class="md-nav__link">
+      2: Procesador
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Tutoriales
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Tutoriales
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/python/" title="Python" class="md-nav__link">
+      Python
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/install/" title="Instalacion de material" class="md-nav__link">
+      Instalacion de material
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5" checked>
+    
+    <label class="md-nav__link" for="nav-5">
+      Notas
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        Notas
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../00_Numbers-Representation/" title="Números" class="md-nav__link">
+      Números
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        C
+      </label>
+    
+    <a href="./" title="C" class="md-nav__link md-nav__link--active">
+      C
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Tabla de contenidos</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#comentarios-en-c" title="Comentarios en c" class="md-nav__link">
+    Comentarios en c
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tipos-de-declaracion" title="Tipos de declaración" class="md-nav__link">
+    Tipos de declaración
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#declaracion-de-constantes" title="Declaración de constantes" class="md-nav__link">
+    Declaración de constantes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#valores-booleanos-en-c" title="Valores Booleanos en C" class="md-nav__link">
+    Valores Booleanos en C
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#funciones-en-c" title="Funciones en C" class="md-nav__link">
+    Funciones en C
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-funcion-que-retorna-un-valor-entero" title="Ejemplo: Función que retorna un valor entero." class="md-nav__link">
+    Ejemplo: Función que retorna un valor entero.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-funcion-que-no-tiene-un-valor-de-retorno-y-que-recibe-un-entero-como-argumento" title="Ejemplo: Función que no tiene un valor de retorno y que recibe un entero como argumento." class="md-nav__link">
+    Ejemplo: Función que no tiene un valor de retorno y que recibe un entero como argumento.
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#estructuras-en-c" title="Estructuras en c" class="md-nav__link">
+    Estructuras en c
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo" title="Ejemplo:" class="md-nav__link">
+    Ejemplo:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#punteros-en-c" title="Punteros en c" class="md-nav__link">
+    Punteros en c
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo_1" title="Ejemplo:" class="md-nav__link">
+    Ejemplo:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-puntero-de-tipo-arbitrario" title="Ejemplo: Puntero de tipo arbitrario." class="md-nav__link">
+    Ejemplo: Puntero de tipo arbitrario.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-puntero-de-punteros" title="Ejemplo: Puntero de Punteros" class="md-nav__link">
+    Ejemplo: Puntero de Punteros
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-asignar-valores-usando-punteros" title="Ejemplo: Asignar Valores Usando Punteros" class="md-nav__link">
+    Ejemplo: Asignar Valores Usando Punteros
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo_2" title="Ejemplo:" class="md-nav__link">
+    Ejemplo:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../02_Intro-RISCV/" title="RISC-V" class="md-nav__link">
+      RISC-V
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../03_Instruction-Format/" title="Formato de instrucciones" class="md-nav__link">
+      Formato de instrucciones
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../04_CALL/" title="CALL" class="md-nav__link">
+      CALL
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Tabla de contenidos</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#comentarios-en-c" title="Comentarios en c" class="md-nav__link">
+    Comentarios en c
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tipos-de-declaracion" title="Tipos de declaración" class="md-nav__link">
+    Tipos de declaración
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#declaracion-de-constantes" title="Declaración de constantes" class="md-nav__link">
+    Declaración de constantes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#valores-booleanos-en-c" title="Valores Booleanos en C" class="md-nav__link">
+    Valores Booleanos en C
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#funciones-en-c" title="Funciones en C" class="md-nav__link">
+    Funciones en C
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-funcion-que-retorna-un-valor-entero" title="Ejemplo: Función que retorna un valor entero." class="md-nav__link">
+    Ejemplo: Función que retorna un valor entero.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-funcion-que-no-tiene-un-valor-de-retorno-y-que-recibe-un-entero-como-argumento" title="Ejemplo: Función que no tiene un valor de retorno y que recibe un entero como argumento." class="md-nav__link">
+    Ejemplo: Función que no tiene un valor de retorno y que recibe un entero como argumento.
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#estructuras-en-c" title="Estructuras en c" class="md-nav__link">
+    Estructuras en c
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo" title="Ejemplo:" class="md-nav__link">
+    Ejemplo:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#punteros-en-c" title="Punteros en c" class="md-nav__link">
+    Punteros en c
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo_1" title="Ejemplo:" class="md-nav__link">
+    Ejemplo:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-puntero-de-tipo-arbitrario" title="Ejemplo: Puntero de tipo arbitrario." class="md-nav__link">
+    Ejemplo: Puntero de tipo arbitrario.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-puntero-de-punteros" title="Ejemplo: Puntero de Punteros" class="md-nav__link">
+    Ejemplo: Puntero de Punteros
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-asignar-valores-usando-punteros" title="Ejemplo: Asignar Valores Usando Punteros" class="md-nav__link">
+    Ejemplo: Asignar Valores Usando Punteros
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo_2" title="Ejemplo:" class="md-nav__link">
+    Ejemplo:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/cc-3/MachineStructures/edit/master/page/es/docs/notes/01_C.md" title="Editar esta página" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="introduccion-a-c">Introducción a C<a class="headerlink" href="#introduccion-a-c" title="Permanent link">&para;</a></h1>
+<p>C es un lenguaje de programación desarrollado en el año 1972 por Dennis Ritchie. El lenguaje C es un lenguaje estructurado el cual a pesar de ser un lenguaje de "alto nivel", da acceso a hacer uso de la memoria, registros, etc.</p>
+<p>C es un lenguaje compilado; se compila una vez para cada arquitectura y se genera un binario que se puede ejecutar directamente. Para poder compilar y ejecutar un archivo llamado HelloWorld.c, se realiza de la siguiente manera:</p>
+<div class="codehilite"><pre><span></span><span class="err">$</span> <span class="n">gcc</span> <span class="n">HelloWorld</span><span class="p">.</span><span class="n">c</span>		<span class="c1">// se compila el archivo</span>
+<span class="err">$</span> <span class="p">.</span><span class="o">/</span><span class="n">a</span><span class="p">.</span><span class="n">out</span>				<span class="c1">// se ejecuta el programa</span>
+<span class="err">$</span> <span class="n">Hello</span> <span class="n">World</span> 			<span class="c1">// output del programa, en este caso</span>
+</pre></div>
+
+<p>Notese que el compilador que estamos utilizando se llama <strong>gcc</strong>. <strong><em>gcc</em>* se encuentra por defecto en la mayoria de sistemas operativos con kernel </strong>linux<strong>. Cuando nosotros no especificamos un nombre para el archivo de salida, </strong>cgg<strong> lo nombra, por defecto, </strong>a.out**.</p>
+<p>Si queremos especificar un nombre para el archivo de salida entonces podemos utilizar la bandera <strong>-o</strong>:</p>
+<div class="codehilite"><pre><span></span><span class="err">$</span> <span class="n">gcc</span> <span class="o">-</span><span class="n">o</span> <span class="n">Hello</span> <span class="n">HelloWorld</span><span class="p">.</span><span class="n">c</span>		<span class="c1">// se compila el archivo</span>
+<span class="err">$</span> <span class="p">.</span><span class="o">/</span><span class="n">Hello</span>				        <span class="c1">// se ejecuta el programa</span>
+<span class="err">$</span> <span class="n">Hello</span> <span class="n">World</span> 			        <span class="c1">// output del programa, en este caso</span>
+</pre></div>
+
+<h2 id="comentarios-en-c">Comentarios en c<a class="headerlink" href="#comentarios-en-c" title="Permanent link">&para;</a></h2>
+<div class="codehilite"><pre><span></span><span class="c1">// para realizar comentarios de una línea</span>
+
+<span class="cm">/* TODO LO QUE ESTE DENTRO</span>
+<span class="cm">	DE ESTA PARTE ES UN COMENTARIO */</span>
+</pre></div>
+
+<h2 id="tipos-de-declaracion">Tipos de declaración<a class="headerlink" href="#tipos-de-declaracion" title="Permanent link">&para;</a></h2>
+<p>Las variables deben ser declaradas antes de usarse y el tipo de la variable no puede ser cambiado. En C, el tamaño de la variable depende de la arquitectura en la cual se este trabajando (x_86, x_86_84, ARM, RISC-V, etc.).</p>
+<p>Algo muy importante que diferencia lenguajes como Java de C, es que en C, si no se inicializa el valor de la variable, la podemos utilizar sin problemas, pero contendrá información "basura", es decir, los datos que estaban ubicados previamente en la dirección de memoria en donde la variable fue guardada.</p>
+<h2 id="declaracion-de-constantes">Declaración de constantes<a class="headerlink" href="#declaracion-de-constantes" title="Permanent link">&para;</a></h2>
+<div class="codehilite"><pre><span></span><span class="cp">#define CONSTANTE_DEFINE 25</span>
+<span class="k">enum</span> <span class="n">T_ENUM</span> <span class="p">{</span> <span class="n">CONSTANTE_ENUM</span> <span class="o">=</span> <span class="mi">25</span> <span class="p">};</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">CONSTANTE_VARIABLE</span> <span class="o">=</span> <span class="mi">25</span><span class="p">;</span>
+</pre></div>
+
+<h2 id="valores-booleanos-en-c">Valores Booleanos en C<a class="headerlink" href="#valores-booleanos-en-c" title="Permanent link">&para;</a></h2>
+<p>Es un importante mencionar que en C, las variables tipo booleanas no existen. En vez de eso, todo valor diferente de 0 se considera verdadero, es decir si se desea representar el valor falso se debe utilizar un 0.</p>
+<h2 id="funciones-en-c">Funciones en C<a class="headerlink" href="#funciones-en-c" title="Permanent link">&para;</a></h2>
+<ul>
+<li>En la declaración de la función debe ir el tipo de dato del valor de retorno y de todos los argumentos.</li>
+<li>void para declarar funciones sin nigun retorno.</li>
+<li>Las funciones en C deben ser declaradas antes de ser usadas; esto implica que tendremos problemas con funciones de este tipo:</li>
+</ul>
+<div class="codehilite"><pre><span></span><span class="kt">int</span> <span class="nf">funcion1</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span>
+	<span class="k">if</span><span class="p">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">){</span>
+	    <span class="k">return</span> <span class="n">function2</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">funcion2</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span>
+	<span class="k">if</span><span class="p">(</span><span class="n">x</span><span class="o">&gt;=</span> <span class="mi">10</span><span class="p">){</span>
+	    <span class="k">return</span> <span class="n">function1</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>Noten que aqui <strong>function1(int x)</strong> ejecuta <strong>function2(int x)</strong>, pero <strong>function2(int x)</strong> esta definida abajo de <strong>function1(int x)</strong>. Para solucionar este problema, declaramos las funciones antes de definirlas:</p>
+<div class="codehilite"><pre><span></span><span class="kt">int</span> <span class="nf">function1</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">);</span>
+<span class="kt">int</span> <span class="nf">function2</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">);</span>
+
+<span class="kt">int</span> <span class="nf">funcion1</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span>
+	<span class="k">if</span><span class="p">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">){</span>
+	    <span class="k">return</span> <span class="n">function2</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">funcion2</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span>
+	<span class="k">if</span><span class="p">(</span><span class="n">x</span><span class="o">&gt;=</span> <span class="mi">10</span><span class="p">){</span>
+	    <span class="k">return</span> <span class="n">function1</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+<h4 id="ejemplo-funcion-que-retorna-un-valor-entero">Ejemplo: Función que retorna un valor entero.<a class="headerlink" href="#ejemplo-funcion-que-retorna-un-valor-entero" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="kt">int</span> <span class="nf">funcion1</span><span class="p">(){</span>
+	<span class="n">x</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+	<span class="k">return</span> <span class="n">x</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+<h4 id="ejemplo-funcion-que-no-tiene-un-valor-de-retorno-y-que-recibe-un-entero-como-argumento">Ejemplo: Función que no tiene un valor de retorno y que recibe un entero como argumento.<a class="headerlink" href="#ejemplo-funcion-que-no-tiene-un-valor-de-retorno-y-que-recibe-un-entero-como-argumento" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="kt">void</span> <span class="nf">function2</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span>
+	<span class="n">printf</span><span class="p">(</span><span class="s">&quot;Hola Mundo %d!&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+
+<h2 id="estructuras-en-c">Estructuras en c<a class="headerlink" href="#estructuras-en-c" title="Permanent link">&para;</a></h2>
+<p>Es un tipo de dato compuesto el cual permite almacenar un conjunto de datos de tipos diferentes. Es muy similar a lo que en java se conoce como clases, pero sin métodos.</p>
+<h4 id="ejemplo">Ejemplo:<a class="headerlink" href="#ejemplo" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+	<span class="cm">/*definimos una estructura en C</span>
+<span class="cm">	llamada Point que contiene 2 variables de tipo entero.</span>
+<span class="cm">	*/</span>
+	<span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span> <span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">;</span> <span class="p">}</span> <span class="n">Point</span><span class="p">;</span>
+		<span class="n">Point</span> <span class="n">p1</span><span class="p">;</span> <span class="c1">//se define una variable de tipo Point llamada p1</span>
+		<span class="c1">//asignanción de valores a las variables x y y de la variable p1.</span>
+		<span class="n">p1</span><span class="p">.</span><span class="n">x</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+		<span class="n">p1</span><span class="p">.</span><span class="n">y</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+		<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+	<span class="p">}</span>
+</pre></div>
+
+<h2 id="punteros-en-c">Punteros en c<a class="headerlink" href="#punteros-en-c" title="Permanent link">&para;</a></h2>
+<p>Un puntero es una variable la cual guarda la dirección de memoria de otra variable o de algún dato. Es necesario al igual que una simple variable asignar el tipo que representa.</p>
+<h4 id="ejemplo_1">Ejemplo:<a class="headerlink" href="#ejemplo_1" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="kt">int</span> <span class="o">*</span><span class="n">pi</span><span class="p">;</span> <span class="c1">//declaración de un puntero de datos enteros.</span>
+<span class="kt">char</span> <span class="o">*</span><span class="n">pc</span><span class="p">;</span> <span class="c1">//declaración de un puntero dé datos tipo char.</span>
+</pre></div>
+
+<h4 id="ejemplo-puntero-de-tipo-arbitrario">Ejemplo: Puntero de tipo arbitrario.<a class="headerlink" href="#ejemplo-puntero-de-tipo-arbitrario" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="c1">//definición de un puntero el cual puede ser asignado a diferentes tipos.</span>
+<span class="kt">void</span> <span class="o">*</span><span class="n">vp</span><span class="p">;</span>
+</pre></div>
+
+<p>Podemos incluso definir un puntero que apunta a un puntero</p>
+<h4 id="ejemplo-puntero-de-punteros">Ejemplo: Puntero de Punteros<a class="headerlink" href="#ejemplo-puntero-de-punteros" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="c1">//definición una variable, un puntero que apunta a ella, y un puntero que apunta a este puntero</span>
+<span class="kt">char</span> <span class="n">c</span> <span class="o">=</span> <span class="sc">&#39;1&#39;</span><span class="p">;</span>
+<span class="kt">char</span> <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">c</span><span class="p">;</span>
+<span class="kt">char</span> <span class="o">**</span><span class="n">args</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">p</span><span class="p">;</span>
+</pre></div>
+
+<h4 id="ejemplo-asignar-valores-usando-punteros">Ejemplo: Asignar Valores Usando Punteros<a class="headerlink" href="#ejemplo-asignar-valores-usando-punteros" title="Permanent link">&para;</a></h4>
+<p><div class="codehilite"><pre><span></span><span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="kt">int</span> <span class="o">*</span><span class="n">pi</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">;</span> <span class="c1">//al puntero pi se le asigna la dirección de memoria de la variable x.</span>
+<span class="kt">int</span> <span class="n">valorx</span> <span class="o">=</span> <span class="o">*</span><span class="n">pi</span><span class="p">;</span> <span class="c1">// en la variable valorx se almacena el valor al cual apunta la variable pi, en este ejemplo es 10</span>
+</pre></div>
+C pasa los argumentos a una función por valor, esto quiere decir que la información de la variable que se recibe en la función es almacenada en una diferente dirección de memoria por lo tanto si la variable se altera dentro de la función, solo será modificada en el contexto de la función.</p>
+<p>Para poder modificar el valor de una variable <em>x</em> declarada en una función <em>A</em> desde una función <em>B</em>, enviamos un puntero que apunta a <em>x</em> como argumento a la función <em>B</em>:</p>
+<h4 id="ejemplo_2">Ejemplo:<a class="headerlink" href="#ejemplo_2" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="kt">void</span> <span class="nf">addOne</span><span class="p">(</span><span class="kt">int</span><span class="o">*</span> <span class="n">x</span><span class="p">){</span>
+    <span class="p">(</span><span class="o">*</span><span class="n">x</span><span class="p">)</span><span class="o">++</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">functionA</span><span class="p">(){</span>
+    <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+    <span class="n">addOne</span><span class="p">(</span><span class="o">&amp;</span><span class="n">x</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">x</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>Noten el usuo de los paréntesis, sin los paréntesis, aumentariamos en 1 el puntero, pero al agregarlos, aumentamos en 1 el valor al que apunta el puntero</p>
+<h1 id="manejo-de-memoria-en-c">Manejo de Memoria en C<a class="headerlink" href="#manejo-de-memoria-en-c" title="Permanent link">&para;</a></h1>
+<p>Podemos diferenciar varias estructuras de memoria existentes al momento de ejecutar un programa:
+- Àrea de Texto: Almacena las instrucciones que estamos ejecutando
+- Àrea de Datos: Almacena datos como numeros y strings que son constantes globales en nuestro programa
+- Stack: Almacena datos <strong>estaticos</strong> como variables, arreglos de tamaño predefinito, etc. Estos datos tienen la caracteristica de que no existen en todo momento de la ejecución del programa. Por ejemplo, una variable <em>x</em> definida en cierta función solo existirá cuando esa función se este ejecutando. Algunas cosas a tomar en cuenta sobre el stack, aunque no las veremos directamente en C, son las siguientes:
+    - Tiene 3 operaciones básicas de un stack: push, pop, top (observar que hay)
+    - <strong>CUIDADO</strong> con la ubicacion del Stack; en assembler veremos que el Stack <em>crece habia abajo</em>, lo que significa que cuando agregamos un dato, la dirección de memoria disminuye
+    - A nivel ensamblador existe un registro llamado <strong>Stack Pointer</strong> o <strong>SP</strong>. Probablemente el registro más usado en assembler
+    - Las variables locales y los parámetros de las funciones se guardan en el Stack
+    - La dirección de retorno tambien se guarda en el Stack
+    - El compilador es el que se encarga de pedir memoria en cada llamada y devolverla cuando se termina, es decir, el Stack es "transparente" al programador de C</p>
+<ul>
+<li>Heap: Almacena datos <strong>dinámicos</strong>, como por ejemplo, un arreglo del tamaño indicado por el usuario. En C, el Heap es la unica estructura de memoria que es administrada directamente por el programador (reservar, liberar y respetar el espacio asignado). El heap, a diferencia del Stack, crece a direcciones de memorias más altas.</li>
+</ul>
+<h2 id="manejo-del-heap">Manejo del Heap<a class="headerlink" href="#manejo-del-heap" title="Permanent link">&para;</a></h2>
+<p><div class="codehilite"><pre><span></span><span class="n">type</span><span class="o">*</span> <span class="n">ptr</span> <span class="o">=</span> <span class="p">(</span><span class="n">type</span><span class="o">*</span><span class="p">)</span> <span class="n">malloc</span><span class="p">(</span><span class="n">byte</span><span class="o">-</span><span class="n">size</span><span class="p">);</span> <span class="c1">// prt es un puntero</span>
+</pre></div>
+<div class="codehilite"><pre><span></span><span class="c1">// ptr es puntero a un &quot;bloque&quot; de 100 enteros.</span>
+<span class="kt">int</span><span class="o">*</span> <span class="n">ptr</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="o">*</span><span class="p">)</span> <span class="n">malloc</span><span class="p">(</span><span class="mi">100</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span>
+</pre></div>
+- función <code>malloc()</code>: los devuelve un bloque de memoria. No los inicializa con ningún valor.
+- función <code>calloc()</code>: bloque de memoria inicializada con ceros. Es una operación lenta. Evitar usarla en cuanto sea posible.
+- función <code>free()</code>: libera un bloque de memoria que previamente pedimos.
+- cuidado con usar malloc sin el free. Aquí no hay garbage collector.
+- Puede ser lento buscar espacio disponible
+- Recordar que manejar el heap es tarea del programador.</p>
+<h3 id="uso-de-valgrid">Uso de Valgrid<a class="headerlink" href="#uso-de-valgrid" title="Permanent link">&para;</a></h3>
+<p>Se puede descargar de: http://valgrind.org/
+- Ayuda a la depuración de problemas de memoria. Puede servir para detectar problemas como fugas de memoria (memory leak).</p>
+<h3 id="clasificacion-de-bugs">Clasificación de Bugs<a class="headerlink" href="#clasificacion-de-bugs" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Bohr Bugs<ul>
+<li>sabemos en precisamente en donde está  (como los electones en el modelo atómico de Bohr)</li>
+<li>Fáciles de reproducir</li>
+</ul>
+</li>
+<li>Heinsenbugs<ul>
+<li>Difíciles de diagnosticar</li>
+<li>Dificiles de reproducir</li>
+</ul>
+</li>
+</ul>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../00_Numbers-Representation/" title="Números" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Anterior
+                </span>
+                Números
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../02_Intro-RISCV/" title="RISC-V" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Siguiente
+                </span>
+                RISC-V
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            CC-3
+          </div>
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+        
+  <div class="md-footer-social">
+    <link rel="stylesheet" href="../../assets/fonts/font-awesome.css">
+    
+      <a href="https://github.com/cc-3/MachineStructures" class="md-footer-social__link fa fa-github"></a>
+    
+  </div>
+
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.b41f3d20.js"></script>
+      
+        
+        
+          
+          <script src="../../assets/javascripts/lunr/lunr.stemmer.support.js"></script>
+          
+            
+              
+              
+                <script src="../../assets/javascripts/lunr/lunr.es.js"></script>
+              
+            
+          
+          
+        
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+        <script src="../../js/latex.js"></script>
+      
+        <script src="../../convnet_demo/jquery.min.js"></script>
+      
+        <script src="../../convnet_demo/convnet-min.js"></script>
+      
+        <script src="../../convnet_demo/convnet_demo.js"></script>
+      
+        <script src="../../js/python.js"></script>
+      
+    
+    
+      
+    
+  </body>
+</html>
