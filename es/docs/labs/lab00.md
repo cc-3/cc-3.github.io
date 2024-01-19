@@ -170,14 +170,14 @@ git push origin master
 
 ## Ejercicio 2: 1000 billetes de $1
 
-Imaginen que tienen mil billetes de \$1 y 10 sobres. Para este ejercicio tienen que encontrar una manera de poner una cantidad determinada de billetes de \$1 en cada uno de los sobres de tal forma que, sin importar la cantidad de dinero que se les pida (entre \$1 y \$1000), simplemente entreguen una combinación de los sobres y que siempre estén seguros de que están dando la cantidad correcta.
+Imaginen que tienen mil billetes de `$1` y 10 sobres. Para este ejercicio tienen que encontrar una manera de poner una cantidad determinada de billetes de `$1` en cada uno de los sobres de tal forma que, sin importar la cantidad de dinero que se les pida (entre `$1` y `$1000`), simplemente entreguen una combinación de los sobres y que siempre estén seguros de que están dando la cantidad correcta.
 En los archivos del laboratorio hay un archivo de texto llamado `ex4.txt` en donde encontrarán lo siguiente:
 
 ```text
 a,b,c,d,e,f,g,h,i,j
 ```
 
-Cada una de las letras representa un sobre, tienen que reemplazar cada letra por la cantidad de billetes de \$1 que crean correcta, esa cantidad tiene que ser positiva y mayor a cero. Recuerda que la suma de la cantidad de cada uno de los sobres tiene que ser igual a `1000`.
+Cada una de las letras representa un sobre, tienen que reemplazar cada letra por la cantidad de billetes de `$1` que crean correcta, esa cantidad tiene que ser positiva y mayor a cero. Recuerda que la suma de la cantidad de cada uno de los sobres tiene que ser igual a 1000.
 
 Si ya contestaron todo y creen que está correcto pueden agregar los cambios, hacer commit y subirlo al repositorio remoto ejecutando los siguientes comandos en la terminal:
 

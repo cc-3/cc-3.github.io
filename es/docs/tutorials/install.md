@@ -12,6 +12,8 @@ Todos los links son para la misma maquina virtual. Si alguno falla, utilice otro
 
 [Descargar maquina virtual desde Google Drive](https://drive.google.com/file/d/1FdxtXya0jA5iSUpeSvBXxc4Vzmz1JyUm/view?usp=sharing)
 
+[Descargar maquina virtual desde Mega](https://mega.nz/file/vMBlBLiD#DlbxbxvM_X_Pbhl-r5pN2cB4yXqE8lOtK1a-GB0EjtY)
+
 ```
 Usuario: student 
 Contrasena: student
@@ -29,7 +31,7 @@ Luego de abrir la máquina virtual en VMware, podemos ir a `VM > Settings...` y 
 
 ## Otra opcion: Nativo
 
-Para trabajar nativo necesitará Ubuntu 18 o 20 en inglés, se recomienda fuertemente Ubuntu 18.
+Para trabajar nativo necesitará Ubuntu 20 en inglés. Si decide usar otra distribución de Linux, usted es responsable de instalar y configurar todo.
 
 Si su Ubuntu no se encuentra en ingles, tendra problemas en el lab 2 (cgdb). Puede cambiar su idioma, o buscar la solucion al problema en Google.
 
@@ -81,5 +83,4 @@ Y terminamos instalando cgdb
 	sudo apt update
 	sudo apt install cgdb
 
-Casi listo! Cuando lleguemos al lab 3 y al lab 5 allí le aparecerán las instrucciones para instalar el software faltante.
-
+Casi listo! Conforme avancemos por los labs, tendrá que instalar software adicional en caso que esté usando su Linux nativo.

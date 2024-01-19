@@ -17,13 +17,15 @@ theme:
   name: material
   language: es
   custom_dir: ../assets
+  palette:
+    primary: teal
 
 
 # Customization
 extra:
   social:
     - type: github
-      link: https://github.com/cc-3/MachineStructures
+      link: https://github.com/cc-3/
 
 extra_css:
   - stylesheets/emoji.css
