@@ -832,23 +832,23 @@
 <ul>
 <li>Pueden utilizar cualquier bloque ya existente en Logisim para el proyecto.</li>
 <li>Guarden constantemente. Realicen commits y hagan push al menos una vez por cada día que trabajen.</li>
-<li>Logisim es un excelente simulador pero ocasionalmente tiene errores, entonces hagamos caso a la indicación anterior. Guarden constantemente...</li>
+<li>Logisim es un excelente simulador pero ocasionalmente tiene errores, entonces hagamos caso a la indicación anterior: Guarden constantemente.</li>
 <li>Trabajemos de la misma forma que en un proyecto de software: Construyamos el proyecto pieza por pieza y realicemos pruebas antes de unir un bloque con otros. Podemos construir todos los subcircuitos adicionales que necesitemos, siempre y cuando sigamos las reglas específicas que cada parte impone (más de esto a continuación).</li>
 <li>Se incluyen algunos tests. Sólo se debe correr el script ./check (esto seguramente tendrán que hacerlo en Linux, se requiere Python 3.X instalado).</li>
 <li>¡Necesitaremos más tests! Cada equipo debería hacer sus propios tests adicionales. En la sección de <em>Testing</em> hay algunas indicaciones de cómo hacer pruebas adicionales.</li>
 </ul>
 <p>Finalmente, las dos indicaciones más importantes:</p>
 <ul>
-<li>Se les darán algunos armazones (harnesses) a los cuales sus circuitos se conectarán. ASEGURENSE QUE SÍ SE ADAPTAN DE FORMA CORRECTA, TODOS LOS TESTS FALLARÁN SI NO LO HACEN.</li>
-<li>En el camino nos hemos encontrado con algunos problemas de git merge si ambos miembros del equipo estaban trabajando en el mismo archivo; a veces git los resolvía automáticamente y a veces no. En Logisim es garantizado que git NO RESOLVERÁ ESTO DE FORMA CORRECTA, entonces si trabajamos en equipo NO DEBEMOS MODIFICAR EL MISMO ARCHIVO AL MISMO TIEMPO</li>
+<li>No modifique (es decir no mueva, no renombre, no elimine) ninguna de las entradas y salidas que se le dan en los circuitos base. Si lo hace nuestro autograder no podrá conectarse con su circuito y tendrá cero de nota.</li>
+<li>En el camino nos hemos encontrado con algunos problemas de git merge si ambos miembros del equipo estaban trabajando en el mismo archivo. En el proyecto 1 a veces git los resolvía automáticamente y a veces no. En Logisim es garantizado que git NO RESOLVERÁ ESTO DE FORMA CORRECTA, entonces si trabajamos en equipo NO DEBEMOS MODIFICAR EL MISMO ARCHIVO AL MISMO TIEMPO.</li>
 </ul>
 <h2 id="preparacion">Preparación<a class="headerlink" href="#preparacion" title="Permanent link">&para;</a></h2>
-<p><strong>Antes de comenzar, asegúrense de que hayan <span style="color: red">leído y comprendido</span> todas las instrucciones del proyecto de principio a fin</strong>. Si tienen alguna pregunta, por favor diríjanse a <strong>Slack</strong> y pregunten en los canales correspondientes.</p>
-<p>Para comenzar con el proyecto, primero tienen que tener todos los archivos base, estos se encuentran <a href="https://classroom.github.com/a/KKOa0Ell">aquí</a>. Tienen permitido trabajar en parejas o de forma individual, por lo que al aceptar la asignación les preguntará si desean crear un grupo nuevo o unirse a uno ya existente. Si crean un grupo nuevo, ingresen un nombre que represente lo represente  y que no haya sido tomado por otro.</p>
+<p><strong>Antes de comenzar, asegúrense de que hayan leído y comprendido todas las instrucciones del proyecto de principio a fin</strong>. Si tienen alguna pregunta, por favor diríjanse a <strong>Slack</strong> y pregunten en los canales correspondientes. Si su duda es general, es decir no necesita mostrar algo muy específico de su circuito, pregunte en los <strong>canales públicos</strong>.</p>
+<p>Para comenzar con el proyecto, primero tienen que tener todos los archivos base, estos se encuentran <a href="https://classroom.github.com/a/gB6R5Wz4">aquí</a>. Pueden trabajar en parejas o de forma individual, por lo que al aceptar la asignación les preguntará si desean crear un grupo nuevo o unirse a uno ya existente. Si crean un grupo nuevo, ingresen un nombre creativo y fácil de recordar. No se pueden repetir los nombres del proyecto 1, Github no lo permite.</p>
 <p><img alt="Create group" src="/img/projs/proj01/classroom1.png" /></p>
 <p>Si desean unirse a un grupo ya creado, tienen que buscar el nombre del grupo y pulsar el botón que dice <strong>join</strong></p>
 <p><img alt="Join group" src="/img/projs/proj01/classroom2.png" /></p>
-<p><strong>Tienen que tener mucho cuidado al unirse a un grupo ya existente, ya que esto no se puede cambiar después, además, lo consideraremos como <span style="color: red">PLAGIO</span> si lo realizan de manera incorrecta, ya que, al hacer esto, pueden tener acceso al repositorio del otro miembro del grupo.</strong></p>
+<p><strong>Tienen que tener mucho cuidado al unirse a un grupo ya existente, ya que esto no se puede cambiar después. Si se une sin permiso a un grupo que no es el suyo, lo consideraremos como PLAGIO, ya que al hacerlo obtiene acceso al repositorio del otro grupo.</strong></p>
 <p>Ya sea que se unan o creen un nuevo grupo, al finalizar el proceso les creará automáticamente un repositorio con una extensión que termina con su nombre de grupo. Ya habiendo hecho todo eso, pueden ejecutar los siguientes comandos abriendo una terminal (<kbd >CTRL</kbd> <kbd>+</kbd> <kbd>T</kbd>):</p>
 <div class="codehilite"><pre><span></span>git clone &lt;link del repositorio&gt;
 </pre></div>
@@ -1006,8 +1006,8 @@
 </table>
 <p>Las salidas para DEBUG/TEST están presentes porque son registros de uso frecuente (por ejemplo, tienen un trabajo importante en las llamadas a funciones). Se utilizarán sólo para pruebas del autograder. En un register file de verdad estas salidas no existirían. Para el proyecto deben estar presentes y funcionar bien para facilitar la calificación.</p>
 <p><strong>IMPORTANTE:</strong> En la primera tabla aparecen nueve registros y en la tabla anterior aparecen siete salidas, eso es intencional. Se estarán <strong>usando</strong> nueve, pero solo se estará <strong>revisando</strong> el valor de siete de ellos.</p>
-<p>Pueden modificar regfile.circ como deseen, pero las salidas deben cumplir con el comportamiento que se indica. Deben ser cuidadosos de no modificar (mover, reemplazar, cortar, pegar, eliminar, etc) los pines de entrada o salida. Si necesitan más espacio, pueden moverlos mientras sean cuidadosos de mantener el posicionamiento relativo que estos tienen. Para verificar que nuestros cambios no "rompan" nada, podemos abrir regfile-harness.circ y revisar que no existan errores allí y que todo funcione bien.</p>
-<p>HINTS: (1) Cuidado con los muxes. Si estos tienen un enable ese debería estar activo (o mejor aún, buscamos en la ayuda de Logisim cómo quitar esa funcionalidad). (2) Si en algún momento se encuentra con algo que diga three-state o tri-estado, no lo use, desactíve esta opción. En cursos futuros le mencionarán estados de alta impedancia, pero eso no importa en CC3 y en Logisim.</p>
+<p>Pueden modificar regfile.circ como deseen, pero las salidas deben cumplir con el comportamiento que se indica. Deben ser cuidadosos de no modificar (mover, reemplazar, cortar, pegar, eliminar, etc.) los pines de entrada o salida. Si necesitan más espacio, pueden moverlos mientras sean cuidadosos de mantener el posicionamiento relativo que estos tienen. Para verificar que nuestros cambios no "rompan" nada, podemos abrir <strong>regfile-harness.circ</strong> y revisar que no existan errores allí (cables rojos de error o cables azules de desconectado) y que todo funcione bien.</p>
+<p>HINTS: Cuidado con los muxes. Si estos tienen un enable ese debería estar activo (o mejor aún, buscamos como eliminar el enable para evitarnos problemas).</p>
 <h2 id="parte-2-alu">Parte 2: ALU<a class="headerlink" href="#parte-2-alu" title="Permanent link">&para;</a></h2>
 <p>Su segunda tarea es crear un ALU que soporte todas las operaciones que necesitan las instrucciones de nuestro ISA (se detallan más adelante). Van a estar trabajando en el archivo <strong>alu.circ</strong>.</p>
 <p><img alt="ALU" src="/img/projs/proj02/alu.png" /></p>
@@ -1038,7 +1038,7 @@
 </tr>
 </tbody>
 </table>
-<p>...y cuatro salidas:</p>
+<p>...y una salida:</p>
 <table>
 <thead>
 <tr>
@@ -1053,24 +1053,9 @@
 <td align="center">32</td>
 <td align="center">Resultado de la operación efectuada por el ALU</td>
 </tr>
-<tr>
-<td align="center">Equal</td>
-<td align="center">1</td>
-<td align="center">1 si A y B son iguales; 0 de lo contrario</td>
-</tr>
-<tr>
-<td align="center">LT</td>
-<td align="center">1</td>
-<td align="center">1 si A es menor que B (signed); 0 de lo contrario</td>
-</tr>
-<tr>
-<td align="center">LTU</td>
-<td align="center">1</td>
-<td align="center">1 si A es menor que B (unsigned); 0 de lo contrario</td>
-</tr>
 </tbody>
 </table>
-<p>Esta es la lista de operaciones que necesitan implementar. Ustedes tienen que utilizar los componentes de logisim que ya efectúan estas operaciones, por favor no las implementen desde cero, sería muy tardado y no es el objetivo del proyecto.</p>
+<p>Esta es la lista de operaciones que necesitan implementar. Ustedes tienen que utilizar los componentes de Logisim que ya efectúan estas operaciones. Si las intenta implementar desde cero, sería muy tardado y no es el objetivo del proyecto.</p>
 <table>
 <thead>
 <tr>
@@ -1130,12 +1115,12 @@
 </tbody>
 </table>
 <p>Algunas cosas adicionales que tienen que tener en mente:</p>
-<p>La salidas <code>Equal</code>, <code>LT</code>, <code>LTU</code> siempre tienen que sacar el valor correcto de comparación sin importar el valor de <code>ALU Op</code>. Nuevamente, tienen que tener cuidado con los inputs y output pins, no los modifiquen por ningún motivo.</p>
-<p>Su ALU debería de encajar con el harness <strong>alu_harness.circ</strong>. Sigan las mismas instrucciones que en el register file. En particular, ustedes deberían de asegurar que su ALU es cargado correctamente por el harness antes de que hagan submit.</p>
+<p>Su ALU debería de encajar con el harness <strong>alu-harness.circ</strong>. Sigan las mismas instrucciones que en el register file. En particular, ustedes deberían de asegurar que su ALU encaja correctamente en el harness.</p>
+<p>Quedan espacios disponibles por si necesitan agregar alguna operación más adelante.</p>
 <h2 id="parte-3-cpu">Parte 3: CPU<a class="headerlink" href="#parte-3-cpu" title="Permanent link">&para;</a></h2>
 <p>Se les provee un esqueleto del procesador en <strong>cpu.circ</strong>. Su procesador tendrá una instancia de su ALU y Register File, así como una unidad de memoria que ya se les provee. Ustedes son los responsables de construir el datapath y control completos, desde cero. Su procesador debe implementar el ISA que se detalla más abajo.</p>
 <p><img alt="CPU" src="/img/projs/proj02/cpu.png" /></p>
-<p>Su procesador obtendrá su programa del armazón (harness) <strong>riscv.circ</strong>. Su procesador tendrá un output llamado FETCH_ADDRESS que indica cuál instrucción queremos, esta dirección será entregada al harness y este nos dará una instrucción. La instrucción será recibida por el procesador y será ejecutada. Revisen riscv.circ para ver exactamente qué sucede.</p>
+<p>Su procesador obtendrá un programa desde el harness <strong>riscv.circ</strong>. Su procesador tendrá un output llamado FETCH_ADDRESS que indica cuál instrucción queremos, esta dirección será entregada al harness y este nos dará una instrucción. La instrucción será recibida por el procesador y será ejecutada. Revisen <strong>riscv.circ</strong> para ver exactamente qué sucede.</p>
 <p>El procesador tiene dos inputs que vienen del harness:</p>
 <table>
 <thead>
@@ -1154,7 +1139,7 @@
 <tr>
 <td>CLOCK</td>
 <td>1</td>
-<td>Input del reloj. Puede ser necesario estar enviando esta señal a varios subcircuitos. Esta señal no debe pasar por ninguna compuerta (NOT, AND, etc).</td>
+<td>Input del reloj. Puede ser necesario estar enviando esta señal a varios subcircuitos.</td>
 </tr>
 </tbody>
 </table>
@@ -1257,8 +1242,8 @@
 </tbody>
 </table>
 <h3 id="control">Control<a class="headerlink" href="#control" title="Permanent link">&para;</a></h3>
-<p>Las señales de control tienen un papel muy importante en el proyecto. Se sugiere volver a leer el capítulo 4 del libro para darse cuenta dónde podemos necesitar un MUX y, por lo tanto, alguna señal de control.</p>
-<p>Existen varias formas de implementar las señales de control. Por ejemplo, pueden construir una palabra de control y guardarla en una memoria ROM (micro-código) o pueden construir un circuito que elija qué acción tomar basándose en algunos bits del opcode, func3 y func7.</p>
+<p>Las señales de control tienen un papel muy importante en el proyecto. Revise de nuevo los diagramas de datapath vistos en clase y la tabla resumen de control que llenamos para tener frescas en su mente las señales.</p>
+<p>Existen varias formas de implementar las señales de control. Por ejemplo, pueden construir una palabra de control y guardarla en una memoria ROM (microcódigo) o pueden construir un circuito que elija qué acción tomar basándose en algunos bits del opcode, func3 y func7.</p>
 <p><strong>Es obligatorio que sus componentes estén unidos y las señales de control necesarias estén implementadas.</strong> Si en la calificación del proyecto sólo tiene componentes sueltos (como el ALU y Reg File de la primera fase) y estos no se comunican entre sí, su nota será cero.</p>
 <p>Consejo final: ¡Modularicen! Creen los subcircuitos que sean necesarios y diséñenlos bien antes de empezar a construirlos.</p>
 <h3 id="isa">ISA<a class="headerlink" href="#isa" title="Permanent link">&para;</a></h3>
@@ -1511,22 +1496,22 @@
 </tbody>
 </table>
 <h2 id="testing">Testing<a class="headerlink" href="#testing" title="Permanent link">&para;</a></h2>
-<p>Para la parte 1 y 2, con el check local es suficiente y si lo pasan significa que esas partes ya las tienen funcionando al 100%. Para la parte 2, el check local también es bastante completo, pero ustedes pueden hacer más pruebas si lo desean. Como no podemos probar cada componente que ustedes vayan implementando, la mejor opción es escribir programas de RISC-V pequeños e ir revisando su datapath de diferentes maneras.</p>
+<p>Para el ALU y Resister File superar el <strong>./check</strong> y si lo pasan significa que esas partes ya las tienen funcionando al 100%. Para el procesador completo el check también es bastante completo, pero ustedes pueden hacer más pruebas si lo desean. Como no podemos probar cada componente que ustedes vayan implementando, la mejor opción es escribir programas de RISC-V pequeños e ir revisando su datapath de diferentes maneras.</p>
 <p>Una vez que hayan escrito su programa de RISC-V, lo van a tener que cargar en la ROM que está en <strong>riscv.circ</strong> y empezar la ejecución. Para eso, primero, abran riscv.circ y localicen la memoria ROM.</p>
 <p><img alt="ROM" src="/img/projs/proj02/rom.png" /></p>
 <p>Hagan click a la memoria y, después, en la barra de herramientas de la izquierda, hagan click en "(click here to edit)", esto va a abrir un diálogo en donde ustedes pueden cargar su archivo con el código de RISC-V y este ensamblará y generará código de máquina por ustedes que va a ser la salida de la memoria ROM.</p>
 <p><img alt="Testing" src="/img/projs/proj02/test.png" /></p>
 <h2 id="notas-sobre-logisim">Notas sobre Logisim<a class="headerlink" href="#notas-sobre-logisim" title="Permanent link">&para;</a></h2>
 <p>Si Logisim les da algún problema extraño, REINICIEN LOGISIM Y VUELVAN A CARGAR SU CIRCUITO. No pierdan tiempo buscando errores si no han hecho esto. Si reiniciar no ha resuelto el problema, allí sí ya les corresponde revisar su circuito.</p>
-<p>Logisim tiene un "Reference", en la pestaña "Help", y les dice las especificaciones de cada componente.</p>
-<p>Do NOT gate the clock! (esto no tiene una traducción directa). Los clocks tienen que llegar directo a los circuitos, ni en CC3 ni en un curso donde usen hardware deberían colocar compuertas antes que la señal de reloj entre al componente.</p>
+<p>Logisim tiene un "Reference" en la pestaña "Help", y les dice las especificaciones de cada componente.</p>
 <p>Si están usando varias ventanas de Logisim tengan mucho cuidado cuando hagan copy-paste de una ventana a otra. Asegúrense que sí se copió el circuito completo que querían y que funcione bien después de pegarlo.</p>
-<p>Cuando importen otro archivo (Project -&gt; Load Library -&gt; Logisim Library...), este aparecerá como un folder en el panel de la izquierda. Los archivos esqueleto deberían de tener importado todo lo necesario.</p>
+<p>Si su máquina tiene poca RAM, se recomienda que no tenga muchas ventanas de Logisim abiertas para evitar errores.</p>
 <p>Cambiar los atributos antes de colocar un componente cambia el default. Si quieren colocar varios pines de 32 bits (por ejemplo), habría que cambiarlo antes de colocar el primero. Si sólo quieren cambiar algún valor para un componente, primero lo colocan y, luego, lo cambian.</p>
 <p>Cuando cambian los inputs y outputs de un subcircuito que ya colocaron en main, Logisim automáticamente añade o remueve puertos según los cambios que hagan. Esto, muchas veces, afecta el tamaño o posición del subcircuito. Si ya habían cables conectados, Logisim intentará moverlos, pero no siempre lo hace bien. Se recomienda que si van a cambiar los inputs y outputs de un circuito, primero desconecten todos los cables que este pueda tener en main o lo eliminen del main y lo vuelvan a colocar después de cambiarlo. <strong>Recuerden que sólo pueden hacer esto para los subcircuitos que USTEDES agregan</strong>.</p>
 <p>Los cables rojos significan que algo está mal conectado. Algunos casos pueden no ser tan obvios, revisen bien todas las conexiones cercanas.</p>
 <p><img alt="Red Wires" src="/img/projs/proj02/error_wire.png" /></p>
 <p>Logisim tiene algunas herramientas de análisis combinacional (nos puede construir mapas de Karnaugh o circuitos completos con sólo darle una tabla :D). Esta herramienta les puede ser útil en algún momento de sus vidas, pero la recomendación es no usarla en CC3. Recuerden que durante los exámenes tendrán que hacer mapas o circuitos a mano, sin acceso a su computadora.</p>
+<p>Finalmente, <strong>guarde seguido</strong> y <strong>haga push seguido</strong>. Para bien o para mal Logisim está hecho en Java y tiene algunos errores. Logisim incluso puede llegar a borrar su circuito completo si su computadora llega a trabarse, entonces es importante tener una copia de seguridad siempre en Github.</p>
 <h2 id="calificacion">Calificación<a class="headerlink" href="#calificacion" title="Permanent link">&para;</a></h2>
 <p>Ustedes pueden verificar que cada parte funcione correctamente utilizando el autograder local, corriendo el siguiente comando en la terminal:</p>
 <div class="codehilite"><pre><span></span>./check
