@@ -1496,17 +1496,17 @@
 </tbody>
 </table>
 <h2 id="testing">Testing<a class="headerlink" href="#testing" title="Permanent link">&para;</a></h2>
-<p>Para el ALU y Resister File superar el <strong>./check</strong> y si lo pasan significa que esas partes ya las tienen funcionando al 100%. Para el procesador completo el check también es bastante completo, pero ustedes pueden hacer más pruebas si lo desean. Como no podemos probar cada componente que ustedes vayan implementando, la mejor opción es escribir programas de RISC-V pequeños e ir revisando su datapath de diferentes maneras.</p>
+<p>Para el ALU y Resister File es suficiente usar el <strong>./check</strong> para probar. Para el procesador completo el check también es bastante útil, pero necesitarán pruebas adicionales. Como no podemos probar cada componente que ustedes vayan implementando, la mejor opción es escribir programas de RISC-V pequeños e ir revisando su datapath de diferentes maneras.</p>
 <p>Una vez que hayan escrito su programa de RISC-V, lo van a tener que cargar en la ROM que está en <strong>riscv.circ</strong> y empezar la ejecución. Para eso, primero, abran riscv.circ y localicen la memoria ROM.</p>
 <p><img alt="ROM" src="/img/projs/proj02/rom.png" /></p>
-<p>Hagan click a la memoria y, después, en la barra de herramientas de la izquierda, hagan click en "(click here to edit)", esto va a abrir un diálogo en donde ustedes pueden cargar su archivo con el código de RISC-V y este ensamblará y generará código de máquina por ustedes que va a ser la salida de la memoria ROM.</p>
+<p>Hagan click a la memoria y, después, en la barra de herramientas de la izquierda, hagan click en <strong>(click here to edit)</strong>, esto va a abrir un diálogo en donde ustedes pueden cargar su archivo con el código de RISC-V y este ensamblará y generará código de máquina por ustedes que va a ser la salida de la memoria ROM.</p>
 <p><img alt="Testing" src="/img/projs/proj02/test.png" /></p>
 <h2 id="notas-sobre-logisim">Notas sobre Logisim<a class="headerlink" href="#notas-sobre-logisim" title="Permanent link">&para;</a></h2>
 <p>Si Logisim les da algún problema extraño, REINICIEN LOGISIM Y VUELVAN A CARGAR SU CIRCUITO. No pierdan tiempo buscando errores si no han hecho esto. Si reiniciar no ha resuelto el problema, allí sí ya les corresponde revisar su circuito.</p>
 <p>Logisim tiene un "Reference" en la pestaña "Help", y les dice las especificaciones de cada componente.</p>
 <p>Si están usando varias ventanas de Logisim tengan mucho cuidado cuando hagan copy-paste de una ventana a otra. Asegúrense que sí se copió el circuito completo que querían y que funcione bien después de pegarlo.</p>
 <p>Si su máquina tiene poca RAM, se recomienda que no tenga muchas ventanas de Logisim abiertas para evitar errores.</p>
-<p>Cambiar los atributos antes de colocar un componente cambia el default. Si quieren colocar varios pines de 32 bits (por ejemplo), habría que cambiarlo antes de colocar el primero. Si sólo quieren cambiar algún valor para un componente, primero lo colocan y, luego, lo cambian.</p>
+<p>Pueden cambiar los atributos antes de colocar un componente para cambiar el default. Si quieren colocar varios pines de 32 bits (por ejemplo), habría que cambiarlo antes de colocar el primero. Si sólo quieren cambiar algún valor para un componente, primero lo colocan y, luego, lo cambian.</p>
 <p>Cuando cambian los inputs y outputs de un subcircuito que ya colocaron en main, Logisim automáticamente añade o remueve puertos según los cambios que hagan. Esto, muchas veces, afecta el tamaño o posición del subcircuito. Si ya habían cables conectados, Logisim intentará moverlos, pero no siempre lo hace bien. Se recomienda que si van a cambiar los inputs y outputs de un circuito, primero desconecten todos los cables que este pueda tener en main o lo eliminen del main y lo vuelvan a colocar después de cambiarlo. <strong>Recuerden que sólo pueden hacer esto para los subcircuitos que USTEDES agregan</strong>.</p>
 <p>Los cables rojos significan que algo está mal conectado. Algunos casos pueden no ser tan obvios, revisen bien todas las conexiones cercanas.</p>
 <p><img alt="Red Wires" src="/img/projs/proj02/error_wire.png" /></p>
@@ -1538,7 +1538,7 @@ Exercise            Grade  Message
 <span class="o">=</span>&gt; Score: <span class="m">100</span>/100
 </pre></div>
 
-<p><strong>IMPORTANTE:</strong> Para tener derecho a nota debe presentar un procesador conectado y funcionando. Es posible obtener los puntos de ALU y de Register File con componentes sueltos y desconectados, sin emgargo si usted presenta esto se le pondrá CERO de nota. En otras palabras, todas las notas de 20 o menos se convierten en CERO.</p>
+<p><strong>IMPORTANTE:</strong> Para tener derecho a nota debe presentar un procesador conectado y funcionando, no puede presentar solamente componentes sueltos. Si solo tiene los 20 puntos de ALU y Register File, esto se convierte en cero.</p>
                 
                   
                 
