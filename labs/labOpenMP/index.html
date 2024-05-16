@@ -13,7 +13,7 @@
         <meta name="description" content="Grandes Ideas en Arquitectura de Computadora">
       
       
-        <link rel="canonical" href="https://cc-3.github.io/labs/lab09/">
+        <link rel="canonical" href="https://cc-3.github.io/labs/labOpenMP/">
       
       
         <meta name="author" content="CC-3">
@@ -42,7 +42,7 @@
     
     
       
-        <title>9: OpenMP - Estructura de Máquinas</title>
+        <title>Lab 9 - Thread Level parallelism con OpenMP - Estructura de Máquinas</title>
       
     
     
@@ -139,7 +139,7 @@
                 Estructura de Máquinas
               </span>
               <span class="md-header-nav__topic">
-                9: OpenMP
+                Lab 9 - Thread Level parallelism con OpenMP
               </span>
             
           
@@ -266,12 +266,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
     
     <label class="md-nav__link" for="nav-2">
       Laboratorios
@@ -388,105 +386,6 @@
     <a href="../lab08/" title="8: SIMD" class="md-nav__link">
       8: SIMD
     </a>
-  </li>
-
-        
-          
-          
-          
-
-  
-
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-      
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        9: OpenMP
-      </label>
-    
-    <a href="./" title="9: OpenMP" class="md-nav__link md-nav__link--active">
-      9: OpenMP
-    </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">Tabla de contenidos</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#objetivo" title="Objetivo" class="md-nav__link">
-    Objetivo
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#referencias-adicional" title="Referencias Adicional" class="md-nav__link">
-    Referencias Adicional
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#preparacion" title="Preparación" class="md-nav__link">
-    Preparación
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#introduccion-a-openmp" title="Introducción a OpenMP" class="md-nav__link">
-    Introducción a OpenMP
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#ejemplo-hola-mundo" title="Ejemplo Hola Mundo" class="md-nav__link">
-    Ejemplo Hola Mundo
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#ejercicio-1-suma-de-vectores" title="Ejercicio 1: Suma de Vectores" class="md-nav__link">
-    Ejercicio 1: Suma de Vectores
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#ejercicio-2-producto-punto" title="Ejercicio 2: Producto Punto" class="md-nav__link">
-    Ejercicio 2: Producto Punto
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#calificacion" title="Calificación" class="md-nav__link">
-    Calificación
-  </a>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -767,7 +666,7 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/cc-3/cc-3.github.io/edit/master/page/es/docs/labs/lab09.md" title="Editar esta página" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/cc-3/cc-3.github.io/edit/master/page/es/docs/labs/labOpenMP.md" title="Editar esta página" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
                 <h1 id="lab-9-thread-level-parallelism-con-openmp">Lab 9 - Thread Level parallelism con OpenMP<a class="headerlink" href="#lab-9-thread-level-parallelism-con-openmp" title="Permanent link">&para;</a></h1>
@@ -906,41 +805,6 @@
       
         
 <footer class="md-footer">
-  
-    <div class="md-footer-nav">
-      <nav class="md-footer-nav__inner md-grid">
-        
-          <a href="../lab08/" title="8: SIMD" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
-            <div class="md-flex__cell md-flex__cell--shrink">
-              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
-            </div>
-            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
-              <span class="md-flex__ellipsis">
-                <span class="md-footer-nav__direction">
-                  Anterior
-                </span>
-                8: SIMD
-              </span>
-            </div>
-          </a>
-        
-        
-          <a href="../../projs/proj01/" title="1: C y RISC-V" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
-            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
-              <span class="md-flex__ellipsis">
-                <span class="md-footer-nav__direction">
-                  Siguiente
-                </span>
-                1: C y RISC-V
-              </span>
-            </div>
-            <div class="md-flex__cell md-flex__cell--shrink">
-              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
-            </div>
-          </a>
-        
-      </nav>
-    </div>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
