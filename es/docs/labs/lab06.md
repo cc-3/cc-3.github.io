@@ -8,7 +8,7 @@
 
 Para este laboratorio, es necesaria la aplicación Logisim. La cual se puede descargar en este [link](http://www.cburch.com/logisim/index.html).
 
-También tienen que tener todos los archivos base, estos se encuentran [aquí](https://classroom.github.com/a/jeBySPd8">aquí). Recuerden que deben aceptar la asignación de **GitHub Classroom** y se les creará automáticamente un repositorio con una extensión que termina con su usuario de GitHub. Cuando ya se haya creado el repositorio, pueden ejecutar los siguientes comandos abriendo una terminal (<kbd>CTRL</kbd><kbd>+</kbd><kbd>T</kbd>):
+También tienen que tener todos los archivos base, estos se encuentran [aquí](https://classroom.github.com/a/mm5PDbKJ). Recuerden que deben aceptar la asignación de **GitHub Classroom** y se les creará automáticamente un repositorio con una extensión que termina con su usuario de GitHub. Cuando ya se haya creado el repositorio, pueden ejecutar los siguientes comandos abriendo una terminal (<kbd>CTRL</kbd><kbd>+</kbd><kbd>T</kbd>):
 
 ```shell
 git clone <link del repositorio>

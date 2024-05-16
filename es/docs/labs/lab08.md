@@ -9,7 +9,7 @@
 
 ## Preparación
 
-Tienen que tener todos los archivos base, estos se encuentran [aquí](https://classroom.github.com/a/XxCbsUIU). Recuerde subir su código a Github y el link de su repositorio al GES.
+Tienen que tener todos los archivos base, estos se encuentran [aquí](https://classroom.github.com/a/t5F4g6gx). Recuerde subir su código a Github y el link de su repositorio al GES.
 
 ## Ejercicio 1: Familiarizándose con las funciones SIMD.
 

@@ -141,11 +141,11 @@ No responda al azar. Lea la documentación y/o pruebe los comandos para saber qu
     
   **8.** ¿Cómo se imprime una lista de **todas las variables y su valor** en la función actual?
     
-  a. info locals
-  b. display locals
-  c. info all
-  d. display all 
-
+  a. info locals   
+  b. display locals   
+  c. info all   
+  d. display all   
+  
   **9.** ¿Cómo salimos de cgdb?
     
   a. end    

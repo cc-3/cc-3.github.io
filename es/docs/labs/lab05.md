@@ -14,7 +14,7 @@
 
 ## Preparación
 
-Para comenzar con el laboratorio primero tienen que tener todos los archivos base, estos se encuentran [aquí](https://classroom.github.com/a/5AbGVaj3). Recuerden que deben
+Para comenzar con el laboratorio primero tienen que tener todos los archivos base, estos se encuentran [aquí](https://classroom.github.com/a/KUq9Ey58). Recuerden que deben
 aceptar la asignación de **Github Classroom** y se les creará automáticamente un repositorio con una extensión que termina con su usuario de GitHub.
 Cuando ya se haya creado el repositorio, pueden ejecutar los siguientes comandos abriendo una terminal (<kbd>CTRL</kbd><kbd>+</kbd><kbd>T</kbd>):
 
@@ -66,7 +66,7 @@ Al traducir, tome en cuenta lo siguiente:
 
 * Al traducir un condicional, lo más cómodo es usar lógica negada, pero existen también otras opciones si no le gustó esa.
 
-* Cuando traduciomos una función tenemos 6 pasos.
+* Cuando traducimos una función tenemos 6 pasos.
     * Paso 1 (caller): preparar los argumentos en un lugar conocido
     * Paso 2 (caller pasa a callee): saltamos usando jal
     * Paso 3 (callee): prólogo, proteja los registros que considere necesarios

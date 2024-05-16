@@ -82,7 +82,7 @@ Haremos un **push** de prueba antes de continuar.
 Asegurese de estar en la carpeta de su laboratorio (recuerde que en Linux usa el comando **cd** para moverse entre carpetas). Una vez se encuentre allí, cree un archivo que diga "Hola Mundo" ejecutando el siguiente comando.
 
 ```shell
-echo 'echo "Hola Mundo"' > hello.txt
+echo "Hola Mundo" > hello.txt
 ```
 
 Ahora comprobamos el estado de nuestro repositorio.
@@ -140,7 +140,7 @@ Vamos a utilizar números de 4 bits y usarlos para "dibujar". Si apilamos cinco 
 4. ¿Qué letra se dibuja con el siguiente numero en hexadecimal: 0xF8F88?
 5. ¿Cuál es el numero en hexadecimal para dibujar la letra b (minúscula)?
 
-En los archivos del laboratorio van a encontrar un archivo de texto `ex3.txt` con lo siguiente:
+En los archivos del laboratorio van a encontrar un archivo de texto `ex1.txt` con lo siguiente:
 
 ```
 1:
@@ -171,7 +171,7 @@ git push origin master
 ## Ejercicio 2: 1000 billetes de $1
 
 Imaginen que tienen mil billetes de `$1` y 10 sobres. Para este ejercicio tienen que encontrar una manera de poner una cantidad determinada de billetes de `$1` en cada uno de los sobres de tal forma que, sin importar la cantidad de dinero que se les pida (entre `$1` y `$1000`), simplemente entreguen una combinación de los sobres y que siempre estén seguros de que están dando la cantidad correcta.
-En los archivos del laboratorio hay un archivo de texto llamado `ex4.txt` en donde encontrarán lo siguiente:
+En los archivos del laboratorio hay un archivo de texto llamado `ex2.txt` en donde encontrarán lo siguiente:
 
 ```text
 a,b,c,d,e,f,g,h,i,j

@@ -14,10 +14,10 @@
 
 ## Preparación
 
-Para comenzar con el laboratorio primero tienen que tener todos los archivos base, estos se encuentran [aquí](https://classroom.github.com/a/rKhFYoFr). Recuerden que deben aceptar la asignación de **Github Classroom** y se les creará automáticamente un repositorio con una extensión que termina con su usuario de GitHub. Cuando ya se haya creado el repositorio, pueden ejecutar los siguientes comandos abriendo una terminal (<kbd>CTRL</kbd> <kbd>+</kbd> <kbd>T</kbd> ):
+Para comenzar con el laboratorio primero tienen que tener todos los archivos base, estos se encuentran [aquí](https://classroom.github.com/a/Fq4GlZkV). Recuerden que deben aceptar la asignación de **Github Classroom** y se les creará automáticamente un repositorio con una extensión que termina con su usuario de GitHub. Cuando ya se haya creado el repositorio, pueden ejecutar los siguientes comandos abriendo una terminal (<kbd>CTRL</kbd> <kbd>+</kbd> <kbd>T</kbd> ):
 
 ```shell
-git clone https://github.com/cc-3/lab04-2023-SU-USUARIO-DE-GITHUB
+git clone https://github.com/cc-3/lab04-2024-SU-USUARIO-DE-GITHUB
 ```
 
 ## Introducción a ensamblador RISC-V

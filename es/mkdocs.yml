@@ -74,7 +74,6 @@ nav:
     - '6: Logisim': labs/lab06.md
     - '7: Logisim Avanzado': labs/lab07.md
     - '8: SIMD': labs/lab08.md
-    - '9: OpenMP': labs/lab09.md
   - Proyectos:
     - '1: C y RISC-V': projs/proj01.md
     - '2: Procesador': projs/proj02.md
