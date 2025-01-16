@@ -881,15 +881,15 @@
 </ul>
 <h3 id="obteniendo-los-archivos">Obteniendo los archivos<a class="headerlink" href="#obteniendo-los-archivos" title="Permanent link">&para;</a></h3>
 <p>Para obtener sus archivos base visite el siguiente link.</p>
-<div class="codehilite"><pre><span></span>https://classroom.github.com/a/DAsWWjLF
+<div class="codehilite"><pre><span></span>https://classroom.github.com/a/CmYCs6WL
 </pre></div>
 
 <p>Allí debe aceptar la asignación para que su repositorio sea creado. Al hacerlo, tendrá un repositorio con un link como este.</p>
-<div class="codehilite"><pre><span></span>https://github.com/cc3-ug/lab00-2024-MI_USUARIO.git
+<div class="codehilite"><pre><span></span>https://github.com/cc3-ug/lab00-2025-MI_USUARIO.git
 </pre></div>
 
 <p>Abra una terminal y navegue en ella hacia el lugar donde quiera colocar su laboratorio. Como es la primera vez que traeremos información del remote hacia nuestra computadora, usaremos el comando <strong>clone</strong>. Recuerde cambiar <code>MI_USUARIO</code> por su usuario.</p>
-<div class="codehilite"><pre><span></span>git clone https://github.com/cc3-ug/lab00-2024-MI_USUARIO.git
+<div class="codehilite"><pre><span></span>git clone https://github.com/cc3-ug/lab00-2025-MI_USUARIO.git
 </pre></div>
 
 <p>Al ejecutar el comando Github le pedirá su "contraseña", sin embargo desde hace un par de años ya no acepta contraseñas sino tokens, genere el suyo siguiendo los pasos que se indican en esta página.</p>
@@ -900,7 +900,7 @@
 <h3 id="haciendo-push-hacia-github">Haciendo push hacia Github<a class="headerlink" href="#haciendo-push-hacia-github" title="Permanent link">&para;</a></h3>
 <p>Haremos un <strong>push</strong> de prueba antes de continuar.</p>
 <p>Asegurese de estar en la carpeta de su laboratorio (recuerde que en Linux usa el comando <strong>cd</strong> para moverse entre carpetas). Una vez se encuentre allí, cree un archivo que diga "Hola Mundo" ejecutando el siguiente comando.</p>
-<div class="codehilite"><pre><span></span><span class="nb">echo</span> <span class="s2">&quot;Hola Mundo&quot;</span> &gt; hello.txt
+<div class="codehilite"><pre><span></span><span class="nb">echo</span> <span class="s1">&#39;echo &quot;Hola Mundo&quot;&#39;</span> &gt; hello.txt
 </pre></div>
 
 <p>Ahora comprobamos el estado de nuestro repositorio.</p>
@@ -965,27 +965,28 @@ git push origin master              <span class="c1"># aquí hacemos el push</sp
 
 <p>Si ya contestaron todo y creen que está correcto pueden agregar los cambios, hacer commit y subirlo al repositorio remoto ejecutando los siguientes comandos en la terminal.</p>
 <div class="codehilite"><pre><span></span>git add ex1.txt
-git commit -m <span class="s2">&quot;ex. 1 complete&quot;</span>
+git commit -m <span class="s2">&quot;Finish exercise 1&quot;</span>
 git push origin master
 </pre></div>
 
 <h2 id="ejercicio-2-1000-billetes-de-1">Ejercicio 2: 1000 billetes de $1<a class="headerlink" href="#ejercicio-2-1000-billetes-de-1" title="Permanent link">&para;</a></h2>
-<p>Imaginen que tienen mil billetes de <code>$1</code> y 10 sobres. Para este ejercicio tienen que encontrar una manera de poner una cantidad determinada de billetes de <code>$1</code> en cada uno de los sobres de tal forma que, sin importar la cantidad de dinero que se les pida (entre <code>$1</code> y <code>$1000</code>), simplemente entreguen una combinación de los sobres y que siempre estén seguros de que están dando la cantidad correcta.
-En los archivos del laboratorio hay un archivo de texto llamado <code>ex2.txt</code> en donde encontrarán lo siguiente:</p>
+<p>Imaginen que tienen mil billetes de \$1 y 10 sobres. Para este ejercicio tienen que encontrar una manera de poner una cantidad determinada de billetes de \$1 en cada uno de los sobres de tal forma que, sin importar la cantidad de dinero que se les pida (entre \$1 y \$1000), simplemente entreguen una combinación de los sobres y que siempre estén seguros de que están dando la cantidad correcta.
+En los archivos del laboratorio hay un archivo de texto llamado <code>ex4.txt</code> en donde encontrarán lo siguiente:</p>
 <div class="codehilite"><pre><span></span>a,b,c,d,e,f,g,h,i,j
 </pre></div>
 
-<p>Cada una de las letras representa un sobre, tienen que reemplazar cada letra por la cantidad de billetes de <code>$1</code> que crean correcta, esa cantidad tiene que ser positiva y mayor a cero. Recuerda que la suma de la cantidad de cada uno de los sobres tiene que ser igual a 1000.</p>
+<p>Cada una de las letras representa un sobre, tienen que reemplazar cada letra por la cantidad de billetes de \$1 que crean correcta, esa cantidad tiene que ser positiva y mayor a cero. Recuerda que la suma de la cantidad de cada uno de los sobres tiene que ser igual a <code>1000</code>.</p>
 <p>Si ya contestaron todo y creen que está correcto pueden agregar los cambios, hacer commit y subirlo al repositorio remoto ejecutando los siguientes comandos en la terminal:</p>
 <div class="codehilite"><pre><span></span>git add ex2.txt
-git commit -m <span class="s2">&quot;ex. 2 complete&quot;</span>
+git commit -m <span class="s2">&quot;Finish exercise 2&quot;</span>
 git push origin master
 </pre></div>
 
 <h2 id="entrega-y-calificacion">Entrega y calificación<a class="headerlink" href="#entrega-y-calificacion" title="Permanent link">&para;</a></h2>
 <p>Revise en el navegador que sus push hayan sido exitosos, luego suba el link de su repositorio al GES.</p>
-<p>El link que subirá debe verse similar a este <code>https://github.com/cc3-ug/lab00-2024-MI_USUARIO.git</code>.</p>
+<p>El link que subirá debe verse similar a este <code>https://github.com/cc3-ug/lab00-2025-MI_USUARIO.git</code>.</p>
 <p>El GES tiene una opción para subir links, úsela. No envíe su link adentro de un txt, pdf, etc. de lo contrarion se le restarán puntos.</p>
+<p>Antes de enviar su link, pase pegándolo en algún editor de texto para asegurarse que sea el formato correcto. Este debe comenzar con <code>https</code> y esto no debe aparecer repetido, y debe terminar con <code>.git</code> o con su usuario.</p>
                 
                   
                 
