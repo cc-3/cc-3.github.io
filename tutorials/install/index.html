@@ -703,11 +703,11 @@
                 <h1 id="tutorial-de-instalacion-de-material">Tutorial de Instalacion de material<a class="headerlink" href="#tutorial-de-instalacion-de-material" title="Permanent link">&para;</a></h1>
 <p>El objetivo de este tutorial es dejar preparado el material que necesitaran para los laboratorios y proyectos.</p>
 <h2 id="la-mejor-opcion-maquina-virtual">La mejor opcion: Máquina virtual<a class="headerlink" href="#la-mejor-opcion-maquina-virtual" title="Permanent link">&para;</a></h2>
-<p>Puede utilizar <a href="https://www.vmware.com/products/workstation-player.html">VMware Player</a> (gratuito, sin necesidad de licencia) para abrir y utilizar maquinas virtuales ya hechas. Adicionalmente, en los próximos días se les enviará licencia para VMware Workstation con el cual también pueden crear sus propias máquinas virtuales.</p>
-<p>Luego de instalar VMware Player, descargue la siguiente máquina virtual. Descomprímala y abra el archivo .vmx (VMware virtual machine configuration).</p>
+<p>Desde 2024 <a href="https://blogs.vmware.com/workstation/2024/05/vmware-workstation-pro-now-available-free-for-personal-use.html">VMware es gratis</a>. Descargue la versión correspondiente (Workstation si está en Windows, Fusion si está en Mac OS) e instálela.</p>
+<p>Luego de instalar VMware, descargue la siguiente máquina virtual. Descomprímala y abra el archivo .vmx (VMware virtual machine configuration).</p>
 <p>Todos los links son para la misma maquina virtual. Si alguno falla, utilice otro.</p>
-<p><a href="https://drive.google.com/file/d/1FdxtXya0jA5iSUpeSvBXxc4Vzmz1JyUm/view?usp=sharing">Descargar maquina virtual desde Google Drive</a></p>
-<p><a href="https://mega.nz/file/vMBlBLiD#DlbxbxvM_X_Pbhl-r5pN2cB4yXqE8lOtK1a-GB0EjtY">Descargar maquina virtual desde Mega</a></p>
+<p><a href="https://drive.google.com/file/d/1_4CFuF1Z7kPzQbND5zvq8vEaOvTKbZl2/view?usp=sharing">Descargar maquina virtual desde Google Drive</a></p>
+<p><a href="https://mega.nz/file/DNxFyYaR#2fJJX7IIeQxOzlXtBsvmDgv79xO8r3r-bhLakXTykyo">Descargar maquina virtual desde Mega</a></p>
 <div class="codehilite"><pre><span></span>Usuario: student 
 Contrasena: student
 </pre></div>
@@ -720,21 +720,21 @@ Contrasena: student
 <p>En <code>Memory</code> aumente la cantidad de RAM que la máquina virtual puede usar. Si tiene menos de 4 GB de RAM, déjela como está. Si tiene entre 4 GB y 8 GB de RAM, coloque la mitad de su RAM. Si tiene más de 8 GB de RAM, coloque 4 GB.</p>
 </li>
 <li>
-<p>En <code>Processors</code> active la opción <code>Virtualize Intel VT-x or AMD-V</code>. Si aparece una ventana que indica que VT-x o AMD-V no están activados, debe ingresar a la BIOS de su máquina y activarlo desde allí. Este proceso cambia de una máquina a otra, entonces busque en Google algo como <code>Enable VT-x Asus Windows 10</code>. Coloque <code>VT-x</code> si su procesador es Intel, <code>AMD-V</code> si es AMD. Sustituya la marca de su computadora y la versión de Windows que utiliza.</p>
+<p>En <code>Processors</code> active la opción <code>Virtualize Intel VT-x or AMD-V</code>. Si aparece una ventana que indica que VT-x o AMD-V no están activados, debe ingresar a la BIOS de su máquina y activarlo desde allí. Este proceso cambia de una máquina a otra, entonces busque en Google algo como <code>Enable VT-x HP Victus Windows 11</code>. Coloque <code>VT-x</code> si su procesador es Intel, <code>AMD-V</code> si es AMD. Sustituya la marca de su computadora y la versión de Windows que utiliza.</p>
 </li>
 </ul>
 <h2 id="otra-opcion-nativo">Otra opcion: Nativo<a class="headerlink" href="#otra-opcion-nativo" title="Permanent link">&para;</a></h2>
-<p>Para trabajar nativo necesitará Ubuntu 20 en inglés. Si decide usar otra distribución de Linux, usted es responsable de instalar y configurar todo.</p>
+<p>Para trabajar nativo necesitará Ubuntu 22 LTS en inglés. Si decide usar otra distribución de Linux, usted es responsable de instalar y configurar todo.</p>
 <p>Si su Ubuntu no se encuentra en ingles, tendra problemas en el lab 2 (cgdb). Puede cambiar su idioma, o buscar la solucion al problema en Google.</p>
 <p>Si todavia no tiene Ubuntu instalado aqui hay un <a href="https://www.youtube.com/watch?v=h9cPABYSJSI">tutorial para dual boot</a>. Ponga mucha atención, sea muy cuidadoso y sobre todo haga un backup de su información importante antes de comenzar.</p>
-<p>Wow... parece que son bastantes instrucciones, seria más facil usar la máquina virtual!</p>
+<p>Recuerde... Nuestra opción preferida es usar la máquina virtual.</p>
 <p>Instalar git</p>
 <div class="codehilite"><pre><span></span>sudo apt update
 sudo apt install git
 </pre></div>
 
 
-<p>Instalar Java</p>
+<p>Instalar Java 11</p>
 <div class="codehilite"><pre><span></span>sudo apt update
 sudo apt install default-jdk
 </pre></div>
@@ -752,19 +752,6 @@ sudo apt install python3.7
 <p>Instalar pip</p>
 <div class="codehilite"><pre><span></span>sudo apt update
 sudo apt install python3-pip
-</pre></div>
-
-
-<p>Las versiones recientes de Python suelen incluir todo lo que necesitamos (en la maquina virtual ya revisamos y esta todo lo que necesita! en serio, use la maquina virtual!), verifiquemoslo abriendo la terminal de Python con el comando <code>python3</code>, luego en la terminal escribiremos los siguientes comandos</p>
-<div class="codehilite"><pre><span></span>import os
-import sys
-import requests
-import zipfile
-</pre></div>
-
-
-<p>Si ninguno nos dio problema, Python esta listo; si alguno fallo, lo instalaremos con pip</p>
-<div class="codehilite"><pre><span></span>pip3 install nombreDelPaqueteQueDioError
 </pre></div>
 
 
