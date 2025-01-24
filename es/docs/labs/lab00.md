@@ -52,19 +52,19 @@ A continuación algunos conceptos importantes relacionados con el uso de git, es
 Para obtener sus archivos base visite el siguiente link.
 
 ```
-https://classroom.github.com/a/DAsWWjLF
+https://classroom.github.com/a/CmYCs6WL
 ```
 
 Allí debe aceptar la asignación para que su repositorio sea creado. Al hacerlo, tendrá un repositorio con un link como este.
 
 ```
-https://github.com/cc3-ug/lab00-2024-MI_USUARIO.git
+https://github.com/cc3-ug/lab00-2025-MI_USUARIO.git
 ```
 
 Abra una terminal y navegue en ella hacia el lugar donde quiera colocar su laboratorio. Como es la primera vez que traeremos información del remote hacia nuestra computadora, usaremos el comando **clone**. Recuerde cambiar `MI_USUARIO` por su usuario.
 
 ```
-git clone https://github.com/cc3-ug/lab00-2024-MI_USUARIO.git
+git clone https://github.com/cc3-ug/lab00-2025-MI_USUARIO.git
 ```
 
 Al ejecutar el comando Github le pedirá su "contraseña", sin embargo desde hace un par de años ya no acepta contraseñas sino tokens, genere el suyo siguiendo los pasos que se indican en esta página.
@@ -82,7 +82,7 @@ Haremos un **push** de prueba antes de continuar.
 Asegurese de estar en la carpeta de su laboratorio (recuerde que en Linux usa el comando **cd** para moverse entre carpetas). Una vez se encuentre allí, cree un archivo que diga "Hola Mundo" ejecutando el siguiente comando.
 
 ```shell
-echo "Hola Mundo" > hello.txt
+echo 'echo "Hola Mundo"' > hello.txt
 ```
 
 Ahora comprobamos el estado de nuestro repositorio.
@@ -164,26 +164,26 @@ Si ya contestaron todo y creen que está correcto pueden agregar los cambios, ha
 
 ```shell
 git add ex1.txt
-git commit -m "ex. 1 complete"
+git commit -m "Finish exercise 1"
 git push origin master
 ```
 
 ## Ejercicio 2: 1000 billetes de $1
 
-Imaginen que tienen mil billetes de `$1` y 10 sobres. Para este ejercicio tienen que encontrar una manera de poner una cantidad determinada de billetes de `$1` en cada uno de los sobres de tal forma que, sin importar la cantidad de dinero que se les pida (entre `$1` y `$1000`), simplemente entreguen una combinación de los sobres y que siempre estén seguros de que están dando la cantidad correcta.
+Imaginen que tienen mil billetes de $1 y 10 sobres. Para este ejercicio tienen que encontrar una manera de poner una cantidad determinada de billetes de $1 en cada uno de los sobres de tal forma que, sin importar la cantidad de dinero que se les pida (entre $1 y $1000), simplemente entreguen una combinación de los sobres y que siempre estén seguros de que están dando la cantidad correcta.
 En los archivos del laboratorio hay un archivo de texto llamado `ex2.txt` en donde encontrarán lo siguiente:
 
 ```text
 a,b,c,d,e,f,g,h,i,j
 ```
 
-Cada una de las letras representa un sobre, tienen que reemplazar cada letra por la cantidad de billetes de `$1` que crean correcta, esa cantidad tiene que ser positiva y mayor a cero. Recuerda que la suma de la cantidad de cada uno de los sobres tiene que ser igual a 1000.
+Cada una de las letras representa un sobre, tienen que reemplazar cada letra por la cantidad de billetes de \$1 que crean correcta, esa cantidad tiene que ser positiva y mayor a cero. Recuerda que la suma de la cantidad de cada uno de los sobres tiene que ser igual a `1000`.
 
 Si ya contestaron todo y creen que está correcto pueden agregar los cambios, hacer commit y subirlo al repositorio remoto ejecutando los siguientes comandos en la terminal:
 
 ```shell
 git add ex2.txt
-git commit -m "ex. 2 complete"
+git commit -m "Finish exercise 2"
 git push origin master
 ```
 
@@ -191,6 +191,8 @@ git push origin master
 
 Revise en el navegador que sus push hayan sido exitosos, luego suba el link de su repositorio al GES.
 
-El link que subirá debe verse similar a este `https://github.com/cc3-ug/lab00-2024-MI_USUARIO.git`.
+El link que subirá debe verse similar a este `https://github.com/cc3-ug/lab00-2025-MI_USUARIO.git`.
 
 El GES tiene una opción para subir links, úsela. No envíe su link adentro de un txt, pdf, etc. de lo contrarion se le restarán puntos.
+
+Antes de enviar su link, pase pegándolo en algún editor de texto para asegurarse que sea el formato correcto. Este debe comenzar con `https` y esto no debe aparecer repetido, y debe terminar con `.git` o con su usuario.
