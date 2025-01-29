@@ -20,13 +20,6 @@ theme:
   palette:
     primary: teal
 
-
-# Customization
-extra:
-  social:
-    - type: github
-      link: https://github.com/cc-3/
-
 extra_css:
   - stylesheets/emoji.css
   - stylesheets/kbd.css

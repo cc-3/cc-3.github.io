@@ -16,13 +16,13 @@ https://classroom.github.com/a/b7qUw-1b
 Allí debe aceptar la asignación para que su repositorio sea creado. Al hacerlo, tendrá un repositorio con un link como este.
 
 ```
-https://github.com/cc3-ug/lab01-2024-MI_USUARIO.git
+https://github.com/cc3-ug/lab01-2025-MI_USUARIO.git
 ```
 
 Abra una terminal y navegue en ella hacia el lugar donde quiera colocar su laboratorio. Como es la primera vez que traeremos información del remote hacia nuestra computadora, usaremos el comando **clone**. Recuerde cambiar `MI_USUARIO` por su usuario.
 
 ```
-git clone https://github.com/cc3-ug/lab01-2024-MI_USUARIO.git
+git clone https://github.com/cc3-ug/lab01-2025-MI_USUARIO.git
 ```
 
 Al ejecutar el comando Github le pedirá su "contraseña", sin embargo desde hace un par de años ya no acepta contraseñas sino tokens, genere el suyo siguiendo los pasos que se indican en esta página. **Puede usar el mismo token de la semana pasada (bueno... depende de la fecha de vencimiento que le haya colocado)**
@@ -52,41 +52,9 @@ gcc -o program program.c
 ./program
 ```
 
-## Ejercicio 1: Programa simple de C
-En este ejercicio, veremos un ejemplo de definiciones macro del preprocesador. Las macros pueden ser un tema complicado, pero en general, la forma en que funcionan es que antes de que un archivo en C sea compilado, las constantes macro son reemplazadas exactamente por el valor al que se refieren.
-
-En este ejercicio, estaremos usando macros exclusivamente como constantes globales. Aquí definimos `CONSTANT_NAME` como un `literal_value` (una literal entera). Noten que solo hay 1 espacio separando el nombre del valor.
-```shell
-#define CONSTANT_NAME LITERAL_VALUE
-```
-Ahora, vean el código en eccentric.c (en el repo). Note que al inicio hay cuatro macros, `v0` a `v3`. Cambie sus valores y vea como esto cambia el output del programa.
-
-Su tarea: Modificando sólo estos cuatro valores, hagan que el programa produzca el siguiente mensaje:
-```shell
-gcc -o eccentric eccentric.c
-./eccentric
-
-Welcome to C:
-====================
-Hola Hola Hola 
-Luis
-
-El gato dice miau
-```
-
-Hay múltiples combinaciones de valores en las macros que consiguen este resultado. El reto para ustedes en este ejercicio es: Consideren el **mínimo** número de distintos valores que `v0` a `v3` puedan tener que den el resultado correcto. Como ejemplo, el máximo teórico es cuatro (cuando todos son diferentes uno de otro).
-
-Cuando ya hayan logrado esto, pueden actualizar el archivo en su repositorio en Github, de esta manera:
-
-```shell
-git add eccentric.c
-git commit -m "Ejercicio 1 terminado"
-git push -u origin master
-```
-
 ## Ejercicio 2: Operando bits
 
-Para este inciso, su trabajo es completar los archivos **ex2/get_bit.c**, **ex2/set_bit.c** y **ex2/flip_bit.c** de manera que las funciones cumplan con la tarea que su nombre indica (obtener un bit, actualizar el valor de un bit, negar un bit). Para ello deberán utilizar las operaciones de bits básicas: and (&), or (\|), xor (^), not (~) y los corrimientos a la derecha (\>\>) y a la izquierda (<<). Lea la sección 2.9 de K&R si aún no ha llegado.
+Para este inciso, su trabajo es completar los archivos **ex1/get_bit.c**, **ex1/set_bit.c** y **ex1/flip_bit.c** de manera que las funciones cumplan con la tarea que su nombre indica (obtener un bit, actualizar el valor de un bit, negar un bit). Para ello deberán utilizar las operaciones de bits básicas: and (&), or (\|), xor (^), not (~) y los corrimientos a la derecha (\>\>) y a la izquierda (<<). Lea la sección 2.9 de K&R si aún no ha llegado.
 
 Para este ejercicio **no pueden utilizar condicionales ni ciclos**. Es decir, no escriba ningún if, else, do, while, for, switch o case. No intente engañarnos, revisaremos que no los use.
 
@@ -138,14 +106,14 @@ Ahora estamos usando un Makefile, el cuál tiene dentro comandos que nos facilit
 
 Al terminar su ejercicio recuerde hacer add + commit + push hacia Github.
 
-## Ejercicio 3: Registro de Corrimiento con Retroalimentación Lineal
+## Ejercicio 2: Registro de Corrimiento con Retroalimentación Lineal
 En este ejercicio deben de implementar una función que compute la siguiente iteración de un registro de corrimiento de retroalimentación lineal (LFSR por sus siglas en inglés). 
 
 Algunas aplicaciones que utilizan LFSRs son: televisión digital, teléfonos con acceso múltiple por división de código, Ethernet, USB 3.0 y mucho más. 
 
 Esta función deberá generar números pseudo-aleatorios utilizando operadores binarios. Si quiere conocer un poco más, puede visitar el siguiente [link de Wikipedia](https://es.wikipedia.org/wiki/LFSR).
 
-En el archivo **ex3/lfsr_calculate.c** deben de completar la función _lfsr_calculate()_ de manera que realice lo siguiente:
+En el archivo **ex2/lfsr_calculate.c** deben de completar la función _lfsr_calculate()_ de manera que realice lo siguiente:
 
 ### Diagrama del hardware
 
@@ -194,14 +162,69 @@ Congratulations! It works!
 ```
 Al finalizar, recuerde hacer add + commit + push.
 
+## Ejercicio 3: Concatenando bits
+
+Para este ejercicio implementaremos una función que concatena los bits de dos números:
+
+```
+unsigned concat_bits(unsigned x, unsigned len_x, unsigned y, unsigned len_y)
+``` 
+
+Cuyos parámetros representan:
+
+- `x`: Al concatenar, este número quedará antepuesto al otro
+- `y`: Al concatenar, este número quedará después, quedará en las posiciones menos significativas
+- `len_x`: En `x` nos llegarán 32 bits (porque es un int), pero no consideraremos como "útil" todo el número, para la concatenación tomaremos en cuenta solo los `len_x` bits menos significativos, lo demás lo ignoraremos
+- `len_y`: De igual manera para `y`, solo tomaremos en cuenta los `len_y` bits menos significativos, lo demás lo ignoraremos
+
+Después de concatenar, debe ver si su "pedacito de número" parece negativo o positivo y rellenar las posiciones más significativas con el valor correspondiente.
+
+
+#### Ejemplo 1
+<pre>
+Nos envian 0x000000aa con longitud 8, y 0x0000cccc con longitud 16
+
+Nos interesan los 8 bits menos significativos de 0x000000aa, es decir 0x<span style="color:blue">aa</span>
+Nos interesan los 16 bits menos significativos de 0x0000cccc, es decir 0x<span style="color:red">cccc</span>
+
+Concatenamos y nos va quedando 0x<span style="color:blue">aa</span><span style="color:red">cccc</span>
+
+Finalmente nos damos cuenta que parece negativo
+(al convertir a binario se mira como 1010 1010 1100...)
+entonces rellenamos las casillas faltantes con 1s
+Nuestro resultado final es 0x<span style="color:magenta">ff</span><span style="color:blue">aa</span><span style="color:red">cccc</span>
+</pre>
+
+#### Ejemplo 2
+<pre>
+Nos envian 0x00000066 con longitud 6, y 0xfffffccc con longitud 10
+
+Nos interesan los 6 bits menos significativos de 0x00000066, es decir 0x<span style="color:blue">26</span>
+(Fijese bien... 0x00000066 se mira como   ...0000 0000 0110 0110
+Cuando me piden tomar solo 6 bits, tomamos 10 0110, lo cual se mira como 0x26)
+
+Nos interesan los 10 bits menos significativos de 0xfffffccc, es decir 0x<span style="color:red">0cc</span>
+(Fijese bien... 0xfffffccc se mira como   ...1111 1100 1100 1100
+Cuando me piden tomar solo 10 bits, tomamos 00 1100 1100, lo cual se mira como 0x0cc)
+
+Al concatenar, estaremos uniendo <span style="color:blue">10 0110</span> con <span style="color:red">00 1100 1100</span>
+Nos quedara <span style="color:blue">100110</span><span style="color:red">0011001100</span>
+Que en grupos de cuatro se ve <span style="color:blue">1001 10</span><span style="color:red">00 1100 1100</span>, es decir 0x98cc
+
+Finalmente nos damos cuenta que parece negativo
+(al convertir a binario se mira como 1001 1000...)
+entonces rellenamos las casillas faltantes con 1s
+Nuestro resultado final es 0x<span style="color:magenta">ffff</span>98ccs
+</pre>
+
 ## Entrega de laboratorio
 
 Antes de entregar, podemos revisar cuántos puntos obtendremos usando el autograder que se nos provee.
 
-Para comenzar, si está en su propio Linux instale lo siguiente. Si está en la máquina virtual del curso, no es necesario, esto ya venía instalado.
+Si está en su propio Linux instale lo siguiente. Si está en la máquina virtual del curso, no es necesario, esto ya venía instalado.
 ```
 pip3 install --upgrade pip
-pip3 install pycrypto boto3 paramiko tabulate psutil pycparser
+pip3 install tabulate psutil pycparser
 ```
 
 Ahora ya podemos usar el autograder. Vaya a la carpeta de su laboratorio, y ejecute:
@@ -224,13 +247,13 @@ Al hacerlo verá algo parecido a lo siguiente:
 
 Exercise        Grade  Message
 ------------  -------  --------------------------------------
-1. eccentric       20  passed
-2. bit_ops         40  passed
-3. lfsr            40  passed
+2. bit_ops         35  passed
+3. lfsr            30  passed
+4. concat_bits     35  passed
 ```
 
-La nota que aparezca allí es la nota que obtendrá en su laboratorio. En este lab, las series valen 20, 40 y 40 respectivamente.
+La nota que aparezca allí es la nota que obtendrá en su laboratorio. En este lab, las series valen 35, 30 y 35 respectivamente.
 
-Cuando esté conforme con su nota (¡apúntele siempre al cien!), entregue su laboratorio a través de Github (los `add` `commit` y `push` que se le pidieron arriba).
+Cuando esté conforme con su nota (¡apúntele siempre al cien!), entregue su laboratorio a través de Github (los `add`, `commit` y `push` que se le pidieron arriba).
 
-Luego **envíe el link de su repositorio de Github en el GES**. El GES tiene una opción para enviar links, ÚSELA. No vaya a poner su link en un txt, pdf, etc. porque eso solo nos causa trabajo adicional.
+Luego **envíe el link de su repositorio de Github en el GES**. El GES tiene una opción para enviar links, ÚSELA. No vaya a poner su link en un txt, pdf, etc. Si lo hace, su lab no será calificado.
