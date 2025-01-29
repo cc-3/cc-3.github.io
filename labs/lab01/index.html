@@ -349,8 +349,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#ejercicio-2-operando-bits" title="Ejercicio 2: Operando bits" class="md-nav__link">
-    Ejercicio 2: Operando bits
+  <a href="#ejercicio-1-operando-bits" title="Ejercicio 1: Operando bits" class="md-nav__link">
+    Ejercicio 1: Operando bits
   </a>
   
 </li>
@@ -738,8 +738,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#ejercicio-2-operando-bits" title="Ejercicio 2: Operando bits" class="md-nav__link">
-    Ejercicio 2: Operando bits
+  <a href="#ejercicio-1-operando-bits" title="Ejercicio 1: Operando bits" class="md-nav__link">
+    Ejercicio 1: Operando bits
   </a>
   
 </li>
@@ -862,7 +862,7 @@ El archivo ejecutable es <code>a.out</code>, así que, ¿qué rayos es eso de pu
 ./program
 </pre></div>
 
-<h2 id="ejercicio-2-operando-bits">Ejercicio 2: Operando bits<a class="headerlink" href="#ejercicio-2-operando-bits" title="Permanent link">&para;</a></h2>
+<h2 id="ejercicio-1-operando-bits">Ejercicio 1: Operando bits<a class="headerlink" href="#ejercicio-1-operando-bits" title="Permanent link">&para;</a></h2>
 <p>Para este inciso, su trabajo es completar los archivos <strong>ex1/get_bit.c</strong>, <strong>ex1/set_bit.c</strong> y <strong>ex1/flip_bit.c</strong> de manera que las funciones cumplan con la tarea que su nombre indica (obtener un bit, actualizar el valor de un bit, negar un bit). Para ello deberán utilizar las operaciones de bits básicas: and (&amp;), or (|), xor (^), not (~) y los corrimientos a la derecha (>>) y a la izquierda (&lt;&lt;). Lea la sección 2.9 de K&amp;R si aún no ha llegado.</p>
 <p>Para este ejercicio <strong>no pueden utilizar condicionales ni ciclos</strong>. Es decir, no escriba ningún if, else, do, while, for, switch o case. No intente engañarnos, revisaremos que no los use.</p>
 <p align="center">
@@ -895,7 +895,7 @@ x | 0 = x
 x | 1 = 1
 </pre></div>
 
-<p>¿Qué tal si usamos <strong>dos</strong> de estas propiedades para resolver el ejercicio?</p>
+<p>Aproveche una o varias de estas propiedades para escribir en la casilla deseada.</p>
 <p><strong>Idea para flip_bit():</strong> ¿Habrá otra operación bitwise con propiedades similares al and y or que aún no haya usado? Quizás hay alguna que me haga la tarea...</p>
 <p>Una vez terminen de editar las funciones, pueden compilar y correr el código con:
 <div class="codehilite"><pre><span></span>make bit_ops
@@ -904,7 +904,7 @@ x | 1 = 1
 <p>Ahora estamos usando un Makefile, el cuál tiene dentro comandos que nos facilitan la compilación. Al ejecutar <code>./bit_ops</code> se imprimirá el resultado de algunas pruebas. Si tienen curiosidad pueden revisar con libertad la carpeta <strong>tests</strong> que contiene las pruebas que se van a realizar en cada ejercicio de este laboratorio y que reflejan bastante lo que evaluará el autograder, por ejemplo el archivo que se utiliza para este ejercicio es <strong>tests/bit_ops_test.c</strong>.</p>
 <p>Al terminar su ejercicio recuerde hacer add + commit + push hacia Github.</p>
 <h2 id="ejercicio-2-registro-de-corrimiento-con-retroalimentacion-lineal">Ejercicio 2: Registro de Corrimiento con Retroalimentación Lineal<a class="headerlink" href="#ejercicio-2-registro-de-corrimiento-con-retroalimentacion-lineal" title="Permanent link">&para;</a></h2>
-<p>En este ejercicio deben de implementar una función que compute la siguiente iteración de un registro de corrimiento de retroalimentación lineal (LFSR por sus siglas en inglés). </p>
+<p>En este ejercicio deben de implementar una función que compute la siguiente iteración de un registro de corrimiento de retroalimentación lineal (Left Feedback Shift Register, LFSR por sus siglas en inglés). </p>
 <p>Algunas aplicaciones que utilizan LFSRs son: televisión digital, teléfonos con acceso múltiple por división de código, Ethernet, USB 3.0 y mucho más. </p>
 <p>Esta función deberá generar números pseudo-aleatorios utilizando operadores binarios. Si quiere conocer un poco más, puede visitar el siguiente <a href="https://es.wikipedia.org/wiki/LFSR">link de Wikipedia</a>.</p>
 <p>En el archivo <strong>ex2/lfsr_calculate.c</strong> deben de completar la función <em>lfsr_calculate()</em> de manera que realice lo siguiente:</p>
