@@ -10,7 +10,7 @@
 Para obtener sus archivos base visite el siguiente link.
 
 ```
-https://classroom.github.com/a/b7qUw-1b
+https://classroom.github.com/a/SMs9QGdc
 ```
 
 Allí debe aceptar la asignación para que su repositorio sea creado. Al hacerlo, tendrá un repositorio con un link como este.
@@ -52,7 +52,7 @@ gcc -o program program.c
 ./program
 ```
 
-## Ejercicio 2: Operando bits
+## Ejercicio 1: Operando bits
 
 Para este inciso, su trabajo es completar los archivos **ex1/get_bit.c**, **ex1/set_bit.c** y **ex1/flip_bit.c** de manera que las funciones cumplan con la tarea que su nombre indica (obtener un bit, actualizar el valor de un bit, negar un bit). Para ello deberán utilizar las operaciones de bits básicas: and (&), or (\|), xor (^), not (~) y los corrimientos a la derecha (\>\>) y a la izquierda (<<). Lea la sección 2.9 de K&R si aún no ha llegado.
 
@@ -92,7 +92,7 @@ x | 0 = x
 x | 1 = 1
 ```
 
-¿Qué tal si usamos **dos** de estas propiedades para resolver el ejercicio?
+Aproveche una o varias de estas propiedades para escribir en la casilla deseada.
 
 **Idea para flip_bit():** ¿Habrá otra operación bitwise con propiedades similares al and y or que aún no haya usado? Quizás hay alguna que me haga la tarea...
 
@@ -107,7 +107,7 @@ Ahora estamos usando un Makefile, el cuál tiene dentro comandos que nos facilit
 Al terminar su ejercicio recuerde hacer add + commit + push hacia Github.
 
 ## Ejercicio 2: Registro de Corrimiento con Retroalimentación Lineal
-En este ejercicio deben de implementar una función que compute la siguiente iteración de un registro de corrimiento de retroalimentación lineal (LFSR por sus siglas en inglés). 
+En este ejercicio deben de implementar una función que compute la siguiente iteración de un registro de corrimiento de retroalimentación lineal (Left Feedback Shift Register, LFSR por sus siglas en inglés). 
 
 Algunas aplicaciones que utilizan LFSRs son: televisión digital, teléfonos con acceso múltiple por división de código, Ethernet, USB 3.0 y mucho más. 
 
@@ -214,8 +214,14 @@ Que en grupos de cuatro se ve <span style="color:blue">1001 10</span><span style
 Finalmente nos damos cuenta que parece negativo
 (al convertir a binario se mira como 1001 1000...)
 entonces rellenamos las casillas faltantes con 1s
-Nuestro resultado final es 0x<span style="color:magenta">ffff</span>98ccs
+Nuestro resultado final es 0x<span style="color:magenta">ffff</span>98cc
 </pre>
+
+Probamos este ejercicio usando:
+```
+make concat_bits
+./concat_bits
+```
 
 ## Entrega de laboratorio
 

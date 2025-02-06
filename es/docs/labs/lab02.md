@@ -10,11 +10,11 @@
 Para obtener sus archivos base visite el siguiente link, luego clone su repositorio.
 
 ```
-https://classroom.github.com/a/GaL-ZrRp
+https://classroom.github.com/a/fQglD5Dp
 ```
 
 ```
-git clone https://github.com/cc3-ug/lab02-2024-MI_USUARIO.git
+git clone https://github.com/cc3-ug/lab02-2025-MI_USUARIO.git
 ```
 
 Un par de recordatorios, si necesita ayuda con esto revise los labs anteriores para más detalle:
@@ -34,7 +34,7 @@ Un **debugger**, como sugiere el nombre, es un programa específicamente diseña
 
   2. Ejecución por **steps** (línea a línea) por el programa. El código siempre se ejecuta línea a línea, pero pasa muy rápido como para que sepamos qué línea produce algún error. Ser capaces de ejecutar línea a línea el programa les permite observar exactamente qué esta causando un bug en el programa.
 
-Para este ejercicio, necesitarán la [GDB reference card](http://inst.eecs.berkeley.edu/~cs61c/resources/gdb5-refcard.pdf). Para poder usarlo compilaremos con la bandera `-g`. 
+Para este ejercicio, necesitarán la [GDB reference card](../docs/gdb5-refcard.pdf). Para poder usarlo agregaremos la bandera `-g`. 
 
 ```shell
 gcc -g -o hello hello.c
@@ -48,7 +48,10 @@ cgdb hello
 
 Vean lo que hace este comando. Están ejecutando el programa `cgdb` en el **ejecutable** `hello` generado por `gcc`. No intenten ejecutar cgdb en el archivo fuente en `hello.c`! Eso no va a funcionar.
 
+(Otra cosa... pruebe que pasa si intenta correr `cgdb` pero NO compiló usando `-g`)
+
 **Su tarea: Ejecute el programa en cgdb varias veces, pruebe distintos comandos en cada ejecución**
+
   1. Ponga un breakpoint en el main.
   2. Use el comando `run` de cgdb.
   3. Use el comando para single-step de cgdb.
@@ -104,7 +107,7 @@ No responda al azar. Lea la documentación y/o pruebe los comandos para saber qu
   c. break ... if expr    
   d. Ninguna de las anteriores
   
-  **3.** ¿Con qué comando se ejecuta la **siguiente línea del código en C** después de parar en un breakpoint? (si la línea a ejecutar es una llamada a función, debe ejecutarse toda la función)
+  **3.** ¿Con qué comando se ejecuta la **siguiente línea del código en C** después de parar en un breakpoint? (si la línea a ejecutar es una llamada a función, se ejecuta la función completa de un solo, no línea por línea)
     
   a. run    
   b. s    
@@ -174,11 +177,11 @@ Segmentation fault
 
 Ejecuten cgdb en el programa, siguiendo las instrucciones aprendidas en los ejercicios anteriores. Les recomendamos añadir un breakpoint en la función `ll_equal()`. Cuando el debugger pare en el breakpoint, ejecuten paso a paso el programa para que puedan descifrar qué es lo que provoca el error.
 
-* Pista 1: Analicen el valor de los punteros `a` y `b` en la función (¡despliéguenlos!). ¿Están siempre apuntando a la dirección correcta?
+* Pista 1: Analicen el valor de los punteros `a` y `b` en la función (¡despliéguelos!). ¿Están siempre apuntando a la dirección correcta?
 
 * Pista 2: Vean el código fuente en `main` para ver la estructura de los nodos y ver exactamente qué se está enviando como argumento a `ll_equal`.
 
-Cuando haya encontrado el problema, arréglelo, compile nuevamente y ejecute el código. ¿Nota la diferencia?
+Cuando haya encontrado el problema, arréglelo, compile nuevamente y ejecute el código. Para resolver este ejercicio normalmente basta una o dos líneas de código, este se trata de analizar en lugar de programar.
 
 Al finalizar, no olvide subir el archivo modificado a su repositorio.
 
@@ -193,12 +196,12 @@ git push origin master
 
 Veamos qué pasa cuando, a un programa que requiere interacción del usuario, lo ejecutamos con cgdb. Primero, ejecuten el programa en `interactive_hello.c` para hablar con un programa muy amigable.
 ```shell
-gcc -g -o int_hello interactive_hello.c
+gcc -g -o interactive_hello interactive_hello.c
 ./int_hello
 ```
 Ahora, traten de depurarlo paso a paso en cgdb.
 ```shell
-cgdb int_hello
+cgdb interactive_hello
 ```
 ¿Qué pasa cuando intentar ejecutar el programa hasta el final? ¿Logró terminar o se quedó trabado?
 
@@ -212,24 +215,24 @@ Ahora uniremos algunas piezas de conocimiento... ¿Qué se le ocurre hacer con e
 ¿Ya lo pensó un poco por su cuenta? Muy bien, hora de ver la solución sobre cómo enviar datos que nuestro programa de C espera leer.
 
 - Cree un archivo `nombre.txt` y escriba adentro su nombre, en una sola línea. Guarde el archivo en la carpeta de su lab.
-- Compile su programa con banderas de debugging `gcc -g -o int_hello interactive_hello.c`
-- Inicie el debugger `cgdb int_hello`
+- Compile su programa con banderas de debugging `gcc -g -o interactive_hello interactive_hello.c`
+- Inicie el debugger `cgdb interactive_hello`
 - En lugar de solo hacer `run` como antes, haga `run < nombre.txt`
 
 ¿Apareció su nombre automágicamente allí escrito? Ese es el poder de las redirecciones, el `<` nos permite enviar el contenido del archivo de texto, hacia el programa que se está debuggeando.
 
-El debugger no es una herramienta muy atractiva visualmente, pero es increiblemente poderosa al momento de buscar errores. Úsela siempre que tenga problemas, aunque las instrucciones no se lo indiquen.
+El debugger no es una herramienta muy atractiva visualmente, pero es increiblemente poderosa al momento de buscar errores. **Úsela siempre que tenga problemas, aunque las instrucciones no se lo indiquen**.
 
-## Ejercicio 3: Punteros y estructuras en C
+## Ejercicio 3: Punteros y estructuras en C (Algoritmo de la tortuga y la liebre)
 En **ll_cycle.c** completen la función `ll_has_cycle()` de modo que implemente el siguiente algoritmo para comprobar si una linked list simple tiene un ciclo:
   1. Comiencen con dos punteros apuntando al principio de la lista. Llamaremos al primero `tortoise` (tortuga) y al segundo `hare` (liebre).
   2. Avancen el puntero `hare` dos nodos hacia adelante. Si no se puede debido a punteros nulos, hemos llegado al final de la lista. Por lo tanto, la lista no tiene un ciclo.
-  3. Ahora, avancen `tortoise` un nodo. (Revisar si llega a ser un puntero nulo es innecesario. ¿Por qué?)
+  3. Ahora, avancen `tortoise` un nodo. (¿Necesitamos revisar si llegamos a un puntero nulo? ¿Por qué?)
   4. Si la tortuga y la liebre apuntan al mismo nodo, la lista es cíclica. Si no, regresen al paso 2.
   
 Después de implementar correctamente la función `ll_has_cycle()`, el programa que se obtiene después de compilar **ll_cycle.c** mostrará si el resultado de su función está correcto, conforme a lo que esperaba como salida.
 
-Pista: Para este ejercicio debe haber entendido que es un puntero nulo. Recuerda cuándo avanzaba en una linked list en Java? Recuerda las precauciones que debía tomar para no seguir avanzando de más?
+Para este ejercicio debe haber entendido que es un puntero nulo. ¿Recuerda cuándo avanzaba en una linked list en Java? ¿Recuerda las precauciones que debía tomar para no seguir avanzando de más?
 
 Si necesita más explicación del algoritmo aquí hay un [artículo](https://en.wikipedia.org/wiki/Cycle_detection#Floyd.27s_Tortoise_and_Hare) sobre su funcionamiento.
 
