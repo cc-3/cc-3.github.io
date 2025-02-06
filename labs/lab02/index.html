@@ -388,8 +388,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#ejercicio-3-punteros-y-estructuras-en-c" title="Ejercicio 3: Punteros y estructuras en C" class="md-nav__link">
-    Ejercicio 3: Punteros y estructuras en C
+  <a href="#ejercicio-3-punteros-y-estructuras-en-c-algoritmo-de-la-tortuga-y-la-liebre" title="Ejercicio 3: Punteros y estructuras en C (Algoritmo de la tortuga y la liebre)" class="md-nav__link">
+    Ejercicio 3: Punteros y estructuras en C (Algoritmo de la tortuga y la liebre)
   </a>
   
 </li>
@@ -738,8 +738,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#ejercicio-3-punteros-y-estructuras-en-c" title="Ejercicio 3: Punteros y estructuras en C" class="md-nav__link">
-    Ejercicio 3: Punteros y estructuras en C
+  <a href="#ejercicio-3-punteros-y-estructuras-en-c-algoritmo-de-la-tortuga-y-la-liebre" title="Ejercicio 3: Punteros y estructuras en C (Algoritmo de la tortuga y la liebre)" class="md-nav__link">
+    Ejercicio 3: Punteros y estructuras en C (Algoritmo de la tortuga y la liebre)
   </a>
   
 </li>
@@ -779,10 +779,10 @@
 </ul>
 <h2 id="preparacion">Preparación<a class="headerlink" href="#preparacion" title="Permanent link">&para;</a></h2>
 <p>Para obtener sus archivos base visite el siguiente link, luego clone su repositorio.</p>
-<div class="codehilite"><pre><span></span>https://classroom.github.com/a/GaL-ZrRp
+<div class="codehilite"><pre><span></span>https://classroom.github.com/a/fQglD5Dp
 </pre></div>
 
-<div class="codehilite"><pre><span></span>git clone https://github.com/cc3-ug/lab02-2024-MI_USUARIO.git
+<div class="codehilite"><pre><span></span>git clone https://github.com/cc3-ug/lab02-2025-MI_USUARIO.git
 </pre></div>
 
 <p>Un par de recordatorios, si necesita ayuda con esto revise los labs anteriores para más detalle:</p>
@@ -805,7 +805,7 @@
 <p>Ejecución por <strong>steps</strong> (línea a línea) por el programa. El código siempre se ejecuta línea a línea, pero pasa muy rápido como para que sepamos qué línea produce algún error. Ser capaces de ejecutar línea a línea el programa les permite observar exactamente qué esta causando un bug en el programa.</p>
 </li>
 </ol>
-<p>Para este ejercicio, necesitarán la <a href="http://inst.eecs.berkeley.edu/~cs61c/resources/gdb5-refcard.pdf">GDB reference card</a>. Para poder usarlo compilaremos con la bandera <code>-g</code>. </p>
+<p>Para este ejercicio, necesitarán la <a href="../../docs/gdb5-refcard.pdf">GDB reference card</a>. Para poder usarlo agregaremos la bandera <code>-g</code>. </p>
 <div class="codehilite"><pre><span></span>gcc -g -o hello hello.c
 </pre></div>
 
@@ -814,10 +814,13 @@
 </pre></div>
 
 <p>Vean lo que hace este comando. Están ejecutando el programa <code>cgdb</code> en el <strong>ejecutable</strong> <code>hello</code> generado por <code>gcc</code>. No intenten ejecutar cgdb en el archivo fuente en <code>hello.c</code>! Eso no va a funcionar.</p>
-<p><strong>Su tarea: Ejecute el programa en cgdb varias veces, pruebe distintos comandos en cada ejecución</strong>
-  1. Ponga un breakpoint en el main.
-  2. Use el comando <code>run</code> de cgdb.
-  3. Use el comando para single-step de cgdb.</p>
+<p>(Otra cosa... pruebe que pasa si intenta correr <code>cgdb</code> pero NO compiló usando <code>-g</code>)</p>
+<p><strong>Su tarea: Ejecute el programa en cgdb varias veces, pruebe distintos comandos en cada ejecución</strong></p>
+<ol>
+<li>Ponga un breakpoint en el main.</li>
+<li>Use el comando <code>run</code> de cgdb.</li>
+<li>Use el comando para single-step de cgdb.</li>
+</ol>
 <p>Escriban <code>help</code> adentro de cgdb para averiguar cómo hacer estas cosas, o usen la reference card.</p>
 <p><strong>Si encuentran un mensaje de error que dice <code>printf.c: No such file or directory</code>:</strong> Probablemente entraron a una función <code>printf</code>. Si siguen ejecutando paso a paso, pareciera que nunca avanzaran en el código. cgdb está dando el error porque no tienen el archivo en el que se define la función <code>printf</code>. Esto es algo molesto, entonces para librarse de esto usen el comando <code>finish</code> para ejecutar el programa hasta que termine la función printf. La próxima vez que prueba, utilice el comando <code>next</code> para saltar sobre la linea que usa <code>printf</code>.</p>
 <p>En cgdb, pueden presionar <code>ESC</code> para ir a la ventana del código (arriba), y usar <code>i</code> para regresar a la ventana de comandos (abajo). La ventana de comandos es donde se introducen los comandos de cgdb.</p>
@@ -856,7 +859,7 @@ Aquí tendrán que responder las siguientes preguntas de opción múltiple con e
   b. cond break expr  <br />
   c. break ... if expr  <br />
   d. Ninguna de las anteriores</p>
-<p><strong>3.</strong> ¿Con qué comando se ejecuta la <strong>siguiente línea del código en C</strong> después de parar en un breakpoint? (si la línea a ejecutar es una llamada a función, debe ejecutarse toda la función)</p>
+<p><strong>3.</strong> ¿Con qué comando se ejecuta la <strong>siguiente línea del código en C</strong> después de parar en un breakpoint? (si la línea a ejecutar es una llamada a función, se ejecuta la función completa de un solo, no línea por línea)</p>
 <p>a. run  <br />
   b. s  <br />
   c. c  <br />
@@ -908,13 +911,13 @@ Segmentation fault
 <p>Ejecuten cgdb en el programa, siguiendo las instrucciones aprendidas en los ejercicios anteriores. Les recomendamos añadir un breakpoint en la función <code>ll_equal()</code>. Cuando el debugger pare en el breakpoint, ejecuten paso a paso el programa para que puedan descifrar qué es lo que provoca el error.</p>
 <ul>
 <li>
-<p>Pista 1: Analicen el valor de los punteros <code>a</code> y <code>b</code> en la función (¡despliéguenlos!). ¿Están siempre apuntando a la dirección correcta?</p>
+<p>Pista 1: Analicen el valor de los punteros <code>a</code> y <code>b</code> en la función (¡despliéguelos!). ¿Están siempre apuntando a la dirección correcta?</p>
 </li>
 <li>
 <p>Pista 2: Vean el código fuente en <code>main</code> para ver la estructura de los nodos y ver exactamente qué se está enviando como argumento a <code>ll_equal</code>.</p>
 </li>
 </ul>
-<p>Cuando haya encontrado el problema, arréglelo, compile nuevamente y ejecute el código. ¿Nota la diferencia?</p>
+<p>Cuando haya encontrado el problema, arréglelo, compile nuevamente y ejecute el código. Para resolver este ejercicio normalmente basta una o dos líneas de código, este se trata de analizar en lugar de programar.</p>
 <p>Al finalizar, no olvide subir el archivo modificado a su repositorio.</p>
 <div class="codehilite"><pre><span></span>git add ll_equal.c
 git commit -m <span class="s2">&quot;Ejercicio 2 terminado&quot;</span>
@@ -924,11 +927,11 @@ git push origin master
 <h2 id="aprendiendo-algo-extra-debuggeando-un-programa-en-c-que-requiere-interaccion-del-usuario">Aprendiendo algo extra: Debuggeando un programa en C que requiere interacción del usuario<a class="headerlink" href="#aprendiendo-algo-extra-debuggeando-un-programa-en-c-que-requiere-interaccion-del-usuario" title="Permanent link">&para;</a></h2>
 <p><strong>Esta parte es opcional y no vale puntos, ni siquiera extras.</strong></p>
 <p>Veamos qué pasa cuando, a un programa que requiere interacción del usuario, lo ejecutamos con cgdb. Primero, ejecuten el programa en <code>interactive_hello.c</code> para hablar con un programa muy amigable.
-<div class="codehilite"><pre><span></span>gcc -g -o int_hello interactive_hello.c
+<div class="codehilite"><pre><span></span>gcc -g -o interactive_hello interactive_hello.c
 ./int_hello
 </pre></div>
 Ahora, traten de depurarlo paso a paso en cgdb.
-<div class="codehilite"><pre><span></span>cgdb int_hello
+<div class="codehilite"><pre><span></span>cgdb interactive_hello
 </pre></div>
 ¿Qué pasa cuando intentar ejecutar el programa hasta el final? ¿Logró terminar o se quedó trabado?</p>
 <p>Vamos a aprender un poco acerca de las redirecciones. Para comenzar, puede ir a leer un poco en los siguientes links:</p>
@@ -940,20 +943,20 @@ Ahora, traten de depurarlo paso a paso en cgdb.
 <p>¿Ya lo pensó un poco por su cuenta? Muy bien, hora de ver la solución sobre cómo enviar datos que nuestro programa de C espera leer.</p>
 <ul>
 <li>Cree un archivo <code>nombre.txt</code> y escriba adentro su nombre, en una sola línea. Guarde el archivo en la carpeta de su lab.</li>
-<li>Compile su programa con banderas de debugging <code>gcc -g -o int_hello interactive_hello.c</code></li>
-<li>Inicie el debugger <code>cgdb int_hello</code></li>
+<li>Compile su programa con banderas de debugging <code>gcc -g -o interactive_hello interactive_hello.c</code></li>
+<li>Inicie el debugger <code>cgdb interactive_hello</code></li>
 <li>En lugar de solo hacer <code>run</code> como antes, haga <code>run &lt; nombre.txt</code></li>
 </ul>
 <p>¿Apareció su nombre automágicamente allí escrito? Ese es el poder de las redirecciones, el <code>&lt;</code> nos permite enviar el contenido del archivo de texto, hacia el programa que se está debuggeando.</p>
-<p>El debugger no es una herramienta muy atractiva visualmente, pero es increiblemente poderosa al momento de buscar errores. Úsela siempre que tenga problemas, aunque las instrucciones no se lo indiquen.</p>
-<h2 id="ejercicio-3-punteros-y-estructuras-en-c">Ejercicio 3: Punteros y estructuras en C<a class="headerlink" href="#ejercicio-3-punteros-y-estructuras-en-c" title="Permanent link">&para;</a></h2>
+<p>El debugger no es una herramienta muy atractiva visualmente, pero es increiblemente poderosa al momento de buscar errores. <strong>Úsela siempre que tenga problemas, aunque las instrucciones no se lo indiquen</strong>.</p>
+<h2 id="ejercicio-3-punteros-y-estructuras-en-c-algoritmo-de-la-tortuga-y-la-liebre">Ejercicio 3: Punteros y estructuras en C (Algoritmo de la tortuga y la liebre)<a class="headerlink" href="#ejercicio-3-punteros-y-estructuras-en-c-algoritmo-de-la-tortuga-y-la-liebre" title="Permanent link">&para;</a></h2>
 <p>En <strong>ll_cycle.c</strong> completen la función <code>ll_has_cycle()</code> de modo que implemente el siguiente algoritmo para comprobar si una linked list simple tiene un ciclo:
   1. Comiencen con dos punteros apuntando al principio de la lista. Llamaremos al primero <code>tortoise</code> (tortuga) y al segundo <code>hare</code> (liebre).
   2. Avancen el puntero <code>hare</code> dos nodos hacia adelante. Si no se puede debido a punteros nulos, hemos llegado al final de la lista. Por lo tanto, la lista no tiene un ciclo.
-  3. Ahora, avancen <code>tortoise</code> un nodo. (Revisar si llega a ser un puntero nulo es innecesario. ¿Por qué?)
+  3. Ahora, avancen <code>tortoise</code> un nodo. (¿Necesitamos revisar si llegamos a un puntero nulo? ¿Por qué?)
   4. Si la tortuga y la liebre apuntan al mismo nodo, la lista es cíclica. Si no, regresen al paso 2.</p>
 <p>Después de implementar correctamente la función <code>ll_has_cycle()</code>, el programa que se obtiene después de compilar <strong>ll_cycle.c</strong> mostrará si el resultado de su función está correcto, conforme a lo que esperaba como salida.</p>
-<p>Pista: Para este ejercicio debe haber entendido que es un puntero nulo. Recuerda cuándo avanzaba en una linked list en Java? Recuerda las precauciones que debía tomar para no seguir avanzando de más?</p>
+<p>Para este ejercicio debe haber entendido que es un puntero nulo. ¿Recuerda cuándo avanzaba en una linked list en Java? ¿Recuerda las precauciones que debía tomar para no seguir avanzando de más?</p>
 <p>Si necesita más explicación del algoritmo aquí hay un <a href="https://en.wikipedia.org/wiki/Cycle_detection#Floyd.27s_Tortoise_and_Hare">artículo</a> sobre su funcionamiento.</p>
 <p>A propósito, los punteros se llaman <code>tortoise</code> y <code>hare</code> porque el puntero tortoise (tortuga) se incrementa lentamente (como una tortuga, que se mueve muy lento) y el puntero hare (liebre) se incrementa rápidamente (más rápido que una tortuga, como una liebre, o conejo, que se mueve muy rápido).</p>
 <p>Al finalizar, compilen y ejecuten el archivo, y verifiquen que el resultado de su código, el cual debería ser más o menos igual a este:</p>
