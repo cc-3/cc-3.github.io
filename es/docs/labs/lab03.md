@@ -11,11 +11,11 @@
 Para obtener sus archivos base visite el siguiente link, luego clone su repositorio.
 
 ```
-https://classroom.github.com/a/HS05zG2H
+https://classroom.github.com/a/tyMAJzFQ
 ```
 
 ```
-git clone https://github.com/cc3-ug/lab03-2024-MI_USUARIO.git
+git clone https://github.com/cc3-ug/lab03-2025-MI_USUARIO.git
 ```
 
 Un par de recordatorios, si necesita ayuda con esto revise los labs anteriores para más detalle:
@@ -43,18 +43,50 @@ El objetivo del lab es acostumbrarse al uso de los **structs** de C, así como e
 Es momento de revisar el código de _ex1/vector.c_ si aún lo ha hecho. Aquí hay comentarios complementarios que describen cómo deberían de correr las funciones. Recuerden que los usuarios de su estructura de datos _vector_t_ asumiran que todas las entradas al vector son 0, a menos que hayan sido definidas de otra manera por ellos. Tengan esto en mente, porque _malloc_ no hace esto por ustedes.
 
 ### ¿Qué deben hacer?
-* Complete _vector_new_(). Hay seis comentarios que nos guían paso a paso en qué realizar; en la mayoría solo necesita una instrucción, pero en un par quizás necesite un poquito más.
-* Termine _vector_get()_. Piense en lo que se dijo arriba: aunque me consulten una casilla que aún no existe, debo entregar un resultado válido.
-* Complementen _vector_delete()_. Es muy probable que le salga con solo dos líneas de código, pero el orden de estas es importante.
-* Complete _vector_set()_. Esta es la más complicada, bienvenidos a las ligas mayores. Para resolver esta parte piense en las siguientes preguntas ¿qué pasa si la posición donde me piden escribir aún no existe? ¿cómo pido espacio adicional para que ahora ya exista esta nueva posición? ¿que valor debo colocar en las demás posiciones cuando expanda mi vector? Adicionalmente, ya no piense solo en `malloc()` sino en las otras dos funciones `_alloc()`. Hay algunos comentarios por allí para ayudarle.
+* Comience con _vector_new_(). Hay algunos comentarios que nos guían en qué realizar.
+* Luego implemente _vector_get()_. Piense en lo que se dijo arriba: aunque me consulten una casilla que aún no existe, debo entregar un resultado válido.
+* Luego implemente _vector_delete()_. Es muy probable que le salga con solo dos líneas de código, pero el orden de estas es importante.
+* Finalice con _vector_set()_. Esta es la que más código llevará (igual no pasa de 15 líneas). Para resolver esta parte piense en las siguientes preguntas ¿qué pasa si la posición donde me piden escribir aún no existe? ¿cómo pido espacio adicional para que ahora ya exista esta nueva posición? ¿que valor debo colocar en las demás posiciones cuando expanda mi vector? Adicionalmente, ya no piense solo en `malloc()` sino en las otras dos funciones `_alloc()`. Hay algunos comentarios por allí para ayudarle.
 
-Saber cómo reorganizar y liberar memoria es importante para la programación en C. Piensen que el manejo de memoria es como un parqueo, si hay carros parqueados y los dueños nunca se van, entonces no tienen espacio para nuevos carros. Finalmente, tenga en cuenta que **debería tener un heap vacío al terminar su programa**. Si no lo tenemos, hay que buscar en cuál función debemos colocar `free()`.
+Saber cómo reorganizar y liberar memoria es importante para la programación en C. Tenga en cuenta que **debería tener un heap vacío al terminar su programa**. Si no lo tenemos, hay que buscar en cuál función debemos colocar `free()`.
 
 Al finalizar, pruebe su programa con:
 ```
 make vector
 ./vector
 ```
+
+## Ejercicio 2: Bubble Sort
+### ¿Qué es Bubble Sort?
+
+En CC2 usted conoció varios algoritmos de ordenamiento, el más sencillo de ellos era Bubble Sort. La ventaja de este es que es el más fácil de implementar, la desventaja es que puede llegar a ser el más tardado.
+
+Aquí tiene un pseudocódigo de este algoritmo:
+
+```
+FOR i FROM 0 TO size - 2 DO
+    swapped ← false
+    FOR j FROM 0 TO size - i - 1 DO
+        IF array[j] > array[j + 1] THEN
+            swap(array[j], array[j + 1])
+            swapped ← true
+        END IF
+    END FOR
+    IF swapped = false THEN
+        BREAK
+    END IF
+END FOR
+```
+
+Note que esta es una versión ligeramente distinta a la vista en CC2, esta es un poco más eficiente.
+
+### ¿Qué deben hacer?
+
+Vaya al archivo _bubble.c_ en la carpeta del ejercicio 2 e implemente las funciones `swap()` y `bubbleSort()`.
+
+`swap()` debe intercambiar el contenido de las casillas indicadas, y `bubbleSort()` debe implementar el algoritmo mostrado en el pseudocódigo anterior.
+
+Resuelva este problema usando solamente notación de punteros. Si utiliza notación de arreglos, es decir `array[pos]`, el autograder le dará cero par este ejercicio.
 
 ## Entrega de laboratorio
 
@@ -64,6 +96,6 @@ Recuerde probar su laboratorio usando el autograder.
 ./check
 ```
 
-Este laboratorio tiene una única serie que vale 100 puntos.
+Este laboratorio tiene dos series que valen 50 puntos cada una
 
 Luego **envíe el link de su repositorio de Github en el GES**. El GES tiene una opción para enviar links, ÚSELA. Si envía algún txt, pdf, zip, etc. su laboratorio no se calificará, es decir tendrá cero.
