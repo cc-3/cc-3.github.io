@@ -393,6 +393,33 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#ejercicio-2-bubble-sort" title="Ejercicio 2: Bubble Sort" class="md-nav__link">
+    Ejercicio 2: Bubble Sort
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#que-es-bubble-sort" title="¿Qué es Bubble Sort?" class="md-nav__link">
+    ¿Qué es Bubble Sort?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#que-deben-hacer_1" title="¿Qué deben hacer?" class="md-nav__link">
+    ¿Qué deben hacer?
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#entrega-de-laboratorio" title="Entrega de laboratorio" class="md-nav__link">
     Entrega de laboratorio
   </a>
@@ -717,6 +744,33 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#ejercicio-2-bubble-sort" title="Ejercicio 2: Bubble Sort" class="md-nav__link">
+    Ejercicio 2: Bubble Sort
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#que-es-bubble-sort" title="¿Qué es Bubble Sort?" class="md-nav__link">
+    ¿Qué es Bubble Sort?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#que-deben-hacer_1" title="¿Qué deben hacer?" class="md-nav__link">
+    ¿Qué deben hacer?
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#entrega-de-laboratorio" title="Entrega de laboratorio" class="md-nav__link">
     Entrega de laboratorio
   </a>
@@ -751,10 +805,10 @@
 </ul>
 <h2 id="preparacion">Preparación<a class="headerlink" href="#preparacion" title="Permanent link">&para;</a></h2>
 <p>Para obtener sus archivos base visite el siguiente link, luego clone su repositorio.</p>
-<div class="codehilite"><pre><span></span>https://classroom.github.com/a/HS05zG2H
+<div class="codehilite"><pre><span></span>https://classroom.github.com/a/tyMAJzFQ
 </pre></div>
 
-<div class="codehilite"><pre><span></span>git clone https://github.com/cc3-ug/lab03-2024-MI_USUARIO.git
+<div class="codehilite"><pre><span></span>git clone https://github.com/cc3-ug/lab03-2025-MI_USUARIO.git
 </pre></div>
 
 <p>Un par de recordatorios, si necesita ayuda con esto revise los labs anteriores para más detalle:</p>
@@ -781,22 +835,45 @@
 <p>Es momento de revisar el código de <em>ex1/vector.c</em> si aún lo ha hecho. Aquí hay comentarios complementarios que describen cómo deberían de correr las funciones. Recuerden que los usuarios de su estructura de datos <em>vector_t</em> asumiran que todas las entradas al vector son 0, a menos que hayan sido definidas de otra manera por ellos. Tengan esto en mente, porque <em>malloc</em> no hace esto por ustedes.</p>
 <h3 id="que-deben-hacer">¿Qué deben hacer?<a class="headerlink" href="#que-deben-hacer" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Complete <em>vector_new</em>(). Hay seis comentarios que nos guían paso a paso en qué realizar; en la mayoría solo necesita una instrucción, pero en un par quizás necesite un poquito más.</li>
-<li>Termine <em>vector_get()</em>. Piense en lo que se dijo arriba: aunque me consulten una casilla que aún no existe, debo entregar un resultado válido.</li>
-<li>Complementen <em>vector_delete()</em>. Es muy probable que le salga con solo dos líneas de código, pero el orden de estas es importante.</li>
-<li>Complete <em>vector_set()</em>. Esta es la más complicada, bienvenidos a las ligas mayores. Para resolver esta parte piense en las siguientes preguntas ¿qué pasa si la posición donde me piden escribir aún no existe? ¿cómo pido espacio adicional para que ahora ya exista esta nueva posición? ¿que valor debo colocar en las demás posiciones cuando expanda mi vector? Adicionalmente, ya no piense solo en <code>malloc()</code> sino en las otras dos funciones <code>_alloc()</code>. Hay algunos comentarios por allí para ayudarle.</li>
+<li>Comience con <em>vector_new</em>(). Hay algunos comentarios que nos guían en qué realizar.</li>
+<li>Luego implemente <em>vector_get()</em>. Piense en lo que se dijo arriba: aunque me consulten una casilla que aún no existe, debo entregar un resultado válido.</li>
+<li>Luego implemente <em>vector_delete()</em>. Es muy probable que le salga con solo dos líneas de código, pero el orden de estas es importante.</li>
+<li>Finalice con <em>vector_set()</em>. Esta es la que más código llevará (igual no pasa de 15 líneas). Para resolver esta parte piense en las siguientes preguntas ¿qué pasa si la posición donde me piden escribir aún no existe? ¿cómo pido espacio adicional para que ahora ya exista esta nueva posición? ¿que valor debo colocar en las demás posiciones cuando expanda mi vector? Adicionalmente, ya no piense solo en <code>malloc()</code> sino en las otras dos funciones <code>_alloc()</code>. Hay algunos comentarios por allí para ayudarle.</li>
 </ul>
-<p>Saber cómo reorganizar y liberar memoria es importante para la programación en C. Piensen que el manejo de memoria es como un parqueo, si hay carros parqueados y los dueños nunca se van, entonces no tienen espacio para nuevos carros. Finalmente, tenga en cuenta que <strong>debería tener un heap vacío al terminar su programa</strong>. Si no lo tenemos, hay que buscar en cuál función debemos colocar <code>free()</code>.</p>
+<p>Saber cómo reorganizar y liberar memoria es importante para la programación en C. Tenga en cuenta que <strong>debería tener un heap vacío al terminar su programa</strong>. Si no lo tenemos, hay que buscar en cuál función debemos colocar <code>free()</code>.</p>
 <p>Al finalizar, pruebe su programa con:
 <div class="codehilite"><pre><span></span>make vector
 ./vector
 </pre></div></p>
+<h2 id="ejercicio-2-bubble-sort">Ejercicio 2: Bubble Sort<a class="headerlink" href="#ejercicio-2-bubble-sort" title="Permanent link">&para;</a></h2>
+<h3 id="que-es-bubble-sort">¿Qué es Bubble Sort?<a class="headerlink" href="#que-es-bubble-sort" title="Permanent link">&para;</a></h3>
+<p>En CC2 usted conoció varios algoritmos de ordenamiento, el más sencillo de ellos era Bubble Sort. La ventaja de este es que es el más fácil de implementar, la desventaja es que puede llegar a ser el más tardado.</p>
+<p>Aquí tiene un pseudocódigo de este algoritmo:</p>
+<div class="codehilite"><pre><span></span>FOR i FROM 0 TO size - 2 DO
+    swapped ← false
+    FOR j FROM 0 TO size - i - 1 DO
+        IF array[j] &gt; array[j + 1] THEN
+            swap(array[j], array[j + 1])
+            swapped ← true
+        END IF
+    END FOR
+    IF swapped = false THEN
+        BREAK
+    END IF
+END FOR
+</pre></div>
+
+<p>Note que esta es una versión ligeramente distinta a la vista en CC2, esta es un poco más eficiente.</p>
+<h3 id="que-deben-hacer_1">¿Qué deben hacer?<a class="headerlink" href="#que-deben-hacer_1" title="Permanent link">&para;</a></h3>
+<p>Vaya al archivo <em>bubble.c</em> en la carpeta del ejercicio 2 e implemente las funciones <code>swap()</code> y <code>bubbleSort()</code>.</p>
+<p><code>swap()</code> debe intercambiar el contenido de las casillas indicadas, y <code>bubbleSort()</code> debe implementar el algoritmo mostrado en el pseudocódigo anterior.</p>
+<p>Resuelva este problema usando solamente notación de punteros. Si utiliza notación de arreglos, es decir <code>array[pos]</code>, el autograder le dará cero par este ejercicio.</p>
 <h2 id="entrega-de-laboratorio">Entrega de laboratorio<a class="headerlink" href="#entrega-de-laboratorio" title="Permanent link">&para;</a></h2>
 <p>Recuerde probar su laboratorio usando el autograder.</p>
 <div class="codehilite"><pre><span></span>./check
 </pre></div>
 
-<p>Este laboratorio tiene una única serie que vale 100 puntos.</p>
+<p>Este laboratorio tiene dos series que valen 50 puntos cada una</p>
 <p>Luego <strong>envíe el link de su repositorio de Github en el GES</strong>. El GES tiene una opción para enviar links, ÚSELA. Si envía algún txt, pdf, zip, etc. su laboratorio no se calificará, es decir tendrá cero.</p>
                 
                   
