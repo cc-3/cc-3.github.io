@@ -420,6 +420,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#solucion-de-problemas" title="Solución de problemas" class="md-nav__link">
+    Solución de problemas
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#entrega-de-laboratorio" title="Entrega de laboratorio" class="md-nav__link">
     Entrega de laboratorio
   </a>
@@ -771,6 +778,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#solucion-de-problemas" title="Solución de problemas" class="md-nav__link">
+    Solución de problemas
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#entrega-de-laboratorio" title="Entrega de laboratorio" class="md-nav__link">
     Entrega de laboratorio
   </a>
@@ -849,7 +863,7 @@
 <h3 id="que-es-bubble-sort">¿Qué es Bubble Sort?<a class="headerlink" href="#que-es-bubble-sort" title="Permanent link">&para;</a></h3>
 <p>En CC2 usted conoció varios algoritmos de ordenamiento, el más sencillo de ellos era Bubble Sort. La ventaja de este es que es el más fácil de implementar, la desventaja es que puede llegar a ser el más tardado.</p>
 <p>Aquí tiene un pseudocódigo de este algoritmo:</p>
-<div class="codehilite"><pre><span></span>FOR i FROM 0 TO size - 2 DO
+<div class="codehilite"><pre><span></span>FOR i FROM 0 TO size - 1 DO
     swapped ← false
     FOR j FROM 0 TO size - i - 1 DO
         IF array[j] &gt; array[j + 1] THEN
@@ -868,6 +882,18 @@ END FOR
 <p>Vaya al archivo <em>bubble.c</em> en la carpeta del ejercicio 2 e implemente las funciones <code>swap()</code> y <code>bubbleSort()</code>.</p>
 <p><code>swap()</code> debe intercambiar el contenido de las casillas indicadas, y <code>bubbleSort()</code> debe implementar el algoritmo mostrado en el pseudocódigo anterior.</p>
 <p>Resuelva este problema usando solamente notación de punteros. Si utiliza notación de arreglos, es decir <code>array[pos]</code>, el autograder le dará cero par este ejercicio.</p>
+<p>Al finalizar, pruebe su programa con:
+<div class="codehilite"><pre><span></span>make bubble
+./bubble
+</pre></div></p>
+<h2 id="solucion-de-problemas">Solución de problemas<a class="headerlink" href="#solucion-de-problemas" title="Permanent link">&para;</a></h2>
+<p>Ante cualquier problema de compilación, primero haga clean y luego reintente compilar.
+<div class="codehilite"><pre><span></span>make clean
+</pre></div></p>
+<p>En el Makefile ya está la bandera necesaria para poder debuggear, entonces puede diagnosticar sus problemas usando cgdb.
+<div class="codehilite"><pre><span></span>cgdb vector
+cgdb bubble
+</pre></div></p>
 <h2 id="entrega-de-laboratorio">Entrega de laboratorio<a class="headerlink" href="#entrega-de-laboratorio" title="Permanent link">&para;</a></h2>
 <p>Recuerde probar su laboratorio usando el autograder.</p>
 <div class="codehilite"><pre><span></span>./check
