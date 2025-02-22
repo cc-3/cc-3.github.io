@@ -42,7 +42,7 @@
     
     
       
-        <title>2: Procesador - Estructura de Máquinas</title>
+        <title>2: Desensamblador - Estructura de Máquinas</title>
       
     
     
@@ -113,7 +113,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#proyecto-2-cpu" tabindex="1" class="md-skip">
+      <a href="#proyecto-1-c-y-risc-v" tabindex="1" class="md-skip">
         Saltar a contenido
       </a>
     
@@ -139,7 +139,7 @@
                 Estructura de Máquinas
               </span>
               <span class="md-header-nav__topic">
-                2: Procesador
+                2: Desensamblador
               </span>
             
           
@@ -421,8 +421,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../proj01/" title="1: C y RISC-V" class="md-nav__link">
-      1: C y RISC-V
+    <a href="../proj01/" title="1: Compresion" class="md-nav__link">
+      1: Compresion
     </a>
   </li>
 
@@ -442,11 +442,11 @@
     
     
       <label class="md-nav__link md-nav__link--active" for="__toc">
-        2: Procesador
+        2: Desensamblador
       </label>
     
-    <a href="./" title="2: Procesador" class="md-nav__link md-nav__link--active">
-      2: Procesador
+    <a href="./" title="2: Desensamblador" class="md-nav__link md-nav__link--active">
+      2: Desensamblador
     </a>
     
       
@@ -460,8 +460,36 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#objetivos" title="Objetivos" class="md-nav__link">
+    Objetivos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conocimientos-previos" title="Conocimientos previos" class="md-nav__link">
+    Conocimientos previos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lecturas-recomendadas" title="Lecturas Recomendadas" class="md-nav__link">
+    Lecturas Recomendadas
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#introduccion" title="Introducción" class="md-nav__link">
     Introducción
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#risc-v-green-card" title="RISC-V Green Card" class="md-nav__link">
+    RISC-V Green Card
   </a>
   
 </li>
@@ -474,44 +502,85 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#parte-1-register-file" title="Parte 1: Register File" class="md-nav__link">
-    Parte 1: Register File
+  <a href="#estructura-del-proyecto" title="Estructura del proyecto" class="md-nav__link">
+    Estructura del proyecto
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#parte-2-alu" title="Parte 2: ALU" class="md-nav__link">
-    Parte 2: ALU
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#parte-3-cpu" title="Parte 3: CPU" class="md-nav__link">
-    Parte 3: CPU
+  <a href="#el-emulador-de-risc-v" title="El emulador de RISC-V" class="md-nav__link">
+    El emulador de RISC-V
   </a>
   
     <nav class="md-nav">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#memoria" title="Memoria" class="md-nav__link">
-    Memoria
+  <a href="#set-de-instrucciones" title="Set de Instrucciones" class="md-nav__link">
+    Set de Instrucciones
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tipo-r" title="Tipo R" class="md-nav__link">
+    Tipo R
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#control" title="Control" class="md-nav__link">
-    Control
+  <a href="#tipo-i" title="Tipo I" class="md-nav__link">
+    Tipo I
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#isa" title="ISA" class="md-nav__link">
-    ISA
+  <a href="#tipo-s" title="Tipo S" class="md-nav__link">
+    Tipo S
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tipo-sb" title="Tipo SB" class="md-nav__link">
+    Tipo SB
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tipo-u" title="Tipo U" class="md-nav__link">
+    Tipo U
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tipo-uj" title="Tipo UJ" class="md-nav__link">
+    Tipo UJ
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#estructura-del-codigo" title="Estructura del código" class="md-nav__link">
+    Estructura del código
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#opciones-en-la-linea-de-comandos" title="Opciones en la línea de comandos" class="md-nav__link">
+    Opciones en la línea de comandos
   </a>
   
 </li>
@@ -522,22 +591,103 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#testing" title="Testing" class="md-nav__link">
-    Testing
+  <a href="#parte-1" title="Parte 1" class="md-nav__link">
+    Parte 1
   </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#requisitos-parte-1" title="Requisitos parte 1" class="md-nav__link">
+    Requisitos parte 1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#probando-la-parte-1" title="Probando la parte 1" class="md-nav__link">
+    Probando la parte 1
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#notas-sobre-logisim" title="Notas sobre Logisim" class="md-nav__link">
-    Notas sobre Logisim
+  <a href="#parte-2" title="Parte 2" class="md-nav__link">
+    Parte 2
   </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#requisitos" title="Requisitos" class="md-nav__link">
+    Requisitos
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#probando-la-parte-2" title="Probando la Parte 2" class="md-nav__link">
+    Probando la Parte 2
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#calificacion" title="Calificación" class="md-nav__link">
-    Calificación
+  <a href="#preguntas-frecuentes" title="Preguntas Frecuentes" class="md-nav__link">
+    Preguntas Frecuentes
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-como-puedo-empezar" title="1. ¿Cómo puedo empezar?" class="md-nav__link">
+    1. ¿Cómo puedo empezar?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-me-da-floating-point-exception-core-dumped-al-hacer-algunas-operaciones-aritmeticas-por-que" title="2. Me da Floating-point Exception (core dumped) al hacer algunas operaciones aritméticas, ¿por qué?" class="md-nav__link">
+    2. Me da Floating-point Exception (core dumped) al hacer algunas operaciones aritméticas, ¿por qué?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-en-la-parte-1-el-formato-nunca-es-el-esperado-por-las-pruebas-por-que" title="3. En la parte 1 el formato nunca es el esperado por las pruebas, ¿por qué?" class="md-nav__link">
+    3. En la parte 1 el formato nunca es el esperado por las pruebas, ¿por qué?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-puedo-crear-mis-propias-funciones" title="4. ¿Puedo crear mis propias funciones?" class="md-nav__link">
+    4. ¿Puedo crear mis propias funciones?
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#revisando-su-nota" title="Revisando su nota" class="md-nav__link">
+    Revisando su nota
   </a>
   
 </li>
@@ -550,6 +700,18 @@
   
 </nav>
     
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../proj03/" title="3: Procesador" class="md-nav__link">
+      3: Procesador
+    </a>
   </li>
 
         
@@ -711,8 +873,36 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#objetivos" title="Objetivos" class="md-nav__link">
+    Objetivos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conocimientos-previos" title="Conocimientos previos" class="md-nav__link">
+    Conocimientos previos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lecturas-recomendadas" title="Lecturas Recomendadas" class="md-nav__link">
+    Lecturas Recomendadas
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#introduccion" title="Introducción" class="md-nav__link">
     Introducción
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#risc-v-green-card" title="RISC-V Green Card" class="md-nav__link">
+    RISC-V Green Card
   </a>
   
 </li>
@@ -725,44 +915,85 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#parte-1-register-file" title="Parte 1: Register File" class="md-nav__link">
-    Parte 1: Register File
+  <a href="#estructura-del-proyecto" title="Estructura del proyecto" class="md-nav__link">
+    Estructura del proyecto
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#parte-2-alu" title="Parte 2: ALU" class="md-nav__link">
-    Parte 2: ALU
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#parte-3-cpu" title="Parte 3: CPU" class="md-nav__link">
-    Parte 3: CPU
+  <a href="#el-emulador-de-risc-v" title="El emulador de RISC-V" class="md-nav__link">
+    El emulador de RISC-V
   </a>
   
     <nav class="md-nav">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#memoria" title="Memoria" class="md-nav__link">
-    Memoria
+  <a href="#set-de-instrucciones" title="Set de Instrucciones" class="md-nav__link">
+    Set de Instrucciones
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tipo-r" title="Tipo R" class="md-nav__link">
+    Tipo R
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#control" title="Control" class="md-nav__link">
-    Control
+  <a href="#tipo-i" title="Tipo I" class="md-nav__link">
+    Tipo I
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#isa" title="ISA" class="md-nav__link">
-    ISA
+  <a href="#tipo-s" title="Tipo S" class="md-nav__link">
+    Tipo S
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tipo-sb" title="Tipo SB" class="md-nav__link">
+    Tipo SB
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tipo-u" title="Tipo U" class="md-nav__link">
+    Tipo U
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tipo-uj" title="Tipo UJ" class="md-nav__link">
+    Tipo UJ
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#estructura-del-codigo" title="Estructura del código" class="md-nav__link">
+    Estructura del código
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#opciones-en-la-linea-de-comandos" title="Opciones en la línea de comandos" class="md-nav__link">
+    Opciones en la línea de comandos
   </a>
   
 </li>
@@ -773,22 +1004,103 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#testing" title="Testing" class="md-nav__link">
-    Testing
+  <a href="#parte-1" title="Parte 1" class="md-nav__link">
+    Parte 1
   </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#requisitos-parte-1" title="Requisitos parte 1" class="md-nav__link">
+    Requisitos parte 1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#probando-la-parte-1" title="Probando la parte 1" class="md-nav__link">
+    Probando la parte 1
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#notas-sobre-logisim" title="Notas sobre Logisim" class="md-nav__link">
-    Notas sobre Logisim
+  <a href="#parte-2" title="Parte 2" class="md-nav__link">
+    Parte 2
   </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#requisitos" title="Requisitos" class="md-nav__link">
+    Requisitos
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#probando-la-parte-2" title="Probando la Parte 2" class="md-nav__link">
+    Probando la Parte 2
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#calificacion" title="Calificación" class="md-nav__link">
-    Calificación
+  <a href="#preguntas-frecuentes" title="Preguntas Frecuentes" class="md-nav__link">
+    Preguntas Frecuentes
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-como-puedo-empezar" title="1. ¿Cómo puedo empezar?" class="md-nav__link">
+    1. ¿Cómo puedo empezar?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-me-da-floating-point-exception-core-dumped-al-hacer-algunas-operaciones-aritmeticas-por-que" title="2. Me da Floating-point Exception (core dumped) al hacer algunas operaciones aritméticas, ¿por qué?" class="md-nav__link">
+    2. Me da Floating-point Exception (core dumped) al hacer algunas operaciones aritméticas, ¿por qué?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-en-la-parte-1-el-formato-nunca-es-el-esperado-por-las-pruebas-por-que" title="3. En la parte 1 el formato nunca es el esperado por las pruebas, ¿por qué?" class="md-nav__link">
+    3. En la parte 1 el formato nunca es el esperado por las pruebas, ¿por qué?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-puedo-crear-mis-propias-funciones" title="4. ¿Puedo crear mis propias funciones?" class="md-nav__link">
+    4. ¿Puedo crear mis propias funciones?
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#revisando-su-nota" title="Revisando su nota" class="md-nav__link">
+    Revisando su nota
   </a>
   
 </li>
@@ -812,721 +1124,752 @@
                   <a href="https://github.com/cc-3/cc-3.github.io/edit/master/page/es/docs/projs/proj02.md" title="Editar esta página" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                <h1 id="proyecto-2-cpu">Proyecto 2: CPU<a class="headerlink" href="#proyecto-2-cpu" title="Permanent link">&para;</a></h1>
+                <h1 id="proyecto-1-c-y-risc-v">Proyecto 1: C y RISC-V<a class="headerlink" href="#proyecto-1-c-y-risc-v" title="Permanent link">&para;</a></h1>
+<h2 id="objetivos">Objetivos<a class="headerlink" href="#objetivos" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Mejorar sus habilidades de programación en C.</li>
+<li>Conocer algunos de los detalles de RISC-V.</li>
+<li>Prepararse para lo que viene más adelante en el curso.</li>
+</ul>
+<h2 id="conocimientos-previos">Conocimientos previos<a class="headerlink" href="#conocimientos-previos" title="Permanent link">&para;</a></h2>
+<p>Para realizar este proyecto ustedes tienen que tener claros algunos conceptos, de lo contrario será bastante difícil e incómodo empezar a trabajar. Les recomendamos que antes de empezar estén totalmente seguros que dominan al 100% los siguientes puntos:</p>
+<ul>
+<li>Operaciones binarias en C (<code>xor</code>, <code>or</code>, <code>and</code>, etc).</li>
+<li>Operaciones aritméticas con signo y sin signo en C.</li>
+<li>Type casting en C.</li>
+<li>Control de flujo en C (<code>switch</code>, <code>if</code>, etc).</li>
+<li>Funciones en C.</li>
+<li>Entender qué son las estructuras (<code>struct</code>) en C.</li>
+<li>Entender cómo funcionan las uniones (<code>union</code>) en C.</li>
+<li>Uso correcto de <code>printf</code>.</li>
+<li>Entender la estructura del set de instrucciones de RISC-V.</li>
+<li>Programar en lenguaje ensamblador RISC-V.</li>
+</ul>
+<p>Si creen que no tienen claro alguno de estos temas al 100%, por favor no duden en ir a consultar los libros y material correspondiente del curso, por ejemplo <strong>K&amp;R</strong>, es indispensable. En <a href="#lecturas-recomendadas">Lecturas Recomendadas</a> pueden encontrar algunas lecturas que tocan los puntos antes mencionados y otras cosas que también les pueden servir, nunca está demás tener un poco más de información.</p>
+<h2 id="lecturas-recomendadas">Lecturas Recomendadas<a class="headerlink" href="#lecturas-recomendadas" title="Permanent link">&para;</a></h2>
+<p><img alt="RISCV Book" src="/img/RVB.jpg" />
+<img alt="KR" src="/img/KR.jpg" />
+<img alt="PH" src="/img/PH.jpg" /></p>
+<ul>
+<li>Guía Práctica de RISC-V: 2</li>
+<li>K&amp;R: 6</li>
+<li>P&amp;H: B-43</li>
+</ul>
 <h2 id="introduccion">Introducción<a class="headerlink" href="#introduccion" title="Permanent link">&para;</a></h2>
-<p>En este proyecto utilizaremos Logisim para implementar un procesador de 32-bits, cuyo ISA es un subset de las instrucciones de RISC-V. Algunos componentes del proyecto serán más sencillos que los componentes de hardware verdaderos para evitar realizar trabajo repetitivo. Nuestro ISA utiliza 32 registros de 32 bits cada uno y una memoria, cuyas direcciones son de 32 bits.</p>
-<p><img alt="RISC-V Datapath" src="/img/projs/proj02/datapath.png" /></p>
-<p>A continuación, algunos detalles importantes que debemos leer antes de iniciar.</p>
-<ul>
-<li>Pueden utilizar cualquier bloque ya existente en Logisim para el proyecto.</li>
-<li>Guarden constantemente. Realicen commits y hagan push al menos una vez por cada día que trabajen.</li>
-<li>Logisim es un excelente simulador pero ocasionalmente tiene errores, entonces hagamos caso a la indicación anterior: Guarden constantemente.</li>
-<li>Trabajemos de la misma forma que en un proyecto de software: Construyamos el proyecto pieza por pieza y realicemos pruebas antes de unir un bloque con otros. Podemos construir todos los subcircuitos adicionales que necesitemos, siempre y cuando sigamos las reglas específicas que cada parte impone (más de esto a continuación).</li>
-<li>Se incluyen algunos tests. Sólo se debe correr el script ./check (esto seguramente tendrán que hacerlo en Linux, se requiere Python 3.X instalado).</li>
-<li>¡Necesitaremos más tests! Cada equipo debería hacer sus propios tests adicionales. En la sección de <em>Testing</em> hay algunas indicaciones de cómo hacer pruebas adicionales.</li>
-</ul>
-<p>Finalmente, las dos indicaciones más importantes:</p>
-<ul>
-<li>No modifique (es decir no mueva, no renombre, no elimine) ninguna de las entradas y salidas que se le dan en los circuitos base. Si lo hace nuestro autograder no podrá conectarse con su circuito y tendrá cero de nota.</li>
-<li>En el camino nos hemos encontrado con algunos problemas de git merge si ambos miembros del equipo estaban trabajando en el mismo archivo. En el proyecto 1 a veces git los resolvía automáticamente y a veces no. En Logisim es garantizado que git NO RESOLVERÁ ESTO DE FORMA CORRECTA, entonces si trabajamos en equipo NO DEBEMOS MODIFICAR EL MISMO ARCHIVO AL MISMO TIEMPO.</li>
-</ul>
+<p>En este proyecto ustedes deben de crear un emulador que pueda ejecutar un subconjunto de instrucciones de <strong>RISC-V</strong>. Ustedes se van a encargar de hacer un programa que decodifique y ejecute varias instrucciones de RISC-V. Considérenlo como una versión miniatura de Jupiter.</p>
+<h2 id="risc-v-green-card">RISC-V Green Card<a class="headerlink" href="#risc-v-green-card" title="Permanent link">&para;</a></h2>
+<p>Se recomienda que tenga impresa su Green Card para consultar fácilmente los opcode, func3, func7, etc.</p>
+<p align="center">
+  <a href="http://inst.eecs.berkeley.edu/~cs61c/fa17/img/riscvcard.pdf" target="_blank"><img src="/img/berkeleyGC.png" alt="Berkeley Green Card" /></a>
+</p>
+
 <h2 id="preparacion">Preparación<a class="headerlink" href="#preparacion" title="Permanent link">&para;</a></h2>
-<p><strong>Antes de comenzar, asegúrense de que hayan leído y comprendido todas las instrucciones del proyecto de principio a fin</strong>. Si tienen alguna pregunta, por favor diríjanse a <strong>Slack</strong> y pregunten en los canales correspondientes. Si su duda es general, es decir no necesita mostrar algo muy específico de su circuito, pregunte en los <strong>canales públicos</strong>.</p>
-<p>Para comenzar con el proyecto, primero tienen que tener todos los archivos base, estos se encuentran <a href="https://classroom.github.com/a/gB6R5Wz4">aquí</a>. Pueden trabajar en parejas o de forma individual, por lo que al aceptar la asignación les preguntará si desean crear un grupo nuevo o unirse a uno ya existente. Si crean un grupo nuevo, ingresen un nombre creativo y fácil de recordar. No se pueden repetir los nombres del proyecto 1, Github no lo permite.</p>
+<p><strong>Antes de comenzar asegúrense de que hayan <span style="color: red">leído y comprendido</span> todas las instrucciones del proyecto de principio a fin</strong>. Si tienen alguna pregunta pueden consultar la sección de preguntas frecuentes para ver si ya ha sido resuelta, de lo contrario por favor diríjanse a <strong>Slack</strong> y pregunten en los canales correspondientes.</p>
+<p>Para comenzar con el proyecto, primero tienen que tener todos los archivos base, estos se encuentran <a href="https://classroom.github.com/a/4LaYXPQz">aquí</a>. Pueden trabajar en parejas o de forma individual, por lo que al aceptar la asignación les preguntará si desean crear un grupo nuevo o unirse a uno ya existente. Si crean un grupo nuevo, ingresen un nombre que represente al grupo y que no esté ya en los grupos existentes. Use un nombre bonito y creativo! (Alguna referencia a su equipo deportivo favorito, alguna canción que les guste, su carta favorita de Magic, algún anime, lo que quiera siempre y cuando no sea ofensivo) No use nombres aburridos como "Proyecto 1", "CC3 - Seccion X", etc. POR FAVOR.</p>
 <p><img alt="Create group" src="/img/projs/proj01/classroom1.png" /></p>
 <p>Si desean unirse a un grupo ya creado, tienen que buscar el nombre del grupo y pulsar el botón que dice <strong>join</strong></p>
 <p><img alt="Join group" src="/img/projs/proj01/classroom2.png" /></p>
-<p><strong>Tienen que tener mucho cuidado al unirse a un grupo ya existente, ya que esto no se puede cambiar después. Si se une sin permiso a un grupo que no es el suyo, lo consideraremos como PLAGIO, ya que al hacerlo obtiene acceso al repositorio del otro grupo.</strong></p>
+<p><strong>Tienen que tener mucho cuidado al unirse a un grupo ya existente, pues al unirse tendrá acceso inmediato al código que ya esté subido por parte del otro grupo. Si se une a un grupo incorrecto lo consideraremos como <span style="color: red">PLAGIO</span> pues podrían pasar robando código de esta manera.</strong></p>
 <p>Ya sea que se unan o creen un nuevo grupo, al finalizar el proceso les creará automáticamente un repositorio con una extensión que termina con su nombre de grupo. Ya habiendo hecho todo eso, pueden ejecutar los siguientes comandos abriendo una terminal (<kbd >CTRL</kbd> <kbd>+</kbd> <kbd>T</kbd>):</p>
 <div class="codehilite"><pre><span></span>git clone &lt;link del repositorio&gt;
 </pre></div>
 
-<h2 id="parte-1-register-file">Parte 1: Register File<a class="headerlink" href="#parte-1-register-file" title="Permanent link">&para;</a></h2>
-<p>Como aprendimos en clase, RISC-V tiene 32 registros. En el proyecto sólo implementaremos 9 (abajo se indica cuales) para evitar realizar trabajo repetitivo. Todas nuestras señales (rs1, rs2, rd) siguen siendo de 5-bits, pero sólo se estarán usando los registros indicados.</p>
-<p>El register file debe poder leer y escribir a los registros que se especifiquen según la instrucción, sin afectar o modificar a cualquier otro registro. Existe una excepción: El registro cero está alambrado a tierra y su valor no puede ser cambiado por ningún motivo.</p>
-<p>Los registros que utilizaremos son los siguientes:</p>
-<table>
-<thead>
-<tr>
-<th>Registro por número</th>
-<th>Registro por nombre</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>x0</td>
-<td>zero</td>
-</tr>
-<tr>
-<td>x1</td>
-<td>ra</td>
-</tr>
-<tr>
-<td>x2</td>
-<td>sp</td>
-</tr>
-<tr>
-<td>x5</td>
-<td>t0</td>
-</tr>
-<tr>
-<td>x6</td>
-<td>t1</td>
-</tr>
-<tr>
-<td>x8</td>
-<td>s0</td>
-</tr>
-<tr>
-<td>x9</td>
-<td>s1</td>
-</tr>
-<tr>
-<td>x10</td>
-<td>a0</td>
-</tr>
-<tr>
-<td>x11</td>
-<td>a1</td>
-</tr>
-</tbody>
-</table>
-<p>En el archivo <strong>regfile.circ</strong> se encuentra el esqueleto de un register file.</p>
-<p><img alt="Register File" src="/img/projs/proj02/regfile.png" /></p>
-<p>Este tiene seis entradas:</p>
-<table>
-<thead>
-<tr>
-<th>Nombre</th>
-<th>Ancho en bits</th>
-<th>Descripción</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Clock</td>
-<td>1</td>
-<td>Señal de reloj. Aquí se recibirá una señal de reloj "non gated", es decir, se recibe la señal directa sin ser afectada por ANDs, NOTs o cualquier compuerta.</td>
-</tr>
-<tr>
-<td>Write Enable</td>
-<td>1</td>
-<td>Indica si se debería escribir a un registro en el siguiente flanco de subida del reloj.</td>
-</tr>
-<tr>
-<td>Read Register 1</td>
-<td>5</td>
-<td>Registro a leer y cuyo valor será enviado a Read Data 1.</td>
-</tr>
-<tr>
-<td>Read Register 2</td>
-<td>5</td>
-<td>Registro a leer y cuyo valor será enviado a Read Data 2.</td>
-</tr>
-<tr>
-<td>Write Register</td>
-<td>5</td>
-<td>Determina cuál registro será modificado en el siguiente flanco de subida (asumiendo que Write Enable = 1).</td>
-</tr>
-<tr>
-<td>Write Data</td>
-<td>32</td>
-<td>Los 32 bits de datos a guardarse en el registro, en el siguiente flanco de subida (asumiendo que Write Enable = 1).</td>
-</tr>
-</tbody>
-</table>
-<p>El register file tiene las siguientes salidas:</p>
-<table>
-<thead>
-<tr>
-<th>Nombre</th>
-<th>Ancho en bits</th>
-<th>Descripción</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Read Data 1</td>
-<td>32</td>
-<td>Datos que se están leyendo, según el registro que Read Register 1 pidió.</td>
-</tr>
-<tr>
-<td>Read Data 2</td>
-<td>32</td>
-<td>Datos que se están leyendo, según el registro que Read Register 2 pidió.</td>
-</tr>
-<tr>
-<td>s0 Value</td>
-<td>32</td>
-<td>Valor de s0 (salida para DEBUG/TEST).</td>
-</tr>
-<tr>
-<td>s1 Value</td>
-<td>32</td>
-<td>Valor de s1 (salida para DEBUG/TEST).</td>
-</tr>
-<tr>
-<td>t0 Value</td>
-<td>32</td>
-<td>Valor de t0 (salida para DEBUG/TEST).</td>
-</tr>
-<tr>
-<td>t1 Value</td>
-<td>32</td>
-<td>Valor de t1 (salida para DEBUG/TEST).</td>
-</tr>
-<tr>
-<td>a0 Value</td>
-<td>32</td>
-<td>Valor de a0 (salida para DEBUG/TEST).</td>
-</tr>
-<tr>
-<td>ra Value</td>
-<td>32</td>
-<td>Valor de ra (salida para DEBUG/TEST).</td>
-</tr>
-<tr>
-<td>sp Value</td>
-<td>32</td>
-<td>Valor de sp (salida para DEBUG/TEST).</td>
-</tr>
-</tbody>
-</table>
-<p>Las salidas para DEBUG/TEST están presentes porque son registros de uso frecuente (por ejemplo, tienen un trabajo importante en las llamadas a funciones). Se utilizarán sólo para pruebas del autograder. En un register file de verdad estas salidas no existirían. Para el proyecto deben estar presentes y funcionar bien para facilitar la calificación.</p>
-<p><strong>IMPORTANTE:</strong> En la primera tabla aparecen nueve registros y en la tabla anterior aparecen siete salidas, eso es intencional. Se estarán <strong>usando</strong> nueve, pero solo se estará <strong>revisando</strong> el valor de siete de ellos.</p>
-<p>Pueden modificar regfile.circ como deseen, pero las salidas deben cumplir con el comportamiento que se indica. Deben ser cuidadosos de no modificar (mover, reemplazar, cortar, pegar, eliminar, etc.) los pines de entrada o salida. Si necesitan más espacio, pueden moverlos mientras sean cuidadosos de mantener el posicionamiento relativo que estos tienen. Para verificar que nuestros cambios no "rompan" nada, podemos abrir <strong>regfile-harness.circ</strong> y revisar que no existan errores allí (cables rojos de error o cables azules de desconectado) y que todo funcione bien.</p>
-<p>HINTS: Cuidado con los muxes. Si estos tienen un enable ese debería estar activo (o mejor aún, buscamos como eliminar el enable para evitarnos problemas).</p>
-<h2 id="parte-2-alu">Parte 2: ALU<a class="headerlink" href="#parte-2-alu" title="Permanent link">&para;</a></h2>
-<p>Su segunda tarea es crear un ALU que soporte todas las operaciones que necesitan las instrucciones de nuestro ISA (se detallan más adelante). Van a estar trabajando en el archivo <strong>alu.circ</strong>.</p>
-<p><img alt="ALU" src="/img/projs/proj02/alu.png" /></p>
-<p>Este tiene tres entradas:</p>
-<table>
-<thead>
-<tr>
-<th align="center">Nombre de Entrada</th>
-<th align="center">Ancho en Bits</th>
-<th align="center">Descripción</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="center">A</td>
-<td align="center">32</td>
-<td align="center">Datos para usar por A en la operación del ALU</td>
-</tr>
-<tr>
-<td align="center">B</td>
-<td align="center">32</td>
-<td align="center">Datos para usar por B en la operación del ALU</td>
-</tr>
-<tr>
-<td align="center">ALU Op</td>
-<td align="center">4</td>
-<td align="center">Selecciona la operación que el ALU debe de efectuar</td>
-</tr>
-</tbody>
-</table>
-<p>...y una salida:</p>
-<table>
-<thead>
-<tr>
-<th align="center">Nombre de Entrada</th>
-<th align="center">Ancho en Bits</th>
-<th align="center">Descripción</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="center">Out</td>
-<td align="center">32</td>
-<td align="center">Resultado de la operación efectuada por el ALU</td>
-</tr>
-</tbody>
-</table>
-<p>Esta es la lista de operaciones que necesitan implementar. Ustedes tienen que utilizar los componentes de Logisim que ya efectúan estas operaciones. Si las intenta implementar desde cero, sería muy tardado y no es el objetivo del proyecto.</p>
-<table>
-<thead>
-<tr>
-<th align="center">Valor de ALU Op</th>
-<th>Instrucción</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="center">0</td>
-<td>sll: Out = A &lt;&lt; B[4:0]</td>
-</tr>
-<tr>
-<td align="center">1</td>
-<td>srl: Out = (unsigned) A &gt;&gt; B[4:0]</td>
-</tr>
-<tr>
-<td align="center">2</td>
-<td>add: Out = A + B</td>
-</tr>
-<tr>
-<td align="center">3</td>
-<td>and: Out = A &amp; B</td>
-</tr>
-<tr>
-<td align="center">4</td>
-<td>or: Out = A | B</td>
-</tr>
-<tr>
-<td align="center">5</td>
-<td>xor: Out = A ^ B</td>
-</tr>
-<tr>
-<td align="center">6</td>
-<td>slt: Out = (A &lt; B) ? 1 : 0 Signed</td>
-</tr>
-<tr>
-<td align="center">7</td>
-<td>mul: Out = (X * Y)[31:0]</td>
-</tr>
-<tr>
-<td align="center">8</td>
-<td>mulh: Out = (A * B)[63:32]</td>
-</tr>
-<tr>
-<td align="center">9</td>
-<td>div: Out =(unsigned) A / B</td>
-</tr>
-<tr>
-<td align="center">10</td>
-<td>rem: Out = A % B</td>
-</tr>
-<tr>
-<td align="center">11</td>
-<td>sub: Out = A - B</td>
-</tr>
-</tbody>
-</table>
-<p>Algunas cosas adicionales que tienen que tener en mente:</p>
-<p>Su ALU debería de encajar con el harness <strong>alu-harness.circ</strong>. Sigan las mismas instrucciones que en el register file. En particular, ustedes deberían de asegurar que su ALU encaja correctamente en el harness.</p>
-<p>Quedan espacios disponibles por si necesitan agregar alguna operación más adelante.</p>
-<h2 id="parte-3-cpu">Parte 3: CPU<a class="headerlink" href="#parte-3-cpu" title="Permanent link">&para;</a></h2>
-<p>Se les provee un esqueleto del procesador en <strong>cpu.circ</strong>. Su procesador tendrá una instancia de su ALU y Register File, así como una unidad de memoria que ya se les provee. Ustedes son los responsables de construir el datapath y control completos, desde cero. Su procesador debe implementar el ISA que se detalla más abajo.</p>
-<p><img alt="CPU" src="/img/projs/proj02/cpu.png" /></p>
-<p>Su procesador obtendrá un programa desde el harness <strong>riscv.circ</strong>. Su procesador tendrá un output llamado FETCH_ADDRESS que indica cuál instrucción queremos, esta dirección será entregada al harness y este nos dará una instrucción. La instrucción será recibida por el procesador y será ejecutada. Revisen <strong>riscv.circ</strong> para ver exactamente qué sucede.</p>
-<p>El procesador tiene dos inputs que vienen del harness:</p>
-<table>
-<thead>
-<tr>
-<th>Input Name</th>
-<th>Bit Width</th>
-<th>Descripción</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>INSTRUCTION</td>
-<td>32</td>
-<td>Aquí se recibe la instrucción que se obtuvo en la dirección identificada por FETCH_ADDRESS.</td>
-</tr>
-<tr>
-<td>CLOCK</td>
-<td>1</td>
-<td>Input del reloj. Puede ser necesario estar enviando esta señal a varios subcircuitos.</td>
-</tr>
-</tbody>
-</table>
-<p>El procesador debe tener los siguientes outputs, que entregará al harness:</p>
-<table>
-<thead>
-<tr>
-<th>Output Name</th>
-<th>Bit Width</th>
-<th>Descripción</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>s0</td>
-<td>32</td>
-<td>Contenido de s0, sólo para pruebas.</td>
-</tr>
-<tr>
-<td>s1</td>
-<td>32</td>
-<td>Contenido de s1, sólo para pruebas.</td>
-</tr>
-<tr>
-<td>t0</td>
-<td>32</td>
-<td>Contenido de t0, sólo para pruebas.</td>
-</tr>
-<tr>
-<td>t1</td>
-<td>32</td>
-<td>Contenido de t1, sólo para pruebas.</td>
-</tr>
-<tr>
-<td>a0</td>
-<td>32</td>
-<td>Contenido de a0, sólo para pruebas.</td>
-</tr>
-<tr>
-<td>ra</td>
-<td>32</td>
-<td>Contenido de ra, sólo para pruebas.</td>
-</tr>
-<tr>
-<td>sp</td>
-<td>32</td>
-<td>Contenido de sp, sólo para pruebas.</td>
-</tr>
-<tr>
-<td>FETCH_ADDRESS</td>
-<td>32</td>
-<td>Dirección que indica qué instrucción queremos obtener del harness. En respuesta a esto, el harness enviará alguna instrucción a través de INSTRUCTION.</td>
-</tr>
-</tbody>
-</table>
-<p>Como en la parte 1, tengan cuidado al mover componentes y asegúrense que los pines de input y output coincidan con el harness.</p>
-<h3 id="memoria">Memoria<a class="headerlink" href="#memoria" title="Permanent link">&para;</a></h3>
-<p>Se les provee una memoria ya implementada. :D</p>
-<p>Un resumen de sus inputs y outputs.</p>
-<table>
-<thead>
-<tr>
-<th>Nombre</th>
-<th>Tipo</th>
-<th>Bit Width</th>
-<th>Descripción</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>ADDRESS</td>
-<td>input</td>
-<td>32</td>
-<td>Dirección a leer o escribir en la memoria.</td>
-</tr>
-<tr>
-<td>WRITE DATA</td>
-<td>input</td>
-<td>32</td>
-<td>Valor a escribirse en la memoria.</td>
-</tr>
-<tr>
-<td>WRITE ENABLE</td>
-<td>input</td>
-<td>1</td>
-<td>En = 1 en las instrucciones que escriben; En = 0 en las demás.</td>
-</tr>
-<tr>
-<td>Clk</td>
-<td>input</td>
-<td>1</td>
-<td>Señal de reloj que viene desde cpu.circ.</td>
-</tr>
-<tr>
-<td>READ DATA</td>
-<td>output</td>
-<td>32</td>
-<td>Datos leídos en la dirección especificada.</td>
-</tr>
-</tbody>
-</table>
-<h3 id="control">Control<a class="headerlink" href="#control" title="Permanent link">&para;</a></h3>
-<p>Las señales de control tienen un papel muy importante en el proyecto. Revise de nuevo los diagramas de datapath vistos en clase y la tabla resumen de control que llenamos para tener frescas en su mente las señales.</p>
-<p>Existen varias formas de implementar las señales de control. Por ejemplo, pueden construir una palabra de control y guardarla en una memoria ROM (microcódigo) o pueden construir un circuito que elija qué acción tomar basándose en algunos bits del opcode, func3 y func7.</p>
-<p><strong>Es obligatorio que sus componentes estén unidos y las señales de control necesarias estén implementadas.</strong> Si en la calificación del proyecto sólo tiene componentes sueltos (como el ALU y Reg File de la primera fase) y estos no se comunican entre sí, su nota será cero.</p>
-<p>Consejo final: ¡Modularicen! Creen los subcircuitos que sean necesarios y diséñenlos bien antes de empezar a construirlos.</p>
-<h3 id="isa">ISA<a class="headerlink" href="#isa" title="Permanent link">&para;</a></h3>
-<p><img alt="Formato de instrucciones" src="/img/projs/proj02/instruction_format.png" /></p>
-<p>Las instrucciones a implementar son las siguientes:</p>
-<table>
-<thead>
-<tr>
-<th>Instruction</th>
-<th>Type</th>
-<th>Opcode</th>
-<th>Funct3</th>
-<th>Funct7/IMM</th>
-<th>Operation</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>add rd, rs1, rs2</td>
-<td>R</td>
-<td>0x33</td>
-<td>0x0</td>
-<td>0x00</td>
-<td>R[rd] ← R[rs1] + R[rs2]</td>
-</tr>
-<tr>
-<td>mul rd, rs1, rs2</td>
-<td>R</td>
-<td>0x33</td>
-<td>0x0</td>
-<td>0x01</td>
-<td>R[rd] ← (R[rs1] * R[rs2])[31:0]</td>
-</tr>
-<tr>
-<td>sub rd, rs1, rs2</td>
-<td>R</td>
-<td>0x33</td>
-<td>0x0</td>
-<td>0x20</td>
-<td>R[rd] ← R[rs1] - R[rs2]</td>
-</tr>
-<tr>
-<td>sll rd, rs1, rs2</td>
-<td>R</td>
-<td>0x33</td>
-<td>0x1</td>
-<td>0x00</td>
-<td>R[rd] ← R[rs1] &lt;&lt; R[rs2</td>
-</tr>
-<tr>
-<td>mulh rd, rs1, rs2</td>
-<td>R</td>
-<td>0x33</td>
-<td>0x1</td>
-<td>0x01</td>
-<td>R[rd] ← (R[rs1] * R[rs2])[63:32]</td>
-</tr>
-<tr>
-<td>slt rd, rs1, rs2</td>
-<td>R</td>
-<td>0x33</td>
-<td>0x2</td>
-<td>0x00</td>
-<td>R[rd] ← (R[rs1] &lt; R[rs2]) ? 1 : 0 (signed)</td>
-</tr>
-<tr>
-<td>xor rd, rs1, rs2</td>
-<td>R</td>
-<td>0x33</td>
-<td>0x4</td>
-<td>0x00</td>
-<td>R[rd] ← R[rs1] ^ R[rs2]</td>
-</tr>
-<tr>
-<td>div rd, rs1, rs2</td>
-<td>R</td>
-<td>0x33</td>
-<td>0x4</td>
-<td>0x01</td>
-<td>R[rd] ← R[rs1] / R[rs2]</td>
-</tr>
-<tr>
-<td>srl rd, rs1, rs2</td>
-<td>R</td>
-<td>0x33</td>
-<td>0x5</td>
-<td>0x00</td>
-<td>R[rd] ← R[rs1] &gt;&gt; R[rs2]</td>
-</tr>
-<tr>
-<td>or rd, rs1, rs2</td>
-<td>R</td>
-<td>0x33</td>
-<td>0x6</td>
-<td>0x00</td>
-<td>R[rd] ← R[rs1] | R[rs2]</td>
-</tr>
-<tr>
-<td>rem rd, rs1, rs2</td>
-<td>R</td>
-<td>0x33</td>
-<td>0x6</td>
-<td>0x01</td>
-<td>R[rd] ← (R[rs1] % R[rs2]</td>
-</tr>
-<tr>
-<td>and rd, rs1, rs2</td>
-<td>R</td>
-<td>0x33</td>
-<td>0x7</td>
-<td>0x00</td>
-<td>R[rd] ← R[rs1] &amp; R[rs2]</td>
-</tr>
-<tr>
-<td>lb rd, offset(rs1)</td>
-<td>I</td>
-<td>0x03</td>
-<td>0x0</td>
-<td></td>
-<td>R[rd] ← SignExt(Mem(R[rs1] + offset, byte))</td>
-</tr>
-<tr>
-<td>lh rd, offset(rs1)</td>
-<td>I</td>
-<td>0x03</td>
-<td>0x1</td>
-<td></td>
-<td>R[rd] ← SignExt(Mem(R[rs1] + offset, half))</td>
-</tr>
-<tr>
-<td>lw rd, offset(rs1)</td>
-<td>I</td>
-<td>0x03</td>
-<td>0x2</td>
-<td></td>
-<td>R[rd] ← Mem(R[rs1] + offset, word)</td>
-</tr>
-<tr>
-<td>addi rd, rs1, imm</td>
-<td>I</td>
-<td>0x13</td>
-<td>0x0</td>
-<td></td>
-<td>R[rd] ← R[rs1] + imm</td>
-</tr>
-<tr>
-<td>slli rd, rs1, imm</td>
-<td>I</td>
-<td>0x13</td>
-<td>0x1</td>
-<td>0x00</td>
-<td>R[rd] ← R[rs1] &lt;&lt; imm</td>
-</tr>
-<tr>
-<td>slti rd, rs1, imm</td>
-<td>I</td>
-<td>0x13</td>
-<td>0x2</td>
-<td></td>
-<td>R[rd] ← (R[rs1] &lt; imm) ? 1 : 0</td>
-</tr>
-<tr>
-<td>xori rd, rs1, imm</td>
-<td>I</td>
-<td>0x13</td>
-<td>0x4</td>
-<td></td>
-<td>R[rd] ← R[rs1] ^ imm</td>
-</tr>
-<tr>
-<td>srli rd, rs1, imm</td>
-<td>I</td>
-<td>0x13</td>
-<td>0x5</td>
-<td>0x00</td>
-<td>R[rd] ← R[rs1] &gt;&gt; imm</td>
-</tr>
-<tr>
-<td>ori rd, rs1, imm</td>
-<td>I</td>
-<td>0x13</td>
-<td>0x6</td>
-<td></td>
-<td>R[rd] ← R[rs1] | imm</td>
-</tr>
-<tr>
-<td>andi rd, rs1, imm</td>
-<td>I</td>
-<td>0x13</td>
-<td>0x7</td>
-<td></td>
-<td>R[rd] ← R[rs1] &amp; imm</td>
-</tr>
-<tr>
-<td>sw rs2, offset(rs1)</td>
-<td>S</td>
-<td>0x23</td>
-<td>0x2</td>
-<td></td>
-<td>Mem(R[rs1] + offset) ← R[rs2]</td>
-</tr>
-<tr>
-<td>beq rs1, rs2, offset</td>
-<td>SB</td>
-<td>0x63</td>
-<td>0x0</td>
-<td></td>
-<td>if(R[rs1] == R[rs2]) then {PC ← PC + {offset, 1b'0}}</td>
-</tr>
-<tr>
-<td>blt rs1, rs2, offset</td>
-<td>SB</td>
-<td>0x63</td>
-<td>0x4</td>
-<td></td>
-<td>if(R[rs1] less than  R[rs2] (signed)) then {PC ← PC + {offset, 1b'0}}</td>
-</tr>
-<tr>
-<td>bltu rs1, rs2, offset</td>
-<td>SB</td>
-<td>0x63</td>
-<td>0x6</td>
-<td></td>
-<td>if(R[rs1] less than  R[rs2] (unsigned)) then {PC ← PC + {offset, 1b'0}}</td>
-</tr>
-<tr>
-<td>lui rd, offset</td>
-<td>U</td>
-<td>0x37</td>
-<td></td>
-<td></td>
-<td>R[rd] ← {offset, 12b'0}</td>
-</tr>
-<tr>
-<td>jal rd, imm</td>
-<td>UJ</td>
-<td>0x6f</td>
-<td></td>
-<td></td>
-<td>R[rd] ← PC  +  4, PC ← PC + {imm, 1b'0}</td>
-</tr>
-<tr>
-<td>jalr rd,rs, imm</td>
-<td>I</td>
-<td>0x67</td>
-<td>0x0</td>
-<td></td>
-<td>R[rd] ← PC  +  4, PC ← R[rs] + {imm}</td>
-</tr>
-</tbody>
-</table>
-<h2 id="testing">Testing<a class="headerlink" href="#testing" title="Permanent link">&para;</a></h2>
-<p>Para el ALU y Resister File es suficiente usar el <strong>./check</strong> para probar. Para el procesador completo el check también es bastante útil, pero necesitarán pruebas adicionales. Como no podemos probar cada componente que ustedes vayan implementando, la mejor opción es escribir programas de RISC-V pequeños e ir revisando su datapath de diferentes maneras.</p>
-<p>Una vez que hayan escrito su programa de RISC-V, lo van a tener que cargar en la ROM que está en <strong>riscv.circ</strong> y empezar la ejecución. Para eso, primero, abran riscv.circ y localicen la memoria ROM.</p>
-<p><img alt="ROM" src="/img/projs/proj02/rom.png" /></p>
-<p>Hagan click a la memoria y, después, en la barra de herramientas de la izquierda, hagan click en <strong>(click here to edit)</strong>, esto va a abrir un diálogo en donde ustedes pueden cargar su archivo con el código de RISC-V y este ensamblará y generará código de máquina por ustedes que va a ser la salida de la memoria ROM.</p>
-<p><img alt="Testing" src="/img/projs/proj02/test.png" /></p>
-<h2 id="notas-sobre-logisim">Notas sobre Logisim<a class="headerlink" href="#notas-sobre-logisim" title="Permanent link">&para;</a></h2>
-<p>Si Logisim les da algún problema extraño, REINICIEN LOGISIM Y VUELVAN A CARGAR SU CIRCUITO. No pierdan tiempo buscando errores si no han hecho esto. Si reiniciar no ha resuelto el problema, allí sí ya les corresponde revisar su circuito.</p>
-<p>Logisim tiene un "Reference" en la pestaña "Help", y les dice las especificaciones de cada componente.</p>
-<p>Si están usando varias ventanas de Logisim tengan mucho cuidado cuando hagan copy-paste de una ventana a otra. Asegúrense que sí se copió el circuito completo que querían y que funcione bien después de pegarlo.</p>
-<p>Si su máquina tiene poca RAM, se recomienda que no tenga muchas ventanas de Logisim abiertas para evitar errores.</p>
-<p>Pueden cambiar los atributos antes de colocar un componente para cambiar el default. Si quieren colocar varios pines de 32 bits (por ejemplo), habría que cambiarlo antes de colocar el primero. Si sólo quieren cambiar algún valor para un componente, primero lo colocan y, luego, lo cambian.</p>
-<p>Cuando cambian los inputs y outputs de un subcircuito que ya colocaron en main, Logisim automáticamente añade o remueve puertos según los cambios que hagan. Esto, muchas veces, afecta el tamaño o posición del subcircuito. Si ya habían cables conectados, Logisim intentará moverlos, pero no siempre lo hace bien. Se recomienda que si van a cambiar los inputs y outputs de un circuito, primero desconecten todos los cables que este pueda tener en main o lo eliminen del main y lo vuelvan a colocar después de cambiarlo. <strong>Recuerden que sólo pueden hacer esto para los subcircuitos que USTEDES agregan</strong>.</p>
-<p>Los cables rojos significan que algo está mal conectado. Algunos casos pueden no ser tan obvios, revisen bien todas las conexiones cercanas.</p>
-<p><img alt="Red Wires" src="/img/projs/proj02/error_wire.png" /></p>
-<p>Logisim tiene algunas herramientas de análisis combinacional (nos puede construir mapas de Karnaugh o circuitos completos con sólo darle una tabla :D). Esta herramienta les puede ser útil en algún momento de sus vidas, pero la recomendación es no usarla en CC3. Recuerden que durante los exámenes tendrán que hacer mapas o circuitos a mano, sin acceso a su computadora.</p>
-<p>Finalmente, <strong>guarde seguido</strong> y <strong>haga push seguido</strong>. Para bien o para mal Logisim está hecho en Java y tiene algunos errores. Logisim incluso puede llegar a borrar su circuito completo si su computadora llega a trabarse, entonces es importante tener una copia de seguridad siempre en Github.</p>
-<h2 id="calificacion">Calificación<a class="headerlink" href="#calificacion" title="Permanent link">&para;</a></h2>
-<p>Ustedes pueden verificar que cada parte funcione correctamente utilizando el autograder local, corriendo el siguiente comando en la terminal:</p>
-<div class="codehilite"><pre><span></span>./check
+<blockquote>
+<p><strong>NOTA</strong>: Tienen que reemplazar &lt;link del repositorio> con el link del repositorio que se creó.</p>
+</blockquote>
+<h2 id="estructura-del-proyecto">Estructura del proyecto<a class="headerlink" href="#estructura-del-proyecto" title="Permanent link">&para;</a></h2>
+<p>Cuando hayan clonado el repositorio, van a encontrar los siguientes archivos:</p>
+<div class="codehilite"><pre><span></span>Makefile
+part1.c  
+part2.c  
+README.md  
+riscv.c  
+riscvcode/
+riscv.h  
+submit  
+types.h  
+utils.c  
+utils.h
 </pre></div>
 
-<p>Si las tres partes del proyecto están correctas les saldrá algo como esto:</p>
-<div class="codehilite"><pre><span></span>   ___       __                        __       
-  / _ <span class="p">|</span>__ __/ /____  ___  _______ ____/ /__ ____
- / __ / // / __/ _ <span class="se">\/</span> _ <span class="se">\/</span> __/ _ <span class="se">\/</span> _  / -_<span class="o">)</span> __/
-/_/ <span class="p">|</span>_<span class="se">\_</span>,_/<span class="se">\_</span>_/<span class="se">\_</span>__/<span class="se">\_</span>, /_/  <span class="se">\_</span>,_/<span class="se">\_</span>,_/<span class="se">\_</span>_/_/
-                   /___/
+<p>Los únicos archivos que pueden modificar son:</p>
+<ul>
+<li><code>utils.c</code>: Archivo auxiliar que contendrá varias funciones de ayuda para la parte 1 y 2 del proyecto.</li>
+<li><code>part1.c</code>: Este es el archivo que van a modificar en la parte 1 del proyecto.</li>
+<li><code>part2.c</code>: Este es el archivo que van a modificar en la parte 2 del proyecto.</li>
+</ul>
+<p><strong>Ustedes <span style="color: red">NO</span> pueden crear otros archivos ni crear archivos de cabecera <code>.h</code>. Si necesitan agregar funciones de ayuda, por favor colóquenlas en los archivos C correspondientes (<code>utils.c</code>, <code>part1.c</code>, <code>part2.c</code>). Si ustedes no siguen estas recomendaciones, su código fallará en el autograder y obtendrán 0 como nota</strong>.</p>
+<p>Otros archivos que necesitan consultar detenidamente para entender el proyecto:</p>
+<ul>
+<li><code>type.h</code>: Archivo de cabecera que tiene los tipos de datos que ustedes van a utilizar.</li>
+<li><code>Makefile</code>: Para compilar y probar su código.</li>
+<li><code>riscvcode/*</code>: Archivos para hacer algunas pruebas.</li>
+<li><code>utils.h</code>: Archivo que contiene el formato de las instrucciones a ser utilizadas en la parte 1 del proyecto.</li>
+</ul>
+<p>Archivos que no es necesario que los revisen, pero si son curiosos:</p>
+<ul>
+<li><code>riscv.h</code>: tiene declaraciones de funciones que se utilizan en la parte 1 y 2 del proyecto.</li>
+<li><code>riscv.c</code>: programa encargado de probar la parte 1 y 2 del proyecto, el simulador como tal.</li>
+</ul>
+<h2 id="el-emulador-de-risc-v">El emulador de RISC-V<a class="headerlink" href="#el-emulador-de-risc-v" title="Permanent link">&para;</a></h2>
+<p>Los archivos proporcionados en el repositorio que crearon con GitHub Classroom son la base para un emulador de RISC-V. Primero, ustedes deberán agregar código en <strong><em>part1.c</em></strong> y <strong><em>utils.c</em></strong> para imprimir las instrucciones en ensamblador correspondientes al código de máquina (binario). Una vez realizaron esto, ustedes completarán el programa agregando código en el archivo <strong><em>parte2.c</em></strong> para ejecutar cada instrucción (incluyendo los accesos a memoria). Su simulador debe de ser capaz de entender cada una de las instrucciones siguientes ya codificadas en código de máquina (binario), nosotros ya les damos una tabla de los tipos de instrucciones que debe de ser capaz de manejar su emulador.</p>
+<p><strong>Es muy importante que ustedes lean y entiendan las definiciones encontradas en <em>types.h</em> antes de empezar su proyecto. Si tiene alguna duda, o encuentran algo que no entiendan respecto a las mismas consulten el capítulo 6 de K&amp;R, que habla sobre estructuras, bitfields y uniones</strong>.</p>
+<h3 id="set-de-instrucciones">Set de Instrucciones<a class="headerlink" href="#set-de-instrucciones" title="Permanent link">&para;</a></h3>
+<p>El set de instrucciones que su emulador debe soportar esta listado a continuación. Toda la información acá es copiada desde <a href="http://inst.eecs.berkeley.edu/~cs61c/fa17/img/riscvcard.pdf">RISC-V green card</a>, como ayuda adicional pueden utilizar la hoja proporcionada anteriormente.</p>
+<h4 id="tipo-r">Tipo R<a class="headerlink" href="#tipo-r" title="Permanent link">&para;</a></h4>
+<table>
+  <tr>
+    <th colspan="7">FORMATO DE UNA INSTRUCCIÓN DE TIPO R </th>
+  </tr>
+  <tr>
+    <td>R-TYPE</td>
+    <td><font color="#ff0000">funct7</font></td>
+    <td><font color="#0000ff">rs2</font></td>
+    <td><font color="#0000ff">rs1</font></td>
+    <td><font color="#ff0000">funct3</font></td>
+    <td><font color="#0000ff">rd</font></td>
+    <td><font color="#ff0000">opcode</font></td>
+  </tr>
+  <tr>
+    <td>Bits</td>
+    <td>7</td>
+    <td>5</td>
+    <td>5</td>
+    <td>3</td>
+    <td>5</td>
+    <td>7</td>
+  </tr>
+</table>
 
-             Machine Structures
-     Great Ideas in Computer Architecture
-               Project <span class="m">2</span>: CPU
+<table>
+  <tr>
+    <th colspan="4"> INTRUCCIONES TIPO R (OPCODE 0x33) </th>
+  </tr>
+  <tr>
+    <td>INSTRUCCIÓN</td>
+    <td>FUNCT3</td>
+    <td>FUNCT7/IMM</td>
+    <td>OPERACIÓN</td>
+  </tr>
+  <tr>
+    <td> <font color="#ff0000"> add</font><font color="#0000ff"> rd</font>, <font color="#0000ff"> rs1</font>, <font color="#0000ff"> rs2</font></td>
+    <td>0x0</td>
+    <td>0x00</td>
+    <td><font color="#ff0000">R</font>[<font color="#0000ff">rd</font>]<-<font color="#ff0000">R</font>[<font color="#0000ff">rs1</font>] + <font color="#ff0000">R</font>[<font color="#0000ff">rs2</font>]</td>
+  </tr>
+  <tr>
+    <td> <font color="#ff0000"> mul</font><font color="#0000ff"> rd</font>, <font color="#0000ff"> rs1</font>, <font color="#0000ff"> rs2</font></td>
+    <td>0x0</td>
+    <td>0x01</td>
+    <td><font color="#ff0000">R</font>[<font color="#0000ff">rd</font>]<-(<font color="#ff0000">R</font>[<font color="#0000ff">rs1</font>] * <font color="#ff0000">R</font>[<font color="#0000ff">rs2</font>]) [31:0]</td>
+  </tr>
+  <tr>
+    <td> <font color="#ff0000"> sub</font><font color="#0000ff"> rd</font>, <font color="#0000ff"> rs1</font>, <font color="#0000ff"> rs2</font></td>
+    <td>0x0</td>
+    <td>0x20</td>
+    <td><font color="#ff0000">R</font>[<font color="#0000ff">rd</font>]<-<font color="#ff0000">R</font>[<font color="#0000ff">rs1</font>] - <font color="#ff0000">R</font>[<font color="#0000ff">rs2</font>]</td>
+  </tr>
+  <tr>
+    <td> <font color="#ff0000"> sll</font><font color="#0000ff"> rd</font>, <font color="#0000ff"> rs1</font>, <font color="#0000ff"> rs2</font></td>
+    <td>0x1</td>
+    <td>0x00</td>
+    <td><font color="#ff0000">R</font>[<font color="#0000ff">rd</font>]<-<font color="#ff0000">R</font>[<font color="#0000ff">rs1</font>] << <font color="#ff0000">R</font>[<font color="#0000ff">rs2</font>]</td>
+  </tr>
+  <tr>
+    <td> <font color="#ff0000"> mulh</font><font color="#0000ff"> rd</font>, <font color="#0000ff"> rs1</font>, <font color="#0000ff"> rs2</font></td>
+    <td>0x1</td>
+    <td>0x01</td>
+    <td><font color="#ff0000">R</font>[<font color="#0000ff">rd</font>]<-(<font color="#ff0000">R</font>[<font color="#0000ff">rs1</font>] * <font color="#ff0000">R</font>[<font color="#0000ff">rs2</font>]) [63:32]</td>
+  </tr>
+  <tr>
+    <td> <font color="#ff0000"> slt</font><font color="#0000ff"> rd</font>, <font color="#0000ff"> rs1</font>, <font color="#0000ff"> rs2</font></td>
+    <td>0x2</td>
+    <td>0x00</td>
+    <td><font color="#ff0000">R</font>[<font color="#0000ff">rd</font>]<-(<font color="#ff0000">R</font>[<font color="#0000ff">rs1</font>] < <font color="#ff0000">R</font>[<font color="#0000ff">rs2</font>]) ? 1 : 0</td>
+  </tr>
+  <tr>
+    <td> <font color="#ff0000"> xor</font><font color="#0000ff"> rd</font>, <font color="#0000ff"> rs1</font>, <font color="#0000ff"> rs2</font></td>
+    <td>0x4</td>
+    <td>0x00</td>
+    <td><font color="#ff0000">R</font>[<font color="#0000ff">rd</font>]<-<font color="#ff0000">R</font>[<font color="#0000ff">rs1</font>] ^ <font color="#ff0000">R</font>[<font color="#0000ff">rs2</font>]</td>
+  </tr>
+  <tr>
+    <td> <font color="#ff0000"> div</font><font color="#0000ff"> rd</font>, <font color="#0000ff"> rs1</font>, <font color="#0000ff"> rs2</font></td>
+    <td>0x4</td>
+    <td>0x01</td>
+    <td><font color="#ff0000">R</font>[<font color="#0000ff">rd</font>]<-<font color="#ff0000">R</font>[<font color="#0000ff">rs1</font>] / <font color="#ff0000">R</font>[<font color="#0000ff">rs2</font>]</td>
+  </tr>
+  <tr>
+    <td> <font color="#ff0000"> srl</font><font color="#0000ff"> rd</font>, <font color="#0000ff"> rs1</font>, <font color="#0000ff"> rs2</font></td>
+    <td>0x5</td>
+    <td>0x00</td>
+    <td><font color="#ff0000">R</font>[<font color="#0000ff">rd</font>]<-<font color="#ff0000">R</font>[<font color="#0000ff">rs1</font>] >> <font color="#ff0000">R</font>[<font color="#0000ff">rs2</font>]</td>
+  </tr>
+  <tr>
+    <td> <font color="#ff0000"> sra</font><font color="#0000ff"> rd</font>, <font color="#0000ff"> rs1</font>, <font color="#0000ff"> rs2</font></td>
+    <td>0x5</td>
+    <td>0x20</td>
+    <td><font color="#ff0000">R</font>[<font color="#0000ff">rd</font>]<-<font color="#ff0000">R</font>[<font color="#0000ff">rs1</font>] >> <font color="#ff0000">R</font>[<font color="#0000ff">rs2</font>]</td>
+  </tr>
+  <tr>
+    <td> <font color="#ff0000"> or</font><font color="#0000ff"> rd</font>, <font color="#0000ff"> rs1</font>, <font color="#0000ff"> rs2</font></td>
+    <td>0x6</td>
+    <td>0x00</td>
+    <td><font color="#ff0000">R</font>[<font color="#0000ff">rd</font>]<-<font color="#ff0000">R</font>[<font color="#0000ff">rs1</font>] | <font color="#ff0000">R</font>[<font color="#0000ff">rs2</font>]</td>
+  </tr>
+  <tr>
+    <td> <font color="#ff0000"> rem</font><font color="#0000ff"> rd</font>, <font color="#0000ff"> rs1</font>, <font color="#0000ff"> rs2</font></td>
+    <td>0x6</td>
+    <td>0x01</td>
+    <td><font color="#ff0000">R</font>[<font color="#0000ff">rd</font>]<-<font color="#ff0000">R</font>[<font color="#0000ff">rs1</font>] % <font color="#ff0000">R</font>[<font color="#0000ff">rs2</font>]</td>
+  </tr>
+  <tr>
+    <td> <font color="#ff0000"> and</font><font color="#0000ff"> rd</font>, <font color="#0000ff"> rs1</font>, <font color="#0000ff"> rs2</font></td>
+    <td>0x7</td>
+    <td>0x00</td>
+    <td><font color="#ff0000">R</font>[<font color="#0000ff">rd</font>]<-<font color="#ff0000">R</font>[<font color="#0000ff">rs1</font>] & <font color="#ff0000">R</font>[<font color="#0000ff">rs2</font>]</td>
+  </tr>
+</table>
 
-
-Exercise            Grade  Message
-----------------  -------  ---------
-<span class="m">1</span>. ALU                 <span class="m">10</span>  passed
-<span class="m">2</span>. Register File       <span class="m">10</span>  passed
-<span class="m">3</span>. CPU                 <span class="m">80</span>  <span class="nv">passed</span>
-
-<span class="o">=</span>&gt; Score: <span class="m">100</span>/100
+<h4 id="tipo-i">Tipo I<a class="headerlink" href="#tipo-i" title="Permanent link">&para;</a></h4>
+<p><table>
+  <tr>
+    <th colspan="6">FORMATO DE UNA INSTRUCCIÓN DE TIPO I </th>
+  </tr>
+  <tr>
+    <td>I-TYPE</td>
+    <td><font color="#ff00ff">imm[11:0]</font></td>
+    <td><font color="#0000ff">rs1</font></td>
+    <td><font color="#ff0000">funct3</font></td>
+    <td><font color="#0000ff">rd</font></td>
+    <td><font color="#ff0000">opcode</font></td>
+  </tr>
+  <tr>
+    <td>Bits</td>
+    <td>12</td>
+    <td>5</td>
+    <td>3</td>
+    <td>5</td>
+    <td>7</td>
+  </tr>
+</table>
+<table>
+  <tr>
+    <th colspan="4"> INTRUCCIONES TIPO I (OPCODE 0x03) </th>
+  </tr>
+  <tr>
+    <td>INSTRUCCIÓN</td>
+    <td>FUNCT3</td>
+    <td>FUNCT7/IMM</td>
+    <td>OPERACIÓN</td>
+  </tr>
+  <tr>
+    <td><font color="#ff0000"> lb</font><font color="#0000ff"> rd,</font><font color="#ff00ff"> offset</font>(<font color="#0000ff">rs1</font>)</td>
+    <td>0x0</td>
+    <td></td>
+    <td><font color="#ff0000">R</font>[<font color="#0000ff">rd</font>]&lt;- SignExt(Mem(<font color="#ff0000">R</font>[<font color="#0000ff">rs1</font>] + <font color="#ff00ff"> offset</font>, <font color="#00a680">byte</font>)) </td>
+  </tr>
+  <tr>
+    <td><font color="#ff0000"> lh</font><font color="#0000ff"> rd,</font><font color="#ff00ff"> offset</font>(<font color="#0000ff">rs1</font>)</td>
+    <td>0x1</td>
+    <td></td>
+    <td><font color="#ff0000">R</font>[<font color="#0000ff">rd</font>]&lt;- SignExt(Mem(<font color="#ff0000">R</font>[<font color="#0000ff">rs1</font>] + <font color="#ff00ff"> offset</font>, <font color="#00a680">half</font>)) </td>
+  </tr>
+  <tr>
+    <td><font color="#ff0000"> lw</font><font color="#0000ff"> rd,</font><font color="#ff00ff"> offset</font>(<font color="#0000ff">rs1</font>)</td>
+    <td>0x2</td>
+    <td></td>
+    <td><font color="#ff0000">R</font>[<font color="#0000ff">rd</font>]&lt;- Mem(<font color="#ff0000">R</font>[<font color="#0000ff">rs1</font>] + <font color="#ff00ff"> offset</font>, <font color="#00a680">word</font>) </td>
+  </tr>
+</table>
+<table>
+  <tr>
+    <th colspan="4"> INTRUCCIONES TIPO I (OPCODE 0x13) </th>
+  </tr>
+  <tr>
+    <td>INSTRUCCIÓN</td>
+    <td>FUNCT3</td>
+    <td>FUNCT7/IMM</td>
+    <td>OPERACIÓN</td>
+  </tr>
+  <tr>
+    <td><font color="#ff0000"> addi</font><font color="#0000ff"> rd,</font><font color="#0000ff"> rs1,</font><font color="#ff00ff"> imm</font></td>
+    <td>0x0</td>
+    <td></td>
+    <td><font color="#ff0000">R</font>[<font color="#0000ff">rd</font>]&lt;- <font color="#ff0000">R</font>[<font color="#0000ff">rs1</font>] + <font color="#ff00ff"> imm</font> </td>
+  </tr>
+  <tr>
+    <td><font color="#ff0000"> slli</font><font color="#0000ff"> rd,</font><font color="#0000ff"> rs1,</font><font color="#ff00ff"> imm</font></td>
+    <td>0x1</td>
+    <td>0x00</td>
+    <td><font color="#ff0000">R</font>[<font color="#0000ff">rd</font>]&lt;- <font color="#ff0000">R</font>[<font color="#0000ff">rs1</font>] &lt;&lt; <font color="#ff00ff"> imm</font> </td>
+  </tr>
+  <tr>
+    <td><font color="#ff0000"> slti</font><font color="#0000ff"> rd,</font><font color="#0000ff"> rs1,</font><font color="#ff00ff"> imm</font></td>
+    <td>0x2</td>
+    <td></td>
+    <td><font color="#ff0000">R</font>[<font color="#0000ff">rd</font>]&lt;- (<font color="#ff0000">R</font>[<font color="#0000ff">rs1</font>] &lt; <font color="#ff00ff"> imm</font>) ? 1 : 0</td>
+  </tr>
+  <tr>
+    <td><font color="#ff0000"> xori</font><font color="#0000ff"> rd,</font><font color="#0000ff"> rs1,</font><font color="#ff00ff"> imm</font></td>
+    <td>0x4</td>
+    <td></td>
+    <td><font color="#ff0000">R</font>[<font color="#0000ff">rd</font>]&lt;- <font color="#ff0000">R</font>[<font color="#0000ff">rs1</font>] ^ <font color="#ff00ff"> imm</font> </td>
+  </tr>
+  <tr>
+    <td><font color="#ff0000"> srli</font><font color="#0000ff"> rd,</font><font color="#0000ff"> rs1,</font><font color="#ff00ff"> imm</font></td>
+    <td>0x5</td>
+    <td>0x00</td>
+    <td><font color="#ff0000">R</font>[<font color="#0000ff">rd</font>]&lt;- <font color="#ff0000">R</font>[<font color="#0000ff">rs1</font>] &gt;&gt; <font color="#ff00ff"> imm</font> </td>
+  </tr>
+  <tr>
+    <td><font color="#ff0000"> srai</font><font color="#0000ff"> rd,</font><font color="#0000ff"> rs1,</font><font color="#ff00ff"> imm</font></td>
+    <td>0x5</td>
+    <td>0x20</td>
+    <td><font color="#ff0000">R</font>[<font color="#0000ff">rd</font>]&lt;- <font color="#ff0000">R</font>[<font color="#0000ff">rs1</font>] &gt;&gt; <font color="#ff00ff"> imm</font> </td>
+  </tr>
+  <tr>
+    <td><font color="#ff0000"> ori</font><font color="#0000ff"> rd,</font><font color="#0000ff"> rs1,</font><font color="#ff00ff"> imm</font></td>
+    <td>0x6</td>
+    <td></td>
+    <td><font color="#ff0000">R</font>[<font color="#0000ff">rd</font>]&lt;- <font color="#ff0000">R</font>[<font color="#0000ff">rs1</font>] | <font color="#ff00ff"> imm</font> </td>
+  </tr>
+  <tr>
+    <td><font color="#ff0000"> andi</font><font color="#0000ff"> rd,</font><font color="#0000ff"> rs1,</font><font color="#ff00ff"> imm</font></td>
+    <td>0x7</td>
+    <td></td>
+    <td><font color="#ff0000">R</font>[<font color="#0000ff">rd</font>]&lt;- <font color="#ff0000">R</font>[<font color="#0000ff">rs1</font>] &amp; <font color="#ff00ff"> imm</font> </td>
+  </tr>
+</table>
+<table>
+  <tr>
+    <th colspan="4"> INTRUCCIONES TIPO I (OPCODE 0x67) </th>
+  </tr>
+  <tr>
+    <td>INSTRUCCIÓN</td>
+    <td>FUNCT3</td>
+    <td>FUNCT7/IMM</td>
+    <td>OPERACIÓN</td>
+  </tr>
+  <tr>
+  <td><font color="#ff0000"> jalr</font></td>
+    <td>0x0</td>
+    <td></td>
+    <td><font color="#ff0000">R</font>[<font color="#0000ff">rd</font>]&lt;- <font color="#ff0000">PC</font> + <font color="#00ff00">4</font> <br><font color="#ff0000">PC</font>&lt;- <font color="#ff0000">R</font>[<font color="#0000ff">rs1</font>] + <font color="#ff00ff">imm</font></td>
+  </tr>
+</table>
+<table>
+  <tr>
+    <th colspan="4"> INTRUCCIONES TIPO I (OPCODE 0x73) </th>
+  </tr>
+  <tr>
+    <td>INSTRUCCIÓN</td>
+    <td>FUNCT3</td>
+    <td>FUNCT7/IMM</td>
+    <td>OPERACIÓN</td>
+  </tr>
+  <tr>
+  <td><font color="#ff0000"> ecall</font></td>
+    <td>0x0</td>
+    <td>0x000</td>
+    <td rowspan="3">(Transfiere el control al Sistema Operativo) <br><font color="#0000ff">a0</font> = <font color="#ff00ff">1</font> imprime el valor contenido en <font color="#0000ff">a1</font> como entero. <br><font color="#0000ff">a0</font> = <font color="#ff00ff"> 10</font>  es exit o un indicador de final de código.<br>
+  </td>
+     </tr>
+</table></p>
+<h4 id="tipo-s">Tipo S<a class="headerlink" href="#tipo-s" title="Permanent link">&para;</a></h4>
+<p><table>
+  <tr>
+    <th colspan="7">FORMATO DE UNA INSTRUCCIÓN DE TIPO S </th>
+  </tr>
+  <tr>
+    <td>S-TYPE</td>
+    <td><font color="#ff00ff">imm[11:5]</font></td>
+    <td><font color="#0000ff">rs2</font></td>
+    <td><font color="#0000ff">rs1</font></td>
+    <td><font color="#ff0000">funct3</font></td>
+    <td><font color="#ff00ff">imm[4:0]</font></td>
+    <td><font color="#ff0000">opcode</font></td>
+  </tr>
+  <tr>
+    <td>Bits</td>
+    <td>7</td>
+    <td>5</td>
+    <td>5</td>
+    <td>3</td>
+    <td>5</td>
+    <td>7</td>
+  </tr>
+</table>
+<table>
+  <tr>
+    <th colspan="4"> INTRUCCIONES TIPO S (OPCODE 0x23) </th>
+  </tr>
+  <tr>
+    <td>INSTRUCCIÓN</td>
+    <td>FUNCT3</td>
+    <td>FUNCT7/IMM</td>
+    <td>OPERACIÓN</td>
+  </tr>
+  <tr>
+    <td><font color="#ff0000">sb</font> <font color="#0000ff">rs2</font>, <font color="#ff00ff">offset</font>(<font color="#0000ff">rs1</font>)</td>
+    <td>0x0</td>
+    <td></td>
+    <td>Mem(<font color="#ff0000">R</font>[<font color="#0000ff">rs1</font>] + <font color="#ff00ff">offset</font>)&lt;- <font color="#ff0000">R</font>[<font color="#0000ff">rs2</font>][7:0]</td>
+  </tr>
+  <tr>
+    <td><font color="#ff0000">sh</font> <font color="#0000ff">rs2</font>, <font color="#ff00ff">offset</font>(<font color="#0000ff">rs1</font>)</td>
+    <td>0x1</td>
+    <td></td>
+    <td>Mem(<font color="#ff0000">R</font>[<font color="#0000ff">rs1</font>] + <font color="#ff00ff">offset</font>)&lt;- <font color="#ff0000">R</font>[<font color="#0000ff">rs2</font>][15:0]</td>
+  </tr>
+  <tr>
+    <td><font color="#ff0000">sw</font> <font color="#0000ff">rs2</font>, <font color="#ff00ff">offset</font>(<font color="#0000ff">rs1</font>)</td>
+    <td>0x2</td>
+    <td></td>
+    <td>Mem(<font color="#ff0000">R</font>[<font color="#0000ff">rs1</font>] + <font color="#ff00ff">offset</font>)&lt;- <font color="#ff0000">R</font>[<font color="#0000ff">rs2</font>]</td>
+  </tr>
+</table></p>
+<h4 id="tipo-sb">Tipo SB<a class="headerlink" href="#tipo-sb" title="Permanent link">&para;</a></h4>
+<p><table>
+  <tr>
+    <th colspan="9">FORMATO DE UNA INSTRUCCIÓN DE TIPO SB </th>
+  </tr>
+  <tr>
+    <td>SB-TYPE</td>
+    <td><font color="#ff00ff">imm[12]</font></td>
+    <td><font color="#ff00ff">imm[10:5]</font></td>
+    <td><font color="#0000ff">rs2</font></td>
+    <td><font color="#0000ff">rs1</font></td>
+    <td><font color="#ff0000">funct3</font></td>
+    <td><font color="#ff00ff">imm[4:1]</font></td>
+    <td><font color="#ff00ff">imm[11]</font></td>
+    <td><font color="#ff0000">opcode</font></td>
+  </tr>
+  <tr>
+    <td>Bits</td>
+    <td>1</td>
+    <td>6</td>
+    <td>5</td>
+    <td>5</td>
+    <td>3</td>
+    <td>4</td>
+    <td>1</td>
+    <td>7</td>
+  </tr>
+</table>
+<table>
+  <tr>
+    <th colspan="4"> INTRUCCIONES TIPO SB (OPCODE 0x63) </th>
+  </tr>
+  <tr>
+    <td>INSTRUCCIÓN</td>
+    <td>FUNCT3</td>
+    <td>FUNCT7/IMM</td>
+    <td>OPERACIÓN</td>
+  </tr>
+  <tr>
+    <td><font color="#ff0000">beq</font> <font color="#0000ff">rs1</font>, <font color="#0000ff">rs2</font>, <font color="#ff00ff">offset</font></td>
+    <td>0x0</td>
+    <td></td>
+    <td>if(<font color="#ff0000">R</font>[<font color="#0000ff">rs1</font>] == <font color="#ff0000">R</font>[<font color="#0000ff">rs2</font>]) <br> <font color="#ff0000">PC</font>&lt;- <font color="#ff0000">PC</font> + {<font color="#ff00ff">offset</font>, 1b'0}</td>
+  </tr>
+  <tr>
+    <td><font color="#ff0000">bne</font>  <font color="#0000ff">rs1</font>, <font color="#0000ff">rs2</font>, <font color="#ff00ff">offset</font></td>
+    <td>0x1</td>
+    <td></td>
+    <td>if(<font color="#ff0000">R</font>[<font color="#0000ff">rs1</font>] != <font color="#ff0000">R</font>[<font color="#0000ff">rs2</font>]) <br> <font color="#ff0000">PC</font>&lt;- <font color="#ff0000">PC</font> + {<font color="#ff00ff">offset</font>, 1b'0}</td>
+  </tr>
+</table></p>
+<h4 id="tipo-u">Tipo U<a class="headerlink" href="#tipo-u" title="Permanent link">&para;</a></h4>
+<p><table>
+  <tr>
+    <th colspan="4">FORMATO DE UNA INSTRUCCIÓN DE TIPO U </th>
+  </tr>
+  <tr>
+    <td>U-TYPE</td>
+    <td><font color="#ff00ff">imm[31:12]</font></td>
+    <td><font color="#0000ff">rd</font></td>
+    <td><font color="#ff0000">opcode</font></td>
+  </tr>
+  <tr>
+    <td>Bits</td>
+    <td>20</td>
+    <td>5</td>
+    <td>7</td>
+  </tr>
+</table>
+<table>
+  <tr>
+    <th colspan="4"> INTRUCCIONES TIPO U (OPCODE 0x17) </th>
+  </tr>
+  <tr>
+    <td>INSTRUCCIÓN</td>
+    <td>FUNCT3</td>
+    <td>FUNCT7/IMM</td>
+    <td>OPERACIÓN</td>
+  </tr>
+  <tr>
+    <td><font color="#ff0000">auipc</font> <font color="#0000ff">rd</font>, <font color="#ff00ff">offset</font></td>
+    <td></td>
+    <td></td>
+    <td><font color="#ff0000">R</font>[<font color="#0000ff">rd</font>]&lt;- <font color="#ff0000">PC</font> + {<font color="#ff00ff">offset</font>, 12b'0}
+  </td>
+  </tr>
+</table>
+<table>
+  <tr>
+    <th colspan="4"> INTRUCCIONES TIPO U (OPCODE 0x37) </th>
+  </tr>
+  <tr>
+    <td>INSTRUCCIÓN</td>
+    <td>FUNCT3</td>
+    <td>FUNCT7/IMM</td>
+    <td>OPERACIÓN</td>
+  </tr>
+  <tr>
+    <td><font color="#ff0000">lui</font> <font color="#0000ff">rd</font>, <font color="#ff00ff">offset</font></td>
+    <td></td>
+    <td></td>
+    <td><font color="#ff0000">R</font>[<font color="#0000ff">rd</font>]&lt;- {<font color="#ff00ff">offset</font>, 12b'0}
+  </td>
+  </tr>
+</table></p>
+<h4 id="tipo-uj">Tipo UJ<a class="headerlink" href="#tipo-uj" title="Permanent link">&para;</a></h4>
+<p><table>
+  <tr>
+    <th colspan="7">FORMATO DE UNA INSTRUCCIÓN DE TIPO UJ </th>
+  </tr>
+  <tr>
+    <td>UJ-TYPE</td>
+    <td><font color="#ff00ff">imm[20]</font></td>
+    <td><font color="#ff00ff">imm[10:1]</font></td>
+    <td><font color="#ff00ff">imm[11]</font></td>
+    <td><font color="#ff00ff">imm[19:12]</font></td>
+    <td><font color="#0000ff">rd</font></td>
+    <td><font color="#ff0000">opcode</font></td>
+  </tr>
+  <tr>
+    <td>Bits</td>
+    <td>1</td>
+    <td>10</td>
+    <td>1</td>
+    <td>8</td>
+    <td>5</td>
+    <td>7</td>
+  </tr>
+</table>
+<table>
+  <tr>
+    <th colspan="4"> INTRUCCIONES TIPO UJ (OPCODE 0x6F) </th>
+  </tr>
+  <tr>
+    <td>INSTRUCCIÓN</td>
+    <td>FUNCT3</td>
+    <td>FUNCT7/IMM</td>
+    <td>OPERACIÓN</td>
+  </tr>
+  <tr>
+    <td><font color="#ff0000">jal</font> <font color="#0000ff">rd</font>, <font color="#ff00ff">imm</font></td>
+    <td></td>
+    <td></td>
+    <td><font color="#ff0000">R</font>[<font color="#0000ff">rd</font>]&lt;- <font color="#ff0000">PC</font> + <font color="#00ff00">4</font> <br><font color="#ff0000">PC</font>&lt;- <font color="#ff0000">PC</font> + {<font color="#ff00ff">imm</font>, 1b'0}</td>
+  </tr>
+</table></p>
+<p>Al igual que la arquitectura RISC-V normal, el sistema RISC-V que están implementando es little-endian. Esto significa que cuando se le da un valor compuesto de múltiples bytes, el byte menos significativo se almacena en la dirección más baja.</p>
+<h3 id="estructura-del-codigo">Estructura del código<a class="headerlink" href="#estructura-del-codigo" title="Permanent link">&para;</a></h3>
+<p>El código base que les fue proporcionado funciona de la siguiente manera:</p>
+<ol>
+<li>Lee los programas en código de máquina que se encuentran en la memoria (Empezando en la dirección <code>0x01000</code>). Para "ejecutar" el programa este es pasado como un parámetro en la línea de comandos. Cada programa tiene 1 MiB de memoria y la unidad mínima de direccionamiento son los bytes.</li>
+<li>Todos los registros de RISC-V son inicializados en 0 y el program counter (<code>PC</code>) hacia la dirección <code>0x01000</code>. Las únicas excepciones a las inicializaciones antes mencionadas son el stack pointer (<code>sp</code>) que tiene un valor inicial de <code>0xEFFFF</code> y el global pointer (<code>gp</code>) que tiene un valor inicial de <code>0x03000</code>. En el contexto de su emulador, el global pointer hace referencia a la sección estática de su memoria. Los registros y el program counter están definidos en el <strong><em>Processor struct</em></strong> definido en <strong><em>types.h</em></strong>.</li>
+<li>Se definieron banderas con las cuales puede manejar la interacción con el usuario. Dependiendo de la opción especificada en la línea de comandos, el simulador mostrará un <em>dissassembly dump</em> (<code>-d</code>) o se ejecutará el programa. Habrá más información sobre las opciones de línea de comandos más adelante.</li>
+</ol>
+<p>Luego se entra al flujo de simulación principal, el cual ejecuta una instrucción tras otra hasta que la simulación se completa. La ejecución de una instrucción realiza las siguientes tareas:</p>
+<ol>
+<li>Trae una instrucción desde la memoria, usando el <code>pc</code> como dirección (<em>fetch</em>).</li>
+<li>Examina el opcode/funct3 para determinar que instrucción es (<em>decode</em>).</li>
+<li>Ejecuta la instrucción y actualiza el <code>pc</code> (<em>execute</em>).</li>
+</ol>
+<h3 id="opciones-en-la-linea-de-comandos">Opciones en la línea de comandos<a class="headerlink" href="#opciones-en-la-linea-de-comandos" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>-d</code>: Indica al simulador que desensamble el programa completo y que termine sin ejecutarlo.</li>
+<li><code>-i</code>: Corre el simulador en modo interactivo (<em>interactive</em>), es decir que se ejecutará una instrucción a la vez al presionar <kbd>enter</kbd>. Cada instrucción es mostrada en su forma desensamblada.</li>
+<li><code>-t</code>: Corre el simulador en modo rastreo (<em>trace</em>), en donde cada instrucción es ejecutada y es mostrada al usuario.</li>
+<li><code>-r</code>: Indica al simulador que imprima el contenido de los 32 registros después de que es ejecutada cada instrucción. Esta opción es más útil cuando se combina con la opción <code>-i</code>.</li>
+</ul>
+<p>En la parte 2, ustedes deberán implementar los siguientes métodos:</p>
+<ul>
+<li>El <strong><em>execute_instruction()</em></strong>.</li>
+<li>Los diferentes <strong><em>executes</em></strong>.</li>
+<li>El <strong><em>store()</em></strong>.</li>
+<li>El <strong><em>load()</em></strong>.</li>
+</ul>
+<p>Para cuando ustedes hayan terminado la implementación de todos los métodos, el simulador será capaz de manejar todas las instrucciones de la tabla anterior.</p>
+<h2 id="parte-1">Parte 1<a class="headerlink" href="#parte-1" title="Permanent link">&para;</a></h2>
+<p>Su primera tarea es implementar un desensamblador al completar el método <strong><em>decode_instruction()</em></strong> en el archivo <strong><em>part1.c</em></strong> junto a otras funciones.</p>
+<p>El objetivo de esta parte, es que, dada una instrucción en código de máquina, ustedes deberán traducirla a su instrucción en lenguaje ensamblador RISC-V (e.g. <code>add x1, x2, x3</code> ). Para esta parte, ustedes no harán referencia a los registros por nombre propio sino por su nombre genérico (es decir, x0, x1, ..., x31). Cuando impriman las instrucciones revisen las constantes definidas en <strong><em>utils.h</em></strong>, ya que estas le pueden ser de ayuda. Más detalles sobre los requisitos a continuación.</p>
+<h3 id="requisitos-parte-1">Requisitos parte 1<a class="headerlink" href="#requisitos-parte-1" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Imprimir el nombre de la instrucción. Si la instrucción tiene argumentos, impriman un tab (<code>\t</code>). HINT: este tab ya viene incluído en los FORMAT que encuentra en utils.</li>
+<li>Imprimir todos los argumentos, siguiendo el orden y formato dado en la columna de <strong>INSTRUCCIÓN</strong> de las tablas mostradas anteriormente.<ul>
+<li>Los argumentos son generalmente separados por coma (<code>lw</code>/<code>sw</code>, usan también paréntesis), pero no están separados por espacios.</li>
+<li>Ustedes encontrarán de ayuda revisar el archivo <strong><em>utils.h</em></strong>.</li>
+<li>Los registros que son argumentos de la instrucción son impresos con una <code>x</code> seguido del número de registro, en decimal. (e.g. <code>x0</code> o <code>x31</code>)</li>
+<li>Todos los inmediatos deben mostrarse como un número decimal con signo.</li>
+<li>Los corrimientos (e.g. para <code>slli</code>) se imprimen como números decimales sin signo (e.g. 0 a 31).</li>
+</ul>
+</li>
+<li>Imprimir un salto de línea (<code>\n</code>) al final de cada instrucción.</li>
+<li>Se estará utilizando un autograder para calificar esta tarea. Si su output difiere del nuestro debido a errores de formato, no obtendrán nota.</li>
+<li>Nosotros les proveemos ciertas pruebas. Sin embargo, dado que estas pruebas sólo cubren un subconjunto de todos los escenarios posibles, pasar estas pruebas no significa que su código esté libre de errores. Ustedes deberán identificar todos los casos y probarlos.</li>
+</ol>
+<p>Para completar la funcionalidad de la parte 1, deben de completar lo siguiente:</p>
+<ul>
+<li>La función <strong><em>decode_instrucction()</em></strong> en <strong><em>part1.c</em></strong>.</li>
+<li>Los diferentes <strong><em>writes</em></strong> en <strong><em>part1.c</em></strong>.</li>
+<li>Los diferentes <strong><em>prints</em></strong> en <strong><em>part1.c</em></strong>.</li>
+<li>Los diferentes <strong><em>gets</em></strong> en <strong><em>utils.c</em></strong>.</li>
+<li>La función <strong><em>bitExtender</em></strong>, <strong><em>get_x_distance</em></strong> y <strong><em>get_memory_offset</em></strong> en <strong><em>utils.c</em></strong>.</li>
+</ul>
+<p>Ustedes deben de correr el test brindado para su proyecto escribiendo el siguiente comando. Si ustedes pasan el test, verán en su consola el siguiente output.</p>
+<div class="codehilite"><pre><span></span>make part1
+gcc -g -Wall -Werror -Wfatal-errors -O2 -o riscv utils.c part1.c part2.c riscv.c
+simple_disasm TEST PASSED!
+multiply_disasm TEST PASSED!
+random_disasm TEST PASSED!
+---------Disassembly Tests Complete---------
 </pre></div>
 
-<p><strong>IMPORTANTE:</strong> Para tener derecho a nota debe presentar un procesador conectado y funcionando, no puede presentar solamente componentes sueltos. Si solo tiene los 20 puntos de ALU y Register File, esto se convierte en cero.</p>
+<h3 id="probando-la-parte-1">Probando la parte 1<a class="headerlink" href="#probando-la-parte-1" title="Permanent link">&para;</a></h3>
+<p>El <code>make part1</code> prueba su proyecto solo con algunos archivos sencillos. Puede consultar la carpeta <code>riscvcode</code> para ver que otros testcases hay, si quiere probar alguno específico use el comando:</p>
+<div class="codehilite"><pre><span></span>make <span class="o">[</span>test_name<span class="o">]</span>_disasm
+</pre></div>
+
+<p>Si quiere que estos testcases adicionales se prueben cada vez que ejecute <code>make part1</code>, vaya al Makefile y agreguelos en la línea que dice <code>ASM_TEST</code>.</p>
+<div class="codehilite"><pre><span></span>SOURCES :<span class="o">=</span> utils.c part1.c part2.c riscv.c
+HEADERS :<span class="o">=</span> types.h utils.h riscv.h
+
+ASM_TESTS :<span class="o">=</span> simple multiply random test_name
+</pre></div>
+
+<p>Si su instrucción desensamblada no es igual a la esperada, ustedes obtendrán la diferencia entre el output esperado y el output que devolvieron.</p>
+<div class="codehilite"><pre><span></span><span class="c1"># Output esperado</span>
+&lt; <span class="m">00001014</span>: lui x8, <span class="m">1048575</span>
+---
+<span class="c1"># Output devuelto</span>
+&gt; <span class="m">00001014</span>: Invalid Instruction: 0xfffff437
+</pre></div>
+
+<h2 id="parte-2">Parte 2<a class="headerlink" href="#parte-2" title="Permanent link">&para;</a></h2>
+<p>Su segunda tarea es completar el emulador implementando los métodos <strong><em>execute_instruction()</em></strong>. <strong><em>execute()</em></strong>'s, <strong><em>store()</em></strong> y <strong><em>load()</em></strong> del archivo <strong><em>part2.c</em></strong>.</p>
+<h3 id="requisitos">Requisitos<a class="headerlink" href="#requisitos" title="Permanent link">&para;</a></h3>
+<p>Esta parte consistirá en implementar la funcionalidad de cada instrucción. Por favor implementen las funciones descritas a continuación (todas en <strong><em>part2.c</em></strong>):</p>
+<ul>
+<li>
+<p><strong><em>execute_instruction()</em></strong>: Ejecuta la instrucción proporcionada como parámetro. Esta debería modificar los registros apropiados, realizar las llamadas a memoria necesarias y actualizar el program counter para apuntar a la siguiente instrucción a ejecutar.</p>
+</li>
+<li>
+<p><strong><em>execute()</em></strong>'s: Varias funciones de ayuda para ser llamadas en ciertas condiciones para ciertas instrucciones. Es su decisión usar estas funciones, pero estas les ayudarán de gran manera a organizar el código.</p>
+</li>
+<li>
+<p><strong><em>store()</em></strong>: Toma una dirección, un tamaño, un valor y almacena los primeros (tamaño) bytes del valor dado en la dirección dada. Cuando el parámetro <code>check_align</code> sea <code>1</code> se validarán las restricciones de alineación. Se incluyó este parámetro para obligar a las instrucciones a estar alineadas por palabras de memoria (word-aligned). Cuando implementen el <code>store</code> y <code>load</code>, este parámetro debe ser <code>0</code> dado que RISC-V no hace cumplir las restricciones de alineación.</p>
+</li>
+<li>
+<p><strong><em>load()</em></strong>: Toma una dirección y un tamaño, y retorna los siguientes (tamaño) bytes empezando en la dirección dada. El <code>check_align</code> funciona de la misma forma que en <code>store()</code>.</p>
+</li>
+</ul>
+<h3 id="probando-la-parte-2">Probando la Parte 2<a class="headerlink" href="#probando-la-parte-2" title="Permanent link">&para;</a></h3>
+<p>Les hemos adjuntado un self-checking assembly test que prueba varias de las instruciones, sin embargo este test no es exhaustivo y no prueba todas las instrucciones. A continuación, se ejemplifica cómo ejecutar los test (el output es de una solución correcta).</p>
+<div class="codehilite"><pre><span></span>make part2
+gcc -Wall -Werror -Wfatal-errors -O2 -o riscv utils.c part1.c part2.c riscv.c
+simple_execute TEST PASSED!
+multiply_execute TEST PASSED!
+random_execute TEST PASSED!
+-----------Execute Tests Complete-----------
+</pre></div>
+
+<p>Lo más probable es que ustedes tenga errores al empezar a realizar la parte 2, entonces prueben el modo de rastreo (<em>trace</em>) descrito en <a href="#opciones-en-la-linea-de-comandos">Opciones en la línea de Comandos</a>.</p>
+<p>Al igual que en la parte 1, el comando <code>make part2</code> hace solo algunas pruebas sencillas. Para usar los demás testcases que encontró en la carpeta <code>riscvcode</code> use el siguiente comando.</p>
+<div class="codehilite"><pre><span></span>make <span class="o">[</span>test_name<span class="o">]</span>_execute
+</pre></div>
+
+<h2 id="preguntas-frecuentes">Preguntas Frecuentes<a class="headerlink" href="#preguntas-frecuentes" title="Permanent link">&para;</a></h2>
+<h3 id="1-como-puedo-empezar">1. ¿Cómo puedo empezar?<a class="headerlink" href="#1-como-puedo-empezar" title="Permanent link">&para;</a></h3>
+<p>Lo mejor es revisar <code>types.h</code> y analizar la estructura <code>Instruction</code> para empezar a trabajar en la <code>parte1.c</code>, por ejemplo como acceder a cada campo de cada diferente tipo de instrucción y al opcode también. Por ejemplo, para acceder al <code>opcode</code> pueden utilizar:</p>
+<div class="codehilite"><pre><span></span><span class="n">instruction</span><span class="p">.</span><span class="n">opcode</span>
+</pre></div>
+
+<p>siendo <code>instruction</code> una variable que representa una "instancia" de la estructura <code>Instruction</code>. Luego de esto, pueden ver cómo accediendo a estos campos pueden decodificar la instrucción y así lograr imprimirla.</p>
+<h3 id="2-me-da-floating-point-exception-core-dumped-al-hacer-algunas-operaciones-aritmeticas-por-que">2. Me da Floating-point Exception (core dumped) al hacer algunas operaciones aritméticas, ¿por qué?<a class="headerlink" href="#2-me-da-floating-point-exception-core-dumped-al-hacer-algunas-operaciones-aritmeticas-por-que" title="Permanent link">&para;</a></h3>
+<p>Generalmente esto se da porque se divide por <code>0</code> o hay <code>overflow</code> utilizando variables enteras con signo. Por ejemplo:</p>
+<div class="superfences-tabs">
+<input name="__tabs_1" type="radio" id="__tab_1_0" checked="checked" />
+<label for="__tab_1_0">Division por 0</label>
+<div class="superfences-content"><div class="codehilite"><pre><span></span><span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">z</span> <span class="o">=</span> <span class="n">x</span> <span class="o">/</span> <span class="n">y</span><span class="p">;</span>
+</pre></div></div>
+<input name="__tabs_1" type="radio" id="__tab_1_1" />
+<label for="__tab_1_1">Overflow</label>
+<div class="superfences-content"><div class="codehilite"><pre><span></span><span class="kt">int32_t</span> <span class="n">x</span> <span class="o">=</span> <span class="mh">0x80000000</span><span class="p">;</span>
+<span class="kt">int32_t</span> <span class="n">y</span> <span class="o">=</span> <span class="mh">0xffffffff</span><span class="p">;</span>
+<span class="kt">int32_t</span> <span class="n">z</span> <span class="o">=</span> <span class="n">x</span> <span class="o">/</span> <span class="n">y</span><span class="p">;</span>
+</pre></div></div>
+</div>
+<p>La solución para la división por <code>0</code> es simplemente tienen que devolver <code>-1</code> como dice la especificación de RISC-V  y para el residuo devolver el primer argumento de la operación. En el caso de <code>overflow</code> devolvemos <code>rs1</code> para la division y <code>0</code> para el residuo.</p>
+<div class="superfences-tabs">
+<input name="__tabs_2" type="radio" id="__tab_2_0" checked="checked" />
+<label for="__tab_2_0">Division</label>
+<div class="superfences-content"><div class="codehilite"><pre><span></span><span class="c1">// division</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">rs2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">rd</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>                <span class="c1">// division entre cero</span>
+<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">rs1</span> <span class="o">==</span> <span class="mh">0x80000000</span> <span class="o">&amp;&amp;</span> <span class="n">rs2</span> <span class="o">==</span> <span class="mh">0xffffffff</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">rd</span> <span class="o">=</span> <span class="n">rs1</span><span class="p">;</span>               <span class="c1">// overflow</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="n">rd</span> <span class="o">=</span> <span class="n">rs1</span> <span class="o">/</span> <span class="n">rs2</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div></div>
+<input name="__tabs_2" type="radio" id="__tab_2_1" />
+<label for="__tab_2_1">Residuo</label>
+<div class="superfences-content"><div class="codehilite"><pre><span></span><span class="c1">// residuo</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">rs2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">rd</span> <span class="o">=</span> <span class="n">rs1</span><span class="p">;</span>               <span class="c1">// residuo entre cero</span>
+<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">rs1</span> <span class="o">==</span> <span class="mh">0x80000000</span> <span class="o">&amp;&amp;</span> <span class="n">rs2</span> <span class="o">==</span> <span class="mh">0xffffffff</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">rd</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>                 <span class="c1">// overflow</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="n">rd</span> <span class="o">=</span> <span class="n">rs1</span> <span class="o">%</span> <span class="n">rs2</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div></div>
+</div>
+<h3 id="3-en-la-parte-1-el-formato-nunca-es-el-esperado-por-las-pruebas-por-que">3. En la parte 1 el formato nunca es el esperado por las pruebas, ¿por qué?<a class="headerlink" href="#3-en-la-parte-1-el-formato-nunca-es-el-esperado-por-las-pruebas-por-que" title="Permanent link">&para;</a></h3>
+<p>Seguramente no están utilizando el formato correcto, les recomendamos que utilicen las siguientes <code>macros</code> para imprimir las instrucciones que se encuentran en el archivo <code>utils.h</code>:</p>
+<div class="codehilite"><pre><span></span><span class="cp">#define RTYPE_FORMAT &quot;%s\tx%d, x%d, x%d\n&quot;</span>
+<span class="cp">#define ITYPE_FORMAT &quot;%s\tx%d, x%d, %d\n&quot;</span>
+<span class="cp">#define JALR_FORMAT &quot;jalr\tx%d, x%d, %d\n&quot;</span>
+<span class="cp">#define MEM_FORMAT &quot;%s\tx%d, %d(x%d)\n&quot;</span>
+<span class="cp">#define AUIPC_FORMAT &quot;auipc\tx%d, %d\n&quot;</span>
+<span class="cp">#define LUI_FORMAT &quot;lui\tx%d, %d\n&quot;</span>
+<span class="cp">#define JAL_FORMAT &quot;jal\tx%d, %d\n&quot;</span>
+<span class="cp">#define BRANCH_FORMAT &quot;%s\tx%d, x%d, %d\n&quot;</span>
+<span class="cp">#define ECALL_FORMAT &quot;ecall\n&quot;</span>
+</pre></div>
+
+<h3 id="4-puedo-crear-mis-propias-funciones">4. ¿Puedo crear mis propias funciones?<a class="headerlink" href="#4-puedo-crear-mis-propias-funciones" title="Permanent link">&para;</a></h3>
+<p>Sí, siempre y cuando estas estén declaradas, ya sea en <code>part1.c</code>, <code>part2.c</code> o <code>utils.c</code>, ya que son los únicos archivos que se envían al autograder. Sin embargo, <strong><span style="color: red">NO</span> está permitido renombrar o eliminar las siguientes funciones</strong>:</p>
+<div class="codehilite"><pre><span></span><span class="cm">/* archivo part1.c */</span>
+<span class="kt">void</span> <span class="nf">decode_instruction</span><span class="p">(</span><span class="n">Instruction</span> <span class="n">i</span><span class="p">);</span>
+
+<span class="cm">/* archivo part2.c */</span>
+<span class="kt">void</span> <span class="nf">execute_instruction</span><span class="p">(</span><span class="n">Instruction</span> <span class="n">instruction</span><span class="p">,</span> <span class="n">Processor</span><span class="o">*</span> <span class="n">processor</span><span class="p">,</span> <span class="n">Byte</span> <span class="o">*</span><span class="n">memory</span><span class="p">);</span>
+<span class="kt">void</span> <span class="nf">store</span><span class="p">(</span><span class="n">Byte</span> <span class="o">*</span><span class="n">memory</span><span class="p">,</span> <span class="n">Address</span> <span class="n">address</span><span class="p">,</span> <span class="n">Alignment</span> <span class="n">alignment</span><span class="p">,</span> <span class="n">Word</span> <span class="n">value</span><span class="p">,</span> <span class="kt">int</span><span class="p">);</span>
+<span class="n">Word</span> <span class="nf">load</span><span class="p">(</span><span class="n">Byte</span> <span class="o">*</span><span class="n">memory</span><span class="p">,</span> <span class="n">Address</span> <span class="n">address</span><span class="p">,</span> <span class="n">Alignment</span> <span class="n">alignment</span><span class="p">,</span> <span class="kt">int</span><span class="p">);</span>
+</pre></div>
+
+<p>Ya que el simulador <code>riscv.c</code> espera que estas estén definidas.</p>
+<h2 id="revisando-su-nota">Revisando su nota<a class="headerlink" href="#revisando-su-nota" title="Permanent link">&para;</a></h2>
+<p>Haga pruebas sencillas antes de usar el autograder, ya que este prueba de una vez todos los casos posibles. Para utilizarlo, use el comando que ya conoce.</p>
+<p><code>./check</code></p>
+<p>Recuerde hacer add + commit + push frecuentemente. Si algo le pasa a su máquina virtual, puede ir a Github a recuperar lo que ya haya subido. </p>
+<p>Al terminar <strong>AMBOS INTEGRANTES DEL GRUPO</strong> deben subir el link del repositorio al GES.</p>
                 
                   
                 
@@ -1547,7 +1890,7 @@ Exercise            Grade  Message
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../proj01/" title="1: C y RISC-V" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../proj01/" title="1: Compresion" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -1556,19 +1899,19 @@ Exercise            Grade  Message
                 <span class="md-footer-nav__direction">
                   Anterior
                 </span>
-                1: C y RISC-V
+                1: Compresion
               </span>
             </div>
           </a>
         
         
-          <a href="../../tutorials/python/" title="Python" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../proj03/" title="3: Procesador" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Siguiente
                 </span>
-                Python
+                3: Procesador
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
