@@ -64,7 +64,7 @@ En CC2 usted conoció varios algoritmos de ordenamiento, el más sencillo de ell
 Aquí tiene un pseudocódigo de este algoritmo:
 
 ```
-FOR i FROM 0 TO size - 2 DO
+FOR i FROM 0 TO size - 1 DO
     swapped ← false
     FOR j FROM 0 TO size - i - 1 DO
         IF array[j] > array[j + 1] THEN
@@ -87,6 +87,25 @@ Vaya al archivo _bubble.c_ en la carpeta del ejercicio 2 e implemente las funcio
 `swap()` debe intercambiar el contenido de las casillas indicadas, y `bubbleSort()` debe implementar el algoritmo mostrado en el pseudocódigo anterior.
 
 Resuelva este problema usando solamente notación de punteros. Si utiliza notación de arreglos, es decir `array[pos]`, el autograder le dará cero par este ejercicio.
+
+Al finalizar, pruebe su programa con:
+```
+make bubble
+./bubble
+```
+
+## Solución de problemas
+
+Ante cualquier problema de compilación, primero haga clean y luego reintente compilar.
+```
+make clean
+```
+
+En el Makefile ya está la bandera necesaria para poder debuggear, entonces puede diagnosticar sus problemas usando cgdb.
+```
+cgdb vector
+cgdb bubble
+```
 
 ## Entrega de laboratorio
 

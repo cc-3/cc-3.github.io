@@ -68,8 +68,9 @@ nav:
     - '7: Logisim Avanzado': labs/lab07.md
     - '8: SIMD': labs/lab08.md
   - Proyectos:
-    - '1: C y RISC-V': projs/proj01.md
-    - '2: Procesador': projs/proj02.md
+    - '1: Compresion': projs/proj01.md
+    - '2: Desensamblador': projs/proj02.md
+    - '3: Procesador': projs/proj03.md
   - Tutoriales:
     - 'Python': tutorials/python.md
     - 'Instalacion de material': tutorials/install.md

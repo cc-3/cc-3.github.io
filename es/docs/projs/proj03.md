@@ -1,24 +1,40 @@
-# Proyecto 3: Optimizaciones
+# Proyecto 2: CPU
 
-## Objetivos
 
-* Utilizar técnicas de programación de optimización aprendidas en clase para acelerar tareas de reconocimiento de imágenes.
-* Aplicar la ley de Amdahl para conocer las partes del programa en donde se deberían aplicar optimizaciones.
-* Enfocarse en las optimizaciones mayores antes de tratar de hacer micro optimizaciones.
+## Introducción
+
+En este proyecto utilizaremos Logisim para implementar un procesador de 32-bits, cuyo ISA es un subset de las instrucciones de RISC-V. Algunos componentes del proyecto serán más sencillos que los componentes de hardware verdaderos para evitar realizar trabajo repetitivo. Nuestro ISA utiliza 32 registros de 32 bits cada uno y una memoria, cuyas direcciones son de 32 bits.
+
+![RISC-V Datapath](/img/projs/proj02/datapath.png)
+
+A continuación, algunos detalles importantes que debemos leer antes de iniciar.
+
+  * Pueden utilizar cualquier bloque ya existente en Logisim para el proyecto.
+  * Guarden constantemente. Realicen commits y hagan push al menos una vez por cada día que trabajen.
+  * Logisim es un excelente simulador pero ocasionalmente tiene errores, entonces hagamos caso a la indicación anterior: Guarden constantemente.
+  * Trabajemos de la misma forma que en un proyecto de software: Construyamos el proyecto pieza por pieza y realicemos pruebas antes de unir un bloque con otros. Podemos construir todos los subcircuitos adicionales que necesitemos, siempre y cuando sigamos las reglas específicas que cada parte impone (más de esto a continuación).
+  * Se incluyen algunos tests. Sólo se debe correr el script ./check (esto seguramente tendrán que hacerlo en Linux, se requiere Python 3.X instalado).
+  * ¡Necesitaremos más tests! Cada equipo debería hacer sus propios tests adicionales. En la sección de *Testing* hay algunas indicaciones de cómo hacer pruebas adicionales.
+
+Finalmente, las dos indicaciones más importantes:
+
+  * No modifique (es decir no mueva, no renombre, no elimine) ninguna de las entradas y salidas que se le dan en los circuitos base. Si lo hace nuestro autograder no podrá conectarse con su circuito y tendrá cero de nota.
+  * En el camino nos hemos encontrado con algunos problemas de git merge si ambos miembros del equipo estaban trabajando en el mismo archivo. En el proyecto 1 a veces git los resolvía automáticamente y a veces no. En Logisim es garantizado que git NO RESOLVERÁ ESTO DE FORMA CORRECTA, entonces si trabajamos en equipo NO DEBEMOS MODIFICAR EL MISMO ARCHIVO AL MISMO TIEMPO.
+
 
 ## Preparación
 
-**Antes de comenzar, asegúrense de que hayan <span style="color: red">leído y comprendido</span> todas las instrucciones del proyecto de principio a fin**. Si tienen alguna pregunta, por favor diríjanse a **Slack** y pregunten en los canales correspondientes.
+**Antes de comenzar, asegúrense de que hayan leído y comprendido todas las instrucciones del proyecto de principio a fin**. Si tienen alguna pregunta, por favor diríjanse a **Slack** y pregunten en los canales correspondientes. Si su duda es general, es decir no necesita mostrar algo muy específico de su circuito, pregunte en los **canales públicos**.
 
-Para comenzar con el proyecto, primero tienen que tener todos los archivos base, estos se encuentran [aquí](https://classroom.github.com/g/UcVbUubs). Tienen permitido trabajar en parejas o de forma individual, por lo que al aceptar la asignación les preguntará si desean crear un grupo nuevo o unirse a uno ya existente. Si crean un grupo nuevo, ingresen un nombre que los represente (seguramente un nombre raro como siempre <i class="em em-rolling_on_the_floor_laughing"></i>...) y que no haya sido tomado por otro.
+Para comenzar con el proyecto, primero tienen que tener todos los archivos base, estos se encuentran [aquí](https://classroom.github.com/a/gB6R5Wz4). Pueden trabajar en parejas o de forma individual, por lo que al aceptar la asignación les preguntará si desean crear un grupo nuevo o unirse a uno ya existente. Si crean un grupo nuevo, ingresen un nombre creativo y fácil de recordar. No se pueden repetir los nombres del proyecto 1, Github no lo permite.
 
 ![Create group](/img/projs/proj01/classroom1.png)
 
-Si desean unirse a un grupo ya creado, tienen que buscar el nombre del grupo y pulsar el botón que dice **join**:
+Si desean unirse a un grupo ya creado, tienen que buscar el nombre del grupo y pulsar el botón que dice **join**
 
 ![Join group](/img/projs/proj01/classroom2.png)
 
-**Tienen que tener mucho cuidado al unirse a un grupo ya existente, ya que esto no se puede cambiar después, además, lo consideraremos como <span style="color: red">PLAGIO</span> si lo realizan de manera incorrecta, ya que, al hacer esto, pueden tener acceso al repositorio del otro miembro del grupo y leer su código.**
+**Tienen que tener mucho cuidado al unirse a un grupo ya existente, ya que esto no se puede cambiar después. Si se une sin permiso a un grupo que no es el suyo, lo consideraremos como PLAGIO, ya que al hacerlo obtiene acceso al repositorio del otro grupo.**
 
 Ya sea que se unan o creen un nuevo grupo, al finalizar el proceso les creará automáticamente un repositorio con una extensión que termina con su nombre de grupo. Ya habiendo hecho todo eso, pueden ejecutar los siguientes comandos abriendo una terminal (<kbd >CTRL</kbd> <kbd>+</kbd> <kbd>T</kbd>):
 
@@ -26,361 +42,246 @@ Ya sea que se unan o creen un nuevo grupo, al finalizar el proceso les creará a
 git clone <link del repositorio>
 ```
 
+## Parte 1: Register File
 
-## Introducción
+Como aprendimos en clase, RISC-V tiene 32 registros. En el proyecto sólo implementaremos 9 (abajo se indica cuales) para evitar realizar trabajo repetitivo. Todas nuestras señales (rs1, rs2, rd) siguen siendo de 5-bits, pero sólo se estarán usando los registros indicados.
 
-En este proyecto, ustedes van a aplicar algunas técnicas de optimizaciones que han aprendido en clase a un problema de la vida real de clasificación de imágenes utilizando una red neural convolucional (Convolutional Neural Network CNN).
+El register file debe poder leer y escribir a los registros que se especifiquen según la instrucción, sin afectar o modificar a cualquier otro registro. Existe una excepción: El registro cero está alambrado a tierra y su valor no puede ser cambiado por ningún motivo.
 
-<div id="teaser">
-<div id="convnetvis"></div>
-<span class="glyphicon glyphicon-question-sign" id="convask"></span>
-<div id="demomsg">
-  *Esta red neural está corriendo en vivo en su navegador.
-</div>
-</div>
-<p align="center">
-  <small>Créditos: <strong>CS231N</strong></small>
-</p>
+Los registros que utilizaremos son los siguientes:
 
-Las siguientes secciones los van a introducir un poco a lo que son las redes neurales convolucionales CNNs, una idea a muy alto nivel para saber que está pasando. No se preocupen en absoluto si ustedes no conocen mucho sobre redes neurales, este proyecto se puede terminar inspeccionando el código base y, así, encontrar patrones que se pueden beneficiar bastante de las optimizaciones.  
+Registro por número | Registro por nombre
+--- | ---
+x0 | zero
+x1 | ra
+x2 | sp
+x5 | t0
+x6 | t1
+x8 | s0
+x9 | s1
+x10 | a0
+x11 | a1
 
-### ¿Cómo una computadora reconoce imágenes?
+En el archivo **regfile.circ** se encuentra el esqueleto de un register file.
 
-La clasificación de imágenes describe un problema en donde a una computadora se le da una imagen y esta, de alguna manera, tiene que ver que hacer para saber qué representa (de un set posible de categorías). Antes del famoso término ***Deep Learning***, la clasificación de imágenes involucraba seleccionar un set de *características* a mano, es decir, un humano experto tenía que reconocer y extraer de la imagen las características de interés para poder efectuar la clasificación.
 
-Actualmente, las redes convolucionales se han vuelto bastante populares para realizar esta tarea. Las CNNs existen desde los 90's pero desde el 2012, gracias a la cantidad masiva de datos y el poder computacional que nos dan las tarjetas de video, son la mejor opción y ya han superado al humano en esta tarea, teniendo un error de clasificación menor al 5% (el error humano al clasificar imágenes del [ILSVRC](http://www.image-net.org/))... En general, las redes neurales asumen que existe cierta función de la entrada (las imágenes) a la salida (un set de categorías). Los algoritmos clásicos tratan de codificar percepción del mundo real en sus funciones, mientras que las CNNs aprenden esta función dinámicamente de un set de imágenes etiquetadas, a este proceso se le conoce como entrenamiento o "traning". Una vez que ya se tiene una función (más bien, una aproximación a esta), se puede aplicar la función a imágenes que el algoritmo nunca ha visto antes.
+![Register File](/img/projs/proj02/regfile.png)
 
-<p align="center">
-  <img src="/img/projs/proj03/ilsvrc.jpg"/><br>
-  <strong>Figura 1: Benchmark competencia ILSVRC</strong><br>
-  <small>Ref: <a href="https://arxiv.org/pdf/1409.0575.pdf" target="_blank">https://arxiv.org/pdf/1409.0575.pdf</a></small>
-</p>
 
-### ¿Qué hacen las CNNs?
+Este tiene seis entradas:
 
-Para este proyecto, nosotros no requerimos que ustedes entiendan cómo funcionan las CNNs a detalle. Sin embargo, queremos darles suficiente información para que tengan conocimiento de los conceptos a alto nivel. Si ustedes quieren aprender más, los alentamos para que tomen algún curso en línea relacionado con **Machine Learning** o **Computer Vision**, hay una buena cantidad de información en internet, no desaprovechen ese recurso.
+Nombre | Ancho en bits | Descripción
+---  | --- | ---
+Clock | 1 | Señal de reloj. Aquí se recibirá una señal de reloj "non gated", es decir, se recibe la señal directa sin ser afectada por ANDs, NOTs o cualquier compuerta.
+Write Enable | 1 | Indica si se debería escribir a un registro en el siguiente flanco de subida del reloj.
+Read Register 1 | 5 | Registro a leer y cuyo valor será enviado a Read Data 1.
+Read Register 2 | 5 | Registro a leer y cuyo valor será enviado a Read Data 2.
+Write Register | 5 | Determina cuál registro será modificado en el siguiente flanco de subida (asumiendo que Write Enable = 1).
+Write Data | 32 | Los 32 bits de datos a guardarse en el registro, en el siguiente flanco de subida (asumiendo que Write Enable = 1).
 
-A alto nivel, una CNN consiste de múltiples capas. Cada capa toma un arreglo multi-dimensional de números como entrada y produce otro arreglo multi-dimensional de números como salida (que posteriormente se vuelve la entrada de otra capa). Cuando se está clasificando imágenes, la entrada a la primera capa es la imagen de entrada (es decir 32x32x3 números para imágenes de 32x32 pixeles y 3 canales de color), mientras que la salida de la capa final es un set de probabilidades de diferentes categorías (es decir, 1x1x10 números si es que hay 10 categorías).
+El register file tiene las siguientes salidas:
 
+Nombre | Ancho en bits | Descripción
+--- | --- | ---
+Read Data 1 | 32 | Datos que se están leyendo, según el registro que Read Register 1 pidió.
+Read Data 2 | 32 | Datos que se están leyendo, según el registro que Read Register 2 pidió.
+s0 Value | 32 | Valor de s0 (salida para DEBUG/TEST).
+s1 Value | 32 | Valor de s1 (salida para DEBUG/TEST).
+t0 Value | 32 | Valor de t0 (salida para DEBUG/TEST).
+t1 Value | 32 | Valor de t1 (salida para DEBUG/TEST).
+a0 Value | 32 | Valor de a0 (salida para DEBUG/TEST).
+ra Value | 32 | Valor de ra (salida para DEBUG/TEST).
+sp Value | 32 | Valor de sp (salida para DEBUG/TEST).
 
-<p align="center">
-  <img src="/img/projs/proj03/CNN2.png"/><br>
-  <strong>Figura 2: Arquitectura general que usamos para este proyecto</strong><br>
-</p>
+Las salidas para DEBUG/TEST están presentes porque son registros de uso frecuente (por ejemplo, tienen un trabajo importante en las llamadas a funciones). Se utilizarán sólo para pruebas del autograder. En un register file de verdad estas salidas no existirían. Para el proyecto deben estar presentes y funcionar bien para facilitar la calificación.
 
-Cada capa tiene un set de pesos asociados, estos pesos son los que la CNN "aprende" cuando es entrenada con los datos que se le presentan. Dependiendo de la capa, los pesos tienen diferentes interpretaciones, pero el propósito de este proyecto, es suficiente con que sepan que cada capa toma la entrada, realiza algunas operaciones en ella en dependencia de estos pesos y, finalmente, produce una salida. A este paso se le conoce como el "***forward pass***": tomamos una entrada, la pasamos a través de la red, produciendo el resultado deseado como salida. El forward pass es todo lo que se necesita para clasificar imágenes si la CNN ya ha sido entrenada anteriormente (como en este proyecto).  
+**IMPORTANTE:** En la primera tabla aparecen nueve registros y en la tabla anterior aparecen siete salidas, eso es intencional. Se estarán **usando** nueve, pero solo se estará **revisando** el valor de siete de ellos.
 
-En la práctica, una red neural realmente resulta ser una simple composición de funciones que reconoce patrones (con una remarcada capacidad limitada), pero puede ser bastante bizarro lo que utiliza para hacer el reconocimiento. Por ejemplo, alguien podría entrenar una red neural para reconocer las diferencias entre "perros" y "lobos". Y puede funcionar bastante bien... ya que esta mira la nieve y los árboles en los bosques en el fondo de las imágenes que contienen lobos.
+Pueden modificar regfile.circ como deseen, pero las salidas deben cumplir con el comportamiento que se indica. Deben ser cuidadosos de no modificar (mover, reemplazar, cortar, pegar, eliminar, etc.) los pines de entrada o salida. Si necesitan más espacio, pueden moverlos mientras sean cuidadosos de mantener el posicionamiento relativo que estos tienen. Para verificar que nuestros cambios no "rompan" nada, podemos abrir **regfile-harness.circ** y revisar que no existan errores allí (cables rojos de error o cables azules de desconectado) y que todo funcione bien.
 
+HINTS: Cuidado con los muxes. Si estos tienen un enable ese debería estar activo (o mejor aún, buscamos como eliminar el enable para evitarnos problemas).
 
-## Su tarea
+## Parte 2: ALU
 
-Hay mucha investigación en diferentes arquitecturas de redes neurales y métodos de entrenamiento.
-Un aspecto crucial de las redes neurales es que, dada una red entrenada, esta pueda clasificar imágenes de una forma rápida y precisa. Para este proyecto, se les estará dando una red pre-entrenada que puede clasificar imágenes RGB de 32x32 en 10 categorías o clases diferentes. Las imágenes a utilizar fueron tomadas del dataset famoso [CIFAR-10](https://www.cs.toronto.edu/~kriz/cifar.html).
+Su segunda tarea es crear un ALU que soporte todas las operaciones que necesitan las instrucciones de nuestro ISA (se detallan más adelante). Van a estar trabajando en el archivo **alu.circ**.
 
-La red va a tener los pesos ya entrenados y el algoritmo para calcular el forward pass de la red neural también se les da. Ustedes van invertir su tiempo en acelerar el forward pass, de tal manera que la red pueda clasificar imágenes a una tasa más elevada.
+![ALU](/img/projs/proj02/alu.png)
 
-## Paso 1: Entendiendo el Código
+Este tiene tres entradas:
 
-Por favor lean esta sección antes de tratar de implementar cualquier cosa. Hay una cantidad considerable de código en este proyecto, así que es crucial que ustedes tengan un conocimiento general de cada archivo.
+| Nombre de Entrada | Ancho en Bits | Descripción |
+|:-----------------:|:-------------:|:------------------------------------------------------:|
+| A | 32 | Datos para usar por A en la operación del ALU |
+| B | 32 | Datos para usar por B en la operación del ALU |
+| ALU Op | 4 | Selecciona la operación que el ALU debe de efectuar |
 
-Este proyecto es más abierto que los proyectos anteriores, ustedes pueden acelerar la aplicación en cualquier número de formas, siempre que este siga teniendo un resultado correcto. ¡Que esto no los intimide! Es posible obtener la aceleración requerida sin aplicar cada optimización existente.
+...y una salida:
 
+| Nombre de Entrada | Ancho en Bits | Descripción |
+|:-----------------:|:-------------:|:---------------------------------------------------:|
+| Out | 32 | Resultado de la operación efectuada por el ALU |
 
-### Estructura del Directorio
+Esta es la lista de operaciones que necesitan implementar. Ustedes tienen que utilizar los componentes de Logisim que ya efectúan estas operaciones. Si las intenta implementar desde cero, sería muy tardado y no es el objetivo del proyecto.
 
-Cuando obtienen los archivos base de GitHub classroom, el directorio principal tiene una estructura como la siguiente:
+| Valor de ALU Op | Instrucción |
+|:---------------:|-----------------------------------|
+| 0 | sll: Out = A << B[4:0] |
+| 1 | srl: Out = (unsigned) A >> B[4:0] |
+| 2 | add: Out = A + B |
+| 3 | and: Out = A & B |
+| 4 | or: Out = A \| B |
+| 5 | xor: Out = A ^ B |
+| 6 | slt: Out = (A < B) ? 1 : 0 Signed |
+| 7 | mul: Out = (X * Y)[31:0] |
+| 8 | mulh: Out = (A * B)[63:32] |
+| 9 | div: Out =(unsigned) A / B |
+| 10 | rem: Out = A % B |
+| 11 | sub: Out = A - B |
 
-```shell
-check
-data/
-LICENSE
-Makefile
-README.md
-snapshot/
-src/
-submit
-test/
-```
+Algunas cosas adicionales que tienen que tener en mente:
 
-**<span style="color: red">Para este proyecto, los únicos archivos que deberían de modificar (y por consecuencia los únicos que se subirán al autograder) son</span>**:
+Su ALU debería de encajar con el harness **alu-harness.circ**. Sigan las mismas instrucciones que en el register file. En particular, ustedes deberían de asegurar que su ALU encaja correctamente en el harness.
 
-* **`src/optimized/layers.c`**
-* **`src/optimized/network.c`**
-* **`src/optimized/volume.c`**
+Quedan espacios disponibles por si necesitan agregar alguna operación más adelante.
 
-Esto implica que, mientras ustedes son libres de escribir sus propias funciones de ayuda en cualquiera de estos archivos, el uso de estas estará restringido al archivo donde las definieron, ya que ustedes no pueden editar ni modificar los archivos `.h`.
+## Parte 3: CPU
 
-Por conveniencia, les hemos proveído los archivos **`src/baseline/layers.c`**, **`src/baseline/network.c`**, **`src/baseline/volume.c`**. Los archivos que están en **`src/baseline`** no deberían de ser modificados cuando estén escribiendo su código optimizado, están únicamente para que ustedes puedan:
+Se les provee un esqueleto del procesador en **cpu.circ**. Su procesador tendrá una instancia de su ALU y Register File, así como una unidad de memoria que ya se les provee. Ustedes son los responsables de construir el datapath y control completos, desde cero. Su procesador debe implementar el ISA que se detalla más abajo.
 
-* Medir la aceleración con respecto a una implementación básica.
-* Hacer referencia a una implementación correcta (pero lenta).
+![CPU](/img/projs/proj02/cpu.png)
 
-### Visión general del Código
+Su procesador obtendrá un programa desde el harness **riscv.circ**. Su procesador tendrá un output llamado FETCH_ADDRESS que indica cuál instrucción queremos, esta dirección será entregada al harness y este nos dará una instrucción. La instrucción será recibida por el procesador y será ejecutada. Revisen **riscv.circ** para ver exactamente qué sucede.
 
-Hay un número de `datatypes` que son utilizados en este proyecto. Por `datatype`, nos referimos a estructuras de C con nombres significativos, gracias a `typedef`. Nosotros los alentamos bastante a que miren los archivos `.h` que están en `src/include` para ver los campos que cada `datatype` tiene. Los archivos `.h` es donde ustedes van a encontrar, también, una descripción a alto nivel de lo que hace cada función. Para la implementación en `src/baseline/layers.c`, también hay comentarios con explicaciones detalladas de lo que el código está haciendo.
+El procesador tiene dos inputs que vienen del harness:
 
-El primer `datatype` que vamos a considerar es el tipo `volume_t`, que contiene un arreglo 3D (o volumen) de números en precisión doble. Estos son utilizados para representar los resultados de cada capa, así como los pesos asociados a algunas de las capas.
+Input Name | Bit Width | Descripción
+--- | --- | ---
+INSTRUCTION | 32 | Aquí se recibe la instrucción que se obtuvo en la dirección identificada por FETCH_ADDRESS.
+CLOCK | 1 | Input del reloj. Puede ser necesario estar enviando esta señal a varios subcircuitos.
 
-Después, tenemos un número diferente de tipos de capas: `conv`, `relu`, `pool`, `fc` y `softmax`. Ustedes no tienen que entender qué hacen estas diferentes capas, pero cada una de ellas tiene:
+El procesador debe tener los siguientes outputs, que entregará al harness:
 
-* Una estructura de datos que tiene una descripción de los parámetros de la capa. **Noten** que cada capa tiene un set fijo de parámetros que no pueden cambiar durante la ejecución. Estos determinan (por ejemplo) el tamaño de los volúmenes de su entrada y salida y estos son puestos cuando se define la CNN. Por ejemplo, la CNN que estamos utilizando tiene 3 capas `conv`, cada con parámetros un poco diferentes.
-* Una función `_forward` que calcula la operación principal de la capa. Estas funciones, toman la estructura de la capa, así como un arreglo de punteros hacia los volúmenes de entrada y salida de la capa. También, aceptan los índices `start` y `end` del arreglo. Esto le permite a cada capa procesar un "batch" de entradas a la vez. Por ejemplo, ustedes podrían tener un arreglo con punteros a volúmenes de entrada y hacer que `start = 5` y `end = 9` para procesar las entradas 5, 6, 7, 8 y 9 al mismo tiempo y escribir los resultados en las posiciones correspondientes del arreglo de salida.
-* Dos funciones: `make_` y `_load`. La primera genera una capa con un set de parámetros específicos; la segunda carga los pesos para esta capa desde el "file system".
+Output Name | Bit Width | Descripción
+--- | --- | ---
+s0 | 32 | Contenido de s0, sólo para pruebas.
+s1 | 32 | Contenido de s1, sólo para pruebas.
+t0 | 32 | Contenido de t0, sólo para pruebas.
+t1 | 32 | Contenido de t1, sólo para pruebas.
+a0 | 32 | Contenido de a0, sólo para pruebas.
+ra | 32 | Contenido de ra, sólo para pruebas.
+sp | 32 | Contenido de sp, sólo para pruebas.
+FETCH_ADDRESS | 32 | Dirección que indica qué instrucción queremos obtener del harness. En respuesta a esto, el harness enviará alguna instrucción a través de INSTRUCTION.
 
-La última estructura importante es `network_t`, que contiene toda la información que describe una CNN. Esto incluye todas las capas y una instancia de cada uno de los diferentes volúmenes intermedios. Noten que estos volúmenes no son usados para almacenar datos (esto es hecho por los batches que vamos a describir más adelante). Estan allí para que las dimensiones de cada diferente volumen estén disponibles de manera fácil en un solo lugar.
+Como en la parte 1, tengan cuidado al mover componentes y asegúrense que los pines de input y output coincidan con el harness.
 
-Todos los datos intermedios son representados por `batches`. Ustedes pueden pensar de ellos como un set de datos intermedios asociados a un set de imágenes de entrada. Mientras que su tipo se mira complicado (`batch_t` es equivalente a `volume_t***`), estos son solamente arreglos 2D de punteros hacia volúmenes. La primera dimensión les dice a qué capa pertenece el volumen (V0, V1, etc., en la Figura 2 de arriba) y la segunda dimensión, les dice qué entrada están viendo. En el código base que les hemos dado, nosotros solo utilizamos batches de tamaño 1 (es decir que solo procesamos una imagen a la vez), pero ustedes van a tener que modificar su programa para considerar batches más largos, de tal manera que se pueda paralelizar la tarea. Los batches pueden ser reservados utilizando la función `make_batch` y pueden ser liberados utilizando la función `free_batch`.
+### Memoria
 
-Finalmente, la función `net_forward` toma un batch (así como los índices `start`/`end`) y aplica la CNN a cada entrada desde `start` a `end`, llamando a las funciones forward para cada capa. Esta función es utilizada en `net_classify` para tomar un set de imágenes de entrada, ponerlas en el volumen V0 como un batch y, entonces, correr la red neural en ese batch de imágenes. Nostros guardamos las probabilidades (es decir los valores en la última capa de la red) en una matriz 2D de números de precisión doble, de tal manera que podamos ver cómo la red clasifica una imagen. Tengan cuidado con estas funciones: son llamadas por el código de benchmarking, así que la firma y su salida no deberían de ser modificadas por sus optimizaciones.
+Se les provee una memoria ya implementada. :D
 
-### Conclusión
+Un resumen de sus inputs y outputs.
 
-Nosotros reconocemos que es mucha información para digerir y que la información de arriba no es suficiente para entender totalmente cada detalle del código. Afortunadamente, ustedes no necesitan hacerlo para hacer que corra de manera más rápida: mirando la estructura del código, ustedes deberían de ver las potenciales fuentes de paralelismo y otras formas de optimizar su código. Más abajo, les daremos los primeros pasos (algunos) para comenzar y, también, les vamos a dar un número de propuestas que pueden intentar. A partir de allí, ustedes deberían de experimentar diferentes técnicas y ver si funcionan bien.
+Nombre | Tipo | Bit Width | Descripción
+--- | --- | --- | ---
+ADDRESS | input | 32 | Dirección a leer o escribir en la memoria.
+WRITE DATA | input | 32 | Valor a escribirse en la memoria.
+WRITE ENABLE | input | 1 | En = 1 en las instrucciones que escriben; En = 0 en las demás.
+Clk | input | 1 | Señal de reloj que viene desde cpu.circ.
+READ DATA | output | 32 | Datos leídos en la dirección especificada.
 
-## Paso 2: Perfilamiento y Ley de Amdahl
+### Control
 
-Siempre que ustedes empiecen a optimizar algún código dado, primero, tienen que determinar en dónde es que se gasta la mayor parte del tiempo. Por ejemplo, acelerar una parte que únicamente toma 5% del tiempo total les va a dar como máximo una aceleración del 5% y es probable que no valga su tiempo y esfuerzo.
+Las señales de control tienen un papel muy importante en el proyecto. Revise de nuevo los diagramas de datapath vistos en clase y la tabla resumen de control que llenamos para tener frescas en su mente las señales.
 
-En clase, ustedes oyeron acerca de la ley de Amdahl, que es una manera genial para estimar el impacto del performance esperado de una optimización. Como vimos en clase, para aplicar la ley de Amdahl, primero tenemos que encontrar que fracción del tiempo se gastan en diferentes partes del programa.
+Existen varias formas de implementar las señales de control. Por ejemplo, pueden construir una palabra de control y guardarla en una memoria ROM (microcódigo) o pueden construir un circuito que elija qué acción tomar basándose en algunos bits del opcode, func3 y func7.
 
-### Utilizando Gprof
+**Es obligatorio que sus componentes estén unidos y las señales de control necesarias estén implementadas.** Si en la calificación del proyecto sólo tiene componentes sueltos (como el ALU y Reg File de la primera fase) y estos no se comunican entre sí, su nota será cero.
 
-Antes de hacer cualquier cosa primero tienen que descargar el dataset que vamos a estar utilizando:
+Consejo final: ¡Modularicen! Creen los subcircuitos que sean necesarios y diséñenlos bien antes de empezar a construirlos.
 
-```shell
-cd data
-./download
-cd ..
-```
+### ISA
 
-***Gprof*** es una herramienta que vamos a estar utilizando para perfilar el código base para ver que funciones se pueden beneficiar de alguna optimización. Para correr Gprof, ustedes tienen que compilar el código base utilizando la bandera "**`-pg`**":
+![Formato de instrucciones](/img/projs/proj02/instruction_format.png)
 
-```shell
-make clean
-make baseline CFLAGS="-Wall -Isrc/include -Wno-unused-result -march=haswell -std=c99 -fopenmp -pg -O0"
-```
+Las instrucciones a implementar son las siguientes:
 
-Después, tenemos que correr el código base. Dado que Gprof está recolectando estadísticas acerca del programa, va a tomar un poco más de tiempo que lo usual (a nosotros nos tomó alrededor de dos minutos para que terminara).
+|Instruction|Type|Opcode|Funct3|Funct7/IMM|Operation|
+|--- |--- |--- |--- |--- |--- |
+|add rd, rs1, rs2|R|0x33|0x0|0x00|R[rd] ← R[rs1] + R[rs2]|
+|mul rd, rs1, rs2|R|0x33|0x0|0x01|R[rd] ← (R[rs1] * R[rs2])[31:0]|
+|sub rd, rs1, rs2|R|0x33|0x0|0x20|R[rd] ← R[rs1] - R[rs2]|
+|sll rd, rs1, rs2|R|0x33|0x1|0x00|R[rd] ← R[rs1] << R[rs2|
+|mulh rd, rs1, rs2|R|0x33|0x1|0x01|R[rd] ← (R[rs1] * R[rs2])[63:32]|
+|slt rd, rs1, rs2|R|0x33|0x2|0x00|R[rd] ← (R[rs1] < R[rs2]) ? 1 : 0 (signed)|
+|xor rd, rs1, rs2|R|0x33|0x4|0x00|R[rd] ← R[rs1] ^ R[rs2]|
+|div rd, rs1, rs2|R|0x33|0x4|0x01|R[rd] ← R[rs1] / R[rs2]|
+|srl rd, rs1, rs2|R|0x33|0x5|0x00|R[rd] ← R[rs1] >> R[rs2]|
+|or rd, rs1, rs2|R|0x33|0x6|0x00|R[rd] ← R[rs1] \| R[rs2]|
+|rem rd, rs1, rs2|R|0x33|0x6|0x01|R[rd] ← (R[rs1] % R[rs2]|
+|and rd, rs1, rs2|R|0x33|0x7|0x00|R[rd] ← R[rs1] & R[rs2]|
+|lb rd, offset(rs1)|I|0x03|0x0||R[rd] ← SignExt(Mem(R[rs1] + offset, byte))|
+|lh rd, offset(rs1)|I|0x03|0x1||R[rd] ← SignExt(Mem(R[rs1] + offset, half))|
+|lw rd, offset(rs1)|I|0x03|0x2||R[rd] ← Mem(R[rs1] + offset, word)|
+|addi rd, rs1, imm|I|0x13|0x0||R[rd] ← R[rs1] + imm|
+|slli rd, rs1, imm|I|0x13|0x1|0x00|R[rd] ← R[rs1] << imm|
+|slti rd, rs1, imm|I|0x13|0x2||R[rd] ← (R[rs1] < imm) ? 1 : 0|
+|xori rd, rs1, imm|I|0x13|0x4||R[rd] ← R[rs1] ^ imm|
+|srli rd, rs1, imm|I|0x13|0x5|0x00|R[rd] ← R[rs1] >> imm|
+|ori rd, rs1, imm|I|0x13|0x6||R[rd] ← R[rs1] \| imm|
+|andi rd, rs1, imm|I|0x13|0x7||R[rd] ← R[rs1] & imm|
+|sw rs2, offset(rs1)|S|0x23|0x2||Mem(R[rs1] + offset) ← R[rs2]|
+|beq rs1, rs2, offset|SB|0x63|0x0||if(R[rs1] == R[rs2]) then {PC ← PC + {offset, 1b'0}}|
+|blt rs1, rs2, offset|SB|0x63|0x4||if(R[rs1] less than  R[rs2] (signed)) then {PC ← PC + {offset, 1b'0}}|
+|bltu rs1, rs2, offset|SB|0x63|0x6||if(R[rs1] less than  R[rs2] (unsigned)) then {PC ← PC + {offset, 1b'0}}|
+|lui rd, offset|U|0x37|||R[rd] ← {offset, 12b'0}|
+|jal rd, imm|UJ|0x6f|||R[rd] ← PC  +  4, PC ← PC + {imm, 1b'0}|
+|jalr rd,rs, imm|I|0x67|0x0||R[rd] ← PC  +  4, PC ← R[rs] + {imm}|
 
-```shell
-./baseline benchmark
-```
 
-Finalmente, necesitamos ver los resultados de Gprof.
+## Testing
 
-```shell
-gprof baseline | less
-```
+Para el ALU y Resister File es suficiente usar el **./check** para probar. Para el procesador completo el check también es bastante útil, pero necesitarán pruebas adicionales. Como no podemos probar cada componente que ustedes vayan implementando, la mejor opción es escribir programas de RISC-V pequeños e ir revisando su datapath de diferentes maneras.
 
-Este comando que acabamos de ejecutar debería de mostrar una cantidad de texto. Para este proyecto, estamos interesados en la tabla de arriba que tiene los siguientes headers:
+Una vez que hayan escrito su programa de RISC-V, lo van a tener que cargar en la ROM que está en **riscv.circ** y empezar la ejecución. Para eso, primero, abran riscv.circ y localicen la memoria ROM.
 
-```shell
- %   cumulative   self              self     total
-time   seconds   seconds    calls   s/call   s/call  name
-```
+![ROM](/img/projs/proj02/rom.png)
 
-Las columnas de más interés son:
+Hagan click a la memoria y, después, en la barra de herramientas de la izquierda, hagan click en **(click here to edit)**, esto va a abrir un diálogo en donde ustedes pueden cargar su archivo con el código de RISC-V y este ensamblará y generará código de máquina por ustedes que va a ser la salida de la memoria ROM.
 
-* `% time`: La cantidad de tiempo que gastamos en una función.
-* `calls`: El número de veces que llamamos a una función.
-* `name`: El nombre de la función.
+![Testing](/img/projs/proj02/test.png)
 
-### Interpretando los Resultados
 
-Primero, lista el top 10 de funciones utilizando el porcentaje de tiempo que nuestro programa gasta en cada una de ellas. La ley de Amdahl nos dice que funciones se pueden beneficiar más de las optimizaciones, así que recomendamos que ustedes pongan su atención a estas funciones.
-Noten que algunas funciones que son relativamente sencillas pueden estar en este top 10 porque estas son llamadas muchas veces (en el orden de los millones para algunas, comparado con miles para otras). Mientras que, optimizar estas, pueden acelerar su programa, estas funciones pueden ser tan cortas que podría ser muy difícil de optimizar. Tengan en cuenta esto si quieren optimizar estas.
+## Notas sobre Logisim
 
+Si Logisim les da algún problema extraño, REINICIEN LOGISIM Y VUELVAN A CARGAR SU CIRCUITO. No pierdan tiempo buscando errores si no han hecho esto. Si reiniciar no ha resuelto el problema, allí sí ya les corresponde revisar su circuito.
 
-### Perfilamiento Intermedio
+Logisim tiene un "Reference" en la pestaña "Help", y les dice las especificaciones de cada componente.
 
-Si ustedes alguna vez quieren perfilar su código optimizado para seguir viendo dónde enfocarse después, pueden correr los siguientes comandos:
+Si están usando varias ventanas de Logisim tengan mucho cuidado cuando hagan copy-paste de una ventana a otra. Asegúrense que sí se copió el circuito completo que querían y que funcione bien después de pegarlo.
 
+Si su máquina tiene poca RAM, se recomienda que no tenga muchas ventanas de Logisim abiertas para evitar errores.
 
-```shell
-make clean
-make optimized CFLAGS="-Wall -Isrc/include -Wno-unused-result -march=haswell -std=c99 -fopenmp -pg -O0"
-./optimized benchmark
-gprof optimized | less
-```
+Pueden cambiar los atributos antes de colocar un componente para cambiar el default. Si quieren colocar varios pines de 32 bits (por ejemplo), habría que cambiarlo antes de colocar el primero. Si sólo quieren cambiar algún valor para un componente, primero lo colocan y, luego, lo cambian.
 
-Estos tiempos no van a ser completamente confiables dado que Gprof hace lenta la ejecución, pero les van a dar una idea general de qué fracción del tiempo usa cada función.
+Cuando cambian los inputs y outputs de un subcircuito que ya colocaron en main, Logisim automáticamente añade o remueve puertos según los cambios que hagan. Esto, muchas veces, afecta el tamaño o posición del subcircuito. Si ya habían cables conectados, Logisim intentará moverlos, pero no siempre lo hace bien. Se recomienda que si van a cambiar los inputs y outputs de un circuito, primero desconecten todos los cables que este pueda tener en main o lo eliminen del main y lo vuelvan a colocar después de cambiarlo. **Recuerden que sólo pueden hacer esto para los subcircuitos que USTEDES agregan**.
 
-## Paso 3: Loop Unrolling y otras optimizaciones
+Los cables rojos significan que algo está mal conectado. Algunos casos pueden no ser tan obvios, revisen bien todas las conexiones cercanas.
 
-En el paso 2, encontramos las funciones que valían la pena optimizar. Ustedes deberían de optimizar estas aplicando técnicas convencionales de optimización (sin SIMD o múltiples threads). Nosotros no les vamos a decir los pasos exactos a seguir, pero aquí hay algunas propuestas que les van a ayudar a empezar:
+![Red Wires](/img/projs/proj02/error_wire.png)
 
-* A veces pueden reemplazar una función por múltiples funciones especializadas que realizan la misma cosa pero están optimizadas para valores de entrada específicos. Ustedes, después, deberían de llamar a estas funciones especializadas desde la función original, cuando ustedes piensen que aplique.
-* ¿Hay algunos lugares en el programa donde una variable siempre tiene el mismo valor, pero es cargado de la memoria todo el tiempo?
-* ¿Hay algunos lugares donde ustedes podrían hacer manualmente el loop unrolling?.
-* ¿Pueden clasificar múltiples ejemplos a la vez, en vez de clasificar uno después de otro?
-* ¿Hay algún orden mejor para los diferentes loops?
+Logisim tiene algunas herramientas de análisis combinacional (nos puede construir mapas de Karnaugh o circuitos completos con sólo darle una tabla :D). Esta herramienta les puede ser útil en algún momento de sus vidas, pero la recomendación es no usarla en CC3. Recuerden que durante los exámenes tendrán que hacer mapas o circuitos a mano, sin acceso a su computadora.
 
-Noten que todas las propuestas de arriba están relacionadas en prácticas generales de optimización. Ustedes no necesariamente necesitan hacer todas estas para poder alcanzar un buen "performance".
-
-Una vez hayan mejorado el performance utilizando estas optimizaciones, ustedes pueden empezar a aplicar vectorización y paralelismo para hacer el programa aún más rápido. Noten que ustedes tienen libertad de aplicar cualquiera de estas optimizaciones y que hay más de una solución correcta. Traten de experimentar con diferentes aproximaciones y vean cuál de todas les da el mejor performance.
-
-## Paso 4: Instrucciones SIMD
-
-En el lab 10, ustedes aprendieron como aplicar instrucciones SIMD para mejorar el performance de un programa. El procesador de las instancias de Amazon soporta la extensión AVX, que les deja hacer operaciones SIMD en valores de 256 bits (no solo 128 bits, como vimos en el laboratorio). Ustedes deberían de utilizar estas extensiones para calcular cuatro operaciones en paralelo (ya que todos los valores de punto flotante son en precisión doble, que son 64 bits).
-
-Como un recordatorio, ustedes pueden utilizar la [Guía de Intel de Intrinsics](https://software.intel.com/sites/landingpage/IntrinsicsGuide/) como referencia para ver las instrucciones relevantes. Ustedes tienen que utilizar el tipo de dato `__m256d` para almacenar 4 valores `double` en un registro `YMM` y, después, utilizar instrucciones `_mm256_*` intrinsics para operar.
-
-
-## Paso 5: OpenMP
-
-Finalmente, ustedes deberían de utilizar OpenMP para paralelizar el cómputo. Noten que la forma más fácil de paralelizar la clasificación de un gran número de imágenes es clasificar batches de ellas en paralelo (dado que estos batches son independientes). Noten que ustedes van a necesitar asegurarse que ninguno de los diferentes threads sobreescriban los datos de otro. Solo utilizando `#pragma omp parallel for` puede causar errores, o tal vez no si lo hacen de manera correcta.
-
-Noten que las instancias de Amazon que van a utilizar tienen ocho cores con un thread por cada core. Esto quiere decir que ustedes deberían de esperar una aceleración aprox de ~8x.
-
-
-## Pruebas de Funcionamiento Correcto
-
-Primero, tienen que descargar el dataset, si es que todavía no lo han hecho:
-
-```shell
-cd data
-./download
-cd ..
-```
-
-Luego, tienen que compilar el código de la siguiente manera:
-
-```shell
-make clean && make
-```
-
-### Benchmark regular
-
-Ustedes pueden correr
-
-```shell
-./optimized benchmark
-```
-
-Para probar qué tan rápido corre su código en un subset de 1200 imágenes. El código base toma alrededor de trece segundos en terminar en las instancias de Amazon que vamos a utilizar para calificar. Si ustedes corren este programa sin arguments adicionales, van a poder observar la siguiente salida:
-
-```shell
-RUNNING BENCHMARK ON 1200 PICTURES...
-Making network...
-Loading batches...
-Loading input batch 0...
-Running classification...
-78.250000% accuracy
-_________ microseconds
-```
-
-Su salida va a tener un número que representa qué tanto tiempo le tomó a la red clasificar esas imágenes. Noten que solo estamos midiendo el tiempo de clasificación de su red. El tiempo que le toma para cargar las imágenes, ponerlas en memoria y otras tareas no son incluidas.
-
-
-La línea de **accuracy** es una referencia rápida para asegurárse de que su implementación es correcta. Si el accuracy es diferente (no igual a 78.25%), eso significa que hay algún problema con su implementación. Para una vista más detallada de lo que está mal con su código, pueden correr `./check simple` o `./check huge` para verificar las capas que pueden tener algún error.
-
-
-Si el test toma demasiado tiempo, pueden correr el test con un número menor de imágenes:
-
-```shell
-./optimized benchmark n
-```
-
-Donde _n_ es un entero que representa la cantidad de imágenes que quieren correr en el benchmark. Noten que, en este caso, el accuracy puede no ser el mismo, o igual a 78.25%, dado que estamos probando en un subset diferente de imágenes. Para asegurarse de que su implementación esté correcta, pueden correr los siguientes comandos:
-
-
-```shell
-./baseline benchmark n
-```
-
-Ahora, pueden comparar los accuracies que sacaron estos dos comandos y, si estos no son los mismos, esto significa que definitivamente hay algún **bug** en su implementación. Sin embargo, incluso si son las mismas, ustedes siempre deberían utilizar estos dos siguientes métodos para verificar completamente que su implementación está correcta.
-
-
-### 1. `./check simple`
-
-Este script corre su red con veinte imágenes y saca los valores exactos de cada capa de la red; compara estos valores con otros valores de referencia que nosotros generamos con el código no optimizado y verifica si estos valores son los mismos o no (hasta cierto grado de error, debido a errores de punto flotante).
-
-También, corre su código en subsets de imágenes grandes para tomar en cuenta los errores de paralelismo. Para estas pruebas, nosotros solo comparamos la salida de la última capa de su red con la versión no optimizada.
-
-Esta es una prueba más detallada que solamente correr `./optimized benchmark`, ya que se asegura que su red esté computando virtualmente las mismas operaciones como el código base. Les recomendamos utilizar esta prueba después de hacer cualquier tipo de modificación mayor a su código para asegurarse de que no afecte la validez del código.
-
-### 2. `./check huge`
-
-Este script es lo mismo que el anterior, solamente que corre el código en subsets de imágenes bastante largos. Ustedes no deberían de utilizar este script muy seguido (ya que toma una cantidad de tiempo considerable en ejecutarse), pero les recomendamos que, aunque sea, lo ejecuten una vez antes de subir su proyecto al autograder.
-
-## Debugging
-
-Nosotros recomendamos que utilicen **CGDB** y **Valgrind** para encontrar bugs en su proyecto. Para usar CGDB, necesitamos utilizar la bandera "`-g`" en la variable `CFLAGS` para que los símbolos de depuración se generen. Podemos lograr esto haciendo lo siguiente:
-
-```
-make CFLAGS="-Wall -Isrc/include -Wno-unused-result -march=haswell -std=c99 -fopenmp -g -O0"
-cgdb ./optimized
-```
-
-Luego, en CGDB, ustedes pueden poner breakpoints y ejecutar
-
-```shell
-run optimized
-```
-
-Para comenzar a depurar. Si ustedes encuentran algún `segmentation fault`, Valgrind es una buena herramienta para encontrar dónde está occurriendo. Un comando ejemplo que podrían ejecutar es:
-
-```shell
-valgrind --leak-check=full --show-leak-kinds=all ./optimized benchmark
-```
-
-Noten que su programa puede tomar más tiempo en ejecutarse al utilizar Valgrind.
-
-Si no tienen Valgrind instalado pueden utilizar el siguiente comando para instalarlo:
-
-```shell
-sudo apt install valgrind
-```
-
-## Rúbrica de Calificación
-
-En este proyecto su calificación va a ser determinada basada en qué tan rápido su código corre relativamente a la solución básica que les damos (speedup). Noten que si su implementación no pasa `./check simple`, van a recibir un 0 en el autograder. Vamos a utilizar la siguiente función para determinar su nota:
-
-```python
-grade(speedup):
-  if 0 <= speedup < 1:
-    0
-  if 1 <= speedup <= 16:
-    1 - (speedup - 16)^2 / 225
-  if speedup > 16:
-    1
-```
-
-Para referencia, aquí están las notas para algunos de los valores de speedup:
-
-
-| Speedup | Nota |
-|:-------:|:----:|
-| 16X | 100% |
-| 14X | ~98% |
-| 12X | ~93% |
-| 10X | ~84% |
-| 8X | ~72% |
-| 6X | ~56% |
-| 4X | ~36% |
-| 2X | ~13% |
-
-Su speedup va a ser basado en qué tan rápido es su código en nuestras pruebas utilizando AWS. `./check speedup` es un buen estimado de que tan rápido es su código a comparación del que les damos.
+Finalmente, **guarde seguido** y **haga push seguido**. Para bien o para mal Logisim está hecho en Java y tiene algunos errores. Logisim incluso puede llegar a borrar su circuito completo si su computadora llega a trabarse, entonces es importante tener una copia de seguridad siempre en Github.
 
 
 ## Calificación
 
-Por favor empiecen lo antes posible, porque vamos a utilizar instancias de Amazon para el autograder y este solo puede procesar 4 submits al mismo tiempo (esto por lo general toma bastante tiempo en completarse). Para este proyecto vamos a limitar la cantidad de veces que ustedes pueden hacer submit, a **20 por persona** debido a cuestiones de créditos. Sí, si ustedes van en pareja, en teoría tendrían 40 submits. De esta manera, tal vez motivamos la colaboración. Les recomendamos que prueben en una computadora con un **procesador intel con extensión AVX habilitada** antes de gastar sus créditos. Pueden ir al laboratorio para esto si no tienen una. Las medidas no van a ser exactas, pero les darán una idea. Para ver su _speedup_ aproximado pueden ejecutar los siguientes comandos:
-
-
-```shell
-make clean && make
-./check speedup
-```
-
-Para ver el _speedup_ real pueden subir su implementación al autograder, haciendo lo siguiente:
+Ustedes pueden verificar que cada parte funcione correctamente utilizando el autograder local, corriendo el siguiente comando en la terminal:
 
 ```shell
-./submit <TOKEN>
+./check
 ```
 
-lo que va a resultar en algo parecido a esto:
+Si las tres partes del proyecto están correctas les saldrá algo como esto:
 
 ```shell
    ___       __                        __       
@@ -391,26 +292,16 @@ lo que va a resultar en algo parecido a esto:
 
              Machine Structures
      Great Ideas in Computer Architecture
+               Project 2: CPU
 
-Repo: proj3_optimizations
 
-Best Score: 100/100
+Exercise            Grade  Message
+----------------  -------  ---------
+1. ALU                 10  passed
+2. Register File       10  passed
+3. CPU                 80  passed
 
-Last Output:
-
-Exercise                      Grade  Message
---------------------------  -------  --------------------
-1. Performance Programming      100  passed: speedup: 16X
+=> Score: 100/100
 ```
 
-En su página de Dashboard hay un nuevo link llamado [Project 3 Race](https://dashboard.cc-3.site/race), si le dan click van a ver algo parecido a lo siguiente:
-
-![Project 3 Race](/img/projs/proj03/race.png)
-
-Este es un tablero de posiciones, donde pueden ver los speedups alcanzados por sus otros compañeros de todas las secciones, si ustedes quedan dentro de los **primeros 3 lugares** y con un speedup mayor a **12X** pueden recibir cierta cantidad de **puntos extra**, más adelante les diremos cuánto exactamente... Como es un tablero donde aparecen los nombres de forma individual y no los grupos, si el primer y segundo lugar (por ejemplo) pertenecen al mismo grupo, el grupo recibirá los puntos del primer lugar, y entonces el tercer lugar sería el segundo lugar realmente. Esto es al estilo "ANSI C Race", para motivarlos a hacer su mejor esfuerzo y el mejor trabajo posible.
-
-Los auxiliares de este curso harán el proyecto también, si alguno de ustedes supera el speedup de un auxiliar, ustedes pueden obtener otra bonificación.
-
-<p align="center">
-  <img src="/img/projs/proj03/giphy.gif" alt="Challenge Accepted"/>
-</p>
+**IMPORTANTE:** Para tener derecho a nota debe presentar un procesador conectado y funcionando, no puede presentar solamente componentes sueltos. Si solo tiene los 20 puntos de ALU y Register File, esto se convierte en cero.
