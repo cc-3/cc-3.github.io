@@ -1706,7 +1706,9 @@ no hay   no hay   no hay   L
 ¿Como asi? Revise la diferencia entre printf y fwrite
 </pre></p>
 <h3 id="que-debe-hacer-en-esta-parte_2">¿Qué debe hacer en esta parte?<a class="headerlink" href="#que-debe-hacer-en-esta-parte_2" title="Permanent link">&para;</a></h3>
-<p>Por favor comience a trabajar su RLE y Twin Encoding. Las instrucciones para Mini Encoding estarán listas en los próximos días.</p>
+<p>(Esta vez no lo colocaré aquí, porque hay algunos comentarios un poco largos)</p>
+<p>De la misma forma que en en RLE y Twin, implemente las funciones para comprimir y descomprimir. Revise el archivo <strong>part3.c</strong> y note que en la compresión hay algo ligeramente distinto.</p>
+<p>Al momento de generar su comprimido, en ocasiones deberá emitir algún caracter nulo, esto no sucedía en RLE o Twin. <code>printf</code> no es capaz de emitir este símbolo, entonces se le sugiere que use <code>fwrite</code> para esta parte. Al generar su descomprimido, no debería encontrarse con este problema.</p>
 <h2 id="probando-el-proyecto">Probando el proyecto<a class="headerlink" href="#probando-el-proyecto" title="Permanent link">&para;</a></h2>
 <p>Compile su proyecto usando el make
 <div class="codehilite"><pre><span></span>make compress
@@ -1794,14 +1796,20 @@ Mini decompression       17  passed
 <h2 id="consejos">Consejos<a class="headerlink" href="#consejos" title="Permanent link">&para;</a></h2>
 <h4 id="editor-hexadecimal">Editor hexadecimal<a class="headerlink" href="#editor-hexadecimal" title="Permanent link">&para;</a></h4>
 <p>El resultado del RLE es fácil de visualizar, sin embargo, cuando ya esté en Twin o Mini el resultado puede incluir caracteres no imprimibles o caracteres que se vean raros en pantalla, entonces se recomienda instalar un editor hexadecimal para entenderlos más fácilmente.</p>
+<p><img alt="Visualizando Twin o Mini" src="/img/projs/proj01/hex3.png" /></p>
 <p>Si está usando Visual Studio Code, puede entrar a <strong>Extensions</strong> en la barra izquierda, en el buscador ingrese <strong>Hex Editor</strong> e instale el creado por Microsoft y con ícono de verificado.</p>
+<p><img alt="Extensions" src="/img/projs/proj01/hex1.png" /></p>
+<p><img alt="Hex Editor" src="/img/projs/proj01/hex2.png" /></p>
 <p>Tras haberlo instalado, puede presionar <strong>F1</strong> para abrir la barra de comandos de Code, en esta busque el comando <strong>Hex Editor: Open Active File in Hex Editor</strong> para visualizar su archivo como hexadecimal en lugar de ASCII.</p>
-<p>(En los próximos días se agregarán imágenes explicativas y más consejos para trabajar su proyecto)</p>
+<p><img alt="Open in Hex Editor" src="/img/projs/proj01/hex4.png" /></p>
+<p>En el panel derecho puede ver los caracteres visibles en su forma normal. En el panel izquierdo puede ver los valores hexadecimales. Si clickea algún valor, se abre un nuevo panel donde fácilmente puede ver el equivalente en binario y otros formatos.</p>
+<p><img alt="Vista del Hex Editor" src="/img/projs/proj01/hex5.png" /></p>
 <h2 id="preguntas-frecuentes">Preguntas Frecuentes<a class="headerlink" href="#preguntas-frecuentes" title="Permanent link">&para;</a></h2>
 <h3 id="1-como-puedo-empezar">1. ¿Cómo puedo empezar?<a class="headerlink" href="#1-como-puedo-empezar" title="Permanent link">&para;</a></h3>
 <p>Lea y entienda todos los archivos. Lea y entienda todos los algoritmos de compresión. Se recomienda comenzar en orden, es decir con la compresión RLE pues las otras están basadas en ella.</p>
 <h3 id="2-al-ojo-estoy-obteniendo-los-resultados-esperados-pero-no-obtengo-el-passed-ni-puntos-en-el-autograder">2. Al ojo estoy obteniendo los resultados esperados, pero no obtengo el PASSED ni puntos en el autograder.<a class="headerlink" href="#2-al-ojo-estoy-obteniendo-los-resultados-esperados-pero-no-obtengo-el-passed-ni-puntos-en-el-autograder" title="Permanent link">&para;</a></h3>
 <p>Probablemente su salida tiene algún caracter adicional. Asegúrese de estar usando los <code>printf</code> que aparecían en el código base. Si por accidente los cambió, puede buscarlos aquí arriba en las instrucciones.</p>
+<p>Use la redirección <code>&gt;</code> para guardar su resultado en algún archivo. Compare su archivo con los outputs esperados usando el editor hexadecimal, y asegúrese que sean <strong>exactamente iguales en todo</strong>, no solo en los caracteres visibles.</p>
 <h3 id="3-puedo-crear-mis-propias-funciones">3. ¿Puedo crear mis propias funciones?<a class="headerlink" href="#3-puedo-crear-mis-propias-funciones" title="Permanent link">&para;</a></h3>
 <p>Sí, cree todas las que necesite para tener código entendible y ordenado.</p>
 <p>Si las planea usar en un solo archivo, las puede declarar allí mismo. Recuerde que en C debería tener la firma de su función cerca del inicio y luego la implementación abajo.</p>
