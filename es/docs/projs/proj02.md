@@ -1,4 +1,4 @@
-# Proyecto 1: C y RISC-V
+# Proyecto 2: C y RISC-V
 
 ## Objetivos
 
@@ -50,25 +50,27 @@ Se recomienda que tenga impresa su Green Card para consultar fácilmente los opc
 
 ## Preparación
 
-**Antes de comenzar asegúrense de que hayan <span style="color: red">leído y comprendido</span> todas las instrucciones del proyecto de principio a fin**. Si tienen alguna pregunta pueden consultar la sección de preguntas frecuentes para ver si ya ha sido resuelta, de lo contrario por favor diríjanse a **Slack** y pregunten en los canales correspondientes.
+Lea las instrucciones completas. Pregunte las dudas conceptuales que le surjan antes de empezar a escribir código. Únase al canal de `#proyecto` que hay en Slack.
 
-Para comenzar con el proyecto, primero tienen que tener todos los archivos base, estos se encuentran [aquí](https://classroom.github.com/a/4LaYXPQz). Pueden trabajar en parejas o de forma individual, por lo que al aceptar la asignación les preguntará si desean crear un grupo nuevo o unirse a uno ya existente. Si crean un grupo nuevo, ingresen un nombre que represente al grupo y que no esté ya en los grupos existentes. Use un nombre bonito y creativo! (Alguna referencia a su equipo deportivo favorito, alguna canción que les guste, su carta favorita de Magic, algún anime, lo que quiera siempre y cuando no sea ofensivo) No use nombres aburridos como "Proyecto 1", "CC3 - Seccion X", etc. POR FAVOR.
+Cuando haya entendido lo que tiene que hacer, y los algoritmos de codificación, descargue el código base desde aquí
 
-![Create group](/img/projs/proj01/classroom1.png)
+```
+https://classroom.github.com/a/DvgwAR5K
+```
 
-Si desean unirse a un grupo ya creado, tienen que buscar el nombre del grupo y pulsar el botón que dice **join**
+Puede trabajar en parejas o de forma individual. No se aceptan grupos de tres o más personas. Puede trabajar mezclado entre las secciones de la matutina, pero al momento de la calificación personal deben llegar en el mismo horario.
 
-![Join group](/img/projs/proj01/classroom2.png)
+Al aceptar la asignación, el primer miembro debe pasar creando el grupo. Ingrese un nombre que represente al grupo y que no esté ya en los grupos existenes. Use un nombre bonito y creativo! (Alguna referencia a su equipo favorito, alguna canción que les guste, su carta favorita de Magic, algún anime, etc., lo que quiera siempre y cuando no sea ofensivo). POR FAVOR no use nombres aburridos como "Proyecto 1", "CC3 seccion X", etc. Grupos con nombres así se nos suelen confundir y terminamos poniéndoles menos atención.
+
+Si desean unirse a un grupo ya creado, tienen que buscar el nombre del grupo y pulsar el botón que dice **join**.
 
 **Tienen que tener mucho cuidado al unirse a un grupo ya existente, pues al unirse tendrá acceso inmediato al código que ya esté subido por parte del otro grupo. Si se une a un grupo incorrecto lo consideraremos como <span style="color: red">PLAGIO</span> pues podrían pasar robando código de esta manera.**
 
-Ya sea que se unan o creen un nuevo grupo, al finalizar el proceso les creará automáticamente un repositorio con una extensión que termina con su nombre de grupo. Ya habiendo hecho todo eso, pueden ejecutar los siguientes comandos abriendo una terminal (<kbd >CTRL</kbd> <kbd>+</kbd> <kbd>T</kbd>):
+![Create group](/img/projs/proj01/classroom1.png)
 
-```shell
-git clone <link del repositorio>
-```
+![Join group](/img/projs/proj01/classroom2.png)
 
-> **NOTA**: Tienen que reemplazar <link del repositorio\> con el link del repositorio que se creó.
+Después de crear o unirse al grupo, ya puede clonar el repositorio hacia su máquina local.
 
 
 ## Estructura del proyecto

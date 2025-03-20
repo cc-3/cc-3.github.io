@@ -1,170 +1,172 @@
-# Lab 7 - Logisim Avanzado
+# Lab 6 - Logisim
 
-## Objetivo
-
-En este laboratorio ustedes van a aprender sobre otros componentes esenciales de Logisim, en particular, los **splitters** que nos permiten hacer cosas como, descomponer un cable en subsets de bits para luego manipularlos individualmente.
+## Objetivos
+* Aprender a usar Logisim y simular circuitos en dicho programa.
+* Aprender las herramientas básicas y el funcionamiento de Logisim.
 
 ## Preparación
 
-Para este laboratorio, nuevamente, es necesario que tengan la aplicación de [Logisim](http://www.cburch.com/logisim/index.html). Adicionalmente pueden utilizar la [documentación](http://www.cburch.com/logisim/docs.html) de Logisim para refrescar el conocimiento que adquirieron en el laboratorio pasado o leer el lab también [aquí](https://cc-3.github.io/labs/lab05/).
+Para este laboratorio, es necesaria la aplicación Logisim. La cual se puede descargar en este [link](http://www.cburch.com/logisim/index.html).
 
-También tienen que tener todos los archivos base, estos se encuentran [aquí](https://classroom.github.com/a/eOTjIzyc). Recuerden que deben aceptar la asignación de **GitHub Classroom** y se les creará automáticamente un repositorio con una extensión que termina con su usuario de GitHub. Cuando ya se haya creado el repositorio, pueden ejecutar los siguientes comandos abriendo una terminal (<kbd>CTRL</kbd><kbd>+</kbd><kbd>T</kbd>):
+También tienen que tener todos los archivos base, estos se encuentran [aquí](https://classroom.github.com/a/mm5PDbKJ). Recuerden que deben aceptar la asignación de **GitHub Classroom** y se les creará automáticamente un repositorio con una extensión que termina con su usuario de GitHub. Cuando ya se haya creado el repositorio, pueden ejecutar los siguientes comandos abriendo una terminal (<kbd>CTRL</kbd><kbd>+</kbd><kbd>T</kbd>):
 
 ```shell
 git clone <link del repositorio>
 ```
 
-## Características Avanzadas de Logisim
+## Vista General
 
-Aquí pueden encontrar tres características más de logisim que ustedes van a encontrar bastante utiles, principalmente en el proyecto 2.
+Logisim es una aplicación que permite simular el comportamiento de circuitos lógicos.
 
-### Túneles (Tunnels)
+Al abrir la aplicación de Logisim, la interfaz gráfica está dividida en tres partes fundamentales:
 
-Un [túnel](http://www.cburch.com/logisim/docs/2.6.0/en/libs/base/tunnel.html) les permite dibujar _un cable invisible_ para unir dos puntos. Los túneles son agrupados por etiquetas (case-sensitive) que se les ponen a los cables para identificarlos. Generalmente son utilizados para conectar cables de la siguiente manera:
+* Área de Trabajo.
+* Sección de Componentes.
+* Sección de Herramientas de acceso directo.
 
-<p align="center">
-  <img src="/img/labs/lab06/tunnels1.png" alt="tunnels 1" />
-</p>
+![Logisim](/img/labs/lab05/logisim.png)
 
-Que se traduce (o tiene un efecto similar) a esto:
+La sección de área de trabajo está compuesta por todo el espacio en blanco con puntos negros. Aquí se pueden colocar componentes, conectarlos entre sí utilizando cables.
 
-<p align="center">
-  <img src="/img/labs/lab06/tunnels2.png" alt="tunnels 2" />
-</p>
+La sección de componentes está ubicada en el lado izquierdo de la interfaz. Es una ventanilla que contiene numerosas carpetas que contienen los componentes.
 
-Hay que tener ciertas precauciones al utilizar los túneles y siempre mantener un registro de cuales cables están conectados con túneles hacia otros cables, para evitar situaciones como esta:
+La sección de herramientas de acceso directo está ubicada en el lado superior izquierdo. Este posee íconos para la realización de distintas tareas.
+Entre dichos íconos se encuentran:
 
-<p align="center">
-  <img src="/img/labs/lab06/tunnels3.png" alt="tunnels 3" />
-</p>
+* <img src="/img/labs/lab05/poke.png" alt="poke1" /> Permite interactuar con el circuito, cambiando valores. Es llamado “Poke” en inglés.
+* <img src="/img/labs/lab05/select.png" alt="select1" /> Permite editar un componente al seleccionarlo y permite crear o editar cables. Es llamado “Select Tool” en inglés.
+* <img src="/img/labs/lab05/label.png" alt="label1" /> Permite crear texto en el área de trabajo.
+* <img src="/img/labs/lab05/input.png" alt="input1" /> Este es un acceso directo al componente llamado “Input Pin”. Permite crear entradas al circuito.
+* <img src="/img/labs/lab05/output.png" alt="output1" /> Este es un acceso directo al componente llamado “Output Pin”. Permite crear salidas de los circuitos.
+* <img src="/img/labs/lab05/not.png" alt="not1" /> Este es un acceso directo a la compuerta lógica “Not”.
+* <img src="/img/labs/lab05/and.png" alt="and1" /> Permite crear compuertas lógicas de tipo “And”.
+* <img src="/img/labs/lab05/or.png" alt="or1" /> Generacompuertas lógicas de tipo “Or”.
 
-Que se traduce (o tiene un efecto similar) a esto:
+Por el momento, estas son las herramientas que se van a necesitar para este laboratorio.
 
-<p align="center">
-  <img src="/img/labs/lab06/tunnels4.png" alt="tunnels 4" />
-</p>
+## Ejercicio 0: Las Bases
 
-Nosotros les recomendamos (**bastante**) utilizar túneles en Logisim, porque hacen los circuitos más limpios, claros y fáciles de depurar.
+Este ejercicio consiste en crear su primer circuito (¡yay! :D).
+Empecemos con un circuito simple.
 
+1. En el área de herramientas o acceso directo, hacer click en el ícono de la compuerta “And”. Esto creará una sombra de dicha compuerta que seguirá el cursor en el área de trabajo.
 
-### Divisores (Splitters)
+2. Colocar la compuerta en el área de trabajo.  Basta con hacer click otra vez para colocar dicho componente.
+También, se pueden rotar los componentes presionando las teclas de flechas del teclado. Se pueden colocar en la orientación deseada, pero para este laboratorio, colocar la compuerta en orientación “Este”. La orientación de un componente puede ser alterado al seleccionarlo y buscar la opción “Orientación” u “Orientation”.(Asegurándose de que el ícono de <img src="/img/labs/lab05/select.png" alt="select2" /> esté activo).
 
-Los divisores crean una correspondencia entre un valor de multiples bits y subsets de esos bits. A pesar de su nombre, puede dividir un valor de multiples bits en varias partes o subsets de bits (lo que se espera por el nombre), así como también puede combinar partes o subsets de bits en un valor de multiples bits. Por ejemplo para el primer caso, un valor float (IEEE 754) de precisión simple (32 bits) dividido en signo (1 bit), exponente (8 bits) y fracción (23 bits):
-
-<p align="center">
-  <img src="/img/labs/lab06/splitters1.png" alt="splitters 1" />
-</p>
-
-Para el segundo caso se unen dos entradas de diferentes anchos de bits (3 y 2 bits) que se unen para formar un valor de 5 bits:
-
-<p align="center">
-  <img src="/img/labs/lab06/splitters2.png" alt="splitters 2" />
-</p>
-
-
-### Extensores (Extenders)
-
-Cuando estén cambiando el ancho de un cable, siempre deberían de utilizar un [extensor](http://www.cburch.com/logisim/docs/2.6.0/en/libs/base/extender.html) para mayor claridad en su circuito. Por ejemplo, consideren la siguiente implementación en donde se extiende un cable de ancho 8 bits a un cable de ancho de 16 bits:
+3. Los pines de entrada y salida ya han sido colocados, <span style="color: #17325e;">**ustedes no tienen que modificar/reemplazar/alterar/cambiar estos pines sino el autograder no les va a funcionar y tendrán que volver a descargar los archivos base nuevamente para que les funcione, en otras palabras empezar de nuevo de lo contrario tendrán una nota de 0**</span>. Hasta este punto su circuito debe verse así:
 
 <p align="center">
-  <img src="/img/labs/lab06/extend1.png" alt="extend 1" />
+  <img src="/img/labs/lab05/ej0unf.png" alt="unf" />
 </p>
 
-A pesar de que hace lo que tiene que hacer, no es una buena práctica y alguien que esté revisando su proyecto posiblemente no pueda comprender la intención del circuito anterior. Algo mejor, más simple, fácil de leer y menos propenso a errores sería algo como lo siguiente:
+5. Luego, hacer click en <img src="/img/labs/lab05/select.png" alt="select5" /> “Select Tool”, y conectar los **Input Pins** y el **Output Pin** con la compuerta **And** creando cables entre ellos (Al mantener presionado el botón izquierdo del mouse, se puede crear un cable del largo deseado y, al soltarlo, dicho botón el cable se creará. ¡Ojo! Sólo se pueden crear cables horizontales y verticales.)
+
+El circuito debe lucir algo parecido a esto:
 
 <p align="center">
-  <img src="/img/labs/lab06/extend2.png" alt="extend 2" />
+  <img src="/img/labs/lab05/ej0Fin.png" alt="fin" />
 </p>
 
-Esto tambíen aplica cuando se quiere pasar de un ancho de bits mayor a un ancho de bits menor. En el siguiente ejemplo, un cable de ancho 8 bits es convertido a un cable de ancho de 4 bits, tirando/ignorando los bits sobrantes:
+6. Y por último, hacer click en <img src="/img/labs/lab05/poke.png" alt="poke2" /> “Poke” y presionar los **Input Pins** para interactuar con ellos. Observar que el **Output Pin** cambia en función de los valores de los **Input Pins**.
+
+¡Y listo! El primer circuito está listo.
+
+## Ejercicio 1: NAND, NOR, XOR y Multiplexores
+
+Ahora es momento para crear circuitos más complejos, van a trabajar en el archivo **ex1.circ**. Se darán cuenta que en la parte izquierda aparecen 5 subcircuitos que tienen que completar (**NAND, NOR, XOR, 2-1 MUX, 4-1 MUX**). En los proyectos de Logisim se pueden crear subcircuitos para mantener organizados los circuitos, ayudando a la estética del proyecto. Para crear un nuevo subcircuito tienen que ir a (Proyecto -> Añadir Circuito) y escribir el nombre del subcircuito, pero esto lo tendrán que hacer más adelante en el proyecto 2, por ahora ya están creados por ustedes. Si quieren tener más información o están interesados lean la siguiente documentación de logisim [link](http://www.cburch.com/logisim/docs/2.3.0/guide/subcirc/index.html).
+
+Su tarea es implementar las compuertas NAND, NOR, XOR y multiplexores 2 a 1 y 4 a 1 utilizando únicamente compuertas **AND, NOT y OR**. Todos los circuitos tienen ya colocados los pines de entrada y salida, nuevamente no los pueden cambiar o no funcionará el autograder.
+
+![NAND](/img/labs/lab05/nand.png)
+
+
+Cuando hayan completado un subcircuito pueden re-utilizarlo en los demás subcircuitos si creen que es necesario o simplifica el circuito. Para esto tienen que estar en otro subcircuito y hacer click en el subcircuito que ya han terminado y lo pueden utilizar como cualquier otro componente. Por ejemplo en la imagen que se muestra a continuación se utiliza en el subcircuito NOR, el subcircuito NAND.
+
+![NAND Sub](/img/labs/lab05/nandsub.png)
+
+
+**Nota**: Para los circuitos que simulan los respectivos multiplexores. Se deben seguir las siguientes normas:
+
+* Para el Multiplexor 2 a 1 de 1 bit:
 
 <p align="center">
-  <img src="/img/labs/lab06/extend3.png" alt="extend 3" />
+  <img src="/img/labs/lab05/mux21.png" alt="mux211" />
 </p>
 
-A pesar de las implicaciones de su nombre, un extensor se puede utilizar también para realizar la misma operación y así evitar el uso de **splitters** para esta tarea:
+* Para el Multiplexor 4 a 1 de 1 bit:
 
 <p align="center">
-  <img src="/img/labs/lab06/extend4.png" alt="extend 4" />
+  <img src="/img/labs/lab05/mux41.png" alt="mux411" />
 </p>
 
-## Ejercicio 1: Divisores (Splitters)
+**Recordar no usar las compuertas lógicas NOR, XOR ni los multiplexores que vienen por defecto.**
 
-Para este ejercicio van a utilizar los splitters para crear un par de circuitos simples manipulando un numero de 8 bits. Van a estar trabajando en el archivo **splitters.circ**.
+## Ejercicio 2: Contador
 
-- Vayan al folder llamado "Wiring" y seleccionen un splitter. Este circuito va a tomar un cable y lo va a dividir en un set de cables con un ancho de bits menor.
+Ya sabiendo sobre circuitos y subcircuitos, ahora se hará un circuito más complejo aplicando todo lo aprendido en el lab hasta el momento. Sino, cuando llegue el momento de realizar un proyecto al respecto, este no tendrá piedad de ustedes. Para este ejercicio van a estar trabajando en el archivo **ex2.circ**.
 
-- Antes de colocar el circuito en el esquemático, cambien el ancho a 8 bits en las propiedades del circuito y "Fan Out" al tamano que considere conveniente, 3 es una buena idea para comenzar. Si ustedes mueven el cursor sobre el esquemático, su cursor debería de verse algo así: ![Splitter](/img/labs/lab06/splitter.gif).
+El ejercicio consiste en realizar un contador utilizando un registro y un sumador. Lo especial de este circuito es que se empezará a utilizar un reloj y a utilizar más bits.
 
-- Tareas a realizar:
-    - Out1: Realice un AND entre el bit más significativo y el menos significativo del input
-        - Arriba le sugerimos que pusiera un fan out de 3. En el panel de la izquierda configure para que solo el bit 0 vaya a la salida 0 (Top), y que solo el bit 7 vaya a la salida 2 (Bottom), todos los demás bits puede mandarlos hacia la salida 1.
-        - Listo! Gracias al splitter, logró separar el bit más significativo y el menos significativo del resto.
-    - Out2: Trabajando en signo-magnitud, obtenga el inverso aditivo del input
-        - Recordatorio: inverso aditivo significa cambiarle de signo de positivo a negativo, y viceversa.
-        - Recordatorio: [Signo Magnitud](https://en.wikipedia.org/wiki/Signed_number_representations#Signed_magnitude_representation) es una otra forma de representar números con signo, la vimos la primera semana de clases.
-        - Usted ya partió al input en pedacitos para resolver Out1, puede usar algunos de esos pedacitos y alguna compuerta para obtener el inverso aditivo.
-        - Luego puede utilizar otro splitter, ahora colocado al revés para reconstruir su número: de varios pedacitos, pasará a tener un valor de 8 bits.
-
-## Ejercicio 2: Rotate Right
-
-Con el conocimiento que tienen acerca de los splitters y multiplexores, están listos para implementar un bloque de lógica combinacional no trivial: `rotr`, que significa **Rotate Right**. 
-
-La idea es que `rotr A,B` va a rotar el patrón de bits de la entrada `A` a la derecha por `B` bits. Por ejemplo, si `A` fuera $0\text{b}10110101011\color{blue}1\color{blue}0\color{blue}0\color{blue}1\color{blue}1$ y `B` fuera $0\text{b}0101$ (5 en decimal), el output del bloque sería $0\text{b}\color{red}1\color{red}0\color{red}0\color{red}1\color{red}110110101011$. Noten que los 5 bits de más a la derecha de `A` (azul) fueron rotados a la derecha y puestos de vuelta a la izquierda (rojo). En RTL, la operación sería algo como:
-
-```c
-R = A >> B | A << (16 - B)
-```
-
-Ustedes tienen que implementar el subcircuito llamado **rotr** en el archivo **rotr.circ** que tiene las siguientes entradas y salida:
-
-* **A**, 16 bits, la entrada a ser rotada.
-* **B**, 4 bits, la cantidad de rotación (Respóndase a usted mismo, ¿por qué 4 bits? <i class="em em-thinking_face"></i>)
-* **C**, 16 bits, salida con el resultado de la rotación.
-
-La salida en el output debería de ser `A` rotado por `B` bits, como se indicó anteriormente. Ustedes **NO** pueden utilizar los shifters que trae Logisim en su solución, pero todos los demás bloques combinacionales (multiplexores, splitters, túneles, constantes, compuertas, sumadores, etc) son permitidos.
-
-
-> **HINT 1**: Antes de empezar a cablear, deberían de pensar muuuuuuuy bien acerca de como pueden descomponer este problema en pequeñas partes y unirlas. Deberían de sentirse libres de implementar subcircuitos para implementar este ejercicio. Si no los utilizan, se van a arrepentir.
-
-> **HINT 2**: Solo porque les dimos una representación en RTL no significa que esta sea la mejor opción para abordar el problema. Piense en los bits de entrada de `B` y en como pueden utilizar efectivamente los splitters. Piense en cómo resolvio el multiplexor de 4 a 1 la semana pasada, usando su multiplexor de 2 a 1.
-
-Si su cableado de un splitter grande se está volviendo desordenado, a veces cambiar los splitters pueden mantener las cosas más limpias y localizables. Por ejemplo, en lugar de utilizar un splitter de 1 a 16, puede primero dividir en 4, y luego volver a dividir en 4.
-
-¡Este ejercicio lo hará pensar bastante!
-
-## Ejercicio 3: ALU
-
-En este ejercicio ustedes van a implementar un ALU de 32 bits. Van estar trabajando en el archivo llamado **ALU.circ**. Como un recordatorio, ALU significa _Arithmetic Logic Unit_ (Unidad Arimética Lógica). Un ALU es una pieza fundamental de un CPU y realiza operaciones aritméticas y lógicas (bitwise). La función que el ALU realiza (ejemplo add, xor) es determinada por el control de nuestro datapath, que esta determinado por la instrucción que nuestro procesador está ejecutando. El ALU está resaltado en el siguiente diagrama de un datapath simplificado:
+El circuito a diseñar es el siguiente:
 
 <p align="center">
-  <img src="/img/labs/lab06/alu.png" alt="ALU" width="400" />
+  <img src="/img/labs/lab05/contador.png" alt="contador1" />
 </p>
 
-Este ejercicio es una versión simplificada de lo que le tocará hacer en el proyecto 2. Esperamos que al realizar este ejercicio, el proyecto 2 se les haga un poco más fácil y suave de llevar.
+Los componentes a emplear se encuentran en:
 
-Las 8 funciones que tienen que implementar son: **shift left logical**, **shift right logical**, **shift right arithmetic**, **rotate left**, **rotate right**, **and**, **or** y **xor**. El ALU va a realizar la función deseada sobre 2 entradas de 32 bits y tendrá una salida de 32 bits como resultado. **Noten que Logisim tiene compuertas que hacen todas estas funciones, NO tienen que implementar ninguna por su cuenta, por favor no lo hagan**.
+<p align="center">
+  <img src="/img/labs/lab05/componentes.png" alt="componentes1" />
+</p>
 
-> **HINT 1**: Busquen el folder en Logisim etiquetado como Arithmetic para poder encontrar shifter, que será útil para varias de las operaciones.
+Los componentes utilizados son los siguientes:
+* Sumador: Ubicado en la librería “Aritmética”.
+* Registro: Ubicado en la librería “Memoria”.
+* Constante Numérica: Ubicado en la librería “Wiring”.
+* Reloj: Ubicado en la librería “Wiring”.
 
-> **HINT 2**: Utilizen túneles para mover todas las salidas del cuadro etiquetado "Compute All Possible Operations" al cuadro etiquetado como "Select the Requested Result".
+Cabe mencionar que ahora se utilizan **Output Pins** de más de un bit, se puede aumentar el número de bits en la configuración de los componentes. Seleccionar un componente y, en el lado izquierdo, se puede encontrar el mismo menú que se usa para darle orientación a los componentes y asignarles una etiqueta, en donde se está la opción de “Bits De Datos”. Para este ejercicio ya está hecho esto para los *Output pins*, pero si tienen que hacerlo para el registro, para la constante numérica y el sumador.
 
-La función seleccionada va a ser determinada por el valor de la señal de control, la siguiente tabla resume todo:
+Una vez se termine de construir el circuito… ¡es hora de simularlo!
 
-| **Control** |        **Operation**       |
-|:-------:|:----------------------:|
-|  `000`  |   Shift Left Logical   |
-|  `001`  |   Shift Right Logical  |
-|  `010`  | Shift Right Arithmetic |
-|  `011`  |       Rotate Left      |
-|  `100`  |      Rotate Right      |
-|  `101`  |           And          |
-|  `110`  |           Or           |
-|  `111`  |           Xor          |
+Seleccionar la opción “Simular” (ubicado en la parte superior de la pantalla) y presionar la opción de “activar reloj”. Se podrá notar que el circuito funciona por sí solo y que, efectivamente, cumple con su objetivo: ¡contar! (si se hizo correctamente).
 
-## Calificación
+Es posible alterar la frecuencia del reloj seleccionando otra vez “Simular” y, luego, “Seleccionar frecuencia del reloj”. Con esto se puede controlar qué tan rápido se contará. Otra función útil es la de “Resetear Simulación” ubicado, también, en “Simular”.
 
-Cuando crean que tengan ejercicios completos, pueden utilizar el autograder escribiendo en la terminal:
+**NOTA**: En lo que se simula el circuito, es posible revisar los estados de los subcircuitos. Para ello, se debe seleccionar la herramienta “Poke”,  hacer click sobre un subcircuito en el área de trabajo y presionar en la lupa que aparece sobre el subcircuito.
+Para regresar al circuito principal, hay que hacer click en el módulo del circuito principal, ubicado en la sección de componentes. Esto no lo van a necesitar en este ejercicio, pero será muy útil para el proyecto nuevamente.
+
+## Ejercicio 3: AFD a Lógica Digital
+
+Es momento de hacer algo mucho más interesante: ¡traducir un Autómata Finito Determinístico a un circuito digital!
+
+En el curso de Informática 3 se aprende qué es un AFD (o **F**inite **S**tate **M**achine en inglés). Un AFD posee estados finitos y transición entre estados.
+
+El AFD de este laboratorio es una variación del AFD que se ha visto en clase. Este AFD posee estados y transición de estados, pero, además de eso, necesita inputs para cambiar de estado y al cambiar de estado regresa un output.
+
+El AFD es el siguiente:
+
+<p align="center">
+  <img src="/img/labs/lab05/AFD.png" alt="AFD1" />
+</p>
+
+La tabla de verdad de dicho autómata puede ser útil para visualizar lo que está pasando:
+
+<p align="center">
+  <img src="/img/labs/lab05/AFDTabla.png" alt="AFDTabla1" />
+</p>
+
+¿Cómo se lee?
+La primera fila de la tabla se entiende de esta manera: “Dado el estado 00, si el input es 0, entonces se hace una transición al estado 01 y devuelve un output de 1”.
+
+Para este ejercicio se les provee el circuito **ex3.circ**. El trabajo a realizar es completar el circuito y lograr que se comporte como el AFD mostrado anteriormente. Para esto ustedes solo van a modificar 2 subcircuitos: **StateBitOne** y **StateBitZero**.
+
+Se tienen dos opciones para completar el circuito: 1) fuerza bruta (suma de productos) o 2) aprovechar patrones (mapas de Karnaugh). Si lo resuelve con mapas de Karnaugh, usará significativamente menos componentes en su respuesta.
+
+# Calificación
+
+Cuando crean que tiene ejercicios completos pueden hacer la prueba localmente escribiendo en la terminal:
 
 ```shell
 ./check
@@ -181,16 +183,15 @@ Si todo esta correcto les saldrá algo como esto:
 
              Machine Structures
      Great Ideas in Computer Architecture
-              Advanced Logisim
+               Logisim Intro
 
 
-Exercise           Grade   Message
-----------------  -------  ---------
-1. Splitters       40      passed
-2. Rotate Right    40      passed
-3. ALU             40      passed
+Exercise                    Grade  Message
+------------------------  -------  ---------
+0. The basics (Warm-Up)        25  passed
+1. Sub-Circuits                25  passed
+2. Storing State               25  passed
+3. FSMs to Digital Logic       25  passed
 
-=> Score: 120/120
+=> Score: 100/100
 ```
-
-Al finalizar, recuerde hacer `add`, `commit` y `push` hacia Github. Luego envíe el link de su repositorio en el GES. Si no envía el link, no podremos ponerle nota!

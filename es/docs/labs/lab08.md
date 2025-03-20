@@ -1,140 +1,196 @@
-# Lab 8 - SIMD Intrinsics y Loop Unrolling
+# Lab 7 - Logisim Avanzado
 
-## Objetivos
+## Objetivo
 
-* Aprender acerca de las instrucciones SIMD y hacer data level parallelism.
-* Escribir código con funciones SIMD para hacer ciertas optimizaciones.
-* Aprender acerca de loop unrolling y por qué este funciona.
-
+En este laboratorio ustedes van a aprender sobre otros componentes esenciales de Logisim, en particular, los **splitters** que nos permiten hacer cosas como, descomponer un cable en subsets de bits para luego manipularlos individualmente.
 
 ## Preparación
 
-Tienen que tener todos los archivos base, estos se encuentran [aquí](https://classroom.github.com/a/t5F4g6gx). Recuerde subir su código a Github y el link de su repositorio al GES.
+Para este laboratorio, nuevamente, es necesario que tengan la aplicación de [Logisim](http://www.cburch.com/logisim/index.html). Adicionalmente pueden utilizar la [documentación](http://www.cburch.com/logisim/docs.html) de Logisim para refrescar el conocimiento que adquirieron en el laboratorio pasado o leer el lab también [aquí](https://cc-3.github.io/labs/lab05/).
 
-## Ejercicio 1: Familiarizándose con las funciones SIMD.
-
-Dado el gran número disponible de instrucciones SIMD, queremos que ustedes aprendan cómo encontrar aquellas que necesitarán para determinadas aplicaciones. Intel proporciona una variedad de herramientas relacionadas a intrinsics, las cuales pueden encontrar [aquí](https://software.intel.com/en-us/isa-extensions) (estas no son necesarias para este laboratorio). Nosotros estamos, particularmente, interesados en la [Guía Intel Intrinsics](https://software.intel.com/sites/landingpage/IntrinsicsGuide/). Abran esta página y, una vez estén dentro, hagan click en todos los checkboxes que empiecen con ***SSE*** (desde SSE hasta SSE4.2). Hagan su mejor esfuerzo para interpretar esta nueva sintaxis y terminología.
-
-Encuentren la instrucción de 128 bits para las siguientes operaciones SIMD:
-
-1. Cuatro divisiones de punto flotante con precisión simple (float):
-    * **a**) `__m128 _mm_div_ss(__m128 a, __m128 b)`
-    * **b**) `__m128 _mm_cvtsi64_ss(__m128 a, __int64 b)`
-    * **c**) `float _mm_cvtss_f32(__m128 a)`
-    * **d**) `__m128_mm_div_ps(__mm128 a, __mm128 b)`
-    * **e**) `__m128 _mm_load_ps(float const* mem_addr)`
-2. Dieciséis operaciones de máximo sobre enteros de 8 bits con signo (char):
-    * **a**) `__m128i _mm_max_epi16 (__m128i a, __m128i b)`
-    * **b**) `__m128i _mm_max_epi32 (__m128i a, __m128i b)`
-    * **c**) `__m128i _mm_max_epi8 (__m128i a, __m128i b)`
-    * **d**) `__m128i _mm_max_epu16 (__m128i a, __m128i b)`
-    * **e**) `__m128d _mm_max_pd (__m128d a, __m128d b)`
-3. Shift right aritmético sobre ocho enteros de 16 bits con signo (short):
-    * **a**) `__m128i _mm_add_epi16(__m128i a, __m128i b)`
-    * **b**) `__m128i _mm_maskz_abs_epi8(__mmask16 k, __m128i a)`
-    * **c**) `__m128i _mm_srai_epi16(__m128i a, __m128i count)`
-    * **d**) `__m128i _mm_slli_epi64(__m128i a, int count)`
-    * **e**) `__m128i _mm_srai_epi32(__m128i a, __m128i count)`
-
-Escriban sus respuestas en el archivo **ex1.txt**. Ustedes tienen que colocar únicamente la letra de la opción que consideren correcta; ejemplo de un archivo correcto:
-
-```
-1: x
-2: y
-3: z
-```
-
-## Ejercicio 2: Escribiendo Código SIMD
-
-Para el ejercicio 2, ustedes deben vectorizar el siguiente código para lograr obtener, aproximadamente, cuatro veces la velocidad en comparación a la implementación que se muestra a continuación:
-
-```c
-static int sum_naive(int n, int *a) {
-  int sum = 0;
-  for (int i = 0; i < n; i++) {
-   sum += a[i];
-  }
-  return sum;
-}
-```
-
-Pueden encontrar útiles las siguientes intrinsics :
-
-| SIMD | Descripción |
-|:----------------------------------------------:|:--------------------------------------------------------------------:|
-| `__m128i _mm_setzero_si128( )` | devuelve un vector de 128 bits de ceros |
-| `__m128i _mm_loadu_si128(__m128i *p)` | devuelve el vector de 128 bits guardado en el puntero `p` |
-| `__m128i _mm_add_epi32(__m128i a, __m128i b)` | devuelve el vector ($a_0 + b_0$, $a_1 + b_1$, $a_2 + b_2$, $a3 + b3$) |
-| `void _mm_storeu_si128(__m128i *p,__m128i a)` | guarda el vector de 128 bits representado por el puntero `p` |
-
-El archivo que deben modificar es **sum.c**. Usen las intrinsics SSE para implementar la función `sum_vectorized()`. Para compilar su código, ejecuten el siguiente comando:
+También tienen que tener todos los archivos base, estos se encuentran [aquí](https://classroom.github.com/a/eOTjIzyc). Recuerden que deben aceptar la asignación de **GitHub Classroom** y se les creará automáticamente un repositorio con una extensión que termina con su usuario de GitHub. Cuando ya se haya creado el repositorio, pueden ejecutar los siguientes comandos abriendo una terminal (<kbd>CTRL</kbd><kbd>+</kbd><kbd>T</kbd>):
 
 ```shell
-make sum
+git clone <link del repositorio>
 ```
 
-Para ejecutar su código, corran el siguiente comando:
+## Características Avanzadas de Logisim
 
-```
-./sum
-```
+Aquí pueden encontrar tres características más de logisim que ustedes van a encontrar bastante utiles, principalmente en el proyecto 2.
 
-## Ejercicio 3: Loop Unrolling
+### Túneles (Tunnels)
 
-Afortunadamente, aún pueden obtener más mejoras en el rendimiento. Cuidadosamente, tomen el código que crearon en el ejercicio previo y hagan un "unroll" del vector SIMD. Esto debería mejorar el rendimiento en , aproximadamente, un factor de dos. Como un ejemplo de un "loop unroll", consideren la función `sum_unrolled()` que se les proporciona:
+Un [túnel](http://www.cburch.com/logisim/docs/2.6.0/en/libs/base/tunnel.html) les permite dibujar _un cable invisible_ para unir dos puntos. Los túneles son agrupados por etiquetas (case-sensitive) que se les ponen a los cables para identificarlos. Generalmente son utilizados para conectar cables de la siguiente manera:
+
+<p align="center">
+  <img src="/img/labs/lab06/tunnels1.png" alt="tunnels 1" />
+</p>
+
+Que se traduce (o tiene un efecto similar) a esto:
+
+<p align="center">
+  <img src="/img/labs/lab06/tunnels2.png" alt="tunnels 2" />
+</p>
+
+Hay que tener ciertas precauciones al utilizar los túneles y siempre mantener un registro de cuales cables están conectados con túneles hacia otros cables, para evitar situaciones como esta:
+
+<p align="center">
+  <img src="/img/labs/lab06/tunnels3.png" alt="tunnels 3" />
+</p>
+
+Que se traduce (o tiene un efecto similar) a esto:
+
+<p align="center">
+  <img src="/img/labs/lab06/tunnels4.png" alt="tunnels 4" />
+</p>
+
+Nosotros les recomendamos (**bastante**) utilizar túneles en Logisim, porque hacen los circuitos más limpios, claros y fáciles de depurar.
+
+
+### Divisores (Splitters)
+
+Los divisores crean una correspondencia entre un valor de multiples bits y subsets de esos bits. A pesar de su nombre, puede dividir un valor de multiples bits en varias partes o subsets de bits (lo que se espera por el nombre), así como también puede combinar partes o subsets de bits en un valor de multiples bits. Por ejemplo para el primer caso, un valor float (IEEE 754) de precisión simple (32 bits) dividido en signo (1 bit), exponente (8 bits) y fracción (23 bits):
+
+<p align="center">
+  <img src="/img/labs/lab06/splitters1.png" alt="splitters 1" />
+</p>
+
+Para el segundo caso se unen dos entradas de diferentes anchos de bits (3 y 2 bits) que se unen para formar un valor de 5 bits:
+
+<p align="center">
+  <img src="/img/labs/lab06/splitters2.png" alt="splitters 2" />
+</p>
+
+
+### Extensores (Extenders)
+
+Cuando estén cambiando el ancho de un cable, siempre deberían de utilizar un [extensor](http://www.cburch.com/logisim/docs/2.6.0/en/libs/base/extender.html) para mayor claridad en su circuito. Por ejemplo, consideren la siguiente implementación en donde se extiende un cable de ancho 8 bits a un cable de ancho de 16 bits:
+
+<p align="center">
+  <img src="/img/labs/lab06/extend1.png" alt="extend 1" />
+</p>
+
+A pesar de que hace lo que tiene que hacer, no es una buena práctica y alguien que esté revisando su proyecto posiblemente no pueda comprender la intención del circuito anterior. Algo mejor, más simple, fácil de leer y menos propenso a errores sería algo como lo siguiente:
+
+<p align="center">
+  <img src="/img/labs/lab06/extend2.png" alt="extend 2" />
+</p>
+
+Esto tambíen aplica cuando se quiere pasar de un ancho de bits mayor a un ancho de bits menor. En el siguiente ejemplo, un cable de ancho 8 bits es convertido a un cable de ancho de 4 bits, tirando/ignorando los bits sobrantes:
+
+<p align="center">
+  <img src="/img/labs/lab06/extend3.png" alt="extend 3" />
+</p>
+
+A pesar de las implicaciones de su nombre, un extensor se puede utilizar también para realizar la misma operación y así evitar el uso de **splitters** para esta tarea:
+
+<p align="center">
+  <img src="/img/labs/lab06/extend4.png" alt="extend 4" />
+</p>
+
+## Ejercicio 1: Divisores (Splitters)
+
+Para este ejercicio van a utilizar los splitters para crear un par de circuitos simples manipulando un numero de 8 bits. Van a estar trabajando en el archivo **splitters.circ**.
+
+- Vayan al folder llamado "Wiring" y seleccionen un splitter. Este circuito va a tomar un cable y lo va a dividir en un set de cables con un ancho de bits menor.
+
+- Antes de colocar el circuito en el esquemático, cambien el ancho a 8 bits en las propiedades del circuito y "Fan Out" al tamano que considere conveniente, 3 es una buena idea para comenzar. Si ustedes mueven el cursor sobre el esquemático, su cursor debería de verse algo así: ![Splitter](/img/labs/lab06/splitter.gif).
+
+- Tareas a realizar:
+    - Out1: Realice un AND entre el bit más significativo y el menos significativo del input
+        - Arriba le sugerimos que pusiera un fan out de 3. En el panel de la izquierda configure para que solo el bit 0 vaya a la salida 0 (Top), y que solo el bit 7 vaya a la salida 2 (Bottom), todos los demás bits puede mandarlos hacia la salida 1.
+        - Listo! Gracias al splitter, logró separar el bit más significativo y el menos significativo del resto.
+    - Out2: Trabajando en signo-magnitud, obtenga el inverso aditivo del input
+        - Recordatorio: inverso aditivo significa cambiarle de signo de positivo a negativo, y viceversa.
+        - Recordatorio: [Signo Magnitud](https://en.wikipedia.org/wiki/Signed_number_representations#Signed_magnitude_representation) es una otra forma de representar números con signo, la vimos la primera semana de clases.
+        - Usted ya partió al input en pedacitos para resolver Out1, puede usar algunos de esos pedacitos y alguna compuerta para obtener el inverso aditivo.
+        - Luego puede utilizar otro splitter, ahora colocado al revés para reconstruir su número: de varios pedacitos, pasará a tener un valor de 8 bits.
+
+## Ejercicio 2: Rotate Right
+
+Con el conocimiento que tienen acerca de los splitters y multiplexores, están listos para implementar un bloque de lógica combinacional no trivial: `rotr`, que significa **Rotate Right**. 
+
+La idea es que `rotr A,B` va a rotar el patrón de bits de la entrada `A` a la derecha por `B` bits. Por ejemplo, si `A` fuera $0\text{b}10110101011\color{blue}1\color{blue}0\color{blue}0\color{blue}1\color{blue}1$ y `B` fuera $0\text{b}0101$ (5 en decimal), el output del bloque sería $0\text{b}\color{red}1\color{red}0\color{red}0\color{red}1\color{red}110110101011$. Noten que los 5 bits de más a la derecha de `A` (azul) fueron rotados a la derecha y puestos de vuelta a la izquierda (rojo). En RTL, la operación sería algo como:
 
 ```c
-static int sum_unrolled(int n, int *a) {
-  int sum = 0;
-
-  // unrolled loop
-  for (int i = 0; i < n / 4 * 4; i += 4) {
-    sum += a[i+0];
-    sum += a[i+1];
-    sum += a[i+2];
-    sum += a[i+3];
-  }
-
-  // tail case
-  for (int i = n / 4 * 4; i < n; i++) {
-    sum += a[i];
-  }
-
-  return sum;
-}
+R = A >> B | A << (16 - B)
 ```
 
-Además, siéntanse libres de darle un vistazo al artículo de Wikipedia: [Loop Unrolling](http://en.wikipedia.org/wiki/Loop_unrolling), para más información. Dentro de **sum.c**, copien su código de `sum_vectorized()` hacia `sum_vectorized_unrolled()` y hagan un unroll de cuatro. Para compilar su código, corran el siguiente comando:
+Ustedes tienen que implementar el subcircuito llamado **rotr** en el archivo **rotr.circ** que tiene las siguientes entradas y salida:
 
-```shell
-make sum
-```
+* **A**, 16 bits, la entrada a ser rotada.
+* **B**, 4 bits, la cantidad de rotación (Respóndase a usted mismo, ¿por qué 4 bits? <i class="em em-thinking_face"></i>)
+* **C**, 16 bits, salida con el resultado de la rotación.
 
-Para ejecutar su código, corran el siguiente comando:
+La salida en el output debería de ser `A` rotado por `B` bits, como se indicó anteriormente. Ustedes **NO** pueden utilizar los shifters que trae Logisim en su solución, pero todos los demás bloques combinacionales (multiplexores, splitters, túneles, constantes, compuertas, sumadores, etc) son permitidos.
 
-```
-./sum
-```
+
+> **HINT 1**: Antes de empezar a cablear, deberían de pensar muuuuuuuy bien acerca de como pueden descomponer este problema en pequeñas partes y unirlas. Deberían de sentirse libres de implementar subcircuitos para implementar este ejercicio. Si no los utilizan, se van a arrepentir.
+
+> **HINT 2**: Solo porque les dimos una representación en RTL no significa que esta sea la mejor opción para abordar el problema. Piense en los bits de entrada de `B` y en como pueden utilizar efectivamente los splitters. Piense en cómo resolvio el multiplexor de 4 a 1 la semana pasada, usando su multiplexor de 2 a 1.
+
+Si su cableado de un splitter grande se está volviendo desordenado, a veces cambiar los splitters pueden mantener las cosas más limpias y localizables. Por ejemplo, en lugar de utilizar un splitter de 1 a 16, puede primero dividir en 4, y luego volver a dividir en 4.
+
+¡Este ejercicio lo hará pensar bastante!
+
+## Ejercicio 3: ALU
+
+En este ejercicio ustedes van a implementar un ALU de 32 bits. Van estar trabajando en el archivo llamado **ALU.circ**. Como un recordatorio, ALU significa _Arithmetic Logic Unit_ (Unidad Arimética Lógica). Un ALU es una pieza fundamental de un CPU y realiza operaciones aritméticas y lógicas (bitwise). La función que el ALU realiza (ejemplo add, xor) es determinada por el control de nuestro datapath, que esta determinado por la instrucción que nuestro procesador está ejecutando. El ALU está resaltado en el siguiente diagrama de un datapath simplificado:
+
+<p align="center">
+  <img src="/img/labs/lab06/alu.png" alt="ALU" width="400" />
+</p>
+
+Este ejercicio es una versión simplificada de lo que le tocará hacer en el proyecto 2. Esperamos que al realizar este ejercicio, el proyecto 2 se les haga un poco más fácil y suave de llevar.
+
+Las 8 funciones que tienen que implementar son: **shift left logical**, **shift right logical**, **shift right arithmetic**, **rotate left**, **rotate right**, **and**, **or** y **xor**. El ALU va a realizar la función deseada sobre 2 entradas de 32 bits y tendrá una salida de 32 bits como resultado. **Noten que Logisim tiene compuertas que hacen todas estas funciones, NO tienen que implementar ninguna por su cuenta, por favor no lo hagan**.
+
+> **HINT 1**: Busquen el folder en Logisim etiquetado como Arithmetic para poder encontrar shifter, que será útil para varias de las operaciones.
+
+> **HINT 2**: Utilizen túneles para mover todas las salidas del cuadro etiquetado "Compute All Possible Operations" al cuadro etiquetado como "Select the Requested Result".
+
+La función seleccionada va a ser determinada por el valor de la señal de control, la siguiente tabla resume todo:
+
+| **Control** |        **Operation**       |
+|:-------:|:----------------------:|
+|  `000`  |   Shift Left Logical   |
+|  `001`  |   Shift Right Logical  |
+|  `010`  | Shift Right Arithmetic |
+|  `011`  |       Rotate Left      |
+|  `100`  |      Rotate Right      |
+|  `101`  |           And          |
+|  `110`  |           Or           |
+|  `111`  |           Xor          |
 
 ## Calificación
 
-#### Serie 2
+Cuando crean que tengan ejercicios completos, pueden utilizar el autograder escribiendo en la terminal:
 
-Para obtener sus puntos en esta serie:
+```shell
+./check
+```
 
-* `vectorized` tiene que ser más rápido que `naive`
-* `vectorized` tiene que ser más rápido que `unrolled`
+Si todo esta correcto les saldrá algo como esto:
 
-#### Serie 3
+```shell
+   ___       __                        __       
+  / _ |__ __/ /____  ___  _______ ____/ /__ ____
+ / __ / // / __/ _ \/ _ \/ __/ _ \/ _  / -_) __/
+/_/ |_\_,_/\__/\___/\_, /_/  \_,_/\_,_/\__/_/
+                   /___/
 
-Para obtener sus puntos en esta serie:
+             Machine Structures
+     Great Ideas in Computer Architecture
+              Advanced Logisim
 
-* `vectorized` tiene que ser más rápido que `naive`
-* `vectorized` tiene que ser más rápido que `unrolled`
-* `vectorized unrolled` tiene que ser más rápido que `vectorized`
 
-Ejecute el `./check` varias veces. No se preocupe si **a veces** fallan los tiempos, lo importante es que sus tiempos salgan bien aprox el 80% de las veces. Si sus tiempos fallan muy seguido, allí si le toca ir a revisar su código :(
+Exercise           Grade   Message
+----------------  -------  ---------
+1. Splitters       40      passed
+2. Rotate Right    40      passed
+3. ALU             40      passed
 
-Las series valen 20, 50 y 50 puntos respectivamente, para un total de 120 puntos.
+=> Score: 120/120
+```
 
-Al terminar recuerde subir su código a Github y colocar el link de su repositorio en el GES.
+Al finalizar, recuerde hacer `add`, `commit` y `push` hacia Github. Luego envíe el link de su repositorio en el GES. Si no envía el link, no podremos ponerle nota!
