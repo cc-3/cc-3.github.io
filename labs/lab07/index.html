@@ -113,7 +113,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#lab-6-logisim" tabindex="1" class="md-skip">
+      <a href="#lab-7-logisim" tabindex="1" class="md-skip">
         Saltar a contenido
       </a>
     
@@ -768,15 +768,17 @@
                   <a href="https://github.com/cc-3/cc-3.github.io/edit/master/page/es/docs/labs/lab07.md" title="Editar esta página" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                <h1 id="lab-6-logisim">Lab 6 - Logisim<a class="headerlink" href="#lab-6-logisim" title="Permanent link">&para;</a></h1>
+                <h1 id="lab-7-logisim">Lab 7 - Logisim<a class="headerlink" href="#lab-7-logisim" title="Permanent link">&para;</a></h1>
 <h2 id="objetivos">Objetivos<a class="headerlink" href="#objetivos" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Aprender a usar Logisim y simular circuitos en dicho programa.</li>
 <li>Aprender las herramientas básicas y el funcionamiento de Logisim.</li>
 </ul>
 <h2 id="preparacion">Preparación<a class="headerlink" href="#preparacion" title="Permanent link">&para;</a></h2>
-<p>Para este laboratorio, es necesaria la aplicación Logisim. La cual se puede descargar en este <a href="http://www.cburch.com/logisim/index.html">link</a>.</p>
-<p>También tienen que tener todos los archivos base, estos se encuentran <a href="https://classroom.github.com/a/mm5PDbKJ">aquí</a>. Recuerden que deben aceptar la asignación de <strong>GitHub Classroom</strong> y se les creará automáticamente un repositorio con una extensión que termina con su usuario de GitHub. Cuando ya se haya creado el repositorio, pueden ejecutar los siguientes comandos abriendo una terminal (<kbd>CTRL</kbd><kbd>+</kbd><kbd>T</kbd>):</p>
+<p>Para este laboratorio, es necesaria la aplicación Logisim. Si aun no lo ha hecho, puede instalarla con
+<div class="codehilite"><pre><span></span>sudo apt install logisim
+</pre></div></p>
+<p>También debe descargar los archivos base, estos se encuentran <a href="https://classroom.github.com/a/EO1wP8i1">aquí</a>. Recuerden que deben aceptar la asignación de <strong>GitHub Classroom</strong> y se les creará automáticamente un repositorio con una extensión que termina con su usuario de GitHub. Cuando ya se haya creado el repositorio, pueden ejecutar los siguientes comandos abriendo una terminal (<kbd>CTRL</kbd><kbd>+</kbd><kbd>T</kbd>):</p>
 <div class="codehilite"><pre><span></span>git clone &lt;link del repositorio&gt;
 </pre></div>
 
@@ -805,8 +807,7 @@ Entre dichos íconos se encuentran:</p>
 </ul>
 <p>Por el momento, estas son las herramientas que se van a necesitar para este laboratorio.</p>
 <h2 id="ejercicio-0-las-bases">Ejercicio 0: Las Bases<a class="headerlink" href="#ejercicio-0-las-bases" title="Permanent link">&para;</a></h2>
-<p>Este ejercicio consiste en crear su primer circuito (¡yay! :D).
-Empecemos con un circuito simple.</p>
+<p>Este ejercicio consiste en crear su primer circuito para verificar que todo esté bien instalado y que el autograder le funcione.</p>
 <ol>
 <li>
 <p>En el área de herramientas o acceso directo, hacer click en el ícono de la compuerta “And”. Esto creará una sombra de dicha compuerta que seguirá el cursor en el área de trabajo.</p>
@@ -816,7 +817,7 @@ Empecemos con un circuito simple.</p>
 También, se pueden rotar los componentes presionando las teclas de flechas del teclado. Se pueden colocar en la orientación deseada, pero para este laboratorio, colocar la compuerta en orientación “Este”. La orientación de un componente puede ser alterado al seleccionarlo y buscar la opción “Orientación” u “Orientation”.(Asegurándose de que el ícono de <img src="/img/labs/lab05/select.png" alt="select2" /> esté activo).</p>
 </li>
 <li>
-<p>Los pines de entrada y salida ya han sido colocados, <span style="color: #17325e;"><strong>ustedes no tienen que modificar/reemplazar/alterar/cambiar estos pines sino el autograder no les va a funcionar y tendrán que volver a descargar los archivos base nuevamente para que les funcione, en otras palabras empezar de nuevo de lo contrario tendrán una nota de 0</strong></span>. Hasta este punto su circuito debe verse así:</p>
+<p>Los pines de entrada y salida ya han sido colocados, <span style="color: #17325e;"><strong>ustedes no tienen que modificar/reemplazar/mover/alterar/cambiar estos pines, si los cambian el autograder les dará cero de nota y tendrán que volver a descargar los archivos base nuevamente para que les funcioneñ en otras palabras, debe empezar de nuevo el ejercicio</strong></span>. Hasta este punto su circuito debe verse así:</p>
 </li>
 </ol>
 <p align="center">
@@ -834,16 +835,16 @@ También, se pueden rotar los componentes presionando las teclas de flechas del 
 <ol>
 <li>Y por último, hacer click en <img src="/img/labs/lab05/poke.png" alt="poke2" /> “Poke” y presionar los <strong>Input Pins</strong> para interactuar con ellos. Observar que el <strong>Output Pin</strong> cambia en función de los valores de los <strong>Input Pins</strong>.</li>
 </ol>
-<p>¡Y listo! El primer circuito está listo.</p>
+<p>¡Y listo! El primer circuito está listo. Ejecute el autograder con <code>./check</code>. Si tiene algún problema con el autograder, debe notificarnos de una vez durante el periodo de laboratorio, de lo contrario será mucho más difícil resolverlo después.</p>
 <h2 id="ejercicio-1-nand-nor-xor-y-multiplexores">Ejercicio 1: NAND, NOR, XOR y Multiplexores<a class="headerlink" href="#ejercicio-1-nand-nor-xor-y-multiplexores" title="Permanent link">&para;</a></h2>
-<p>Ahora es momento para crear circuitos más complejos, van a trabajar en el archivo <strong>ex1.circ</strong>. Se darán cuenta que en la parte izquierda aparecen 5 subcircuitos que tienen que completar (<strong>NAND, NOR, XOR, 2-1 MUX, 4-1 MUX</strong>). En los proyectos de Logisim se pueden crear subcircuitos para mantener organizados los circuitos, ayudando a la estética del proyecto. Para crear un nuevo subcircuito tienen que ir a (Proyecto -&gt; Añadir Circuito) y escribir el nombre del subcircuito, pero esto lo tendrán que hacer más adelante en el proyecto 2, por ahora ya están creados por ustedes. Si quieren tener más información o están interesados lean la siguiente documentación de logisim <a href="http://www.cburch.com/logisim/docs/2.3.0/guide/subcirc/index.html">link</a>.</p>
-<p>Su tarea es implementar las compuertas NAND, NOR, XOR y multiplexores 2 a 1 y 4 a 1 utilizando únicamente compuertas <strong>AND, NOT y OR</strong>. Todos los circuitos tienen ya colocados los pines de entrada y salida, nuevamente no los pueden cambiar o no funcionará el autograder.</p>
+<p>Ahora es momento para crear circuitos más complejos, van a trabajar en el archivo <strong>ex1.circ</strong>. Se darán cuenta que en la parte izquierda aparecen 5 subcircuitos que tienen que completar (<strong>NAND, NOR, XOR, 2-1 MUX, 4-1 MUX</strong>). En los proyectos de Logisim se pueden crear subcircuitos para mantener organizados los circuitos, ayudando a la estética del proyecto. Para crear un nuevo subcircuito tienen que ir a (Proyecto -&gt; Añadir Circuito) y escribir el nombre del subcircuito, pero esto lo tendrán que hacer más adelante en el proyecto 3, por ahora ya están creados por ustedes. Si quieren tener más información o están interesados lean la siguiente documentación de logisim <a href="http://www.cburch.com/logisim/docs/2.3.0/guide/subcirc/index.html">link</a>.</p>
+<p>Su tarea es implementar las compuertas NAND, NOR, XOR y los multiplexores 2-1 y 4-1 utilizando únicamente compuertas <strong>AND, NOT y OR</strong>. Todos los circuitos tienen ya colocados los pines de entrada y salida, nuevamente no los pueden cambiar o no funcionará el autograder.</p>
 <p><img alt="NAND" src="/img/labs/lab05/nand.png" /></p>
 <p>Cuando hayan completado un subcircuito pueden re-utilizarlo en los demás subcircuitos si creen que es necesario o simplifica el circuito. Para esto tienen que estar en otro subcircuito y hacer click en el subcircuito que ya han terminado y lo pueden utilizar como cualquier otro componente. Por ejemplo en la imagen que se muestra a continuación se utiliza en el subcircuito NOR, el subcircuito NAND.</p>
 <p><img alt="NAND Sub" src="/img/labs/lab05/nandsub.png" /></p>
 <p><strong>Nota</strong>: Para los circuitos que simulan los respectivos multiplexores. Se deben seguir las siguientes normas:</p>
 <ul>
-<li>Para el Multiplexor 2 a 1 de 1 bit:</li>
+<li>Para el Multiplexor 2-1 de 1 bit:</li>
 </ul>
 <p align="center">
   <img src="/img/labs/lab05/mux21.png" alt="mux211" />
@@ -856,9 +857,9 @@ También, se pueden rotar los componentes presionando las teclas de flechas del 
   <img src="/img/labs/lab05/mux41.png" alt="mux411" />
 </p>
 
-<p><strong>Recordar no usar las compuertas lógicas NOR, XOR ni los multiplexores que vienen por defecto.</strong></p>
+<p><strong>Recuerden no usar las compuertas lógicas NOR, XOR ni los multiplexores que vienen por defecto.</strong></p>
 <h2 id="ejercicio-2-contador">Ejercicio 2: Contador<a class="headerlink" href="#ejercicio-2-contador" title="Permanent link">&para;</a></h2>
-<p>Ya sabiendo sobre circuitos y subcircuitos, ahora se hará un circuito más complejo aplicando todo lo aprendido en el lab hasta el momento. Sino, cuando llegue el momento de realizar un proyecto al respecto, este no tendrá piedad de ustedes. Para este ejercicio van a estar trabajando en el archivo <strong>ex2.circ</strong>.</p>
+<p>En nuestro siguiente ejercicio practicaremos usar registros, relojes, sumadores y constantes. Para este ejercicio van a estar trabajando en el archivo <strong>ex2.circ</strong>. Explore los componentes que le salen en el panel superior izquierdo, allí encontrará todas las piezas que necesita.</p>
 <p>El ejercicio consiste en realizar un contador utilizando un registro y un sumador. Lo especial de este circuito es que se empezará a utilizar un reloj y a utilizar más bits.</p>
 <p>El circuito a diseñar es el siguiente:</p>
 <p align="center">
@@ -876,13 +877,13 @@ También, se pueden rotar los componentes presionando las teclas de flechas del 
 <em> Constante Numérica: Ubicado en la librería “Wiring”.
 </em> Reloj: Ubicado en la librería “Wiring”.</p>
 <p>Cabe mencionar que ahora se utilizan <strong>Output Pins</strong> de más de un bit, se puede aumentar el número de bits en la configuración de los componentes. Seleccionar un componente y, en el lado izquierdo, se puede encontrar el mismo menú que se usa para darle orientación a los componentes y asignarles una etiqueta, en donde se está la opción de “Bits De Datos”. Para este ejercicio ya está hecho esto para los <em>Output pins</em>, pero si tienen que hacerlo para el registro, para la constante numérica y el sumador.</p>
-<p>Una vez se termine de construir el circuito… ¡es hora de simularlo!</p>
+<p>Una vez se termine de construir el circuito, es hora de simularlo.</p>
 <p>Seleccionar la opción “Simular” (ubicado en la parte superior de la pantalla) y presionar la opción de “activar reloj”. Se podrá notar que el circuito funciona por sí solo y que, efectivamente, cumple con su objetivo: ¡contar! (si se hizo correctamente).</p>
 <p>Es posible alterar la frecuencia del reloj seleccionando otra vez “Simular” y, luego, “Seleccionar frecuencia del reloj”. Con esto se puede controlar qué tan rápido se contará. Otra función útil es la de “Resetear Simulación” ubicado, también, en “Simular”.</p>
 <p><strong>NOTA</strong>: En lo que se simula el circuito, es posible revisar los estados de los subcircuitos. Para ello, se debe seleccionar la herramienta “Poke”,  hacer click sobre un subcircuito en el área de trabajo y presionar en la lupa que aparece sobre el subcircuito.
 Para regresar al circuito principal, hay que hacer click en el módulo del circuito principal, ubicado en la sección de componentes. Esto no lo van a necesitar en este ejercicio, pero será muy útil para el proyecto nuevamente.</p>
 <h2 id="ejercicio-3-afd-a-logica-digital">Ejercicio 3: AFD a Lógica Digital<a class="headerlink" href="#ejercicio-3-afd-a-logica-digital" title="Permanent link">&para;</a></h2>
-<p>Es momento de hacer algo mucho más interesante: ¡traducir un Autómata Finito Determinístico a un circuito digital!</p>
+<p>En este último ejercicio practicaremos construir un circuito a partir de un autómata, tal como vimos en clase.</p>
 <p>En el curso de Informática 3 se aprende qué es un AFD (o <strong>F</strong>inite <strong>S</strong>tate <strong>M</strong>achine en inglés). Un AFD posee estados finitos y transición entre estados.</p>
 <p>El AFD de este laboratorio es una variación del AFD que se ha visto en clase. Este AFD posee estados y transición de estados, pero, además de eso, necesita inputs para cambiar de estado y al cambiar de estado regresa un output.</p>
 <p>El AFD es el siguiente:</p>
@@ -895,36 +896,21 @@ Para regresar al circuito principal, hay que hacer click en el módulo del circu
   <img src="/img/labs/lab05/AFDTabla.png" alt="AFDTabla1" />
 </p>
 
-<p>¿Cómo se lee?
-La primera fila de la tabla se entiende de esta manera: “Dado el estado 00, si el input es 0, entonces se hace una transición al estado 01 y devuelve un output de 1”.</p>
+<p>(Note que aquí en el laboratorio le quisimos ahorrar los pasos más complejos, plantear el autómata y construir la tabla)</p>
+<p>¿Cómo se lee la tabla?
+La primera fila de la tabla se entiende de esta manera: “Dado el estado 00, si el input es 0, entonces se hace una transición al estado 01 y devuelve un output de 1”. Aunque la tabla ya está hecha y ya viene correcta, asegúrese de entender de dónde salió, no para CC3 sino para el resto de su vida como ingeniero o ingeniera.</p>
 <p>Para este ejercicio se les provee el circuito <strong>ex3.circ</strong>. El trabajo a realizar es completar el circuito y lograr que se comporte como el AFD mostrado anteriormente. Para esto ustedes solo van a modificar 2 subcircuitos: <strong>StateBitOne</strong> y <strong>StateBitZero</strong>.</p>
-<p>Se tienen dos opciones para completar el circuito: 1) fuerza bruta (suma de productos) o 2) aprovechar patrones (mapas de Karnaugh). Si lo resuelve con mapas de Karnaugh, usará significativamente menos componentes en su respuesta.</p>
+<p>Se tienen dos opciones para completar el circuito: 
+<em> fuerza bruta (suma de productos)
+</em> simplificar antes de construir el circuito (mapas de Karnaugh)</p>
+<p>Si lo resuelve con mapas de Karnaugh, usará significativamente menos componentes en su respuesta.</p>
 <h1 id="calificacion">Calificación<a class="headerlink" href="#calificacion" title="Permanent link">&para;</a></h1>
 <p>Cuando crean que tiene ejercicios completos pueden hacer la prueba localmente escribiendo en la terminal:</p>
 <div class="codehilite"><pre><span></span>./check
 </pre></div>
 
-<p>Si todo esta correcto les saldrá algo como esto:</p>
-<div class="codehilite"><pre><span></span>   ___       __                        __       
-  / _ <span class="p">|</span>__ __/ /____  ___  _______ ____/ /__ ____
- / __ / // / __/ _ <span class="se">\/</span> _ <span class="se">\/</span> __/ _ <span class="se">\/</span> _  / -_<span class="o">)</span> __/
-/_/ <span class="p">|</span>_<span class="se">\_</span>,_/<span class="se">\_</span>_/<span class="se">\_</span>__/<span class="se">\_</span>, /_/  <span class="se">\_</span>,_/<span class="se">\_</span>,_/<span class="se">\_</span>_/_/
-                   /___/
-
-             Machine Structures
-     Great Ideas in Computer Architecture
-               Logisim Intro
-
-
-Exercise                    Grade  Message
-------------------------  -------  ---------
-<span class="m">0</span>. The basics <span class="o">(</span>Warm-Up<span class="o">)</span>        <span class="m">25</span>  passed
-<span class="m">1</span>. Sub-Circuits                <span class="m">25</span>  passed
-<span class="m">2</span>. Storing State               <span class="m">25</span>  passed
-<span class="m">3</span>. FSMs to Digital Logic       <span class="m">25</span>  <span class="nv">passed</span>
-
-<span class="o">=</span>&gt; Score: <span class="m">100</span>/100
-</pre></div>
+<p>Si todo esta correcto obtendrá 10, 30, 30 y 30 puntos en sus ejercicios, respectivamente.</p>
+<p>Recuerde probar el autograder al menos una vez antes de terminar los periodos de laboratorio (el ejercicio 0 sale en cinco minutos máximo!) para asegurarse que Logisim y el autograder se están comunicando bien. Cualquier problema, notifíquelo a sus auxiliares o catedrático de inmediato.</p>
                 
                   
                 
