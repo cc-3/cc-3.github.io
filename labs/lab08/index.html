@@ -113,7 +113,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#lab-7-logisim-avanzado" tabindex="1" class="md-skip">
+      <a href="#lab-7-mas-avanzado" tabindex="1" class="md-skip">
         Saltar a contenido
       </a>
     
@@ -426,8 +426,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#caracteristicas-avanzadas-de-logisim" title="Características Avanzadas de Logisim" class="md-nav__link">
-    Características Avanzadas de Logisim
+  <a href="#mas-componentes-de-logisim" title="Más componentes de Logisim" class="md-nav__link">
+    Más componentes de Logisim
   </a>
   
     <nav class="md-nav">
@@ -467,8 +467,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#ejercicio-2-rotate-right" title="Ejercicio 2: Rotate Right" class="md-nav__link">
-    Ejercicio 2: Rotate Right
+  <a href="#ejercicio-2-comparadores-equal-y-less-than" title="Ejercicio 2: Comparadores Equal y Less Than" class="md-nav__link">
+    Ejercicio 2: Comparadores Equal y Less Than
   </a>
   
 </li>
@@ -742,8 +742,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#caracteristicas-avanzadas-de-logisim" title="Características Avanzadas de Logisim" class="md-nav__link">
-    Características Avanzadas de Logisim
+  <a href="#mas-componentes-de-logisim" title="Más componentes de Logisim" class="md-nav__link">
+    Más componentes de Logisim
   </a>
   
     <nav class="md-nav">
@@ -783,8 +783,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#ejercicio-2-rotate-right" title="Ejercicio 2: Rotate Right" class="md-nav__link">
-    Ejercicio 2: Rotate Right
+  <a href="#ejercicio-2-comparadores-equal-y-less-than" title="Ejercicio 2: Comparadores Equal y Less Than" class="md-nav__link">
+    Ejercicio 2: Comparadores Equal y Less Than
   </a>
   
 </li>
@@ -822,17 +822,17 @@
                   <a href="https://github.com/cc-3/cc-3.github.io/edit/master/page/es/docs/labs/lab08.md" title="Editar esta página" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                <h1 id="lab-7-logisim-avanzado">Lab 7 - Logisim Avanzado<a class="headerlink" href="#lab-7-logisim-avanzado" title="Permanent link">&para;</a></h1>
+                <h1 id="lab-7-mas-avanzado">Lab 7 - Más Avanzado<a class="headerlink" href="#lab-7-mas-avanzado" title="Permanent link">&para;</a></h1>
 <h2 id="objetivo">Objetivo<a class="headerlink" href="#objetivo" title="Permanent link">&para;</a></h2>
 <p>En este laboratorio ustedes van a aprender sobre otros componentes esenciales de Logisim, en particular, los <strong>splitters</strong> que nos permiten hacer cosas como, descomponer un cable en subsets de bits para luego manipularlos individualmente.</p>
 <h2 id="preparacion">Preparación<a class="headerlink" href="#preparacion" title="Permanent link">&para;</a></h2>
-<p>Para este laboratorio, nuevamente, es necesario que tengan la aplicación de <a href="http://www.cburch.com/logisim/index.html">Logisim</a>. Adicionalmente pueden utilizar la <a href="http://www.cburch.com/logisim/docs.html">documentación</a> de Logisim para refrescar el conocimiento que adquirieron en el laboratorio pasado o leer el lab también <a href="https://cc-3.github.io/labs/lab05/">aquí</a>.</p>
-<p>También tienen que tener todos los archivos base, estos se encuentran <a href="https://classroom.github.com/a/eOTjIzyc">aquí</a>. Recuerden que deben aceptar la asignación de <strong>GitHub Classroom</strong> y se les creará automáticamente un repositorio con una extensión que termina con su usuario de GitHub. Cuando ya se haya creado el repositorio, pueden ejecutar los siguientes comandos abriendo una terminal (<kbd>CTRL</kbd><kbd>+</kbd><kbd>T</kbd>):</p>
+<p>Para este laboratorio, nuevamente, es necesario que tengan la aplicación de <a href="http://www.cburch.com/logisim/index.html">Logisim</a>. Adicionalmente pueden utilizar la <a href="http://www.cburch.com/logisim/docs.html">documentación</a> de Logisim para refrescar el conocimiento que adquirieron en el laboratorio pasado o leer el lab también <a href="https://cc-3.github.io/labs/lab07/">aquí</a>.</p>
+<p>También tienen que tener todos los archivos base, estos se encuentran <a href="https://classroom.github.com/a/KxJPq_aF">aquí</a>. Recuerden que deben aceptar la asignación de <strong>GitHub Classroom</strong> y se les creará automáticamente un repositorio con una extensión que termina con su usuario de GitHub. Cuando ya se haya creado el repositorio, pueden ejecutar los siguientes comandos abriendo una terminal (<kbd>CTRL</kbd><kbd>+</kbd><kbd>T</kbd>):</p>
 <div class="codehilite"><pre><span></span>git clone &lt;link del repositorio&gt;
 </pre></div>
 
-<h2 id="caracteristicas-avanzadas-de-logisim">Características Avanzadas de Logisim<a class="headerlink" href="#caracteristicas-avanzadas-de-logisim" title="Permanent link">&para;</a></h2>
-<p>Aquí pueden encontrar tres características más de logisim que ustedes van a encontrar bastante utiles, principalmente en el proyecto 2.</p>
+<h2 id="mas-componentes-de-logisim">Más componentes de Logisim<a class="headerlink" href="#mas-componentes-de-logisim" title="Permanent link">&para;</a></h2>
+<p>Aquí pueden encontrar tres características más de logisim que ustedes van a encontrar bastante utiles, principalmente en el proyecto 3.</p>
 <h3 id="tuneles-tunnels">Túneles (Tunnels)<a class="headerlink" href="#tuneles-tunnels" title="Permanent link">&para;</a></h3>
 <p>Un <a href="http://www.cburch.com/logisim/docs/2.6.0/en/libs/base/tunnel.html">túnel</a> les permite dibujar <em>un cable invisible</em> para unir dos puntos. Los túneles son agrupados por etiquetas (case-sensitive) que se les ponen a los cables para identificarlos. Generalmente son utilizados para conectar cables de la siguiente manera:</p>
 <p align="center">
@@ -856,7 +856,7 @@
 
 <p>Nosotros les recomendamos (<strong>bastante</strong>) utilizar túneles en Logisim, porque hacen los circuitos más limpios, claros y fáciles de depurar.</p>
 <h3 id="divisores-splitters">Divisores (Splitters)<a class="headerlink" href="#divisores-splitters" title="Permanent link">&para;</a></h3>
-<p>Los divisores crean una correspondencia entre un valor de multiples bits y subsets de esos bits. A pesar de su nombre, puede dividir un valor de multiples bits en varias partes o subsets de bits (lo que se espera por el nombre), así como también puede combinar partes o subsets de bits en un valor de multiples bits. Por ejemplo para el primer caso, un valor float (IEEE 754) de precisión simple (32 bits) dividido en signo (1 bit), exponente (8 bits) y fracción (23 bits):</p>
+<p>Los divisores nos permiten separar los bits de un cable. A pesar de su nombre, puede separar, pero también juntar bits. Por ejemplo para el primer caso, un valor float (IEEE 754) de precisión simple (32 bits) dividido en signo (1 bit), exponente (8 bits) y fracción (23 bits):</p>
 <p align="center">
   <img src="/img/labs/lab06/splitters1.png" alt="splitters 1" />
 </p>
@@ -882,13 +882,13 @@
   <img src="/img/labs/lab06/extend3.png" alt="extend 3" />
 </p>
 
-<p>A pesar de las implicaciones de su nombre, un extensor se puede utilizar también para realizar la misma operación y así evitar el uso de <strong>splitters</strong> para esta tarea:</p>
+<p>A pesar de su nombre, un extensor también se puede usar para "recortar" o "eliminar" algunos bits, como en el siguiente ejemplo:</p>
 <p align="center">
   <img src="/img/labs/lab06/extend4.png" alt="extend 4" />
 </p>
 
 <h2 id="ejercicio-1-divisores-splitters">Ejercicio 1: Divisores (Splitters)<a class="headerlink" href="#ejercicio-1-divisores-splitters" title="Permanent link">&para;</a></h2>
-<p>Para este ejercicio van a utilizar los splitters para crear un par de circuitos simples manipulando un numero de 8 bits. Van a estar trabajando en el archivo <strong>splitters.circ</strong>.</p>
+<p>Para este ejercicio van a utilizar los splitters para crear un par de circuitos simples manipulando un número de 8 bits. Van a estar trabajando en el archivo <strong>splitters.circ</strong>.</p>
 <ul>
 <li>
 <p>Vayan al folder llamado "Wiring" y seleccionen un splitter. Este circuito va a tomar un cable y lo va a dividir en un set de cables con un ancho de bits menor.</p>
@@ -904,42 +904,37 @@
 <li>Listo! Gracias al splitter, logró separar el bit más significativo y el menos significativo del resto.</li>
 </ul>
 </li>
-<li>Out2: Trabajando en signo-magnitud, obtenga el inverso aditivo del input<ul>
-<li>Recordatorio: inverso aditivo significa cambiarle de signo de positivo a negativo, y viceversa.</li>
-<li>Recordatorio: <a href="https://en.wikipedia.org/wiki/Signed_number_representations#Signed_magnitude_representation">Signo Magnitud</a> es una otra forma de representar números con signo, la vimos la primera semana de clases.</li>
-<li>Usted ya partió al input en pedacitos para resolver Out1, puede usar algunos de esos pedacitos y alguna compuerta para obtener el inverso aditivo.</li>
+<li>Out2: Cambie el valor del bit más significativo del input<ul>
+<li>Usted ya partió al input en pedacitos para resolver Out1, puede usar algunos de esos pedacitos y alguna compuerta para obtener el valor opuesto.</li>
 <li>Luego puede utilizar otro splitter, ahora colocado al revés para reconstruir su número: de varios pedacitos, pasará a tener un valor de 8 bits.</li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
-<h2 id="ejercicio-2-rotate-right">Ejercicio 2: Rotate Right<a class="headerlink" href="#ejercicio-2-rotate-right" title="Permanent link">&para;</a></h2>
-<p>Con el conocimiento que tienen acerca de los splitters y multiplexores, están listos para implementar un bloque de lógica combinacional no trivial: <code>rotr</code>, que significa <strong>Rotate Right</strong>. </p>
-<p>La idea es que <code>rotr A,B</code> va a rotar el patrón de bits de la entrada <code>A</code> a la derecha por <code>B</code> bits. Por ejemplo, si <code>A</code> fuera $0\text{b}10110101011\color{blue}1\color{blue}0\color{blue}0\color{blue}1\color{blue}1$ y <code>B</code> fuera $0\text{b}0101$ (5 en decimal), el output del bloque sería $0\text{b}\color{red}1\color{red}0\color{red}0\color{red}1\color{red}110110101011$. Noten que los 5 bits de más a la derecha de <code>A</code> (azul) fueron rotados a la derecha y puestos de vuelta a la izquierda (rojo). En RTL, la operación sería algo como:</p>
-<div class="codehilite"><pre><span></span><span class="n">R</span> <span class="o">=</span> <span class="n">A</span> <span class="o">&gt;&gt;</span> <span class="n">B</span> <span class="o">|</span> <span class="n">A</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="mi">16</span> <span class="o">-</span> <span class="n">B</span><span class="p">)</span>
-</pre></div>
-
-<p>Ustedes tienen que implementar el subcircuito llamado <strong>rotr</strong> en el archivo <strong>rotr.circ</strong> que tiene las siguientes entradas y salida:</p>
+<h2 id="ejercicio-2-comparadores-equal-y-less-than">Ejercicio 2: Comparadores Equal y Less Than<a class="headerlink" href="#ejercicio-2-comparadores-equal-y-less-than" title="Permanent link">&para;</a></h2>
+<p>Implementaremos a mano un par de comparadores sencillos. Nuestro comparador Equal quiere comprobar que <strong>A == B</strong>, mientras que el comparador Less Than quiere comprobar que <strong>A &lt; B</strong> (por favor ponga atención a esto, no queremos Less Or Equal, tampoco queremos B &lt; A).</p>
+<p>Cuando revise el archivo notará que tanto A como B son números de dos bits para este ejercicio. Para la comparación Equal debe revisar que ambos números sean iguales, y para el Less Than considerarlos como números sin signo que debe comparar.</p>
+<p>Recuerde nuestro proceso para elaborar un circuito:</p>
 <ul>
-<li><strong>A</strong>, 16 bits, la entrada a ser rotada.</li>
-<li><strong>B</strong>, 4 bits, la cantidad de rotación (Respóndase a usted mismo, ¿por qué 4 bits? <i class="em em-thinking_face"></i>)</li>
-<li><strong>C</strong>, 16 bits, salida con el resultado de la rotación.</li>
+<li>Plantee la solución en forma de tabla<ul>
+<li>Por cada bit de sus inputs debería tener una columna de entrada.</li>
+<li>Por cada problema a resolver (Equal, Less Than) debería tener una columna de salida.</li>
 </ul>
-<p>La salida en el output debería de ser <code>A</code> rotado por <code>B</code> bits, como se indicó anteriormente. Ustedes <strong>NO</strong> pueden utilizar los shifters que trae Logisim en su solución, pero todos los demás bloques combinacionales (multiplexores, splitters, túneles, constantes, compuertas, sumadores, etc) son permitidos.</p>
-<blockquote>
-<p><strong>HINT 1</strong>: Antes de empezar a cablear, deberían de pensar muuuuuuuy bien acerca de como pueden descomponer este problema en pequeñas partes y unirlas. Deberían de sentirse libres de implementar subcircuitos para implementar este ejercicio. Si no los utilizan, se van a arrepentir.</p>
-<p><strong>HINT 2</strong>: Solo porque les dimos una representación en RTL no significa que esta sea la mejor opción para abordar el problema. Piense en los bits de entrada de <code>B</code> y en como pueden utilizar efectivamente los splitters. Piense en cómo resolvio el multiplexor de 4 a 1 la semana pasada, usando su multiplexor de 2 a 1.</p>
-</blockquote>
-<p>Si su cableado de un splitter grande se está volviendo desordenado, a veces cambiar los splitters pueden mantener las cosas más limpias y localizables. Por ejemplo, en lugar de utilizar un splitter de 1 a 16, puede primero dividir en 4, y luego volver a dividir en 4.</p>
-<p>¡Este ejercicio lo hará pensar bastante!</p>
+</li>
+<li>A partir de la tabla elabore mapas de Karnaugh (̣¿por qué dice mapas en plural?)</li>
+<li>Agrupe sus 1s en cada mapa de Karnaugh</li>
+<li>Obtenga su ecuación gracias a los grupos</li>
+<li>Con la ecuación elabore el circuito correspondiente</li>
+</ul>
+<p>Un detalle más... No puede utilizar los comparadores que ya vienen en Logisim para hacer este ejercicio, debe construir su circuito con ANDs, ORs, NOTs y demás elementos que le sirvan, como túneles, splitters, etc.</p>
 <h2 id="ejercicio-3-alu">Ejercicio 3: ALU<a class="headerlink" href="#ejercicio-3-alu" title="Permanent link">&para;</a></h2>
-<p>En este ejercicio ustedes van a implementar un ALU de 32 bits. Van estar trabajando en el archivo llamado <strong>ALU.circ</strong>. Como un recordatorio, ALU significa <em>Arithmetic Logic Unit</em> (Unidad Arimética Lógica). Un ALU es una pieza fundamental de un CPU y realiza operaciones aritméticas y lógicas (bitwise). La función que el ALU realiza (ejemplo add, xor) es determinada por el control de nuestro datapath, que esta determinado por la instrucción que nuestro procesador está ejecutando. El ALU está resaltado en el siguiente diagrama de un datapath simplificado:</p>
+<p>En este ejercicio ustedes van a implementar un ALU sencillo de 32 bits. Van estar trabajando en el archivo llamado <strong>ALU.circ</strong>. Como un recordatorio, ALU significa <em>Arithmetic Logic Unit</em> (Unidad Arimética Lógica). Un ALU es una pieza fundamental de un CPU y realiza operaciones aritméticas y lógicas (bitwise). La función que el ALU realiza (ejemplo add, xor) es determinada por el control de nuestro datapath, que esta determinado por la instrucción que nuestro procesador está ejecutando. El ALU está resaltado en el siguiente diagrama de un datapath simplificado:</p>
 <p align="center">
   <img src="/img/labs/lab06/alu.png" alt="ALU" width="400" />
 </p>
 
-<p>Este ejercicio es una versión simplificada de lo que le tocará hacer en el proyecto 2. Esperamos que al realizar este ejercicio, el proyecto 2 se les haga un poco más fácil y suave de llevar.</p>
+<p>Este ejercicio es una versión simplificada de lo que le tocará hacer en el proyecto 3. Esperamos que al realizar este ejercicio, el proyecto 3 se les haga un poco más fácil y suave de llevar.</p>
 <p>Las 8 funciones que tienen que implementar son: <strong>shift left logical</strong>, <strong>shift right logical</strong>, <strong>shift right arithmetic</strong>, <strong>rotate left</strong>, <strong>rotate right</strong>, <strong>and</strong>, <strong>or</strong> y <strong>xor</strong>. El ALU va a realizar la función deseada sobre 2 entradas de 32 bits y tendrá una salida de 32 bits como resultado. <strong>Noten que Logisim tiene compuertas que hacen todas estas funciones, NO tienen que implementar ninguna por su cuenta, por favor no lo hagan</strong>.</p>
 <blockquote>
 <p><strong>HINT 1</strong>: Busquen el folder en Logisim etiquetado como Arithmetic para poder encontrar shifter, que será útil para varias de las operaciones.</p>
@@ -1007,14 +1002,15 @@
 
 Exercise           Grade   Message
 ----------------  -------  ---------
-<span class="m">1</span>. Splitters       <span class="m">40</span>      passed
-<span class="m">2</span>. Rotate Right    <span class="m">40</span>      passed
+<span class="m">1</span>. Splitters       <span class="m">20</span>      passed
+<span class="m">2</span>. Comparators     <span class="m">40</span>      passed
 <span class="m">3</span>. ALU             <span class="m">40</span>      <span class="nv">passed</span>
 
-<span class="o">=</span>&gt; Score: <span class="m">120</span>/120
+<span class="o">=</span>&gt; Score: <span class="m">100</span>/100
 </pre></div>
 
-<p>Al finalizar, recuerde hacer <code>add</code>, <code>commit</code> y <code>push</code> hacia Github. Luego envíe el link de su repositorio en el GES. Si no envía el link, no podremos ponerle nota!</p>
+<p>Al finalizar, recuerde hacer <code>add</code>, <code>commit</code> y <code>push</code> al finalizar el periodo, cada vez que logre un avance, y al terminar su laboratorio completo.</p>
+<p>Para este momento del curso ya se sabe las reglas, al finalizar el periodo suba sus avances a Github y suba el link de su repositorio al GES. Si no lo hace tendrá cero, no se aceptará ninguna excusa ni justificación, ese cero no se le cambiará.</p>
                 
                   
                 
