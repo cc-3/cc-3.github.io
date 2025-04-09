@@ -702,6 +702,19 @@
     Revisando su nota
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#recordatorio-sobre-su-link" title="Recordatorio sobre su link" class="md-nav__link">
+    Recordatorio sobre su link
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
       
@@ -1114,6 +1127,19 @@
   <a href="#revisando-su-nota" title="Revisando su nota" class="md-nav__link">
     Revisando su nota
   </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#recordatorio-sobre-su-link" title="Recordatorio sobre su link" class="md-nav__link">
+    Recordatorio sobre su link
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1789,7 +1815,12 @@ ASM_TESTS :<span class="o">=</span> simple multiply random test_name
 </li>
 </ul>
 <h3 id="probando-la-parte-2">Probando la Parte 2<a class="headerlink" href="#probando-la-parte-2" title="Permanent link">&para;</a></h3>
-<p>Les hemos adjuntado un self-checking assembly test que prueba varias de las instruciones, sin embargo este test no es exhaustivo y no prueba todas las instrucciones. A continuación, se ejemplifica cómo ejecutar los test (el output es de una solución correcta).</p>
+<p>Una vez compilada su parte 2, comience a probar usando archivos individuales:
+<div class="codehilite"><pre><span></span>./riscv -r -i riscvcode/code/ARCHIVODEPRUEBA.input
+</pre></div></p>
+<p>La bandera <code>-r</code> sirve para imprimir el contenido de los registros, la bandera <code>-i</code> para que sea interactivo, es decir que le pida un ENTER después de cada instrucción. Puede quitar alguna bandera si esta no le sirve.</p>
+<p>Cada vez que se trabe en algo, vuelva a probar archivos de forma individual para diagnosticar dónde está el error.</p>
+<p>Si ya superó tests individuales, les hemos adjuntado un self-checking assembly test que prueba varias de las instruciones, sin embargo este test no es exhaustivo y no prueba todas las instrucciones. A continuación, se ejemplifica cómo ejecutar los test (el output es de una solución correcta).</p>
 <div class="codehilite"><pre><span></span>make part2
 gcc -Wall -Werror -Wfatal-errors -O2 -o riscv utils.c part1.c part2.c riscv.c
 simple_execute TEST PASSED!
@@ -1798,7 +1829,6 @@ random_execute TEST PASSED!
 -----------Execute Tests Complete-----------
 </pre></div>
 
-<p>Lo más probable es que ustedes tenga errores al empezar a realizar la parte 2, entonces prueben el modo de rastreo (<em>trace</em>) descrito en <a href="#opciones-en-la-linea-de-comandos">Opciones en la línea de Comandos</a>.</p>
 <p>Al igual que en la parte 1, el comando <code>make part2</code> hace solo algunas pruebas sencillas. Para usar los demás testcases que encontró en la carpeta <code>riscvcode</code> use el siguiente comando.</p>
 <div class="codehilite"><pre><span></span>make <span class="o">[</span>test_name<span class="o">]</span>_execute
 </pre></div>
@@ -1881,6 +1911,28 @@ random_execute TEST PASSED!
 <p><code>./check</code></p>
 <p>Recuerde hacer add + commit + push frecuentemente. Si algo le pasa a su máquina virtual, puede ir a Github a recuperar lo que ya haya subido. </p>
 <p>Al terminar <strong>AMBOS INTEGRANTES DEL GRUPO</strong> deben subir el link del repositorio al GES.</p>
+<h3 id="recordatorio-sobre-su-link">Recordatorio sobre su link<a class="headerlink" href="#recordatorio-sobre-su-link" title="Permanent link">&para;</a></h3>
+<p>El link subido al GES tiene que verse de la siguiente manera:</p>
+<div class="codehilite"><pre><span></span>https://github.com/cc3-ug/proj02-2025-nombre-de-mi-grupo
+</pre></div>
+
+<p>Empieza con <code>http</code> o <code>https</code> y termina con el nombre de su grupo.</p>
+<p>Si el link subido es incorrecto, se le penalizará quitando dos puntos netos. A continuación le dejamos algunos errores comunes para que se asegure de no cometerlos:</p>
+<div class="codehilite"><pre><span></span>https://github.com/cc3-ug/proj02-2025-nombre-de-mi-grupo/blob/master/archivo.ext
+Subió link directo a algun archivo, no a su repo completo
+
+http://https://github.com/cc3-ug/proj02-2025-nombre-de-mi-grupo
+No borró el http que viene por defecto en el GES
+
+https://github.com/cc3-ug/lab00-2025-mi-usuario
+Subió link de un repositorio distinto a su proyecto
+
+No subió link
+
+Subió link en otra asignación del GES
+
+Subió ZIP o cualquier otro tipo de archivo
+</pre></div>
                 
                   
                 
