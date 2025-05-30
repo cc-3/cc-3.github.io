@@ -1,4 +1,4 @@
-# Proyecto 2: CPU
+# Proyecto 3: CPU
 
 
 ## Introducción
@@ -26,7 +26,7 @@ Finalmente, las dos indicaciones más importantes:
 
 **Antes de comenzar, asegúrense de que hayan leído y comprendido todas las instrucciones del proyecto de principio a fin**. Si tienen alguna pregunta, por favor diríjanse a **Slack** y pregunten en los canales correspondientes. Si su duda es general, es decir no necesita mostrar algo muy específico de su circuito, pregunte en los **canales públicos**.
 
-Para comenzar con el proyecto, primero tienen que tener todos los archivos base, estos se encuentran [aquí](https://classroom.github.com/a/gB6R5Wz4). Pueden trabajar en parejas o de forma individual, por lo que al aceptar la asignación les preguntará si desean crear un grupo nuevo o unirse a uno ya existente. Si crean un grupo nuevo, ingresen un nombre creativo y fácil de recordar. No se pueden repetir los nombres del proyecto 1, Github no lo permite.
+Para comenzar con el proyecto, primero tienen que tener todos los archivos base, estos se encuentran [aquí](https://classroom.github.com/a/eYgAAbGW). Pueden trabajar en parejas o de forma individual, por lo que al aceptar la asignación les preguntará si desean crear un grupo nuevo o unirse a uno ya existente. Si crean un grupo nuevo, ingresen un nombre creativo y fácil de recordar. No se pueden repetir los nombres del proyecto 1, Github no lo permite.
 
 ![Create group](/img/projs/proj01/classroom1.png)
 
@@ -297,11 +297,11 @@ Si las tres partes del proyecto están correctas les saldrá algo como esto:
 
 Exercise            Grade  Message
 ----------------  -------  ---------
-1. ALU                 10  passed
-2. Register File       10  passed
-3. CPU                 80  passed
+1. ALU                  5  passed
+2. Register File        5  passed
+3. CPU                 90  passed
 
 => Score: 100/100
 ```
 
-**IMPORTANTE:** Para tener derecho a nota debe presentar un procesador conectado y funcionando, no puede presentar solamente componentes sueltos. Si solo tiene los 20 puntos de ALU y Register File, esto se convierte en cero.
+**IMPORTANTE:** Para tener derecho a nota debe presentar un procesador conectado y funcionando, no puede presentar solamente componentes sueltos. Si solo tiene los 10 puntos de ALU y Register File, esto se convierte en cero.

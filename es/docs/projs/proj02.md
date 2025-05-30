@@ -705,7 +705,16 @@ Esta parte consistirá en implementar la funcionalidad de cada instrucción. Por
 
 ### Probando la Parte 2
 
-Les hemos adjuntado un self-checking assembly test que prueba varias de las instruciones, sin embargo este test no es exhaustivo y no prueba todas las instrucciones. A continuación, se ejemplifica cómo ejecutar los test (el output es de una solución correcta).
+Una vez compilada su parte 2, comience a probar usando archivos individuales:
+```
+./riscv -r -i riscvcode/code/ARCHIVODEPRUEBA.input
+```
+
+La bandera `-r` sirve para imprimir el contenido de los registros, la bandera `-i` para que sea interactivo, es decir que le pida un ENTER después de cada instrucción. Puede quitar alguna bandera si esta no le sirve.
+
+Cada vez que se trabe en algo, vuelva a probar archivos de forma individual para diagnosticar dónde está el error.
+
+Si ya superó tests individuales, les hemos adjuntado un self-checking assembly test que prueba varias de las instruciones, sin embargo este test no es exhaustivo y no prueba todas las instrucciones. A continuación, se ejemplifica cómo ejecutar los test (el output es de una solución correcta).
 
 ```shell
 make part2
@@ -715,8 +724,6 @@ multiply_execute TEST PASSED!
 random_execute TEST PASSED!
 -----------Execute Tests Complete-----------
 ```
-
-Lo más probable es que ustedes tenga errores al empezar a realizar la parte 2, entonces prueben el modo de rastreo (_trace_) descrito en [Opciones en la línea de Comandos](#opciones-en-la-linea-de-comandos).
 
 Al igual que en la parte 1, el comando `make part2` hace solo algunas pruebas sencillas. Para usar los demás testcases que encontró en la carpeta `riscvcode` use el siguiente comando.
 
@@ -820,3 +827,32 @@ Haga pruebas sencillas antes de usar el autograder, ya que este prueba de una ve
 Recuerde hacer add + commit + push frecuentemente. Si algo le pasa a su máquina virtual, puede ir a Github a recuperar lo que ya haya subido. 
 
 Al terminar **AMBOS INTEGRANTES DEL GRUPO** deben subir el link del repositorio al GES.
+
+### Recordatorio sobre su link
+
+El link subido al GES tiene que verse de la siguiente manera:
+
+```
+https://github.com/cc3-ug/proj02-2025-nombre-de-mi-grupo
+```
+
+Empieza con `http` o `https` y termina con el nombre de su grupo.
+
+Si el link subido es incorrecto, se le penalizará quitando dos puntos netos. A continuación le dejamos algunos errores comunes para que se asegure de no cometerlos:
+
+```
+https://github.com/cc3-ug/proj02-2025-nombre-de-mi-grupo/blob/master/archivo.ext
+Subió link directo a algun archivo, no a su repo completo
+
+http://https://github.com/cc3-ug/proj02-2025-nombre-de-mi-grupo
+No borró el http que viene por defecto en el GES
+
+https://github.com/cc3-ug/lab00-2025-mi-usuario
+Subió link de un repositorio distinto a su proyecto
+
+No subió link
+
+Subió link en otra asignación del GES
+
+Subió ZIP o cualquier otro tipo de archivo
+```

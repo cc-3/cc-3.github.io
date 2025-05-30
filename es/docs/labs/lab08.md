@@ -1,4 +1,4 @@
-# Lab 7 - Logisim Avanzado
+# Lab 8 - Más Logisim
 
 ## Objetivo
 
@@ -6,17 +6,17 @@ En este laboratorio ustedes van a aprender sobre otros componentes esenciales de
 
 ## Preparación
 
-Para este laboratorio, nuevamente, es necesario que tengan la aplicación de [Logisim](http://www.cburch.com/logisim/index.html). Adicionalmente pueden utilizar la [documentación](http://www.cburch.com/logisim/docs.html) de Logisim para refrescar el conocimiento que adquirieron en el laboratorio pasado o leer el lab también [aquí](https://cc-3.github.io/labs/lab05/).
+Para este laboratorio, nuevamente, es necesario que tengan la aplicación de [Logisim](http://www.cburch.com/logisim/index.html). Adicionalmente pueden utilizar la [documentación](http://www.cburch.com/logisim/docs.html) de Logisim para refrescar el conocimiento que adquirieron en el laboratorio pasado o leer el lab también [aquí](https://cc-3.github.io/labs/lab07/).
 
-También tienen que tener todos los archivos base, estos se encuentran [aquí](https://classroom.github.com/a/eOTjIzyc). Recuerden que deben aceptar la asignación de **GitHub Classroom** y se les creará automáticamente un repositorio con una extensión que termina con su usuario de GitHub. Cuando ya se haya creado el repositorio, pueden ejecutar los siguientes comandos abriendo una terminal (<kbd>CTRL</kbd><kbd>+</kbd><kbd>T</kbd>):
+También tienen que tener todos los archivos base, estos se encuentran [aquí](https://classroom.github.com/a/KxJPq_aF). Recuerden que deben aceptar la asignación de **GitHub Classroom** y se les creará automáticamente un repositorio con una extensión que termina con su usuario de GitHub. Cuando ya se haya creado el repositorio, pueden ejecutar los siguientes comandos abriendo una terminal (<kbd>CTRL</kbd><kbd>+</kbd><kbd>T</kbd>):
 
 ```shell
 git clone <link del repositorio>
 ```
 
-## Características Avanzadas de Logisim
+## Más componentes de Logisim
 
-Aquí pueden encontrar tres características más de logisim que ustedes van a encontrar bastante utiles, principalmente en el proyecto 2.
+Aquí pueden encontrar tres características más de logisim que ustedes van a encontrar bastante utiles, principalmente en el proyecto 3.
 
 ### Túneles (Tunnels)
 
@@ -49,7 +49,7 @@ Nosotros les recomendamos (**bastante**) utilizar túneles en Logisim, porque ha
 
 ### Divisores (Splitters)
 
-Los divisores crean una correspondencia entre un valor de multiples bits y subsets de esos bits. A pesar de su nombre, puede dividir un valor de multiples bits en varias partes o subsets de bits (lo que se espera por el nombre), así como también puede combinar partes o subsets de bits en un valor de multiples bits. Por ejemplo para el primer caso, un valor float (IEEE 754) de precisión simple (32 bits) dividido en signo (1 bit), exponente (8 bits) y fracción (23 bits):
+Los divisores nos permiten separar los bits de un cable. A pesar de su nombre, puede separar, pero también juntar bits. Por ejemplo para el primer caso, un valor float (IEEE 754) de precisión simple (32 bits) dividido en signo (1 bit), exponente (8 bits) y fracción (23 bits):
 
 <p align="center">
   <img src="/img/labs/lab06/splitters1.png" alt="splitters 1" />
@@ -82,7 +82,7 @@ Esto tambíen aplica cuando se quiere pasar de un ancho de bits mayor a un ancho
   <img src="/img/labs/lab06/extend3.png" alt="extend 3" />
 </p>
 
-A pesar de las implicaciones de su nombre, un extensor se puede utilizar también para realizar la misma operación y así evitar el uso de **splitters** para esta tarea:
+A pesar de su nombre, un extensor también se puede usar para "recortar" o "eliminar" algunos bits, como en el siguiente ejemplo:
 
 <p align="center">
   <img src="/img/labs/lab06/extend4.png" alt="extend 4" />
@@ -90,7 +90,7 @@ A pesar de las implicaciones de su nombre, un extensor se puede utilizar tambié
 
 ## Ejercicio 1: Divisores (Splitters)
 
-Para este ejercicio van a utilizar los splitters para crear un par de circuitos simples manipulando un numero de 8 bits. Van a estar trabajando en el archivo **splitters.circ**.
+Para este ejercicio van a utilizar los splitters para crear un par de circuitos simples manipulando un número de 8 bits. Van a estar trabajando en el archivo **splitters.circ**.
 
 - Vayan al folder llamado "Wiring" y seleccionen un splitter. Este circuito va a tomar un cable y lo va a dividir en un set de cables con un ancho de bits menor.
 
@@ -100,48 +100,38 @@ Para este ejercicio van a utilizar los splitters para crear un par de circuitos 
     - Out1: Realice un AND entre el bit más significativo y el menos significativo del input
         - Arriba le sugerimos que pusiera un fan out de 3. En el panel de la izquierda configure para que solo el bit 0 vaya a la salida 0 (Top), y que solo el bit 7 vaya a la salida 2 (Bottom), todos los demás bits puede mandarlos hacia la salida 1.
         - Listo! Gracias al splitter, logró separar el bit más significativo y el menos significativo del resto.
-    - Out2: Trabajando en signo-magnitud, obtenga el inverso aditivo del input
-        - Recordatorio: inverso aditivo significa cambiarle de signo de positivo a negativo, y viceversa.
-        - Recordatorio: [Signo Magnitud](https://en.wikipedia.org/wiki/Signed_number_representations#Signed_magnitude_representation) es una otra forma de representar números con signo, la vimos la primera semana de clases.
-        - Usted ya partió al input en pedacitos para resolver Out1, puede usar algunos de esos pedacitos y alguna compuerta para obtener el inverso aditivo.
+    - Out2: Cambie el valor del bit más significativo del input
+        - Usted ya partió al input en pedacitos para resolver Out1, puede usar algunos de esos pedacitos y alguna compuerta para obtener el valor opuesto.
         - Luego puede utilizar otro splitter, ahora colocado al revés para reconstruir su número: de varios pedacitos, pasará a tener un valor de 8 bits.
 
-## Ejercicio 2: Rotate Right
+## Ejercicio 2: Comparadores Equal y Less Than
 
-Con el conocimiento que tienen acerca de los splitters y multiplexores, están listos para implementar un bloque de lógica combinacional no trivial: `rotr`, que significa **Rotate Right**. 
+Implementaremos a mano un par de comparadores sencillos. Nuestro comparador Equal quiere comprobar que **A == B**, mientras que el comparador Less Than quiere comprobar que **A < B** (por favor ponga atención a esto, no queremos Less Or Equal, tampoco queremos B < A).
 
-La idea es que `rotr A,B` va a rotar el patrón de bits de la entrada `A` a la derecha por `B` bits. Por ejemplo, si `A` fuera $0\text{b}10110101011\color{blue}1\color{blue}0\color{blue}0\color{blue}1\color{blue}1$ y `B` fuera $0\text{b}0101$ (5 en decimal), el output del bloque sería $0\text{b}\color{red}1\color{red}0\color{red}0\color{red}1\color{red}110110101011$. Noten que los 5 bits de más a la derecha de `A` (azul) fueron rotados a la derecha y puestos de vuelta a la izquierda (rojo). En RTL, la operación sería algo como:
+Cuando revise el archivo notará que tanto A como B son números de dos bits para este ejercicio. Para la comparación Equal debe revisar que ambos números sean iguales, y para el Less Than considerarlos como números sin signo que debe comparar.
 
-```c
-R = A >> B | A << (16 - B)
-```
+Recuerde nuestro proceso para elaborar un circuito:
 
-Ustedes tienen que implementar el subcircuito llamado **rotr** en el archivo **rotr.circ** que tiene las siguientes entradas y salida:
+* Plantee la solución en forma de tabla
+    * Por cada bit de sus inputs debería tener una columna de entrada.
+    * Por cada problema a resolver (Equal, Less Than) debería tener una columna de salida.
+* A partir de la tabla elabore mapas de Karnaugh (̣¿por qué dice mapas en plural?)
+* Agrupe sus 1s en cada mapa de Karnaugh
+* Obtenga su ecuación gracias a los grupos
+* Con la ecuación elabore el circuito correspondiente
 
-* **A**, 16 bits, la entrada a ser rotada.
-* **B**, 4 bits, la cantidad de rotación (Respóndase a usted mismo, ¿por qué 4 bits? <i class="em em-thinking_face"></i>)
-* **C**, 16 bits, salida con el resultado de la rotación.
+Un detalle más... No puede utilizar los comparadores que ya vienen en Logisim para hacer este ejercicio, debe construir su circuito con ANDs, ORs, NOTs y demás elementos que le sirvan, como túneles, splitters, etc.
 
-La salida en el output debería de ser `A` rotado por `B` bits, como se indicó anteriormente. Ustedes **NO** pueden utilizar los shifters que trae Logisim en su solución, pero todos los demás bloques combinacionales (multiplexores, splitters, túneles, constantes, compuertas, sumadores, etc) son permitidos.
-
-
-> **HINT 1**: Antes de empezar a cablear, deberían de pensar muuuuuuuy bien acerca de como pueden descomponer este problema en pequeñas partes y unirlas. Deberían de sentirse libres de implementar subcircuitos para implementar este ejercicio. Si no los utilizan, se van a arrepentir.
-
-> **HINT 2**: Solo porque les dimos una representación en RTL no significa que esta sea la mejor opción para abordar el problema. Piense en los bits de entrada de `B` y en como pueden utilizar efectivamente los splitters. Piense en cómo resolvio el multiplexor de 4 a 1 la semana pasada, usando su multiplexor de 2 a 1.
-
-Si su cableado de un splitter grande se está volviendo desordenado, a veces cambiar los splitters pueden mantener las cosas más limpias y localizables. Por ejemplo, en lugar de utilizar un splitter de 1 a 16, puede primero dividir en 4, y luego volver a dividir en 4.
-
-¡Este ejercicio lo hará pensar bastante!
 
 ## Ejercicio 3: ALU
 
-En este ejercicio ustedes van a implementar un ALU de 32 bits. Van estar trabajando en el archivo llamado **ALU.circ**. Como un recordatorio, ALU significa _Arithmetic Logic Unit_ (Unidad Arimética Lógica). Un ALU es una pieza fundamental de un CPU y realiza operaciones aritméticas y lógicas (bitwise). La función que el ALU realiza (ejemplo add, xor) es determinada por el control de nuestro datapath, que esta determinado por la instrucción que nuestro procesador está ejecutando. El ALU está resaltado en el siguiente diagrama de un datapath simplificado:
+En este ejercicio ustedes van a implementar un ALU sencillo de 32 bits. Van estar trabajando en el archivo llamado **ALU.circ**. Como un recordatorio, ALU significa _Arithmetic Logic Unit_ (Unidad Arimética Lógica). Un ALU es una pieza fundamental de un CPU y realiza operaciones aritméticas y lógicas (bitwise). La función que el ALU realiza (ejemplo add, xor) es determinada por el control de nuestro datapath, que esta determinado por la instrucción que nuestro procesador está ejecutando. El ALU está resaltado en el siguiente diagrama de un datapath simplificado:
 
 <p align="center">
   <img src="/img/labs/lab06/alu.png" alt="ALU" width="400" />
 </p>
 
-Este ejercicio es una versión simplificada de lo que le tocará hacer en el proyecto 2. Esperamos que al realizar este ejercicio, el proyecto 2 se les haga un poco más fácil y suave de llevar.
+Este ejercicio es una versión simplificada de lo que le tocará hacer en el proyecto 3. Esperamos que al realizar este ejercicio, el proyecto 3 se les haga un poco más fácil y suave de llevar.
 
 Las 8 funciones que tienen que implementar son: **shift left logical**, **shift right logical**, **shift right arithmetic**, **rotate left**, **rotate right**, **and**, **or** y **xor**. El ALU va a realizar la función deseada sobre 2 entradas de 32 bits y tendrá una salida de 32 bits como resultado. **Noten que Logisim tiene compuertas que hacen todas estas funciones, NO tienen que implementar ninguna por su cuenta, por favor no lo hagan**.
 
@@ -186,11 +176,13 @@ Si todo esta correcto les saldrá algo como esto:
 
 Exercise           Grade   Message
 ----------------  -------  ---------
-1. Splitters       40      passed
-2. Rotate Right    40      passed
+1. Splitters       20      passed
+2. Comparators     40      passed
 3. ALU             40      passed
 
-=> Score: 120/120
+=> Score: 100/100
 ```
 
-Al finalizar, recuerde hacer `add`, `commit` y `push` hacia Github. Luego envíe el link de su repositorio en el GES. Si no envía el link, no podremos ponerle nota!
+Al finalizar, recuerde hacer `add`, `commit` y `push` al finalizar el periodo, cada vez que logre un avance, y al terminar su laboratorio completo.
+
+Para este momento del curso ya se sabe las reglas, al finalizar el periodo suba sus avances a Github y suba el link de su repositorio al GES. Si no lo hace tendrá cero, no se aceptará ninguna excusa ni justificación, ese cero no se le cambiará.
