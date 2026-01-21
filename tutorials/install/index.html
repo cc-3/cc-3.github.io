@@ -716,7 +716,8 @@
 <p>El objetivo de este tutorial es dejar preparado el material que necesitaran para los laboratorios y proyectos.</p>
 <h2 id="la-mejor-opcion-maquina-virtual">La mejor opcion: Máquina virtual<a class="headerlink" href="#la-mejor-opcion-maquina-virtual" title="Permanent link">&para;</a></h2>
 <p>Desde 2024 <a href="https://blogs.vmware.com/workstation/2024/05/vmware-workstation-pro-now-available-free-for-personal-use.html">VMware es gratis</a>. Descargue la versión correspondiente (Workstation si está en Windows, Fusion si está en Mac OS) e instálela.</p>
-<p>Luego de instalar VMware, descargue la siguiente máquina virtual. Descomprímala y abra el archivo .vmx (VMware virtual machine configuration).</p>
+<p>Descargue VMware según su sistema operativo. En el GES encuentra links de descarga tanto desde la página de Broadcom como desde Drive o Mega. </p>
+<p>Luego de instalar VMware, descargue la siguiente máquina virtual. Descomprímala y abra el archivo .vmx (VMware virtual machine configuration). Si intenta abrir el .vmx dentro del zip en lugar de descomprimir, tendrá un error.</p>
 <p>Todos los links son para la misma maquina virtual. Si alguno falla, utilice otro.</p>
 <p><a href="https://drive.google.com/file/d/1_4CFuF1Z7kPzQbND5zvq8vEaOvTKbZl2/view?usp=sharing">Descargar maquina virtual desde Google Drive</a></p>
 <p><a href="https://mega.nz/file/DNxFyYaR#2fJJX7IIeQxOzlXtBsvmDgv79xO8r3r-bhLakXTykyo">Descargar maquina virtual desde Mega</a></p>
@@ -724,6 +725,7 @@
 Contrasena: student
 </pre></div>
 
+<p>Si VMware le pregunta por algún dispositivo no conectado, seleccione la opción de siempre ignorar. Si le pregunta si movió o copió la máquina virtual, seleccione la opción que indica por defecto.</p>
 <p>La maquina virtual trae ya todo lo necesario para el semestre.</p>
 <h3 id="mejorando-el-desempeno-de-la-maquina-virtual">Mejorando el desempeño de la máquina virtual<a class="headerlink" href="#mejorando-el-desempeno-de-la-maquina-virtual" title="Permanent link">&para;</a></h3>
 <p>Luego de abrir la máquina virtual en VMware, podemos ir a <code>VM &gt; Settings...</code> y hacer los siguientes cambios.</p>
@@ -732,7 +734,7 @@ Contrasena: student
 <p>En <code>Memory</code> aumente la cantidad de RAM que la máquina virtual puede usar. Si tiene menos de 4 GB de RAM, déjela como está. Si tiene entre 4 GB y 8 GB de RAM, coloque la mitad de su RAM. Si tiene más de 8 GB de RAM, coloque 4 GB.</p>
 </li>
 <li>
-<p>En <code>Processors</code> active la opción <code>Virtualize Intel VT-x or AMD-V</code>. Si aparece una ventana que indica que VT-x o AMD-V no están activados, debe ingresar a la BIOS de su máquina y activarlo desde allí. Este proceso cambia de una máquina a otra, entonces busque en Google algo como <code>Enable VT-x HP Victus Windows 11</code>. Coloque <code>VT-x</code> si su procesador es Intel, <code>AMD-V</code> si es AMD. Sustituya la marca de su computadora y la versión de Windows que utiliza.</p>
+<p>Opcional, si su máquina virtual funciona lento: En <code>Processors</code> active la opción <code>Virtualize Intel VT-x or AMD-V</code>. Si aparece una ventana que indica que VT-x o AMD-V no están activados, debe ingresar a la BIOS de su máquina y activarlo desde allí. Este proceso cambia de una máquina a otra, entonces busque en Google algo como <code>Enable VT-x HP Victus Windows 11</code>. Coloque <code>VT-x</code> si su procesador es Intel, <code>AMD-V</code> si es AMD. Sustituya la marca de su computadora y la versión de Windows que utiliza.</p>
 </li>
 </ul>
 <h2 id="otra-opcion-nativo">Otra opcion: Nativo<a class="headerlink" href="#otra-opcion-nativo" title="Permanent link">&para;</a></h2>
