@@ -10,11 +10,11 @@
 Para obtener sus archivos base visite el siguiente link, luego clone su repositorio.
 
 ```
-https://classroom.github.com/a/fQglD5Dp
+https://classroom.github.com/a/AMN4VCx-
 ```
 
 ```
-git clone https://github.com/cc3-ug/lab02-2025-MI_USUARIO.git
+git clone https://github.com/cc3-ug/lab02-2026-MI_USUARIO
 ```
 
 Un par de recordatorios, si necesita ayuda con esto revise los labs anteriores para más detalle:
@@ -22,9 +22,6 @@ Un par de recordatorios, si necesita ayuda con esto revise los labs anteriores p
 * Si está trabajando en las computadoras del lab o en alguna máquina nueva, debe volver a hacer las configuraciones de Github.
 
 * En Github usamos token en lugar de contraseña.
-
-
-
 
 ## Ejercicio 1: Debugger (depurador)
 ### ¿Qué es un debugger?
@@ -259,8 +256,6 @@ git add ll_cycle.c
 git commit -m "Lab 2 terminado"
 git push origin master
 ``` 
-
-Para finalizar, la fábula de [la tortuga y la liebre](http://read.gov/aesop/025.html) es relevante siempre, especialmente en este curso. Escribir sus programas en C a paso lento pero seguro (ayudándose de programas como cgdb) es lo que les hará ganar la carrera.
 
 ## Entrega de laboratorio
 

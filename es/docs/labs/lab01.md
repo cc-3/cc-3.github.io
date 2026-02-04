@@ -10,19 +10,21 @@
 Para obtener sus archivos base visite el siguiente link.
 
 ```
-https://classroom.github.com/a/SMs9QGdc
+https://classroom.github.com/a/RleUEv8r
 ```
 
-Allí debe aceptar la asignación para que su repositorio sea creado. Al hacerlo, tendrá un repositorio con un link como este.
+Si Github le da algún error de **Repository Access Issue** no se preocupe, es probable que su repo sí haya sido creado. Ingrese a este link desde su navegador, cambiando `MI_USUARIO` por su usuario de Github:
 
 ```
-https://github.com/cc3-ug/lab01-2025-MI_USUARIO.git
+https://github.com/cc3-ug/lab01-2026-MI_USUARIO
 ```
 
-Abra una terminal y navegue en ella hacia el lugar donde quiera colocar su laboratorio. Como es la primera vez que traeremos información del remote hacia nuestra computadora, usaremos el comando **clone**. Recuerde cambiar `MI_USUARIO` por su usuario.
+Si su repo fue creado, continúe trabajando. Si no, comuníquelo a su catedrático **inmediatamente**. No atenderemos este error vía Slack y se quedará sin trabajar el lab si no lo reporta en el momento.
+
+Una vez comprobó que su repo fue creado, abra una terminal y navegue en ella hacia el lugar donde quiera colocar su laboratorio. Como es la primera vez que traeremos información del repo hacia nuestra computadora, usaremos el comando **clone**. Recuerde cambiar `MI_USUARIO` por su usuario.
 
 ```
-git clone https://github.com/cc3-ug/lab01-2025-MI_USUARIO.git
+git clone https://github.com/cc3-ug/lab01-2026-MI_USUARIO
 ```
 
 Al ejecutar el comando Github le pedirá su "contraseña", sin embargo desde hace un par de años ya no acepta contraseñas sino tokens, genere el suyo siguiendo los pasos que se indican en esta página. **Puede usar el mismo token de la semana pasada (bueno... depende de la fecha de vencimiento que le haya colocado)**
@@ -30,6 +32,8 @@ Al ejecutar el comando Github le pedirá su "contraseña", sin embargo desde hac
 ```
 https://docs.github.com/es/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token
 ```
+
+Recuerde que debe crear un **token classic** con los permisos **admin:repo_hook**, **delete_repo**, **repo**.
 
 Tras haber realizado el **clone** exitosamente, tendrá en su máquina una carpeta con todos los archivos que usaremos en este lab.
 

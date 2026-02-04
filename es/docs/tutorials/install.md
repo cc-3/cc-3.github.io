@@ -6,7 +6,9 @@ El objetivo de este tutorial es dejar preparado el material que necesitaran para
 
 Desde 2024 [VMware es gratis](https://blogs.vmware.com/workstation/2024/05/vmware-workstation-pro-now-available-free-for-personal-use.html). Descargue la versión correspondiente (Workstation si está en Windows, Fusion si está en Mac OS) e instálela.
 
-Luego de instalar VMware, descargue la siguiente máquina virtual. Descomprímala y abra el archivo .vmx (VMware virtual machine configuration).
+Descargue VMware según su sistema operativo. En el GES encuentra links de descarga tanto desde la página de Broadcom como desde Drive o Mega. 
+
+Luego de instalar VMware, descargue la siguiente máquina virtual. Descomprímala y abra el archivo .vmx (VMware virtual machine configuration). Si intenta abrir el .vmx dentro del zip en lugar de descomprimir, tendrá un error.
 
 Todos los links son para la misma maquina virtual. Si alguno falla, utilice otro.
 
@@ -19,6 +21,8 @@ Usuario: student
 Contrasena: student
 ```
 
+Si VMware le pregunta por algún dispositivo no conectado, seleccione la opción de siempre ignorar. Si le pregunta si movió o copió la máquina virtual, seleccione la opción que indica por defecto.
+
 La maquina virtual trae ya todo lo necesario para el semestre.
 
 ### Mejorando el desempeño de la máquina virtual
@@ -27,7 +31,7 @@ Luego de abrir la máquina virtual en VMware, podemos ir a `VM > Settings...` y 
 
 * En `Memory` aumente la cantidad de RAM que la máquina virtual puede usar. Si tiene menos de 4 GB de RAM, déjela como está. Si tiene entre 4 GB y 8 GB de RAM, coloque la mitad de su RAM. Si tiene más de 8 GB de RAM, coloque 4 GB.
 
-* En `Processors` active la opción `Virtualize Intel VT-x or AMD-V`. Si aparece una ventana que indica que VT-x o AMD-V no están activados, debe ingresar a la BIOS de su máquina y activarlo desde allí. Este proceso cambia de una máquina a otra, entonces busque en Google algo como `Enable VT-x HP Victus Windows 11`. Coloque `VT-x` si su procesador es Intel, `AMD-V` si es AMD. Sustituya la marca de su computadora y la versión de Windows que utiliza.
+* Opcional, si su máquina virtual funciona lento: En `Processors` active la opción `Virtualize Intel VT-x or AMD-V`. Si aparece una ventana que indica que VT-x o AMD-V no están activados, debe ingresar a la BIOS de su máquina y activarlo desde allí. Este proceso cambia de una máquina a otra, entonces busque en Google algo como `Enable VT-x HP Victus Windows 11`. Coloque `VT-x` si su procesador es Intel, `AMD-V` si es AMD. Sustituya la marca de su computadora y la versión de Windows que utiliza.
 
 ## Otra opcion: Nativo
 

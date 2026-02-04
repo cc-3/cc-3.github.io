@@ -11,11 +11,11 @@
 Para obtener sus archivos base visite el siguiente link, luego clone su repositorio.
 
 ```
-https://classroom.github.com/a/tyMAJzFQ
+https://classroom.github.com/a/wN-FEhTR
 ```
 
 ```
-git clone https://github.com/cc3-ug/lab03-2025-MI_USUARIO.git
+git clone https://github.com/cc3-ug/lab03-2026-MI_USUARIO
 ```
 
 Un par de recordatorios, si necesita ayuda con esto revise los labs anteriores para más detalle:

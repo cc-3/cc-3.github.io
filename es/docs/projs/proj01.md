@@ -27,7 +27,7 @@ Le recomendamos que los conozca desde ya, en el siguiente proyecto los necesitar
 
 En este proyecto implementaremos tres algoritmos de compresión. El primero de ellos, **Run Length Encoding (RLE)** es uno de los más sencillos que existe, a tal punto que a veces puede llegar a generar un archivo más grande que el original. El siguiente, **Twin Encoding** es una invención nuestra que se basa en RLE y que por lo general obtiene buenos resultados. El tercero, **Mini Encoding** también es una invención nuestra para aprovechar que solo estamos trabajando con texto.
 
-Elegimos esta mezcla de algoritmos sencillos e inventados porque son fáciles de implementar y rápidos de ejecutar. Adicionalmente, al tener algunos inventados por nosotros, nos será más fácil detectar si alguna AI lo implementó por usted.
+Elegimos esta mezcla de algoritmos sencillos e inventados porque son fáciles de implementar y rápidos de ejecutar. Adicionalmente, al tener algunos inventados por nosotros, nos será más fácil detectar si alguna IA lo implementó por usted.
 
 ## Preparación
 
@@ -36,12 +36,12 @@ Lea las instrucciones completas. Pregunte las dudas conceptuales que le surjan a
 Cuando haya entendido lo que tiene que hacer, y los algoritmos de codificación, descargue el código base desde aquí
 
 ```
-https://classroom.github.com/a/i1_cwIrg
+https://classroom.github.com/a/0k7krAvR
 ```
 
-Puede trabajar en parejas o de forma individual. No se aceptan grupos de tres o más personas. Puede trabajar mezclado entre las secciones de la matutina, pero al momento de la calificación personal deben llegar en el mismo horario.
+Puede trabajar en parejas o de forma individual. No se aceptan grupos de tres o más personas. Puede trabajar mezclado entre las secciones de su misma jornada (por temas de horario de calificación, no podemos mezlcar entre matutina y nocturna), al momento de la calificación personal deben llegar en el mismo horario.
 
-Al aceptar la asignación, el primer miembro debe pasar creando el grupo. Ingrese un nombre que represente al grupo y que no esté ya en los grupos existenes. Use un nombre bonito y creativo! (Alguna referencia a su equipo favorito, alguna canción que les guste, su carta favorita de Magic, algún anime, etc., lo que quiera siempre y cuando no sea ofensivo). POR FAVOR no use nombres aburridos como "Proyecto 1", "CC3 seccion X", etc. Grupos con nombres así se nos suelen confundir y terminamos poniéndoles menos atención.
+Al aceptar la asignación, el primer miembro debe pasar creando el grupo. Ingrese un nombre que represente al grupo y que no esté ya en los grupos existentes. Use un nombre bonito y creativo! (Alguna referencia a su equipo favorito, alguna canción que les guste, su carta favorita de Magic, algún anime, etc., lo que quiera siempre y cuando no sea ofensivo). POR FAVOR no use nombres aburridos como "Proyecto 1", "CC3 seccion X", etc. Grupos con nombres así se nos suelen confundir y terminamos poniéndoles menos atención.
 
 Si desean unirse a un grupo ya creado, tienen que buscar el nombre del grupo y pulsar el botón que dice **join**.
 
@@ -77,7 +77,6 @@ Usted debería modificar los siguientes archivos:
 * `part1.c`: Aquí implementará Run Length Encoding.
 * `part2.c`: Aquí implementará Twin Encoding.
 * `part3.c`: Aquí implementará Mini Encoding.
-
 
 **No cree archivos adicionales ni elimine ninguno de los ya existentes, de lo contrario el autograder le dará cero**
 
@@ -282,7 +281,7 @@ Output esperado:
 
 Tenemos cinco `a` y once `z`, entonces al comprimir estaremos guardando un `0x5b`. Al revisar la tabla ascii se dará cuenta que `0x5b` es el corchete cuadrado `[`
 
-Note que al usar el Twin Encoding es posible que aparezcan algunos caracteres raros o no visibles. Baje a la sección de Consejos para ver algunas sugerencias sobre cómo visualizar estos caracteres.
+Note que al usar el Twin Encoding es posible que aparezcan algunos caracteres raros o no visibles. Baje a la sección de **consejos** para ver algunas sugerencias sobre cómo visualizar estos caracteres.
 
 #### Ejemplo 3
 ```
@@ -449,7 +448,7 @@ Y       X       B       A
 Los concatenamos...
 <span style="color:red">011001</span><span style="color:blue">011000</span><span style="color:green">000010</span><span style="color:brown">000001</span>
 
-Finalmente visualizamos estos 24 bits como que fueran 3 bytes...
+Finalmente visualizamos estos 24 bits como si fueran 3 bytes...
 01100101  10000000  10000001
 
 10000001 = 0x81 = caracter no imprimible, ascii llega hasta 0x7f
@@ -577,7 +576,7 @@ Finalmente visualizamos estos 24 bits como que fueran 3 bytes...
 00000000 = 0x00 = caracter nulo! no es imprimible
 00000000 = 0x00 = caracter nulo! no es imprimible
 
-Aunque el caracter nulo no es visible en pantalla, tengo que ver como lo emito
+Aunque el caracter nulo no es visible en pantalla, debo buscar la manera de emitirlo
 ¿Como asi? Revise la diferencia entre printf y fwrite
 </pre>
 
@@ -754,9 +753,3 @@ En este y los demás proyectos debe hacer commits continuamente. **Si no tiene s
 Ambas personas deben realizar commits. **Si un miembro no realizó commits, se le restarán puntos.**
 
 En Slack en los próximos días encontrará una guía sobre cómo usar git cuando trabajamos en equipo. Léala y entiéndala para evitar problemas al subir sus archivos.
-
-## Instruction Bounty Hunter
-
-Este es un proyecto nuevo, entonces las instrucciones están recién escritas. Si nota algún error (algún comando no funciona, algún link está roto, algún ejemplo está mal) indíquelo a su catedrático a través de Slack y se le darán algunos puntos extras. Solo la primera persona en reportar cada error se lleva los puntos.
-
-La falta de `ñ` y de tildes no es un error válido para puntos extras, simplemente mi teclado está en inglés :P

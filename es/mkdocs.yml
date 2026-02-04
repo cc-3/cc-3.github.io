@@ -73,7 +73,6 @@ nav:
     - '2: Desensamblador': projs/proj02.md
     - '3: Procesador': projs/proj03.md
   - Tutoriales:
-    - 'Python': tutorials/python.md
     - 'Instalacion de material': tutorials/install.md
   - Notas:
     - 'Números': notes/00_Numbers-Representation.md
