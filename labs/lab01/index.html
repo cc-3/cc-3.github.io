@@ -845,21 +845,23 @@
 </ul>
 <h2 id="preparacion">Preparación<a class="headerlink" href="#preparacion" title="Permanent link">&para;</a></h2>
 <p>Para obtener sus archivos base visite el siguiente link.</p>
-<div class="codehilite"><pre><span></span>https://classroom.github.com/a/SMs9QGdc
+<div class="codehilite"><pre><span></span>https://classroom.github.com/a/RleUEv8r
 </pre></div>
 
-<p>Allí debe aceptar la asignación para que su repositorio sea creado. Al hacerlo, tendrá un repositorio con un link como este.</p>
-<div class="codehilite"><pre><span></span>https://github.com/cc3-ug/lab01-2025-MI_USUARIO.git
+<p>Si Github le da algún error de <strong>Repository Access Issue</strong> no se preocupe, es probable que su repo sí haya sido creado. Ingrese a este link desde su navegador, cambiando <code>MI_USUARIO</code> por su usuario de Github:</p>
+<div class="codehilite"><pre><span></span>https://github.com/cc3-ug/lab01-2026-MI_USUARIO
 </pre></div>
 
-<p>Abra una terminal y navegue en ella hacia el lugar donde quiera colocar su laboratorio. Como es la primera vez que traeremos información del remote hacia nuestra computadora, usaremos el comando <strong>clone</strong>. Recuerde cambiar <code>MI_USUARIO</code> por su usuario.</p>
-<div class="codehilite"><pre><span></span>git clone https://github.com/cc3-ug/lab01-2025-MI_USUARIO.git
+<p>Si su repo fue creado, continúe trabajando. Si no, comuníquelo a su catedrático <strong>inmediatamente</strong>. No atenderemos este error vía Slack y se quedará sin trabajar el lab si no lo reporta en el momento.</p>
+<p>Una vez comprobó que su repo fue creado, abra una terminal y navegue en ella hacia el lugar donde quiera colocar su laboratorio. Como es la primera vez que traeremos información del repo hacia nuestra computadora, usaremos el comando <strong>clone</strong>. Recuerde cambiar <code>MI_USUARIO</code> por su usuario.</p>
+<div class="codehilite"><pre><span></span>git clone https://github.com/cc3-ug/lab01-2026-MI_USUARIO
 </pre></div>
 
 <p>Al ejecutar el comando Github le pedirá su "contraseña", sin embargo desde hace un par de años ya no acepta contraseñas sino tokens, genere el suyo siguiendo los pasos que se indican en esta página. <strong>Puede usar el mismo token de la semana pasada (bueno... depende de la fecha de vencimiento que le haya colocado)</strong></p>
 <div class="codehilite"><pre><span></span>https://docs.github.com/es/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token
 </pre></div>
 
+<p>Recuerde que debe crear un <strong>token classic</strong> con los permisos <strong>admin:repo_hook</strong>, <strong>delete_repo</strong>, <strong>repo</strong>.</p>
 <p>Tras haber realizado el <strong>clone</strong> exitosamente, tendrá en su máquina una carpeta con todos los archivos que usaremos en este lab.</p>
 <h2 id="recordatorio-compilar-y-ejecutar-un-programa-de-c">Recordatorio: compilar y ejecutar un programa de C<a class="headerlink" href="#recordatorio-compilar-y-ejecutar-un-programa-de-c" title="Permanent link">&para;</a></h2>
 <p>En este laboratorio, estaremos usando el programa <code>gcc</code> para compilar programas en c. La manera más sencilla de ejecutar <code>gcc</code> es la siguiente:

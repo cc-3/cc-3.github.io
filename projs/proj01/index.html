@@ -740,13 +740,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#instruction-bounty-hunter" title="Instruction Bounty Hunter" class="md-nav__link">
-    Instruction Bounty Hunter
-  </a>
-  
-</li>
-      
       
       
       
@@ -1208,13 +1201,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#instruction-bounty-hunter" title="Instruction Bounty Hunter" class="md-nav__link">
-    Instruction Bounty Hunter
-  </a>
-  
-</li>
-      
       
       
       
@@ -1258,15 +1244,15 @@
 <p>Le recomendamos que los conozca desde ya, en el siguiente proyecto los necesitará.</p>
 <h2 id="introduccion">Introducción<a class="headerlink" href="#introduccion" title="Permanent link">&para;</a></h2>
 <p>En este proyecto implementaremos tres algoritmos de compresión. El primero de ellos, <strong>Run Length Encoding (RLE)</strong> es uno de los más sencillos que existe, a tal punto que a veces puede llegar a generar un archivo más grande que el original. El siguiente, <strong>Twin Encoding</strong> es una invención nuestra que se basa en RLE y que por lo general obtiene buenos resultados. El tercero, <strong>Mini Encoding</strong> también es una invención nuestra para aprovechar que solo estamos trabajando con texto.</p>
-<p>Elegimos esta mezcla de algoritmos sencillos e inventados porque son fáciles de implementar y rápidos de ejecutar. Adicionalmente, al tener algunos inventados por nosotros, nos será más fácil detectar si alguna AI lo implementó por usted.</p>
+<p>Elegimos esta mezcla de algoritmos sencillos e inventados porque son fáciles de implementar y rápidos de ejecutar. Adicionalmente, al tener algunos inventados por nosotros, nos será más fácil detectar si alguna IA lo implementó por usted.</p>
 <h2 id="preparacion">Preparación<a class="headerlink" href="#preparacion" title="Permanent link">&para;</a></h2>
 <p>Lea las instrucciones completas. Pregunte las dudas conceptuales que le surjan antes de empezar a escribir código. Únase al canal de <code>#proyecto</code> que hay en Slack.</p>
 <p>Cuando haya entendido lo que tiene que hacer, y los algoritmos de codificación, descargue el código base desde aquí</p>
-<div class="codehilite"><pre><span></span>https://classroom.github.com/a/i1_cwIrg
+<div class="codehilite"><pre><span></span>https://classroom.github.com/a/0k7krAvR
 </pre></div>
 
-<p>Puede trabajar en parejas o de forma individual. No se aceptan grupos de tres o más personas. Puede trabajar mezclado entre las secciones de la matutina, pero al momento de la calificación personal deben llegar en el mismo horario.</p>
-<p>Al aceptar la asignación, el primer miembro debe pasar creando el grupo. Ingrese un nombre que represente al grupo y que no esté ya en los grupos existenes. Use un nombre bonito y creativo! (Alguna referencia a su equipo favorito, alguna canción que les guste, su carta favorita de Magic, algún anime, etc., lo que quiera siempre y cuando no sea ofensivo). POR FAVOR no use nombres aburridos como "Proyecto 1", "CC3 seccion X", etc. Grupos con nombres así se nos suelen confundir y terminamos poniéndoles menos atención.</p>
+<p>Puede trabajar en parejas o de forma individual. No se aceptan grupos de tres o más personas. Puede trabajar mezclado entre las secciones de su misma jornada (por temas de horario de calificación, no podemos mezlcar entre matutina y nocturna), al momento de la calificación personal deben llegar en el mismo horario.</p>
+<p>Al aceptar la asignación, el primer miembro debe pasar creando el grupo. Ingrese un nombre que represente al grupo y que no esté ya en los grupos existentes. Use un nombre bonito y creativo! (Alguna referencia a su equipo favorito, alguna canción que les guste, su carta favorita de Magic, algún anime, etc., lo que quiera siempre y cuando no sea ofensivo). POR FAVOR no use nombres aburridos como "Proyecto 1", "CC3 seccion X", etc. Grupos con nombres así se nos suelen confundir y terminamos poniéndoles menos atención.</p>
 <p>Si desean unirse a un grupo ya creado, tienen que buscar el nombre del grupo y pulsar el botón que dice <strong>join</strong>.</p>
 <p><strong>Tienen que tener mucho cuidado al unirse a un grupo ya existente, pues al unirse tendrá acceso inmediato al código que ya esté subido por parte del otro grupo. Si se une a un grupo incorrecto lo consideraremos como <span style="color: red">PLAGIO</span> pues podrían pasar robando código de esta manera.</strong></p>
 <p><img alt="Create group" src="/img/projs/proj01/classroom1.png" /></p>
@@ -1458,7 +1444,7 @@ Output esperado:
 </pre></div>
 
 <p>Tenemos cinco <code>a</code> y once <code>z</code>, entonces al comprimir estaremos guardando un <code>0x5b</code>. Al revisar la tabla ascii se dará cuenta que <code>0x5b</code> es el corchete cuadrado <code>[</code></p>
-<p>Note que al usar el Twin Encoding es posible que aparezcan algunos caracteres raros o no visibles. Baje a la sección de Consejos para ver algunas sugerencias sobre cómo visualizar estos caracteres.</p>
+<p>Note que al usar el Twin Encoding es posible que aparezcan algunos caracteres raros o no visibles. Baje a la sección de <strong>consejos</strong> para ver algunas sugerencias sobre cómo visualizar estos caracteres.</p>
 <h4 id="ejemplo-3_1">Ejemplo 3<a class="headerlink" href="#ejemplo-3_1" title="Permanent link">&para;</a></h4>
 <div class="codehilite"><pre><span></span>Input:
 aaaaazzzzzzzzzzzbbbb
@@ -1600,7 +1586,7 @@ Y       X       B       A
 <span style="color:red">011001</span>  <span style="color:blue">011000</span>  <span style="color:green">000010</span>  <span style="color:brown">000001</span></p>
 <p>Los concatenamos...
 <span style="color:red">011001</span><span style="color:blue">011000</span><span style="color:green">000010</span><span style="color:brown">000001</span></p>
-<p>Finalmente visualizamos estos 24 bits como que fueran 3 bytes...
+<p>Finalmente visualizamos estos 24 bits como si fueran 3 bytes...
 01100101  10000000  10000001</p>
 <p>10000001 = 0x81 = caracter no imprimible, ascii llega hasta 0x7f
 10000000 = 0x80 = caracter no imprimible, ascii llega hasta 0x7f
@@ -1702,7 +1688,7 @@ no hay   no hay   no hay   L
 <p>00001100 = 0x0C = caracter no imprimible, ascii visible empieza en 0x21
 00000000 = 0x00 = caracter nulo! no es imprimible
 00000000 = 0x00 = caracter nulo! no es imprimible</p>
-<p>Aunque el caracter nulo no es visible en pantalla, tengo que ver como lo emito
+<p>Aunque el caracter nulo no es visible en pantalla, debo buscar la manera de emitirlo
 ¿Como asi? Revise la diferencia entre printf y fwrite
 </pre></p>
 <h3 id="que-debe-hacer-en-esta-parte_2">¿Qué debe hacer en esta parte?<a class="headerlink" href="#que-debe-hacer-en-esta-parte_2" title="Permanent link">&para;</a></h3>
@@ -1821,9 +1807,6 @@ Mini decompression       17  passed
 <p>¿Cuánto es suficientes commits? Usted lo sabrá al empezar a trabajar, nosotros estimamos que un commit por cada día que trabaje en el proyecto es un buen punto de partida.</p>
 <p>Ambas personas deben realizar commits. <strong>Si un miembro no realizó commits, se le restarán puntos.</strong></p>
 <p>En Slack en los próximos días encontrará una guía sobre cómo usar git cuando trabajamos en equipo. Léala y entiéndala para evitar problemas al subir sus archivos.</p>
-<h2 id="instruction-bounty-hunter">Instruction Bounty Hunter<a class="headerlink" href="#instruction-bounty-hunter" title="Permanent link">&para;</a></h2>
-<p>Este es un proyecto nuevo, entonces las instrucciones están recién escritas. Si nota algún error (algún comando no funciona, algún link está roto, algún ejemplo está mal) indíquelo a su catedrático a través de Slack y se le darán algunos puntos extras. Solo la primera persona en reportar cada error se lleva los puntos.</p>
-<p>La falta de <code>ñ</code> y de tildes no es un error válido para puntos extras, simplemente mi teclado está en inglés :P</p>
                 
                   
                 
