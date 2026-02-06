@@ -912,7 +912,8 @@ x | 1 = 1
 <p>Aproveche una o varias de estas propiedades para escribir en la casilla deseada.</p>
 <p><strong>Idea para flip_bit():</strong> ¿Habrá otra operación bitwise con propiedades similares al and y or que aún no haya usado? Quizás hay alguna que me haga la tarea...</p>
 <p>Una vez terminen de editar las funciones, pueden compilar y correr el código con:
-<div class="codehilite"><pre><span></span>make bit_ops
+<div class="codehilite"><pre><span></span>make clean
+make bit_ops
 ./bit_ops
 </pre></div></p>
 <p>Ahora estamos usando un Makefile, el cuál tiene dentro comandos que nos facilitan la compilación. Al ejecutar <code>./bit_ops</code> se imprimirá el resultado de algunas pruebas. Si tienen curiosidad pueden revisar con libertad la carpeta <strong>tests</strong> que contiene las pruebas que se van a realizar en cada ejercicio de este laboratorio y que reflejan bastante lo que evaluará el autograder, por ejemplo el archivo que se utiliza para este ejercicio es <strong>tests/bit_ops_test.c</strong>.</p>
@@ -935,7 +936,8 @@ x | 1 = 1
 <li>A diferencia del ejercicio 1, las posiciones de los bits <strong>inician con 1</strong>.</li>
 </ul>
 <p>Después que hayan implementado de manera correcta <code>lfsr_calculate()</code>, compilen y córranlo. Su respuesta debe ser similar a lo siguiente:</p>
-<p><div class="codehilite"><pre><span></span>make lfsr
+<p><div class="codehilite"><pre><span></span>make clean
+make lfsr
 ./lfsr
 
 My number is: <span class="m">1</span>
@@ -1008,7 +1010,8 @@ entonces rellenamos las casillas faltantes con 1s
 Nuestro resultado final es 0x<span style="color:magenta">ffff</span>98cc
 </pre></p>
 <p>Probamos este ejercicio usando:
-<div class="codehilite"><pre><span></span>make concat_bits
+<div class="codehilite"><pre><span></span>make clean
+make concat_bits
 ./concat_bits
 </pre></div></p>
 <h2 id="entrega-de-laboratorio">Entrega de laboratorio<a class="headerlink" href="#entrega-de-laboratorio" title="Permanent link">&para;</a></h2>
@@ -1018,7 +1021,8 @@ Nuestro resultado final es 0x<span style="color:magenta">ffff</span>98cc
 pip3 install tabulate psutil pycparser
 </pre></div></p>
 <p>Ahora ya podemos usar el autograder. Vaya a la carpeta de su laboratorio, y ejecute:
-<div class="codehilite"><pre><span></span>./check
+<div class="codehilite"><pre><span></span>make clean
+./check
 </pre></div></p>
 <p>Al hacerlo verá algo parecido a lo siguiente:
 <div class="codehilite"><pre><span></span>   ___       __                        __       
@@ -1039,7 +1043,13 @@ Exercise        Grade  Message
 4. concat_bits     35  passed
 </pre></div></p>
 <p>La nota que aparezca allí es la nota que obtendrá en su laboratorio. En este lab, las series valen 35, 30 y 35 respectivamente.</p>
-<p>Cuando esté conforme con su nota (¡apúntele siempre al cien!), entregue su laboratorio a través de Github (los <code>add</code>, <code>commit</code> y <code>push</code> que se le pidieron arriba).</p>
+<p>Cuando esté conforme con su nota (¡apúntele siempre al cien!), haga un <code>clean</code> y entregue su laboratorio a través de Github (los <code>add</code>, <code>commit</code> y <code>push</code> que se le pidieron arriba).</p>
+<div class="codehilite"><pre><span></span>make clean
+git add *
+git commit -m &quot;Finish lab01&quot;
+git push
+</pre></div>
+
 <p>Luego <strong>envíe el link de su repositorio de Github en el GES</strong>. El GES tiene una opción para enviar links, ÚSELA. No vaya a poner su link en un txt, pdf, etc. Si lo hace, su lab no será calificado.</p>
                 
                   
