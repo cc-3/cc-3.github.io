@@ -71,9 +71,9 @@ Finalmente instalamos curl
 	sudo apt update
 	sudo apt install curl
 
-Y terminamos instalando cgdb
+Y terminamos instalando C y sus herramientas relacionadas
 
 	sudo apt update
-	sudo apt install cgdb
+	sudo apt install gcc make cgdb
 
 Casi listo! Conforme avancemos por los labs, tendrá que instalar software adicional en caso que esté usando su Linux nativo.

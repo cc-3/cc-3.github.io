@@ -72,9 +72,13 @@ nav:
     - '1: Compresion': projs/proj01.md
     - '2: Desensamblador': projs/proj02.md
     - '3: Procesador': projs/proj03.md
-  - Tutoriales:
-    - 'Instalacion de material': tutorials/install.md
-  - Notas:
+  - Instalacion de material:
+    - 'Directorio': install/where-to.md
+    - 'Maquina virtual Intel/AMD': install/intel-amd-vm.md
+    - 'Maquina virtual ARM': install/arm-vm.md
+    - 'Nativo para Linux': install/linux-native.md
+    - 'Nativo para Mac': install/mac-native.md
+  - Apuntes:
     - 'Números': notes/00_Numbers-Representation.md
     - 'C': notes/01_C.md
     - 'RISC-V': notes/02_Intro-RISCV.md

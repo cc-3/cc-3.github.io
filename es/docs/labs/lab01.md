@@ -102,6 +102,7 @@ Aproveche una o varias de estas propiedades para escribir en la casilla deseada.
 
 Una vez terminen de editar las funciones, pueden compilar y correr el código con:
 ```shell
+make clean
 make bit_ops
 ./bit_ops
 ```
@@ -134,6 +135,7 @@ En el archivo **ex2/lfsr_calculate.c** deben de completar la función _lfsr_calc
 Después que hayan implementado de manera correcta `lfsr_calculate()`, compilen y córranlo. Su respuesta debe ser similar a lo siguiente:
 
 ```shell
+make clean
 make lfsr
 ./lfsr
 
@@ -223,6 +225,7 @@ Nuestro resultado final es 0x<span style="color:magenta">ffff</span>98cc
 
 Probamos este ejercicio usando:
 ```
+make clean
 make concat_bits
 ./concat_bits
 ```
@@ -239,6 +242,7 @@ pip3 install tabulate psutil pycparser
 
 Ahora ya podemos usar el autograder. Vaya a la carpeta de su laboratorio, y ejecute:
 ```
+make clean
 ./check
 ```
 
@@ -264,6 +268,13 @@ Exercise        Grade  Message
 
 La nota que aparezca allí es la nota que obtendrá en su laboratorio. En este lab, las series valen 35, 30 y 35 respectivamente.
 
-Cuando esté conforme con su nota (¡apúntele siempre al cien!), entregue su laboratorio a través de Github (los `add`, `commit` y `push` que se le pidieron arriba).
+Cuando esté conforme con su nota (¡apúntele siempre al cien!), haga un `clean` y entregue su laboratorio a través de Github (los `add`, `commit` y `push` que se le pidieron arriba).
+
+```
+make clean
+git add *
+git commit -m "Finish lab01"
+git push
+```
 
 Luego **envíe el link de su repositorio de Github en el GES**. El GES tiene una opción para enviar links, ÚSELA. No vaya a poner su link en un txt, pdf, etc. Si lo hace, su lab no será calificado.
