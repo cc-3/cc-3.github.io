@@ -13,7 +13,7 @@
         <meta name="description" content="Grandes Ideas en Arquitectura de Computadora">
       
       
-        <link rel="canonical" href="https://cc-3.github.io/notes/04_CALL/">
+        <link rel="canonical" href="https://cc-3.github.io/install/arm-vm/">
       
       
         <meta name="author" content="CC-3">
@@ -42,7 +42,7 @@
     
     
       
-        <title>CALL - Estructura de Máquinas</title>
+        <title>Maquina virtual ARM - Estructura de Máquinas</title>
       
     
     
@@ -113,7 +113,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#compiling-assembling-linking-and-loading-call" tabindex="1" class="md-skip">
+      <a href="#maquina-virtual-para-arm" tabindex="1" class="md-skip">
         Saltar a contenido
       </a>
     
@@ -139,7 +139,7 @@
                 Estructura de Máquinas
               </span>
               <span class="md-header-nav__topic">
-                CALL
+                Maquina virtual ARM
               </span>
             
           
@@ -470,10 +470,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
     
     <label class="md-nav__link" for="nav-4">
       Instalacion de material
@@ -491,7 +493,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../install/where-to/" title="Directorio" class="md-nav__link">
+    <a href="../where-to/" title="Directorio" class="md-nav__link">
       Directorio
     </a>
   </li>
@@ -503,118 +505,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../install/intel-amd-vm/" title="Maquina virtual Intel/AMD" class="md-nav__link">
+    <a href="../intel-amd-vm/" title="Maquina virtual Intel/AMD" class="md-nav__link">
       Maquina virtual Intel/AMD
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../install/arm-vm/" title="Maquina virtual ARM" class="md-nav__link">
-      Maquina virtual ARM
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../install/linux-native/" title="Nativo para Linux" class="md-nav__link">
-      Nativo para Linux
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../install/mac-native/" title="Nativo para Mac" class="md-nav__link">
-      Nativo para Mac
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-    
-      
-      
-      
-
-  
-
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5" checked>
-    
-    <label class="md-nav__link" for="nav-5">
-      Apuntes
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
-      <label class="md-nav__title" for="nav-5">
-        Apuntes
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../00_Numbers-Representation/" title="Números" class="md-nav__link">
-      Números
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../01_C/" title="C" class="md-nav__link">
-      C
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../02_Intro-RISCV/" title="RISC-V" class="md-nav__link">
-      RISC-V
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../03_Instruction-Format/" title="Formato de instrucciones" class="md-nav__link">
-      Formato de instrucciones
     </a>
   </li>
 
@@ -634,11 +526,11 @@
     
     
       <label class="md-nav__link md-nav__link--active" for="__toc">
-        CALL
+        Maquina virtual ARM
       </label>
     
-    <a href="./" title="CALL" class="md-nav__link md-nav__link--active">
-      CALL
+    <a href="./" title="Maquina virtual ARM" class="md-nav__link md-nav__link--active">
+      Maquina virtual ARM
     </a>
     
       
@@ -652,36 +544,44 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#notas-importantes-multiplicacion-y-division" title="Notas Importantes: Multiplicación y División" class="md-nav__link">
-    Notas Importantes: Multiplicación y División
+  <a href="#preparacion-vmware" title="Preparación: VMware" class="md-nav__link">
+    Preparación: VMware
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#interpretacion-vs-traduccion" title="Interpretación vs Traducción" class="md-nav__link">
-    Interpretación vs Traducción
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#ventajas-de-traduccion" title="Ventajas de Traducción" class="md-nav__link">
-    Ventajas de Traducción
+  <a href="#maquina-virtual" title="Máquina virtual" class="md-nav__link">
+    Máquina virtual
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#ventajas-de-interpretacion" title="Ventajas de Interpretación" class="md-nav__link">
-    Ventajas de Interpretación
+      
+        <li class="md-nav__item">
+  <a href="#autograder-para-risc-v" title="Autograder para RISC-V" class="md-nav__link">
+    Autograder para RISC-V
   </a>
   
 </li>
-        
-      </ul>
-    </nav>
+      
+        <li class="md-nav__item">
+  <a href="#usando-jupiter" title="Usando Jupiter" class="md-nav__link">
+    Usando Jupiter
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#autograder-para-c-y-electronica-digital" title="Autograder para C y electrónica digital" class="md-nav__link">
+    Autograder para C y electrónica digital
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mejorando-el-desempeno-de-la-maquina-virtual" title="Mejorando el desempeño de la máquina virtual" class="md-nav__link">
+    Mejorando el desempeño de la máquina virtual
+  </a>
   
 </li>
       
@@ -693,6 +593,114 @@
   
 </nav>
     
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../linux-native/" title="Nativo para Linux" class="md-nav__link">
+      Nativo para Linux
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mac-native/" title="Nativo para Mac" class="md-nav__link">
+      Nativo para Mac
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      Apuntes
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        Apuntes
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../notes/00_Numbers-Representation/" title="Números" class="md-nav__link">
+      Números
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../notes/01_C/" title="C" class="md-nav__link">
+      C
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../notes/02_Intro-RISCV/" title="RISC-V" class="md-nav__link">
+      RISC-V
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../notes/03_Instruction-Format/" title="Formato de instrucciones" class="md-nav__link">
+      Formato de instrucciones
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../notes/04_CALL/" title="CALL" class="md-nav__link">
+      CALL
+    </a>
   </li>
 
         
@@ -722,36 +730,44 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#notas-importantes-multiplicacion-y-division" title="Notas Importantes: Multiplicación y División" class="md-nav__link">
-    Notas Importantes: Multiplicación y División
+  <a href="#preparacion-vmware" title="Preparación: VMware" class="md-nav__link">
+    Preparación: VMware
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#interpretacion-vs-traduccion" title="Interpretación vs Traducción" class="md-nav__link">
-    Interpretación vs Traducción
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#ventajas-de-traduccion" title="Ventajas de Traducción" class="md-nav__link">
-    Ventajas de Traducción
+  <a href="#maquina-virtual" title="Máquina virtual" class="md-nav__link">
+    Máquina virtual
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#ventajas-de-interpretacion" title="Ventajas de Interpretación" class="md-nav__link">
-    Ventajas de Interpretación
+      
+        <li class="md-nav__item">
+  <a href="#autograder-para-risc-v" title="Autograder para RISC-V" class="md-nav__link">
+    Autograder para RISC-V
   </a>
   
 </li>
-        
-      </ul>
-    </nav>
+      
+        <li class="md-nav__item">
+  <a href="#usando-jupiter" title="Usando Jupiter" class="md-nav__link">
+    Usando Jupiter
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#autograder-para-c-y-electronica-digital" title="Autograder para C y electrónica digital" class="md-nav__link">
+    Autograder para C y electrónica digital
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mejorando-el-desempeno-de-la-maquina-virtual" title="Mejorando el desempeño de la máquina virtual" class="md-nav__link">
+    Mejorando el desempeño de la máquina virtual
+  </a>
   
 </li>
       
@@ -771,51 +787,97 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/cc-3/cc-3.github.io/edit/master/page/es/docs/notes/04_CALL.md" title="Editar esta página" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/cc-3/cc-3.github.io/edit/master/page/es/docs/install/arm-vm.md" title="Editar esta página" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                <h1 id="compiling-assembling-linking-and-loading-call">Compiling, Assembling, Linking and Loading (CALL)<a class="headerlink" href="#compiling-assembling-linking-and-loading-call" title="Permanent link">&para;</a></h1>
-<h2 id="notas-importantes-multiplicacion-y-division">Notas Importantes: Multiplicación y División<a class="headerlink" href="#notas-importantes-multiplicacion-y-division" title="Permanent link">&para;</a></h2>
+                <h1 id="maquina-virtual-para-arm">Máquina virtual para ARM<a class="headerlink" href="#maquina-virtual-para-arm" title="Permanent link">&para;</a></h1>
+<div class="admonition info">
+<p class="admonition-title">Mac + ARM</p>
+<p>Las siguientes instrucciones aplican para usuarios de Mac OS con procesador AMD (Apple Silicon) (Macs recientes).</p>
+</div>
+<h2 id="preparacion-vmware">Preparación: VMware<a class="headerlink" href="#preparacion-vmware" title="Permanent link">&para;</a></h2>
+<p>Descargue e <strong>instale</strong> VMware Fusion (Mac OS). Puede realizar la descarga desde la <a href="https://www.vmware.com/products/desktop-hypervisor/workstation-and-fusion">página de Broadcom</a>.</p>
+<p>La página puede requerir que se registre y que acepte términos y condiciones antes de permitirle su descarga. Si al momento de registrarse le pide dirección, basta con colocar Guatemala.</p>
+<div class="admonition warning">
+<p class="admonition-title">Software de virtualización</p>
+<p>Workstation o Fusion es el software utilizado para virtualización, no es la máquina virtual. Continue con la siguiente sección.</p>
+</div>
+<h2 id="maquina-virtual">Máquina virtual<a class="headerlink" href="#maquina-virtual" title="Permanent link">&para;</a></h2>
+<p>Descargue y <strong>descomprima</strong> una de las siguientes opciones.</p>
 <ul>
-<li>La multiplicación de enteros de <strong>n</strong> bytes puede generar enteros de hasta <strong>2n</strong> bytes</li>
-<li>La multiplicación es una operación mucho más costosa que la suma</li>
-<li>RISC-V maneja la multiplicación de la siguiente forma: <strong>mul rd, rs1, rs2</strong> multiplica <strong>rs1</strong> y <strong>rs2</strong> y deja la <em>parte baja</em> del resultado en <strong>rd</strong>, <strong>mulh rd, rs1, rs2</strong> multiplica <strong>rs1</strong> y <strong>rs2</strong> y deja la <em>parte alta</em> del resultado en <strong>rd</strong>.</li>
-<li>Para la división existen tambien dos operaciones: <strong>div rd, rs1, rs2</strong> que realiza la división entera <strong>rs1/rs2</strong> y coloca el resultado en <strong>rd</strong>, y <strong>rem rd, rs1, rs2</strong> qye realiza una división entera <strong>rs1/rs2</strong> y coloca el residuo en <strong>rd</strong></li>
+<li>
+<p>Máquina virtual para CC3 2026-2027: basada en Ubuntu 24</p>
+<ul>
+<li>Mirror 1: <a href="https://drive.google.com/file/d/1algAHeU54aBPGKY9RbWO6fSMb2H0Ke0G/view?usp=drive_link">Descargar maquina virtual ARM 2026-2027 desde Google Drive</a>
+<div class="codehilite"><pre><span></span>user: cc3
+pass: student
+</pre></div></li>
 </ul>
-<h2 id="interpretacion-vs-traduccion">Interpretación vs Traducción<a class="headerlink" href="#interpretacion-vs-traduccion" title="Permanent link">&para;</a></h2>
-<p>Un programa en lenguajes compilados, como C, tiene los siguientes niveles de representación:</p>
-<table>
-<thead>
-<tr>
-<th>Stack de Traducción</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Lenguaje de Alto Nivel: C</td>
-</tr>
-<tr>
-<td>Lenguaje Ensamblador: RISC-V Assembler</td>
-</tr>
-<tr>
-<td>Código de Máquina: RISC-V Machine Code</td>
-</tr>
-<tr>
-<td>Hardware: Compuertas Lógicas, Transistores</td>
-</tr>
-</tbody>
-</table>
-<h4 id="ventajas-de-traduccion">Ventajas de Traducción<a class="headerlink" href="#ventajas-de-traduccion" title="Permanent link">&para;</a></h4>
-<ul>
-<li>Se hace unicamente una vez</li>
-<li>Es muy rapida en tiempo de ejecución</li>
-<li>Nos da cierto nivel de <em>privacidad</em> en el código fuente: podemos distribuir unicamente el archivo ya compilado</li>
+</li>
 </ul>
-<h4 id="ventajas-de-interpretacion">Ventajas de Interpretación<a class="headerlink" href="#ventajas-de-interpretacion" title="Permanent link">&para;</a></h4>
+<p>Es importante que <strong>descomprima</strong> el ZIP que acaba de descargar. Si no lo hace, tendrá múltiples errores. Deje la carpeta descomprimida en su unidad de almacenamiento interna, si lo deja en una USB tendrá un mal desempeño.</p>
+<p>Una vez descomprimido vaya a su software de virtualización y use la opción para agregar o importar una máquina virtual. Busque en la carpeta recién descomprimida un archivo con extensión VMX y seleccionelo. </p>
+<p>Es posible que Fusion le pida una ubicación para guardar el bundle <code>.vmwarevm</code>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Primer uso</p>
+<p>La primera vez que inicie su máquina virtual, es posible que VMware le haga algunas preguntas:</p>
 <ul>
-<li>No se necesita compilarlo mós de una vez para una arquitectura y sistema operativo particulares</li>
-<li>No se tiene que recompilar el archivo luego de hacer un cambio</li>
-<li>Un archivo corre sobre todas las combinaciones de sistema operativo y arquitectura siempre que se tenga el interprete instalado</li>
+<li>
+<p>Si le pregunta si movió o copió la máquina, haga click en <strong>I copied it</strong></p>
+</li>
+<li>
+<p>Si le pregunta por algún dispositivo no conectado, seleccione la opción de siempre ignorar. </p>
+</li>
+</ul>
+</div>
+<p>Esta máquina virtual incluye:</p>
+<ul>
+<li><code>gcc</code> y <code>cgdb</code>, para trabajar laboratorios de C.</li>
+<li><code>jupiter</code> en versión JAR para trabajar los laboratorios de RISC-V. Estos laboratorios no son compatibles con el autograder local (consulte la siguiente sección).</li>
+<li><code>logisim</code> en versión JAR para trabajar los laboratorios de electrónica digital.</li>
+<li><code>conda</code> para ejecutar sus autograders.</li>
+</ul>
+<h2 id="autograder-para-risc-v">Autograder para RISC-V<a class="headerlink" href="#autograder-para-risc-v" title="Permanent link">&para;</a></h2>
+<p>Existe un problema de compatibilidad entre Jupiter, ARM y el autograder. Para conocer su nota siga estos pasos:</p>
+<ul>
+<li>No podrá realizar <code>./check</code>, deberá probar manualmente sus ejercicios de RISC-V ingresando valores en Jupiter.</li>
+<li>Cuando suba su ejercicio al repositorio, Github Actions ejecutará el autograder y mostrará su nota.</li>
+</ul>
+<h2 id="usando-jupiter">Usando Jupiter<a class="headerlink" href="#usando-jupiter" title="Permanent link">&para;</a></h2>
+<p>Como usuario de Mac + ARM, tiene algunas opciones para trabajar sus labs de RISC-V:</p>
+<ul>
+<li>
+<p>Opción preferida: Usar el <code>jupiter.jar</code> que viene incluido en su directorio raiz, solo debe hacerle doble click.</p>
+</li>
+<li>
+<p>Opción adicional: Descargar <a href="https://github.com/andrescv/jupiter/releases/download/v3.1/Jupiter-3.1-mac.zip">Jupiter para Mac</a> desde su Mac OS (es decir, afuera de su máquina virtual)</p>
+<ul>
+<li>
+<p>Descargar y descomprimir el archivo</p>
+</li>
+<li>
+<p>Entrar a la carpeta <code>image/bin</code></p>
+</li>
+<li>
+<p>Desde esa carpeta ejecutar <code>./jupiter</code></p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="autograder-para-c-y-electronica-digital">Autograder para C y electrónica digital<a class="headerlink" href="#autograder-para-c-y-electronica-digital" title="Permanent link">&para;</a></h2>
+<p>Debe ejecutar el comando <code>grading</code> antes del <code>./check</code> que normalmente hacemos.</p>
+<ul>
+<li>
+<p>Notará que el <code>(base)</code> que salía en la terminal cambió y ahora dice <code>(grading)</code></p>
+</li>
+<li>
+<p>Después de eso, ya puede ejecutar su comando <code>./check</code> con normalidad</p>
+</li>
+</ul>
+<h2 id="mejorando-el-desempeno-de-la-maquina-virtual">Mejorando el desempeño de la máquina virtual<a class="headerlink" href="#mejorando-el-desempeno-de-la-maquina-virtual" title="Permanent link">&para;</a></h2>
+<p>Luego de abrir la máquina virtual en VMware, podemos ir a <code>VM &gt; Settings...</code> y hacer los siguientes cambios.</p>
+<ul>
+<li>En <code>Memory</code> aumente la cantidad de RAM que la máquina virtual puede usar. Si tiene menos de 4 GB de RAM, déjela como está. Si tiene entre 4 GB y 8 GB de RAM, coloque la mitad de su RAM. Si tiene más de 8 GB de RAM, coloque 4 GB.</li>
 </ul>
                 
                   
@@ -837,7 +899,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../03_Instruction-Format/" title="Formato de instrucciones" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../intel-amd-vm/" title="Maquina virtual Intel/AMD" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -846,11 +908,25 @@
                 <span class="md-footer-nav__direction">
                   Anterior
                 </span>
-                Formato de instrucciones
+                Maquina virtual Intel/AMD
               </span>
             </div>
           </a>
         
+        
+          <a href="../linux-native/" title="Nativo para Linux" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Siguiente
+                </span>
+                Nativo para Linux
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
         
       </nav>
     </div>
