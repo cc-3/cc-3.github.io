@@ -13,7 +13,13 @@
 
 ## Preparación
 
-Para comenzar con el laboratorio primero tienen que tener todos los archivos base, estos se encuentran [aquí](https://classroom.github.com/a/il_u0Yyq). Recuerden que deben aceptar la asignación de **Github Classroom** y se les creará automáticamente un repositorio con una extensión que termina con su usuario de GitHub. Cuando ya se haya creado el repositorio, pueden ejecutar los siguientes comandos abriendo una terminal (<kbd>CTRL</kbd><kbd>+</kbd><kbd>T</kbd>):
+Para comenzar con el laboratorio primero tienen que tener todos los archivos base, estos se encuentran
+
+```
+https://classroom.github.com/a/Qj9svSAU
+```
+
+Recuerden que deben aceptar la asignación de **Github Classroom** y se les creará automáticamente un repositorio con una extensión que termina con su usuario de GitHub. Cuando ya se haya creado el repositorio, pueden ejecutar los siguientes comandos abriendo una terminal (<kbd>CTRL</kbd><kbd>+</kbd><kbd>T</kbd>):
 
 ```shell
 git clone <link del repositorio>
@@ -93,7 +99,7 @@ Para que calcule cuánto trabajo es, la función `hanoi` queda con aprox 30-50 l
 
 ## Calificación
 
-Si está usando nuestra máquina virtual (es decir, ya tenía Jupiter pre-instalado), para conocer su nota use el comando:
+Después de probar cada ejercicio de forma individual puede ejecutar el autograder:
 
 ```
 ./check

@@ -16,13 +16,13 @@
 Para comenzar con el laboratorio primero tienen que tener todos los archivos base, estos se encuentran aquí:
 
 ```
-https://classroom.github.com/a/yhN0LGT4
+https://classroom.github.com/a/Xr_AsuCP
 ```
 
 Recuerden que deben aceptar la asignación de **Github Classroom** y se les creará automáticamente un repositorio con una extensión que termina con su usuario de GitHub. Cuando ya se haya creado el repositorio, pueden ejecutar los siguientes comandos abriendo una terminal (<kbd>CTRL</kbd> <kbd>+</kbd> <kbd>T</kbd> ):
 
 ```shell
-git clone https://github.com/cc-3/lab04-2025-SU-USUARIO-DE-GITHUB
+git clone https://github.com/cc-3/lab04-2026-SU-USUARIO-DE-GITHUB
 ```
 
 ## Introducción a ensamblador RISC-V
@@ -43,18 +43,21 @@ Para instalarlo en su computadora, siga estas instrucciones:
 jupiter
 ```
 
-**Ubuntu 20 o 22**
+**Mac + ARM**
 
-Descargue [este archivo](https://github.com/andrescv/Jupiter/releases/download/v3.1/Jupiter-3.1-linux.zip), luego en su terminal vaya a la carpeta donde lo descargó y ejecute estos comandos
+Ya contamos con máquina virtual para Mac + ARM (Apple Silicon), se le sugiere utilizarla. Siga estas instrucciones:
 
-```
-unzip Jupiter-3.1-linux.zip
-sudo mv image /opt/jupiter
-echo 'export PATH=/opt/jupiter/bin:$PATH' >> ~/.bashrc 
-source ~/.bashrc
-```
+[Máquina virtual ARM](../install/arm-vm.md)
 
-Después de esto, ya debería poder usar el comando `jupiter`. Si aun no funciona, la vieja y confiable, reinicie su máquina.
+Pruebe su autograder durante el periodo de laboratorio, si este falla, indiquelo a su catedrático de inmediato.
+
+**Linux nativo**
+
+Debe descargar y descomprimir Jupiter. Siga estas instrucciones:
+
+[Linux nativo](../install/linux-native.md)
+
+Pruebe su autograder durante el periodo de laboratorio, si este falla, indiquelo a su catedrático de inmediato
 
 ### Cosas básicas en Jupiter:
 
@@ -154,3 +157,5 @@ Cuando haya probado suficiente, puede usar el **check** para ejecutar el autogra
 Las series valen 10, 40 y 50 puntos respectivamente.
 
 Cuando esté satisfecho con su nota haga add, commit y push. Luego suba el link de su repositorio al GES.
+
+Después de hacer commit, Github Actions también ejecutará su autograder, puede revisar su nota desde la web.

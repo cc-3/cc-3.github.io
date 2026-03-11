@@ -31,7 +31,7 @@ Descargue y **descomprima** una de las siguientes opciones.
 
 * Máquina virtual para CC3 y Compiladores 2026-2027: basada en Ubuntu 24
 
-    * Mirror 1: [Descargar maquina virtual Intel/AMD 2026-2027 desde Google Drive](LINK PENDIENTE)
+    * Mirror 1: [Descargar maquina virtual Intel/AMD 2026-2027 desde Google Drive](https://drive.google.com/file/d/1Q_zPswf2J90UCEQD70DWDblx9HUwEJ0y/view?usp=drive_link)
 
     ```
     user: ug

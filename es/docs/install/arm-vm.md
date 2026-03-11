@@ -1,7 +1,7 @@
 # Máquina virtual para ARM
 
 !!! info "Mac + ARM"
-    Las siguientes instrucciones aplican para usuarios de Mac OS con procesador AMD (Apple Silicon) (Macs recientes).
+    Las siguientes instrucciones aplican para usuarios de Mac OS con procesador ARM (Apple Silicon) (Macs recientes).
 
 
 ## Preparación: VMware
