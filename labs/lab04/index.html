@@ -935,11 +935,11 @@
 </ul>
 <h2 id="preparacion">Preparación<a class="headerlink" href="#preparacion" title="Permanent link">&para;</a></h2>
 <p>Para comenzar con el laboratorio primero tienen que tener todos los archivos base, estos se encuentran aquí:</p>
-<div class="codehilite"><pre><span></span>https://classroom.github.com/a/yhN0LGT4
+<div class="codehilite"><pre><span></span>https://classroom.github.com/a/Xr_AsuCP
 </pre></div>
 
 <p>Recuerden que deben aceptar la asignación de <strong>Github Classroom</strong> y se les creará automáticamente un repositorio con una extensión que termina con su usuario de GitHub. Cuando ya se haya creado el repositorio, pueden ejecutar los siguientes comandos abriendo una terminal (<kbd>CTRL</kbd> <kbd>+</kbd> <kbd>T</kbd> ):</p>
-<div class="codehilite"><pre><span></span>git clone https://github.com/cc-3/lab04-2025-SU-USUARIO-DE-GITHUB
+<div class="codehilite"><pre><span></span>git clone https://github.com/cc-3/lab04-2026-SU-USUARIO-DE-GITHUB
 </pre></div>
 
 <h2 id="introduccion-a-ensamblador-risc-v">Introducción a ensamblador RISC-V<a class="headerlink" href="#introduccion-a-ensamblador-risc-v" title="Permanent link">&para;</a></h2>
@@ -954,15 +954,14 @@
 <div class="codehilite"><pre><span></span>jupiter
 </pre></div>
 
-<p><strong>Ubuntu 20 o 22</strong></p>
-<p>Descargue <a href="https://github.com/andrescv/Jupiter/releases/download/v3.1/Jupiter-3.1-linux.zip">este archivo</a>, luego en su terminal vaya a la carpeta donde lo descargó y ejecute estos comandos</p>
-<div class="codehilite"><pre><span></span>unzip Jupiter-3.1-linux.zip
-sudo mv image /opt/jupiter
-echo &#39;export PATH=/opt/jupiter/bin:$PATH&#39; &gt;&gt; ~/.bashrc 
-source ~/.bashrc
-</pre></div>
-
-<p>Después de esto, ya debería poder usar el comando <code>jupiter</code>. Si aun no funciona, la vieja y confiable, reinicie su máquina.</p>
+<p><strong>Mac + ARM</strong></p>
+<p>Ya contamos con máquina virtual para Mac + ARM (Apple Silicon), se le sugiere utilizarla. Siga estas instrucciones:</p>
+<p><a href="../../install/arm-vm/">Máquina virtual ARM</a></p>
+<p>Pruebe su autograder durante el periodo de laboratorio, si este falla, indiquelo a su catedrático de inmediato.</p>
+<p><strong>Linux nativo</strong></p>
+<p>Debe descargar y descomprimir Jupiter. Siga estas instrucciones:</p>
+<p><a href="../../install/linux-native/">Linux nativo</a></p>
+<p>Pruebe su autograder durante el periodo de laboratorio, si este falla, indiquelo a su catedrático de inmediato</p>
 <h3 id="cosas-basicas-en-jupiter">Cosas básicas en Jupiter:<a class="headerlink" href="#cosas-basicas-en-jupiter" title="Permanent link">&para;</a></h3>
 <p>A continuación, les vamos a dar una pequeña guía de Jupiter, para más información visiten <a href="https://jupitersim.gitbook.io/jupiter/">la documentación completa</a>.</p>
 <ul>
@@ -1041,6 +1040,7 @@ source ~/.bashrc
 
 <p>Las series valen 10, 40 y 50 puntos respectivamente.</p>
 <p>Cuando esté satisfecho con su nota haga add, commit y push. Luego suba el link de su repositorio al GES.</p>
+<p>Después de hacer commit, Github Actions también ejecutará su autograder, puede revisar su nota desde la web.</p>
                 
                   
                 
