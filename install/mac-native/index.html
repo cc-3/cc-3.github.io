@@ -568,9 +568,22 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#instalacion" title="Instalación" class="md-nav__link">
-    Instalación
+  <a href="#instalacion-de-jupiter" title="Instalación de Jupiter" class="md-nav__link">
+    Instalación de Jupiter
   </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#permisos" title="Permisos" class="md-nav__link">
+    Permisos
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -695,9 +708,22 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#instalacion" title="Instalación" class="md-nav__link">
-    Instalación
+  <a href="#instalacion-de-jupiter" title="Instalación de Jupiter" class="md-nav__link">
+    Instalación de Jupiter
   </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#permisos" title="Permisos" class="md-nav__link">
+    Permisos
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -722,18 +748,38 @@
                 
                 <h1 id="instalacion-nativa-para-mac">Instalación nativa para Mac<a class="headerlink" href="#instalacion-nativa-para-mac" title="Permanent link">&para;</a></h1>
 <div class="admonition warning">
-<p class="admonition-title">No hay soporte oficial</p>
-<p>No debió llegar por su cuenta a esta página, pues no hay soporte oficial para instalar nativo en Mac.</p>
+<p class="admonition-title">No hay soporte completo para Mac</p>
 <p>Ya contamos con máquina virtual tanto para Mac + Intel/AMD como Mac + ARM, esta es la opción recomendada.</p>
-<p>Si aún así desea hacerlo, comuníquese con su catedrático.</p>
+<p>Lo único que podría instalar nativo es Jupiter.</p>
 </div>
-<h2 id="instalacion">Instalación<a class="headerlink" href="#instalacion" title="Permanent link">&para;</a></h2>
-<p>Su catedrático le indicará como adaptar la <a href="../linux-native/">instalación nativa para Linux</a> para su máquina en específico.</p>
-<p>Entre las indicaciones se le mencionarán detalles como:</p>
+<h2 id="instalacion-de-jupiter">Instalación de Jupiter<a class="headerlink" href="#instalacion-de-jupiter" title="Permanent link">&para;</a></h2>
+<p>Realice estos pasos desde Mac OS (es decir desde su sistema nativo, no desde la máquina virtual).</p>
 <ul>
-<li><code>cgdb</code> u otro debugger?</li>
-<li>Imagen de <code>jupiter</code> ejecutándose de forma nativa, o mediante Rosetta?</li>
-<li><code>conda</code> o Python nativo?</li>
+<li>
+<p>Descargar <a href="https://github.com/andrescv/jupiter/releases/download/v3.1/Jupiter-3.1-mac.zip">Jupiter para Mac</a></p>
+</li>
+<li>
+<p>Descargar y descomprimir el archivo</p>
+</li>
+<li>
+<p>Entrar a la carpeta <code>image/bin</code></p>
+</li>
+<li>
+<p>Desde esa carpeta ejecutar <code>./jupiter</code></p>
+</li>
+</ul>
+<h3 id="permisos">Permisos<a class="headerlink" href="#permisos" title="Permanent link">&para;</a></h3>
+<p>Antes de ejecutar por primera vez, debe dar permisos.</p>
+<ul>
+<li>
+<p>Primero ejecute <code>sudo spctl --master-disable</code></p>
+</li>
+<li>
+<p>Luego vaya a <strong>System Settings &gt; Privacy &amp; Security</strong>, en la sección de Security selecciones la opción <strong>Anywhere</strong>.</p>
+</li>
+<li>
+<p>Cuando los labs que usan Jupiter terminen (el de caches es el último), regrese las opciones de seguridad a lo normal.</p>
+</li>
 </ul>
                 
                   
