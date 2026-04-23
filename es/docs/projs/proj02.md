@@ -55,7 +55,7 @@ Lea las instrucciones completas. Pregunte las dudas conceptuales que le surjan a
 Cuando haya entendido lo que tiene que hacer, y los algoritmos de codificación, descargue el código base desde aquí
 
 ```
-https://classroom.github.com/a/DvgwAR5K
+https://classroom.github.com/a/PJu19irM
 ```
 
 Puede trabajar en parejas o de forma individual. No se aceptan grupos de tres o más personas. Puede trabajar mezclado entre las secciones de la matutina, pero al momento de la calificación personal deben llegar en el mismo horario.
@@ -828,6 +828,18 @@ Recuerde hacer add + commit + push frecuentemente. Si algo le pasa a su máquina
 
 Al terminar **AMBOS INTEGRANTES DEL GRUPO** deben subir el link del repositorio al GES.
 
+## Entrega
+
+Al igual que los laboratorios, el proyecto se entrega vía Github. Al finalizarlo haga add, commit y push. Ambos miembros del equipo tienen que subir el link del repositorio al GES. **No se les pondrá nota si no tienen link en el GES.**
+
+En este y los demás proyectos debe hacer commits continuamente. **Si no tiene suficientes commits, se le restarán puntos.**
+
+¿Cuánto es suficientes commits? Usted lo sabrá al empezar a trabajar, nosotros estimamos que un commit por cada día que trabaje en el proyecto es un buen punto de partida.
+
+Ambas personas deben realizar commits. **Si un miembro no realizó commits, se le restarán puntos.**
+
+En Slack en los próximos días encontrará una guía sobre cómo usar git cuando trabajamos en equipo. Léala y entiéndala para evitar problemas al subir sus archivos.
+
 ### Recordatorio sobre su link
 
 El link subido al GES tiene que verse de la siguiente manera:
@@ -838,7 +850,7 @@ https://github.com/cc3-ug/proj02-2025-nombre-de-mi-grupo
 
 Empieza con `http` o `https` y termina con el nombre de su grupo.
 
-Si el link subido es incorrecto, se le penalizará quitando dos puntos netos. A continuación le dejamos algunos errores comunes para que se asegure de no cometerlos:
+Si el link subido es incorrecto, se le penalizará quitando un punto neto. A continuación le dejamos algunos errores comunes para que se asegure de no cometerlos:
 
 ```
 https://github.com/cc3-ug/proj02-2025-nombre-de-mi-grupo/blob/master/archivo.ext

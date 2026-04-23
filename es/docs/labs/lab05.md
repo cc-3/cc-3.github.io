@@ -22,7 +22,7 @@ https://classroom.github.com/a/Qj9svSAU
 Recuerden que deben aceptar la asignación de **Github Classroom** y se les creará automáticamente un repositorio con una extensión que termina con su usuario de GitHub. Cuando ya se haya creado el repositorio, pueden ejecutar los siguientes comandos abriendo una terminal (<kbd>CTRL</kbd><kbd>+</kbd><kbd>T</kbd>):
 
 ```shell
-git clone <link del repositorio>
+git clone https://github.com/cc3-ug/lab05-2026-SU-USUARIO-DE-GITHUB
 ```
 
 > **NOTA**: Tienen que reemplazar <link del repositorio\> con el link del repositorio que se creó.

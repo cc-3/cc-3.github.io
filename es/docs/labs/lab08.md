@@ -8,7 +8,7 @@ En este laboratorio ustedes van a aprender sobre otros componentes esenciales de
 
 Para este laboratorio, nuevamente, es necesario que tengan la aplicación de [Logisim](http://www.cburch.com/logisim/index.html). Adicionalmente pueden utilizar la [documentación](http://www.cburch.com/logisim/docs.html) de Logisim para refrescar el conocimiento que adquirieron en el laboratorio pasado o leer el lab también [aquí](https://cc-3.github.io/labs/lab07/).
 
-También tienen que tener todos los archivos base, estos se encuentran [aquí](https://classroom.github.com/a/KxJPq_aF). Recuerden que deben aceptar la asignación de **GitHub Classroom** y se les creará automáticamente un repositorio con una extensión que termina con su usuario de GitHub. Cuando ya se haya creado el repositorio, pueden ejecutar los siguientes comandos abriendo una terminal (<kbd>CTRL</kbd><kbd>+</kbd><kbd>T</kbd>):
+También tienen que tener todos los archivos base, estos se encuentran [aquí](https://classroom.github.com/a/G1XpTmtq). Recuerden que deben aceptar la asignación de **GitHub Classroom** y se les creará automáticamente un repositorio con una extensión que termina con su usuario de GitHub. Cuando ya se haya creado el repositorio, pueden ejecutar los siguientes comandos abriendo una terminal (<kbd>CTRL</kbd><kbd>+</kbd><kbd>T</kbd>):
 
 ```shell
 git clone <link del repositorio>
@@ -70,7 +70,7 @@ Cuando estén cambiando el ancho de un cable, siempre deberían de utilizar un [
   <img src="/img/labs/lab06/extend1.png" alt="extend 1" />
 </p>
 
-A pesar de que hace lo que tiene que hacer, no es una buena práctica y alguien que esté revisando su proyecto posiblemente no pueda comprender la intención del circuito anterior. Algo mejor, más simple, fácil de leer y menos propenso a errores sería algo como lo siguiente:
+A pesar de que funciona, no es una buena práctica; además alguien que esté revisando su proyecto posiblemente no pueda comprender la intención del circuito anterior. Algo mejor, más simple, fácil de leer y menos propenso a errores sería algo como lo siguiente:
 
 <p align="center">
   <img src="/img/labs/lab06/extend2.png" alt="extend 2" />
@@ -133,7 +133,7 @@ En este ejercicio ustedes van a implementar un ALU sencillo de 32 bits. Van esta
 
 Este ejercicio es una versión simplificada de lo que le tocará hacer en el proyecto 3. Esperamos que al realizar este ejercicio, el proyecto 3 se les haga un poco más fácil y suave de llevar.
 
-Las 8 funciones que tienen que implementar son: **shift left logical**, **shift right logical**, **shift right arithmetic**, **rotate left**, **rotate right**, **and**, **or** y **xor**. El ALU va a realizar la función deseada sobre 2 entradas de 32 bits y tendrá una salida de 32 bits como resultado. **Noten que Logisim tiene compuertas que hacen todas estas funciones, NO tienen que implementar ninguna por su cuenta, por favor no lo hagan**.
+Las 8 funciones que tienen que implementar son: **shift left logical**, **shift right logical**, **shift right arithmetic**, **rotate left**, **rotate right**, **and**, **or** y **xor**. El ALU va a realizar la función deseada sobre 2 entradas de 32 bits y tendrá una salida de 32 bits como resultado. **Noten que Logisim tiene componentes que hacen todas estas funciones, utilícelos; no tienen que implementar ninguna desde cero.**.
 
 > **HINT 1**: Busquen el folder en Logisim etiquetado como Arithmetic para poder encontrar shifter, que será útil para varias de las operaciones.
 
@@ -185,4 +185,4 @@ Exercise           Grade   Message
 
 Al finalizar, recuerde hacer `add`, `commit` y `push` al finalizar el periodo, cada vez que logre un avance, y al terminar su laboratorio completo.
 
-Para este momento del curso ya se sabe las reglas, al finalizar el periodo suba sus avances a Github y suba el link de su repositorio al GES. Si no lo hace tendrá cero, no se aceptará ninguna excusa ni justificación, ese cero no se le cambiará.
+Al finalizar el periodo suba sus avances a Github y suba el link de su repositorio al GES. Si no lo hace tendrá cero.

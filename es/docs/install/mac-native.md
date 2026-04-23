@@ -1,18 +1,28 @@
 # Instalación nativa para Mac
 
-!!! warning "No hay soporte oficial"
-    No debió llegar por su cuenta a esta página, pues no hay soporte oficial para instalar nativo en Mac.
-
+!!! warning "No hay soporte completo para Mac"
     Ya contamos con máquina virtual tanto para Mac + Intel/AMD como Mac + ARM, esta es la opción recomendada.
 
-    Si aún así desea hacerlo, comuníquese con su catedrático.
+    Lo único que podría instalar nativo es Jupiter.
 
-## Instalación
+## Instalación de Jupiter
 
-Su catedrático le indicará como adaptar la [instalación nativa para Linux](linux-native.md) para su máquina en específico.
+Realice estos pasos desde Mac OS (es decir desde su sistema nativo, no desde la máquina virtual).
 
-Entre las indicaciones se le mencionarán detalles como:
+* Descargar [Jupiter para Mac](https://github.com/andrescv/jupiter/releases/download/v3.1/Jupiter-3.1-mac.zip)
 
-* `cgdb` u otro debugger?
-* Imagen de `jupiter` ejecutándose de forma nativa, o mediante Rosetta?
-* `conda` o Python nativo?
+* Descargar y descomprimir el archivo
+
+* Entrar a la carpeta `image/bin`
+
+* Desde esa carpeta ejecutar `./jupiter`
+
+### Permisos
+
+Antes de ejecutar por primera vez, debe dar permisos.
+
+* Primero ejecute `sudo spctl --master-disable`
+
+* Luego vaya a **System Settings > Privacy & Security**, en la sección de Security selecciones la opción **Anywhere**.
+
+* Cuando los labs que usan Jupiter terminen (el de caches es el último), regrese las opciones de seguridad a lo normal.

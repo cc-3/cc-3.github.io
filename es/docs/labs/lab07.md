@@ -11,7 +11,7 @@ Para este laboratorio, es necesaria la aplicación Logisim. Si aun no lo ha hech
 sudo apt install logisim
 ```
 
-También debe descargar los archivos base, estos se encuentran [aquí](https://classroom.github.com/a/EO1wP8i1). Recuerden que deben aceptar la asignación de **GitHub Classroom** y se les creará automáticamente un repositorio con una extensión que termina con su usuario de GitHub. Cuando ya se haya creado el repositorio, pueden ejecutar los siguientes comandos abriendo una terminal (<kbd>CTRL</kbd><kbd>+</kbd><kbd>T</kbd>):
+También debe descargar los archivos base, estos se encuentran [aquí](https://classroom.github.com/a/jolWa4Qg). Recuerden que deben aceptar la asignación de **GitHub Classroom** y se les creará automáticamente un repositorio con una extensión que termina con su usuario de GitHub. Cuando ya se haya creado el repositorio, pueden ejecutar los siguientes comandos abriendo una terminal (<kbd>CTRL</kbd><kbd>+</kbd><kbd>T</kbd>):
 
 ```shell
 git clone <link del repositorio>
@@ -143,7 +143,7 @@ Para regresar al circuito principal, hay que hacer click en el módulo del circu
 
 En este último ejercicio practicaremos construir un circuito a partir de un autómata, tal como vimos en clase.
 
-En el curso de Informática 3 se aprende qué es un AFD (o **F**inite **S**tate **M**achine en inglés). Un AFD posee estados finitos y transición entre estados.
+En el curso de Informática 3 se aprende qué es un AFD (o DFA, Deterministic Finite Automata, en inglés). Un DFA posee estados finitos y transiciones entre estados.
 
 El AFD de este laboratorio es una variación del AFD que se ha visto en clase. Este AFD posee estados y transición de estados, pero, además de eso, necesita inputs para cambiar de estado y al cambiar de estado regresa un output.
 
